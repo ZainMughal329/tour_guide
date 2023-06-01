@@ -12,17 +12,20 @@ class InputTextField extends StatelessWidget {
   final String hint;
   final bool obsecure;
   final bool enable, autoFocus;
-  const InputTextField(
+  IconData icon;
+
+  InputTextField(
       {super.key,
-        required this.controller,
-        required this.focusnode,
-        required this.onFieldSubmitedVlaue,
-        required this.formfieldValidator,
-        required this.keyboardType,
-        this.autoFocus = false,
-        required this.obsecure,
-        this.enable = true,
-        required this.hint});
+      required this.controller,
+      required this.focusnode,
+      required this.onFieldSubmitedVlaue,
+      required this.formfieldValidator,
+      required this.keyboardType,
+      this.autoFocus = false,
+      required this.obsecure,
+      this.enable = true,
+      required this.icon,
+      required this.hint});
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +62,14 @@ class InputTextField extends StatelessWidget {
               .bodyText2!
               .copyWith(height: 0, fontSize: 19),
           decoration: InputDecoration(
-
+            prefixIcon: Icon(icon),
             hintText: hint,
             enabled: enable,
             contentPadding: EdgeInsets.all(15),
             hintStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-              height: 0,
-              color: Color(0xff242424).withOpacity(0.8),
-            ),
+                  height: 0,
+                  color: Color(0xff242424).withOpacity(0.8),
+                ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(8),
