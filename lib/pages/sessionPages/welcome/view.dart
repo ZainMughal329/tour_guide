@@ -66,7 +66,7 @@ class WelcomePage extends GetView<WelcomeController> {
                 ),
                 InkWell(
                   onTap: () {
-                    // controller.handleSignIn() ;
+                    controller.handleSignIn() ;
                   },
                   child: Ink(
                     padding: EdgeInsets.all(15),

@@ -10,19 +10,6 @@ import 'controller.dart';
 class SignInPage extends GetView<SignInController> {
   SignInPage({Key? key}) : super(key: key);
   final _formKwy = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final emailFocus = FocusNode();
-  final passwordFocus = FocusNode();
-
-  void dispose() {
-    // TODO: implement dispose
-    // super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    emailFocus.dispose();
-    passwordFocus.dispose();
-  }
 
   Widget _buildLogo() {
     return Container(
@@ -55,27 +42,21 @@ class SignInPage extends GetView<SignInController> {
             Padding(
               padding: EdgeInsets.only(top: 8.0.h, bottom: 4.h),
               child: InputTextField(
-                icon: Icons.email_outlined,
-                  controller: emailController,
-                  focusnode: emailFocus,
+                  icon: Icons.email_outlined,
+                  controller: controller.emailController,
+                  focusnode: controller.emailFocus,
                   onFieldSubmitedVlaue: (value) {},
                   formfieldValidator: (value) {},
                   keyboardType: TextInputType.emailAddress,
                   obsecure: false,
                   hint: 'Email'),
-              // InputTextField(
-              //     textController: emailController,
-              //     icon: Icons.email_outlined,
-              //     focusNode: emailFocus,
-              //     hint: 'Email',
-              //     obscureText: false),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 8.0.h),
               child: InputTextField(
-                icon: Icons.lock_open,
-                  controller: passwordController,
-                  focusnode: passwordFocus,
+                  icon: Icons.lock_open,
+                  controller: controller.passwordController,
+                  focusnode: controller.passwordFocus,
                   onFieldSubmitedVlaue: (value) {},
                   formfieldValidator: (value) {},
                   keyboardType: TextInputType.visiblePassword,
@@ -173,8 +154,10 @@ class SignInPage extends GetView<SignInController> {
                         loading: controller.state.loading.value,
                         onPress: () {
                           if (_formKwy.currentState!.validate()) {
-                            // controller.login(emailController.text.trim(),
-                            //     passwordController.text);
+                            controller.loginUserWithEmailAndPassword(
+                              controller.emailController.text.trim(),
+                              controller.passwordController.text.trim(),
+                            );
                           }
                           // Utils().toastMsg('Clicked!!');
                         });

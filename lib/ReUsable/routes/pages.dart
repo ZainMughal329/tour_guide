@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/sessionPages/sigin/index.dart';
 import '../../pages/sessionPages/welcome/bindings.dart';
 import '../../pages/sessionPages/welcome/view.dart';
 import 'names.dart';
@@ -33,11 +34,11 @@ class AppPages {
       // ],
     ),
     //
-    // GetPage(
-    //   name: AppRoutes.SIGN_IN,
-    //   page: () => SignInPage(),
-    //   binding: SignInBinding(),
-    // ),
+    GetPage(
+      name: AppRoutes.SIGN_IN,
+      page: () => SignInPage(),
+      binding: SignInBinding(),
+    ),
     //
     //
     //

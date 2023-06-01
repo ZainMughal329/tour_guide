@@ -21,28 +21,28 @@ class WelcomeController extends GetxController {
   changePage(int index) async {
     state.index.value = index ;
   }
-  // handleSignIn() async{
-  //   // await ConfigStore.to.saveAlreadyOpen();
-  //   // await ConfigStore.to.setFirstOpen(true);
-  //   StorePrefrences sp = StorePrefrences();
-  //   //new
-  //   // sp.getIsFirstOpen();
-  //   await sp.setIsFirstOpen(true);
-  //   print("welcome first open is asfasdf"+sp.getIsFirstOpen().toString());
-  //
-  //
-  //   try{
-  //     final auth =  FirebaseAuth.instance;
-  //     if(auth.currentUser!= null){
-  //       print(auth.currentUser!.uid.toString());
-  //       Get.offAllNamed(AppRoutes.Application);
-  //     }else{
-  //       print(auth.currentUser.toString()+"empty user");
-  //       Get.offAndToNamed(AppRoutes.SIGN_IN);
-  //     }
-  //   }catch (e){
-  //     SnackBar.showSnackBar('Error', e.toString());
-  //   }
-  //
-  // }
+  handleSignIn() async{
+    // await ConfigStore.to.saveAlreadyOpen();
+    // await ConfigStore.to.setFirstOpen(true);
+    // StorePrefrences sp = StorePrefrences();
+    // //new
+    // // sp.getIsFirstOpen();
+    // await sp.setIsFirstOpen(true);
+    // print("welcome first open is asfasdf"+sp.getIsFirstOpen().toString());
+
+
+    try{
+      final auth =  FirebaseAuth.instance;
+      if(auth.currentUser!= null){
+        print(auth.currentUser!.uid.toString());
+        Get.offAllNamed(AppRoutes.Application);
+      }else{
+        print(auth.currentUser.toString()+" empty user");
+        Get.offAndToNamed(AppRoutes.SIGN_IN);
+      }
+    }catch (e){
+      SnackBar.showSnackBar('Error', e.toString());
+    }
+
+  }
 }

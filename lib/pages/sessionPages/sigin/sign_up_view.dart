@@ -13,23 +13,7 @@ class SignUpView extends GetView<SignInController> {
   SignUpView({Key? key}) : super(key: key);
 
   final _formKwy = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final userController = TextEditingController();
-  final emailFocus = FocusNode();
-  final userFocus = FocusNode();
-  final passwordFocus = FocusNode();
 
-  void dispose() {
-    // TODO: implement dispose
-    // super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    emailFocus.dispose();
-    userFocus.dispose();
-    userController.dispose();
-    passwordFocus.dispose();
-  }
 
   // Widget _buildLogo() {
   //   return Container(
@@ -91,8 +75,8 @@ class SignUpView extends GetView<SignInController> {
               padding: EdgeInsets.symmetric(vertical: 4.0.h),
               child: InputTextField(
                   icon: Icons.email_outlined,
-                  controller: emailController,
-                  focusnode: emailFocus,
+                  controller: controller.emailController,
+                  focusnode: controller.emailFocus,
                   onFieldSubmitedVlaue: (value) {},
                   formfieldValidator: (value) {},
                   keyboardType: TextInputType.emailAddress,
@@ -101,8 +85,8 @@ class SignUpView extends GetView<SignInController> {
             ),
             InputTextField(
                 icon: Icons.lock_open,
-                controller: passwordController,
-                focusnode: passwordFocus,
+                controller: controller.passwordController,
+                focusnode: controller.passwordFocus,
                 onFieldSubmitedVlaue: (value) {},
                 formfieldValidator: (value) {},
                 keyboardType: TextInputType.emailAddress,
@@ -110,8 +94,8 @@ class SignUpView extends GetView<SignInController> {
                 hint: 'Email'),
             InputTextField(
                 icon: Icons.person_outline,
-                controller: userController,
-                focusnode: userFocus,
+                controller: controller.userController,
+                focusnode: controller.userFocus,
                 onFieldSubmitedVlaue: (value) {},
                 formfieldValidator: (value) {},
                 keyboardType: TextInputType.emailAddress,
@@ -148,6 +132,9 @@ class SignUpView extends GetView<SignInController> {
                         loading: controller.state.loading.value,
                         onPress: () {
                           if (_formKwy.currentState!.validate()) {
+                            controller.registerUserWithEmailAndPassword(
+                                controller.emailController.text.trim(),
+                                controller.passwordController.text.trim());
                             // var user = UserModel(
                             //     email: emailController.text.trim(),
                             //     password: passwordController.text.trim(),
