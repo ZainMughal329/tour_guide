@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../ReUsable/Components/input_fields.dart';
 import '../../../ReUsable/Components/round_button.dart';
+import '../../../ReUsable/models/userModel.dart';
 import '../../../ReUsable/routes/names.dart';
 import 'controller.dart';
 
@@ -13,7 +14,6 @@ class SignUpView extends GetView<SignInController> {
   SignUpView({Key? key}) : super(key: key);
 
   final _formKwy = GlobalKey<FormState>();
-
 
   // Widget _buildLogo() {
   //   return Container(
@@ -74,15 +74,24 @@ class SignUpView extends GetView<SignInController> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 4.0.h),
               child: InputTextField(
-                  icon: Icons.email_outlined,
-                  controller: controller.emailController,
-                  focusnode: controller.emailFocus,
+                  icon: Icons.person_outline,
+                  controller: controller.userController,
+                  focusnode: controller.userFocus,
                   onFieldSubmitedVlaue: (value) {},
                   formfieldValidator: (value) {},
                   keyboardType: TextInputType.emailAddress,
                   obsecure: false,
-                  hint: 'Email'),
+                  hint: 'UserName'),
             ),
+            InputTextField(
+                icon: Icons.email_outlined,
+                controller: controller.emailController,
+                focusnode: controller.emailFocus,
+                onFieldSubmitedVlaue: (value) {},
+                formfieldValidator: (value) {},
+                keyboardType: TextInputType.emailAddress,
+                obsecure: false,
+                hint: 'Email'),
             InputTextField(
                 icon: Icons.lock_open,
                 controller: controller.passwordController,
@@ -91,16 +100,7 @@ class SignUpView extends GetView<SignInController> {
                 formfieldValidator: (value) {},
                 keyboardType: TextInputType.emailAddress,
                 obsecure: false,
-                hint: 'Email'),
-            InputTextField(
-                icon: Icons.person_outline,
-                controller: controller.userController,
-                focusnode: controller.userFocus,
-                onFieldSubmitedVlaue: (value) {},
-                formfieldValidator: (value) {},
-                keyboardType: TextInputType.emailAddress,
-                obsecure: false,
-                hint: 'Email'),
+                hint: 'Password'),
           ],
         ));
   }
@@ -132,18 +132,19 @@ class SignUpView extends GetView<SignInController> {
                         loading: controller.state.loading.value,
                         onPress: () {
                           if (_formKwy.currentState!.validate()) {
-                            controller.registerUserWithEmailAndPassword(
-                                controller.emailController.text.trim(),
-                                controller.passwordController.text.trim());
-                            // var user = UserModel(
-                            //     email: emailController.text.trim(),
-                            //     password: passwordController.text.trim(),
-                            //     phoneNo: '+92**********',
-                            //     username: userController.text.trim(),
-                            //     photoUrl: '',
-                            //     type: 'User');
-                            // controller.storeUser(user, context);
-                            //
+                            // controller.registerUserWithEmailAndPassword(
+                            //     controller.emailController.text.trim(),
+                            //     controller.passwordController.text.trim());
+                            var user = UserModel(
+                              email: controller.emailController.text.trim(),
+                              password:
+                                  controller.passwordController.text.trim(),
+                              phone: '+92**********',
+                              userName: controller.userController.text.trim(),
+                              photoUrl: '',
+                            );
+                            controller.storeUser(user, context);
+
                             // Get.offAllNamed(AppRoutes.Application);
                             // Get.toNamed(AppRoutes.Application);
                           }

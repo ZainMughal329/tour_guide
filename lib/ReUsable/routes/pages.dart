@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/application/index.dart';
 import '../../pages/sessionPages/sigin/index.dart';
+import '../../pages/sessionPages/sigin/sign_up_view.dart';
 import '../../pages/sessionPages/welcome/bindings.dart';
 import '../../pages/sessionPages/welcome/view.dart';
 import 'names.dart';
@@ -47,21 +49,21 @@ class AppPages {
     //   page: () => ForgotPasswordView(),
     //   binding: ForgotPassBinding(),
     // ),
-    // GetPage(
-    //   name: AppRoutes.SIGN_UP,
-    //   page: () => SignUpView(),
-    //
-    // ),
+    GetPage(
+      name: AppRoutes.SIGN_UP,
+      page: () => SignUpView(),
+
+    ),
     //
     // // check if needed to login or not
-    // GetPage(
-    //   name: AppRoutes.Application,
-    //   page: () =>  ApplicationPage(),
-    //   binding: ApplicationBinding(),
-    //   // middlewares: [
-    //   //   // RouteAuthMiddleware(priority: 1),
-    //   // ],
-    // ),
+    GetPage(
+      name: AppRoutes.Application,
+      page: () =>  ApplicationPage(),
+      binding: ApplicationBinding(),
+      // middlewares: [
+      //   // RouteAuthMiddleware(priority: 1),
+      // ],
+    ),
     //
     //
     //

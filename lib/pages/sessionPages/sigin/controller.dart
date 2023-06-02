@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +8,7 @@ import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/state.dart';
 
+import '../../../ReUsable/models/userModel.dart';
 import '../../../ReUsable/routes/names.dart';
 
 GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -61,29 +61,69 @@ class SignInController extends GetxController {
   final db = FirebaseFirestore.instance;
 
   void registerUserWithEmailAndPassword(String email, password) async {
+    state.loading.value = true;
     try {
       var user = auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) {})
-          .onError((error, stackTrace) {});
+          ;
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
+      state.loading.value = false;
       print('Firebase Auth Exception : ' + e.code.toString());
-    } catch (_) {}
+    } catch (_) {
+      state.loading.value = false;
+    }
   }
 
   void loginUserWithEmailAndPassword(String email, password) async {
+    state.loading.value = true;
     try {
       var user = auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {})
-          .onError((error, stackTrace) {});
+          .signInWithEmailAndPassword(email: email, password: password).then((value) {
+        Get.offAndToNamed(AppRoutes.Application);
+        toastInfo(msg: 'Successfully log in');
+        state.loading.value = false;
+        emailController.clear();
+        passwordController.clear();
+        userController.clear();
+      }).onError((error, stackTrace) {
+
+        final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
+        toastInfo(msg: ex.toString());
+        print('Error is : ' + error.toString());
+        state.loading.value = false;
+      });
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
+      state.loading.value = false;
       print('Firebase Auth Exception : ' + e.code.toString());
-    } catch (_) {}
+    } catch (_) {
+      state.loading.value = false;
+    }
+  }
+  createUser(UserModel user) async {
+    state.loading.value = true;
+    await _db.add(user.toJson()).whenComplete(() {
+      // sp.setIsFirstOpen(true);
+     toastInfo(msg: 'Successfully created account');
+     state.loading.value = false;
+    }).catchError((error, stackTrace) {
+      toastInfo(msg: "Error occurred");
+      print('Error is : ' +error.toString());
+      state.loading.value = false;
+    });
+  }
+//
+  void storeUser(UserModel user, BuildContext context) async {
+    await createUser(user);
+    registerUserWithEmailAndPassword( user.email, user.password);
+    Get.offAll(AppRoutes.Application);
+  }
+
+  updateUserData(UserModel user) async {
+    await db.collection('users').doc(user.id).update(user.toJson());
   }
 
 
@@ -209,32 +249,7 @@ class SignInController extends GetxController {
 //     return userData;
 //   }
 //
-//   createUser(UserModel user) async {
-//     await _db.add(user.toJson()).whenComplete(() {
-//       // sp.setIsFirstOpen(true);
-//       Get.snackbar(
-//         'Congrats',
-//         'Your account has successfully created',
-//         snackPosition: SnackPosition.BOTTOM,
-//         colorText: Colors.green,
-//         backgroundColor: Colors.green.withOpacity(0.1),
-//       );
-//     }).catchError((error, stackTrace) {
-//       Get.snackbar(
-//         'Error',
-//         'Something went wrong ' + error.toString(),
-//         snackPosition: SnackPosition.BOTTOM,
-//         colorText: Colors.green,
-//         backgroundColor: Colors.green.withOpacity(0.1),
-//       );
-//     });
-//   }
-//
-//   void storeUser(UserModel user, BuildContext context) async {
-//     await createUser(user);
-//     handleSignIn(context, user.email, user.password);
-//     Get.offAll(AppRoutes.Application);
-//   }
+
 //
 //   // @override
 //   // void onReady() {
@@ -270,7 +285,5 @@ class SignInController extends GetxController {
 //     }
 //   }
 //
-//   updateUserData(UserModel user) async {
-//     await db.collection('users').doc(user.id).update(user.toJson());
-//   }
+
 }

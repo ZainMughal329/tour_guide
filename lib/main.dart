@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: AppRoutes.Application,
+          initialRoute: AppRoutes.Welcome,
           getPages: AppPages.routes,
         );
       },
