@@ -65,16 +65,16 @@ class SignInController extends GetxController {
     state.loading.value = true;
     try {
       var user = await auth
-          .createUserWithEmailAndPassword(email: email, password: password).then((value){
-            state.loading.value=false;
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        state.loading.value = false;
         StorePrefrences sp = StorePrefrences();
         sp.setIsFirstOpen(true);
-            Get.offAllNamed(AppRoutes.Application);
-      }).onError((error, stackTrace){
-        state.loading.value=false;
+        Get.offAllNamed(AppRoutes.Application);
+      }).onError((error, stackTrace) {
+        state.loading.value = false;
         toastInfo(msg: error.toString());
-      })
-          ;
+      });
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
@@ -89,7 +89,8 @@ class SignInController extends GetxController {
     state.loading.value = true;
     try {
       var user = await auth
-          .signInWithEmailAndPassword(email: email, password: password).then((value) {
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
         Get.offAndToNamed(AppRoutes.Application);
         toastInfo(msg: 'Successfully log in');
         state.loading.value = false;
@@ -97,7 +98,6 @@ class SignInController extends GetxController {
         passwordController.clear();
         userController.clear();
       }).onError((error, stackTrace) {
-
         final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
         toastInfo(msg: ex.toString());
         print('Error is : ' + error.toString());
@@ -112,29 +112,35 @@ class SignInController extends GetxController {
       state.loading.value = false;
     }
   }
+
+  Future<UserModel> getUserData(String email) async {
+    final snapshot = await _db.where('email', isEqualTo: email).get();
+    final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
+    return userData;
+  }
+
   createUser(UserModel user) async {
     state.loading.value = true;
     await _db.add(user.toJson()).whenComplete(() {
       // sp.setIsFirstOpen(true);
-     toastInfo(msg: 'Successfully created account');
-     state.loading.value = false;
+      toastInfo(msg: 'Successfully created account');
+      state.loading.value = false;
     }).catchError((error, stackTrace) {
       toastInfo(msg: "Error occurred");
-      print('Error is : ' +error.toString());
+      print('Error is : ' + error.toString());
       state.loading.value = false;
     });
   }
+
 //
   void storeUser(UserModel user, BuildContext context) async {
     await createUser(user);
-    registerUserWithEmailAndPassword( user.email, user.password);
-
+    registerUserWithEmailAndPassword(user.email, user.password);
   }
 
   updateUserData(UserModel user) async {
     await db.collection('users').doc(user.id).update(user.toJson());
   }
-
 
 // Future<void> handleGoogleSignIn() async {
 //   state.loading.value = true;
@@ -293,5 +299,4 @@ class SignInController extends GetxController {
 //     }
 //   }
 //
-
 }

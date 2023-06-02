@@ -20,10 +20,6 @@ class HomeController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    //
-    // location.onLocationChanged.listen((LocationData currentLocation) {
-    //   state.currentLocation.value = LatLng(currentLocation.latitude!.toDouble(),
-    //       currentLocation.longitude!.toDouble());
 
 
     category = [

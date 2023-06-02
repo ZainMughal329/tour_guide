@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tours_guide/pages/screens/GoogleMap/index.dart';
 
 import '../../ReUsable/Components/app_colors.dart';
+import '../screens/PersonPage/view.dart';
 import '../screens/home_screen/view.dart';
 import '../screens/search_screen/view.dart';
 import 'controller.dart';
@@ -21,9 +22,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         HomePage(),
         SearchView(),
         MapPage(),
-        Center(
-          child: Text('Person'),
-        ),
+        PersonView(),
       ],
     );
   }

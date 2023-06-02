@@ -60,14 +60,7 @@ class MapController extends GetxController {
     completer = Completer();
     marker.addAll(_list);
 
-    //
-    // marker.add(Marker(
-    //     markerId: MarkerId('1'),
-    //     position: LatLng(32.0740, 72.6861),
-    //     icon: BitmapDescriptor.defaultMarker),
-    //
-    //
-    // );
+
 
     getUserLocation();
   }
