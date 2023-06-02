@@ -1,32 +1,53 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tours_guide/ReUsable/Components/round_button.dart';
-import 'package:tours_guide/ReUsable/routes/names.dart';
-import 'package:tours_guide/pages/application/controller.dart';
+import 'package:tours_guide/pages/screens/GoogleMap/index.dart';
+
+import '../../ReUsable/Components/app_colors.dart';
+import '../screens/home_screen/view.dart';
+import '../screens/search_screen/view.dart';
+import 'controller.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
   const ApplicationPage({Key? key}) : super(key: key);
 
+  Widget _buildPage() {
+    return PageView(
+      physics: const NeverScrollableScrollPhysics(),
+      controller: controller.pageController,
+      onPageChanged: controller.handlePageChanged,
+      children: const [
+        HomePage(),
+        SearchView(),
+        MapPage(),
+        Center(
+          child: Text('Person'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNavBar() {
+    return Obx(
+          () => BottomNavigationBar(
+        items: controller.bottomTabs,
+        currentIndex: controller.state.page,
+        onTap: controller.handleNavBarChange,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: AppColors.tabBarElement,
+        unselectedItemColor: AppColors.thirdElementText,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: RoundButton(
-                title: 'Logout',
-                onPress: () async {
-                  final auth = await FirebaseAuth.instance;
-                  await auth.signOut();
-                  Get.offAndToNamed(AppRoutes.SIGN_IN);
-                }),
-          ),
-        ],
-      ),
+      body: _buildPage(),
+      bottomNavigationBar: _buildNavBar(),
     );
   }
 }
