@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
+import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/state.dart';
 
 import '../../../ReUsable/models/userModel.dart';
@@ -63,8 +64,16 @@ class SignInController extends GetxController {
   void registerUserWithEmailAndPassword(String email, password) async {
     state.loading.value = true;
     try {
-      var user = auth
-          .createUserWithEmailAndPassword(email: email, password: password)
+      var user = await auth
+          .createUserWithEmailAndPassword(email: email, password: password).then((value){
+            state.loading.value=false;
+        StorePrefrences sp = StorePrefrences();
+        sp.setIsFirstOpen(true);
+            Get.offAllNamed(AppRoutes.Application);
+      }).onError((error, stackTrace){
+        state.loading.value=false;
+        toastInfo(msg: error.toString());
+      })
           ;
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
@@ -79,7 +88,7 @@ class SignInController extends GetxController {
   void loginUserWithEmailAndPassword(String email, password) async {
     state.loading.value = true;
     try {
-      var user = auth
+      var user = await auth
           .signInWithEmailAndPassword(email: email, password: password).then((value) {
         Get.offAndToNamed(AppRoutes.Application);
         toastInfo(msg: 'Successfully log in');
@@ -119,7 +128,7 @@ class SignInController extends GetxController {
   void storeUser(UserModel user, BuildContext context) async {
     await createUser(user);
     registerUserWithEmailAndPassword( user.email, user.password);
-    Get.offAll(AppRoutes.Application);
+
   }
 
   updateUserData(UserModel user) async {
@@ -198,8 +207,7 @@ class SignInController extends GetxController {
 //         .createUserWithEmailAndPassword(email: email, password: password)
 //         .then((value) {
 //
-//       // StorePrefrences sp = StorePrefrences();
-//       // sp.setIsFirstOpen(true);
+
 //       // toastInfo(msg: "Account Created Successfully");
 //     }).onError((error, stackTrace) {
 //       // toastInfo(msg: error.toString());
