@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/ReUsable/routes/pages.dart';
+import 'package:tours_guide/fucntions_call.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,8 +37,9 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: AppRoutes.SplashScreen,
-          getPages: AppPages.routes,
+          home: CallFunction(),
+          // initialRoute: AppRoutes.,
+          // getPages: AppPages.routes,
         );
       },
     );

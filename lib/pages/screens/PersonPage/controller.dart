@@ -171,10 +171,10 @@ final _db = FirebaseFirestore.instance;
 
   getUsersData() async{
     print('INSIDE FUNC');
-    final email = signInController.firebaseUser.value?.email;
+    final email = await signInController.firebaseUser.value?.email;
     print('Email is : ' +email.toString());
     if(email != null) {
-      return signInController.getUserData(email);
+      return await signInController.getUserData(email);
     }else {
       Get.snackbar('Error', 'Something went wrong');
     }
