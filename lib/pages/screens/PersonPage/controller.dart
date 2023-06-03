@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 
 import '../../../ReUsable/models/userModel.dart';
 import '../../../ReUsable/routes/names.dart';
@@ -147,8 +148,8 @@ final _db = FirebaseFirestore.instance;
   void signOut ()async{
     try{
       await auth.signOut().then((value) async{
-        // StorePrefrences sp = StorePrefrences();
-        // await sp.setIsFirstOpen(false);
+        StorePrefrences sp = StorePrefrences();
+        await sp.setIsFirstOpen(false);
 
         print("user data is ssss"+auth.currentUser.toString());
 

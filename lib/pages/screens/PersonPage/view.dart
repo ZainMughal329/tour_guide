@@ -380,20 +380,25 @@ class PersonView extends GetView<PersonController> {
                                   );
                                 });
                               },
-                              child: Container(
-                                height: 50,
-                                width: 300,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: Colors.blue,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 17),
+                              child: InkWell(
+                                child: Container(
+                                  height: 50,
+                                  width: 300,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: Colors.blue,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 17),
+                                    ),
                                   ),
                                 ),
+                                onTap: (){
+                                  controller.signOut();
+                                },
                               ),
                             ),
                           ),

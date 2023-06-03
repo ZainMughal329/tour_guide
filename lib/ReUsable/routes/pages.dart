@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../pages/application/index.dart';
 import '../../pages/sessionPages/sigin/index.dart';
 import '../../pages/sessionPages/sigin/sign_up_view.dart';
+import '../../pages/sessionPages/splashScreen/index.dart';
 import '../../pages/sessionPages/welcome/bindings.dart';
 import '../../pages/sessionPages/welcome/view.dart';
 import 'names.dart';
@@ -18,14 +19,14 @@ class AppPages {
 
   static final List<GetPage> routes = [
 
-    // GetPage(
-    //   name: AppRoutes.SplashScreen,
-    //   // page: () => const SplashScreenView(),
-    //   // binding: SplashScreenBinding(),
-    //   // middlewares: [
-    //   //   RouteWelcomeMiddleware(priority: 1),
-    //   // ],
-    // ),
+    GetPage(
+      name: AppRoutes.SplashScreen,
+      page: () => const SplashScreenView(),
+      binding: SplashScreenBinding(),
+      // middlewares: [
+      //   RouteWelcomeMiddleware(priority: 1),
+      // ],
+    ),
 
     GetPage(
       name: AppRoutes.Welcome,

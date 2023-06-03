@@ -93,6 +93,10 @@ class SignInController extends GetxController {
           .then((value) {
         Get.offAndToNamed(AppRoutes.Application);
         toastInfo(msg: 'Successfully log in');
+        StorePrefrences sp = StorePrefrences();
+        sp.setIsFirstOpen(true);
+
+
         state.loading.value = false;
         emailController.clear();
         passwordController.clear();

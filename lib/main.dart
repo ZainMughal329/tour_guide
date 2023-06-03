@@ -37,9 +37,9 @@ class _MyAppState extends State<MyApp> {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: CallFunction(),
-          // initialRoute: AppRoutes.,
-          // getPages: AppPages.routes,
+          // home: CallFunction(),
+          initialRoute: AppRoutes.SplashScreen,
+          getPages: AppPages.routes,
         );
       },
     );
