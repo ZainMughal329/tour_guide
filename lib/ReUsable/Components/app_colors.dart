@@ -1,48 +1,34 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class AppColors {
-  /// 主背景 白色
-  static const Color primaryBackground = Color.fromARGB(255, 255, 255, 255);
+  static const Color titleTextColor = Color(0xFF27374D);
+  static const Color subtitleTextColor = Color(0xFF526D82);
+  static const Color primaryBackground = Color(0xFFFFFFFF);
+  // static const Color secondaryBgColor = Color(0xFFF5F5F5);
+  static const Color iconColor = Color(0xFF27374D);
+  static const Color activeIconColor = Color(0xFF212A3E);
+  static const Color unActiveIconColor = Color(0xFF394867);
+  static const Color buttonBgColor = Color(0xFF394867);
+  static const Color errorColor = Color(0xFFED2B2A);
 
-  /// 主文本 灰色
-  static const Color primaryText = Color.fromARGB(255, 45, 45, 47);
 
-  /// 主控件-背景
-  static const Color primaryElement = Color.fromARGB(255, 99, 133, 230);
+  static const Color activeTabElementColor = Color(0xFF567189);
+  static const Color unActiveTabElementColor = Color(0xFF7B8FA1);
 
-  /// 主控件-文本 白色
-  static const Color primaryElementText = Color.fromARGB(255, 255, 255, 255);
+  // static const Color successColor = Color(0xFF00C853);
+  static const Color warningColor = Color(0xFFFFA000);
+  static const Color infoColor = Color(0xFF212A3E);
+  // static const Color disabledColor = Color(0xFF9E9E9E);
+  // static const Color dividerColor = Color(0xFFBDBDBD);
+  static const Color backgroundOverlayColor = Color(0x99000000);
 
-  // *****************************************
+  static const Color SuccessColor = Color(0xFF43A047);
+  // static const Color snackBarErrorColor = Color(0xFFD32F2F);
+  // static const Color snackBarWarningColor = Color(0xFFFB8C00);
+  // static const Color snackBarInfoColor = Color(0xFF1976D2);
 
-  /// 第二种控件-背景色 淡灰色
-  static const Color secondaryElement = Color.fromARGB(255, 246, 246, 246);
-
-  /// 第二种控件-文本 浅蓝色
-  static const Color secondaryElementText = Color.fromARGB(255, 99, 133, 231);
-
-  // *****************************************
-
-  /// 第三种控件-背景色 石墨色
-  static const Color thirdElement = Color.fromARGB(255, 45, 45, 47);
-
-  static const Color fourElementText = Color.fromARGB(255, 99, 99, 99);
-
-  /// 第三种控件-文本 浅灰色2
-  static const Color thirdElementText = Color.fromARGB(255, 183, 191, 202);
-
-  // *****************************************
-
-  /// tabBar 默认颜色 灰色
-  static const Color tabBarElement = Color.fromARGB(255, 208, 208, 208);
-
-  /// tabCellSeparator 单元格底部分隔条 颜色
-  static const Color tabCellSeparator = Color.fromARGB(255, 230, 230, 231);
-
-  //聊天背景颜色
-  static const Color chatbg = Color.fromARGB(255, 248, 248, 248);
-
-  static const Color morenbg = Color.fromARGB(255, 250, 250, 250);
-
-//背景颜色
+  // static const Color toastSuccessColor = Color(0xFF4CAF50);
+  // static const Color toastErrorColor = Color(0xFFE53935);
+  // static const Color toastWarningColor = Color(0xFFFFB300);
+  // static const Color toastInfoColor = Color(0xFF2196F3);
 }

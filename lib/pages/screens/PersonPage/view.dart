@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/pages/screens/PersonPage/update.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/view.dart';
 
@@ -386,7 +387,7 @@ class PersonView extends GetView<PersonController> {
                                   width: 300,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: Colors.blue,
+                                    color: AppColors.buttonBgColor,
                                   ),
                                   child: Center(
                                     child: Text(

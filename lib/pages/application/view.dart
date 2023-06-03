@@ -36,8 +36,8 @@ class ApplicationPage extends GetView<ApplicationController> {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        selectedItemColor: AppColors.tabBarElement,
-        unselectedItemColor: AppColors.thirdElementText,
+        selectedItemColor: AppColors.activeTabElementColor,
+        unselectedItemColor: AppColors.unActiveTabElementColor,
       ),
     );
   }
