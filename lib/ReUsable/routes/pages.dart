@@ -1,6 +1,9 @@
 // import 'package:air_proj_comp/pages/Administration/login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
+import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
+import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
 
 import '../../pages/application/index.dart';
 import '../../pages/sessionPages/sigin/index.dart';
@@ -55,6 +58,22 @@ class AppPages {
       page: () => SignUpView(),
 
     ),
+
+    GetPage(
+      name: AppRoutes.Company_SignUp,
+      page: () => CompanySignUpPage(),
+      binding: CompanySignUpBinding(),
+
+    ),
+
+    GetPage(
+      name: AppRoutes.Company_Home,
+      page: () => CompanyHomePage(),
+      binding: CompanyHomeBinding(),
+
+    ),
+
+
     //
     // // check if needed to login or not
     GetPage(

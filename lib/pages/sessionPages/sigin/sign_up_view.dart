@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 
 import '../../../ReUsable/Components/input_fields.dart';
 import '../../../ReUsable/Components/round_button.dart';
@@ -168,6 +169,29 @@ class SignUpView extends GetView<SignInController> {
                                 .bodyMedium!
                                 .copyWith(decoration: TextDecoration.underline))
                       ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 100.w, vertical: 5.h),
+                  child: Divider(
+                    color: AppColors.iconColor,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 30.h),
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.Company_SignUp);
+                    },
+                    child: Text(
+                      'Click to \n Sign up as a Tour Company',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.textButtonColor,
+                      ),
+
                     ),
                   ),
                 ),

@@ -10,6 +10,9 @@ class AppRoutes {
   static const Admin_Login = '/admin_login';
   static const Admin_Home = '/admin_home';
 
+  static const Company_SignUp = '/company_signup';
+  static const Company_Home = '/company_home';
+
   static const Tourist_Login = '/tourist_login';
   static const Tourist_Home = '/tourist_home';
   static const Add_Tour = '/add_tour';

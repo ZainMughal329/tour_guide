@@ -10,12 +10,20 @@ class CompanyModel {
 
   final String companyDescription;
 
+  final String status;
+
+  final String pass;
+
+  // final String status;
+
   CompanyModel({
     this.id,
     required this.companyEmail,
     required this.companyName,
     required this.companyPhone,
     required this.companyDescription,
+    required this.pass,
+    this.status = 'notApproved'
   });
 
   Map<String, dynamic> toJson() {
@@ -24,6 +32,8 @@ class CompanyModel {
       "CompanyEmail": companyEmail,
       "companyPhone": companyPhone,
       "companyDescription": companyDescription,
+      "password" : pass,
+      "status" : "notApproved"
     };
   }
 
@@ -36,6 +46,8 @@ class CompanyModel {
       companyName: data["companyName"],
       companyPhone: data["companyPhone"],
       companyDescription: data["companyDescription"],
+      status: data["status"],
+      pass: data["password"],
     );
   }
 }

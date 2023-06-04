@@ -23,6 +23,8 @@ class AppColors {
   static const Color backgroundOverlayColor = Color(0x99000000);
 
   static const Color SuccessColor = Color(0xFF43A047);
+  static const Color textButtonColor = Colors.blue;
+
   // static const Color snackBarErrorColor = Color(0xFFD32F2F);
   // static const Color snackBarWarningColor = Color(0xFFFB8C00);
   // static const Color snackBarInfoColor = Color(0xFF1976D2);
