@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
+import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/state.dart';
 
 import '../../../ReUsable/models/userModel.dart';
@@ -18,6 +19,7 @@ class SignInController extends GetxController {
   late final Rx<User?> firebaseUser;
   FirebaseAuth auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('users');
+  final _dbCompnay = FirebaseFirestore.instance.collection('company');
   var verificationId = "".obs;
 
   final emailController = TextEditingController();
@@ -61,16 +63,14 @@ class SignInController extends GetxController {
 
   final db = FirebaseFirestore.instance;
 
-  void registerUserWithEmailAndPassword(String email, password) async {
+  void registerUserWithEmailAndPassword(UserModel userinfo,String email, password) async {
     state.loading.value = true;
     try {
       var user = await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        state.loading.value = false;
-        StorePrefrences sp = StorePrefrences();
-        sp.setIsFirstOpen(true);
-        Get.offAllNamed(AppRoutes.Application);
+        createUser(userinfo);
+
       }).onError((error, stackTrace) {
         state.loading.value = false;
         toastInfo(msg: error.toString());
@@ -91,11 +91,53 @@ class SignInController extends GetxController {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        Get.offAndToNamed(AppRoutes.Application);
-        toastInfo(msg: 'Successfully log in');
-        StorePrefrences sp = StorePrefrences();
-        sp.setIsFirstOpen(true);
+            print(value);
 
+        print("auth id :"+auth.currentUser!.uid.toString());
+        print("dbCOmmpany idL :"+_dbCompnay.doc(auth.currentUser!.uid).id);
+
+
+
+            // _dbCompnay.get().then((QuerySnapshot querySnapshot) {
+            //   querySnapshot.docs.forEach((DocumentSnapshot documentSnapshot) {
+            //     String docId = documentSnapshot.id;
+            //     // Use the docId as needed
+            //   });
+            //
+            //
+
+
+        if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
+
+          _dbCompnay
+              .doc(auth.currentUser!.uid)
+              .get()
+              .then((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
+            // print("line after 111");
+            //
+            // print(documentSnapshot['status']);
+
+            // var user = CompanyModel.fromJson(documentSnapshot);
+            if (documentSnapshot.exists) {
+              var status = documentSnapshot['status'];
+              print(status.toString());
+              handelNavigation(status);
+            }
+          }).onError((error, stackTrace) {
+            toastInfo(msg: error.toString());
+            // print(error.toString());
+
+            // print("inside company login code");
+          });
+        }
+            // if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id)
+        else if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id){
+          Get.offAndToNamed(AppRoutes.Application);
+          toastInfo(msg: 'Successfully log in');
+          StorePrefrences sp = StorePrefrences();
+          sp.setIsFirstOpen(true);
+          // print("inside user login code");
+        }
 
         state.loading.value = false;
         emailController.clear();
@@ -117,6 +159,21 @@ class SignInController extends GetxController {
     }
   }
 
+  handelNavigation(String status) async{
+
+    if (status == "notApproved") {
+      await auth.signOut();
+      toastInfo(msg: "Verification Still in Progress");
+      toastInfo(msg: "You'll get verification mail shortyly");
+
+    } else {
+      StorePrefrences sp = StorePrefrences();
+      sp.setIsFirstOpen(true);
+
+      Get.offAllNamed(AppRoutes.Company_Home);
+    }
+  }
+
   Future<UserModel> getUserData(String email) async {
     final snapshot = await _db.where('email', isEqualTo: email).get();
     final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
@@ -124,11 +181,17 @@ class SignInController extends GetxController {
   }
 
   createUser(UserModel user) async {
+    print("inside create user");
     state.loading.value = true;
-    await _db.add(user.toJson()).whenComplete(() {
+    await _db.doc(auth.currentUser!.uid).set(user.toJson()).whenComplete(() {
+      print("insdie create 2nd line");
       // sp.setIsFirstOpen(true);
       toastInfo(msg: 'Successfully created account');
+      // state.loading.value = false;
       state.loading.value = false;
+      StorePrefrences sp = StorePrefrences();
+      sp.setIsFirstOpen(true);
+      Get.offAllNamed(AppRoutes.Application);
     }).catchError((error, stackTrace) {
       toastInfo(msg: "Error occurred");
       print('Error is : ' + error.toString());
@@ -138,8 +201,9 @@ class SignInController extends GetxController {
 
 //
   void storeUser(UserModel user, BuildContext context) async {
-    await createUser(user);
-    registerUserWithEmailAndPassword(user.email, user.password);
+    registerUserWithEmailAndPassword( user,user.email, user.password);
+
+    // registerUserWithEmailAndPassword(user.email, user.password);
   }
 
   updateUserData(UserModel user) async {

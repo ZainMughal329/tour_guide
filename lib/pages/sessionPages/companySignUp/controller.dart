@@ -22,20 +22,24 @@ class CompanySignUpController extends GetxController {
   final auth=FirebaseAuth.instance;
 
 
-  void registerUserWithEmailAndPassword(String email,String password) async {
+  void registerUserWithEmailAndPassword(CompanyModel Compuser,String email,String password) async {
     state.loading.value = true;
     try {
       var user = await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
             print(value.user!.uid.toString());
+            toastInfo(msg: "Information Recieved");
+            toastInfo(msg: "You'll recieve confirmation \nmail shortyly");
 
         state.loading.value = false;
         StorePrefrences sp = StorePrefrences();
         sp.setIsFirstOpen(true);
+        Compuser.id=auth.currentUser!.uid.toString();
         // Write code to move to screen that show unApproved Status
+           create(Compuser);
 
-        Get.offAllNamed(AppRoutes.SIGN_IN);
+
 
       }).onError((error, stackTrace) {
         print("this is error block of registery code");
@@ -49,6 +53,29 @@ class CompanySignUpController extends GetxController {
       print('Firebase Auth Exception : ' + e.code.toString());
     } catch (_) {
       state.loading.value = false;
+    }
+  }
+
+
+
+  create(CompanyModel user) async{
+    state.loading.value=true;
+    try{
+
+      await _db.doc(auth.currentUser!.uid.toString()).set(user.toJson()).then((value){
+        print("Successfully created user in doc ");
+        auth.signOut();
+        Get.offAllNamed(AppRoutes.SIGN_IN);
+        state.loading.value=false;
+
+      }).onError((error, stackTrace){
+        state.loading.value=false;
+        toastInfo(msg: error.toString());
+        print("inside create code");
+      });
+    }catch(e){
+      toastInfo(msg: e.toString());
+      print(" Error Inside create user code");
     }
   }
 
@@ -71,9 +98,10 @@ class CompanySignUpController extends GetxController {
   }
 
 //
-  void storeUser(CompanyModel user, BuildContext context) async {
-    await createUser(user);
-    registerUserWithEmailAndPassword(user.companyEmail, user.pass);
+  void storeUser(CompanyModel compUser, BuildContext context)  {
+
+    registerUserWithEmailAndPassword(compUser,compUser.companyEmail, compUser.pass);
+
   }
 
 

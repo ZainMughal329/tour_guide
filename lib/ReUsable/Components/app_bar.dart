@@ -1,7 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 
 class BuildAppBar extends StatelessWidget {
   String title ;
@@ -18,8 +20,10 @@ class BuildAppBar extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: (){
-              Scaffold.of(context).openDrawer();
+            onTap: ()async{
+              // Scaffold.of(context).openDrawer();
+              await FirebaseAuth.instance.signOut();
+              Get.offAllNamed(AppRoutes.SIGN_IN);
             },
             child: Tooltip(
               message: 'Drawer',

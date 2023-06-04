@@ -1,7 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 import '../../../ReUsable/Components/app_bar.dart';
 import '../../../ReUsable/Components/details.dart';
 import 'controller.dart';
@@ -17,8 +19,10 @@ class HomePage extends GetView<HomeController> {
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () {
-              Scaffold.of(context).openDrawer();
+            onTap: () async{
+              await FirebaseAuth.instance.signOut();
+              Get.offAllNamed(AppRoutes.SIGN_IN);
+              // Scaffold.of(context).openDrawer();
             },
             child: Container(
               padding: EdgeInsets.all(10.w),

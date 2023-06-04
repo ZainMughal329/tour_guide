@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompanyModel {
-  final String? id;
+   String? id;
   final String companyName;
 
   final String companyEmail;
@@ -17,7 +17,7 @@ class CompanyModel {
   // final String status;
 
   CompanyModel({
-    this.id,
+    this.id='',
     required this.companyEmail,
     required this.companyName,
     required this.companyPhone,
@@ -28,6 +28,7 @@ class CompanyModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "id" : id,
       "CompanyName": companyName,
       "CompanyEmail": companyEmail,
       "companyPhone": companyPhone,
@@ -41,7 +42,7 @@ class CompanyModel {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data()!;
     return CompanyModel(
-      id: snapshot.id,
+      id: data["id"],
       companyEmail: data["companyEmail"],
       companyName: data["companyName"],
       companyPhone: data["companyPhone"],

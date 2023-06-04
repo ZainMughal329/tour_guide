@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
@@ -146,6 +147,8 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                       TextButton(
                         onPressed: () async{
                           await FirebaseAuth.instance.signOut();
+                          StorePrefrences sp = StorePrefrences();
+                          sp.setIsFirstOpen(false);
                           Get.offAllNamed(AppRoutes.SIGN_IN);
                           // Navigate to forgot password screen
                         },
