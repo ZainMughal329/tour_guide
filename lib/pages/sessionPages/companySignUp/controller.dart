@@ -73,7 +73,7 @@ class CompanySignUpController extends GetxController {
 //
   void storeUser(CompanyModel user, BuildContext context) async {
     await createUser(user);
-    registerUserWithEmailAndPassword(user.companyEmail, user.pass);
+    // registerUserWithEmailAndPassword(user.companyEmail, user.pass);
   }
 
 

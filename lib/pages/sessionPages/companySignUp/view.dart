@@ -103,7 +103,9 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                           onTap: () {
 
                             if(_formKey.currentState!.validate()){
+                              controller.registerUserWithEmailAndPassword(emailController.text.trim(), passController.text.trim());
                               final CompanyUser= CompanyModel(
+                                id: controller.auth.currentUser!.uid.toString(),
                                 companyEmail: emailController.text.trim().toString(),
                                 companyName: nameController.text.trim().toString(),
                                 companyPhone: phoneNumberController.text.trim().toString(),

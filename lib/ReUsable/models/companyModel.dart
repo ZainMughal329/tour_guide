@@ -28,6 +28,7 @@ class CompanyModel {
 
   Map<String, dynamic> toJson() {
     return {
+      "uid" : id,
       "CompanyName": companyName,
       "CompanyEmail": companyEmail,
       "companyPhone": companyPhone,
@@ -41,7 +42,7 @@ class CompanyModel {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data()!;
     return CompanyModel(
-      id: snapshot.id,
+      id: data['uid'],
       companyEmail: data["companyEmail"],
       companyName: data["companyName"],
       companyPhone: data["companyPhone"],
