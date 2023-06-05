@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/sign_up_msg.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
@@ -32,6 +33,7 @@ class CompanySignUpController extends GetxController {
             print(value.user!.uid.toString());
             toastInfo(msg: "Information Recieved");
             toastInfo(msg: "You'll recieve confirmation \nmail shortyly");
+            Get.to(() => SignUpMsg());
 
         state.loading.value = false;
         StorePrefrences sp = StorePrefrences();

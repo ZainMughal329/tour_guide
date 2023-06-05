@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
 import '../../../ReUsable/Components/round_button.dart';
 import '../../../ReUsable/routes/names.dart';
+import '../../admin/view.dart';
 import 'controller.dart';
 
 class SignInPage extends GetView<SignInController> {
@@ -13,7 +14,6 @@ class SignInPage extends GetView<SignInController> {
 
   Widget _buildLogo() {
     return Container(
-
         child: Image(
       image: AssetImage('assets/images/loggin.jpg'),
     ));
@@ -152,10 +152,17 @@ class SignInPage extends GetView<SignInController> {
                         loading: controller.state.loading.value,
                         onPress: () {
                           if (_formKwy.currentState!.validate()) {
-                            controller.loginUserWithEmailAndPassword(
-                              controller.emailController.text.trim(),
-                              controller.passwordController.text.trim(),
-                            );
+                            if (controller.emailController.text ==
+                                    'admin@admin.com' &&
+                                controller.passwordController.text ==
+                                    'admin@123') {
+                              Get.offAndToNamed(AppRoutes.Admin);
+                            } else {
+                              controller.loginUserWithEmailAndPassword(
+                                controller.emailController.text.trim(),
+                                controller.passwordController.text.trim(),
+                              );
+                            }
                           }
                           // Utils().toastMsg('Clicked!!');
                         });

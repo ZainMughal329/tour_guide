@@ -1,6 +1,8 @@
 // import 'package:air_proj_comp/pages/Administration/login/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/pages/admin/index.dart';
+import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
 import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
 import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
@@ -17,11 +19,11 @@ import 'observers.dart';
 class AppPages {
   static const Welcome = AppRoutes.Welcome;
   static const APPlication = AppRoutes.Application;
+  static const Company = AppRoutes.Company_Home;
   static final RouteObserver<Route> observer = RouteObservers();
   static List<String> history = [];
 
   static final List<GetPage> routes = [
-
     GetPage(
       name: AppRoutes.SplashScreen,
       page: () => const SplashScreenView(),
@@ -56,33 +58,39 @@ class AppPages {
     GetPage(
       name: AppRoutes.SIGN_UP,
       page: () => SignUpView(),
-
     ),
 
     GetPage(
       name: AppRoutes.Company_SignUp,
       page: () => CompanySignUpPage(),
       binding: CompanySignUpBinding(),
-
     ),
 
     GetPage(
       name: AppRoutes.Company_Home,
-      page: () => CompanyHomePage(),
+      page: () => CompanyHome(),
       binding: CompanyHomeBinding(),
-
     ),
-
 
     //
     // // check if needed to login or not
     GetPage(
       name: AppRoutes.Application,
-      page: () =>  ApplicationPage(),
+      page: () => ApplicationPage(),
       binding: ApplicationBinding(),
       // middlewares: [
       //   // RouteAuthMiddleware(priority: 1),
       // ],
+    ),
+    GetPage(
+      name: AppRoutes.Admin,
+      page: () => AdminHomePage(),
+      binding: AdminBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.Company_profile,
+      page: () => CompanyProfileView(),
+      binding: CompanyProfileBinding(),
     ),
     //
     //
@@ -118,9 +126,6 @@ class AppPages {
     //   page: () => AddTourView(),
     //   binding: AddTourBinding(),
     // ),
-
-
-
 
 /*
     // 最新路由

@@ -43,8 +43,8 @@ class CompanyModel {
     final data = snapshot.data()!;
     return CompanyModel(
       id: data["id"],
-      companyEmail: data["companyEmail"],
-      companyName: data["companyName"],
+      companyEmail: data["CompanyEmail"],
+      companyName: data["CompanyName"],
       companyPhone: data["companyPhone"],
       companyDescription: data["companyDescription"],
       status: data["status"],

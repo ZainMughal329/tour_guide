@@ -95,35 +95,39 @@ class SignInController extends GetxController {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
+
             print(value);
 
-        if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
+            Get.offAndToNamed(AppRoutes.Company_Home);
 
-          _dbCompnay
-              .doc(auth.currentUser!.uid)
-              .get()
-              .then((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
-
-            if (documentSnapshot.exists) {
-              var status = documentSnapshot['status'];
-              print(status.toString());
-              handelNavigation(status);
-            }
-          }).onError((error, stackTrace) {
-            toastInfo(msg: error.toString());
-
-          });
-        }
-
-
-
-        else if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id){
-          Get.offAndToNamed(AppRoutes.Application);
-          toastInfo(msg: 'Successfully log in');
-          StorePrefrences sp = StorePrefrences();
-          sp.setIsFirstOpen(true);
-
-        }
+            //
+        // if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
+        //
+        //   _dbCompnay
+        //       .doc(auth.currentUser!.uid)
+        //       .get()
+        //       .then((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
+        //
+        //     if (documentSnapshot.exists) {
+        //       var status = documentSnapshot['status'];
+        //       print(status.toString());
+        //       handelNavigation(status);
+        //     }
+        //   }).onError((error, stackTrace) {
+        //     toastInfo(msg: error.toString());
+        //
+        //   });
+        // }
+        //
+        //
+        //
+        // else if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id){
+        //   Get.offAndToNamed(AppRoutes.Application);
+        //   toastInfo(msg: 'Successfully log in');
+        //   StorePrefrences sp = StorePrefrences();
+        //   sp.setIsFirstOpen(true);
+        //
+        // }
 
         state.loading.value = false;
         emailController.clear();

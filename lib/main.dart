@@ -6,10 +6,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/ReUsable/routes/pages.dart';
 import 'package:tours_guide/fucntions_call.dart';
+import 'package:tours_guide/pages/companyScreen/company_profile/controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp() ;
+  Get.put(CompanyProfileController());
   runApp(const MyApp());
 }
 

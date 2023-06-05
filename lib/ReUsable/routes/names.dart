@@ -6,12 +6,13 @@ class AppRoutes {
   static const Forgot_Password = '/forgot_pass';
   static const NotFound = '/not_found';
 
-
+  static const Admin = '/admin';
   static const Admin_Login = '/admin_login';
   static const Admin_Home = '/admin_home';
 
   static const Company_SignUp = '/company_signup';
   static const Company_Home = '/company_home';
+  static const Company_profile = '/company_profile';
 
   static const Tourist_Login = '/tourist_login';
   static const Tourist_Home = '/tourist_home';
