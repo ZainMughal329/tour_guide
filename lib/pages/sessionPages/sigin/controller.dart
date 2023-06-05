@@ -20,7 +20,9 @@ class SignInController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('users');
   final _dbCompnay = FirebaseFirestore.instance.collection('company');
-  final _dbCompanySnap =FirebaseFirestore.instance.collection('company').snapshots();
+  // final _dbCompanySnap =FirebaseFirestore.instance.collection('company').snapshots();
+  final _dbUserSnap =FirebaseFirestore.instance.collection('users').snapshots();
+
   var verificationId = "".obs;
 
   final emailController = TextEditingController();
@@ -94,12 +96,19 @@ class SignInController extends GetxController {
     try {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
+          .then((value) async {
 
             print(value);
-
-            Get.offAndToNamed(AppRoutes.Company_Home);
-
+            print('ourside if');
+            final companyData = await _dbCompnay.where('id',isEqualTo: auth.currentUser!.uid.toString()).get();
+            if(companyData.docs.isNotEmpty) {
+              print('Inside if');
+              Get.offAndToNamed(AppRoutes.Company_Home);
+              print('Executed');
+            }else {
+              print('inside else');
+              Get.offAndToNamed(AppRoutes.Application);
+            }
             //
         // if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
         //
@@ -164,11 +173,6 @@ class SignInController extends GetxController {
     }
   }
 
-  Future<UserModel> getUserData(String email) async {
-    final snapshot = await _db.where('email', isEqualTo: email).get();
-    final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
-    return userData;
-  }
 
   createUser(UserModel user) async {
     print("inside create user");
@@ -195,8 +199,6 @@ class SignInController extends GetxController {
 
   }
 
-  updateUserData(UserModel user) async {
-    await db.collection('users').doc(user.id).update(user.toJson());
-  }
+
 
 }

@@ -15,11 +15,10 @@ import '../../../ReUsable/routes/names.dart';
 import '../../sessionPages/sigin/controller.dart';
 import 'index.dart';
 
-class PersonController extends GetxController{
-
+class PersonController extends GetxController {
   PersonController();
-  // String? name;
 
+  // String? name;
 
   final emailFocus = FocusNode();
   final passwordFocus = FocusNode();
@@ -27,62 +26,59 @@ class PersonController extends GetxController{
   final userFocus = FocusNode();
   final phoneFocus = FocusNode();
 
-
   final state = PersonState();
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: <String> [
-        'openid',
-      ]
-  );
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>[
+    'openid',
+  ]);
   final auth = FirebaseAuth.instance;
+
   // final db = FirebaseFirestore.instance.collection('admin');
-final _db = FirebaseFirestore.instance;
+  final _db = FirebaseFirestore.instance;
 
-
-
-
-
-  void setLoading(bool value){
-    state.loading.value=value;
+  void setLoading(bool value) {
+    state.loading.value = value;
   }
+
   var doc_id = null;
 
-
   final picker = ImagePicker();
-
 
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
   XFile? _image;
+
   XFile? get image => _image;
 
-  Future pickedImageFromGallery(BuildContext context , UserModel userModel) async {
+  Future pickedImageFromGallery(
+      BuildContext context, UserModel userModel) async {
     final pickedImage =
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-      print('Image path is : '+_image!.path.toString());
-      uploadImage(context,userModel);
+      print('Image path is : ' + _image!.path.toString());
+      uploadImage(context, userModel);
       update();
-
     }
   }
+
   //
-  Future pickedImageFromCamera(BuildContext context,UserModel userModel) async {
+  Future pickedImageFromCamera(
+      BuildContext context, UserModel userModel) async {
     final pickedImage =
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-      print('Image path is : '+_image!.path.toString());
-      uploadImage(context,userModel);
+      print('Image path is : ' + _image!.path.toString());
+      uploadImage(context, userModel);
       // notifyListeners();
       update();
     }
   }
-  void showImage(context , userModel) {
+
+  void showImage(context, userModel) {
     showDialog(
       context: context,
       builder: (context) {
@@ -94,7 +90,7 @@ final _db = FirebaseFirestore.instance;
               children: [
                 ListTile(
                   onTap: () {
-                    pickedImageFromCamera(context , userModel);
+                    pickedImageFromCamera(context, userModel);
                     Navigator.pop(context);
                   },
                   leading: Icon(Icons.camera),
@@ -102,7 +98,7 @@ final _db = FirebaseFirestore.instance;
                 ),
                 ListTile(
                   onTap: () {
-                    pickedImageFromGallery(context , userModel);
+                    pickedImageFromGallery(context, userModel);
                     Navigator.pop(context);
                   },
                   leading: Icon(Icons.image),
@@ -116,13 +112,13 @@ final _db = FirebaseFirestore.instance;
     );
   }
 
-  Future uploadImage(BuildContext context , UserModel userModel) async {
+  Future uploadImage(BuildContext context, UserModel userModel) async {
     // setLoading(true);
     firebase_storage.Reference storageRef = firebase_storage
         .FirebaseStorage.instance
         .ref('/profileImage' + DateTime.now().toString());
     firebase_storage.UploadTask uploadTask =
-    storageRef.putFile(File(image!.path).absolute);
+        storageRef.putFile(File(image!.path).absolute);
 
     print('upload task is : ' + uploadTask.toString());
     await Future.value(uploadTask);
@@ -132,56 +128,62 @@ final _db = FirebaseFirestore.instance;
     // return newUrl;
 
     _db.collection('users').doc(userModel.id).update({
-      'photoUrl' : newUrl.toString(),
+      'photoUrl': newUrl.toString(),
     }).then((value) {
       // setLoading(false);
-      Get.snackbar('Congrats','Update successfull');
+      Get.snackbar('Congrats', 'Update successfull');
       _image = null;
     }).onError((error, stackTrace) {
       // setLoading(false);
-      Get.snackbar('Error is',error.toString());
+      Get.snackbar('Error is', error.toString());
     });
   }
 
-
-
-  void signOut ()async{
-    try{
-      await auth.signOut().then((value) async{
+  void signOut() async {
+    try {
+      await auth.signOut().then((value) async {
         StorePrefrences sp = StorePrefrences();
         await sp.setIsFirstOpen(false);
 
-        print("user data is ssss"+auth.currentUser.toString());
+        print("user data is ssss" + auth.currentUser.toString());
 
         Get.snackbar('Sign Out ', 'Successfully');
         setLoading(false);
         Get.offAllNamed(AppRoutes.SIGN_IN);
-
-      }).onError((error, stackTrace){
+      }).onError((error, stackTrace) {
         setLoading(false);
         Get.snackbar('Error', error.toString());
-
       });
-
-    }catch(e){
-      Get.snackbar("Error while logout" , e.toString());
+    } catch (e) {
+      Get.snackbar("Error while logout", e.toString());
     }
   }
 
-  final signInController = Get.put(SignInController());
+  // final signInController = Get.put(SignInController());
 
-  getUsersData() async{
+  Future<UserModel> getUserData(String id) async {
+    final snapshot =
+        await _db.collection('users').where('id', isEqualTo: id).get();
+    final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
+    return userData;
+  }
+
+  getUsersData() async {
     print('INSIDE FUNC');
-    final email = await signInController.firebaseUser.value?.email;
-    print('Email is : ' +email.toString());
-    if(email != null) {
-      return await signInController.getUserData(email);
-    }else {
+    final id = auth.currentUser!.uid.toString();
+    print('Email is : ' + id.toString());
+    if (id != '') {
+      return await getUserData(id);
+    } else {
       Get.snackbar('Error', 'Something went wrong');
     }
   }
-  updateUser(UserModel user) async{
-    await signInController.updateUserData(user);
+
+  updateUserData(UserModel user) async {
+    await _db.collection('users').doc(user.id).update(user.toJson());
   }
 
+  updateUser(UserModel user) async {
+    await updateUserData(user);
+  }
 }
