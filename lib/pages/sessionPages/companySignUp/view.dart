@@ -9,27 +9,16 @@ import 'package:tours_guide/ReUsable/routes/names.dart';
 
 import 'controller.dart';
 
-// import '../../welcome/controller.dart';dart
 
 class CompanySignUpPage extends GetView<CompanySignUpController> {
   CompanySignUpPage({Key? key}) : super(key: key);
 
-  TextEditingController nameController = TextEditingController();
-  FocusNode nameNode = FocusNode();
+  final auth=FirebaseAuth.instance;
 
-  TextEditingController emailController = TextEditingController();
-  FocusNode emailNode = FocusNode();
-
-  TextEditingController phoneNumberController = TextEditingController();
-  FocusNode phoneNumberNode = FocusNode();
-
-  TextEditingController descController = TextEditingController();
-  FocusNode descNode = FocusNode();
-
-  TextEditingController passController = TextEditingController();
-  FocusNode passNode = FocusNode();
 
   final _formKey = GlobalKey<FormState>();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +38,8 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextFormField(
-                        controller: nameController,
-                        focusNode: nameNode,
+                        controller: controller.state.nameController,
+                        focusNode: controller.state.nameNode,
                         onFieldSubmitted: (value) {},
                         validator: (value) {},
                         decoration: InputDecoration(
@@ -59,8 +48,8 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                       ),
                       SizedBox(height: 16.0.h),
                       TextFormField(
-                        controller: emailController,
-                        focusNode: emailNode,
+                        controller: controller.state.emailController,
+                        focusNode: controller.state.emailNode,
                         onFieldSubmitted: (value) {},
                         validator: (value) {},
                         decoration: InputDecoration(
@@ -69,8 +58,8 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                       ),
                       SizedBox(height: 16.0.h),
                       TextFormField(
-                        controller: phoneNumberController,
-                        focusNode: phoneNumberNode,
+                        controller: controller.state.phoneNumberController,
+                        focusNode: controller.state.phoneNumberNode,
                         onFieldSubmitted: (value) {},
                         validator: (value) {},
                         decoration: InputDecoration(
@@ -79,8 +68,8 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                       ),
                       SizedBox(height: 16.0.h),
                       TextFormField(
-                        controller: descController,
-                        focusNode: descNode,
+                        controller: controller.state.descController,
+                        focusNode: controller.state.descNode,
                         onFieldSubmitted: (value) {},
                         validator: (value) {},
                         decoration: InputDecoration(
@@ -89,8 +78,8 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                       ),
                       SizedBox(height: 16.0.h),
                       TextFormField(
-                        controller: passController,
-                        focusNode: passNode,
+                        controller: controller.state.passController,
+                        focusNode: controller.state.passNode,
                         onFieldSubmitted: (value) {},
                         validator: (value) {},
                         decoration: InputDecoration(
@@ -104,14 +93,14 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                           onTap: () {
 
                             if(_formKey.currentState!.validate()){
-                              controller.registerUserWithEmailAndPassword(emailController.text.trim(), passController.text.trim());
+
                               final CompanyUser= CompanyModel(
-                                id: controller.auth.currentUser!.uid.toString(),
-                                companyEmail: emailController.text.trim().toString(),
-                                companyName: nameController.text.trim().toString(),
-                                companyPhone: phoneNumberController.text.trim().toString(),
-                                companyDescription: descController.text.trim().toString(),
-                                pass: passController.text.trim().toString(),
+
+                                companyEmail: controller.state.emailController.text.trim().toString(),
+                                companyName: controller.state.nameController.text.trim().toString(),
+                                companyPhone: controller.state.phoneNumberController.text.trim().toString(),
+                                companyDescription: controller.state.descController.text.trim().toString(),
+                                pass: controller.state.passController.text.trim().toString(),
                               );
                               controller.storeUser(CompanyUser, context);
 
@@ -137,15 +126,7 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                           ),
                         );
                       }),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     // Perform sign-in action
-                      //   },
-                      //   child: Text('Sign In'),
-                      //   style: ButtonStyle(
-                      //     backgroundColor: Colors.blue
-                      //   ),
-                      // ),
+
                       TextButton(
                         onPressed: () async{
                           await FirebaseAuth.instance.signOut();

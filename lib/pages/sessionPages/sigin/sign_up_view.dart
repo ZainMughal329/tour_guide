@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unused_field
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,50 +16,7 @@ class SignUpView extends GetView<SignInController> {
 
   final _formKwy = GlobalKey<FormState>();
 
-  // Widget _buildLogo() {
-  //   return Container(
-  //     width: 110.w,
-  //     margin: EdgeInsets.only(top: 84.w),
-  //     child: Column(
-  //       children: [
-  //         Container(
-  //           height: 76.w,
-  //           width: 76.w,
-  //           margin: EdgeInsets.symmetric(horizontal: 15.w),
-  //           child: Stack(
-  //             children: [
-  //               Positioned(
-  //                 child: Container(
-  //                   child: Text("this is it"),
-  //                   height: 76.w,
-  //                   decoration: const BoxDecoration(
-  //                     color: AppColors.primaryBackground,
-  //                     boxShadow: [
-  //                       Shadows.primaryShadow,
-  //                     ],
-  //                     borderRadius: BorderRadius.all(
-  //                       Radius.circular(35),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               // Positioned(
-  //               //   child: Image.asset('assets/images/ic_launcher.png'),
-  //               // ),
-  //             ],
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           height: 5.w,
-  //         ),
-  //         const Text(
-  //           'Let\'s chat',
-  //           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
   Widget _buildLogo() {
     return Container(
         child: Image(
@@ -133,23 +90,20 @@ class SignUpView extends GetView<SignInController> {
                         loading: controller.state.loading.value,
                         onPress: () {
                           if (_formKwy.currentState!.validate()) {
-                            // controller.registerUserWithEmailAndPassword(
-                            //     controller.emailController.text.trim(),
-                            //     controller.passwordController.text.trim());
+
                             var user = UserModel(
-                              email: controller.emailController.text.trim(),
+                              email: controller.emailController.text.trim().toString(),
                               password:
-                                  controller.passwordController.text.trim(),
+                                  controller.passwordController.text.trim().toString(),
                               phone: '+92**********',
-                              userName: controller.userController.text.trim(),
+                              userName: controller.userController.text.trim().toString(),
                               photoUrl: '',
                             );
                             controller.storeUser(user, context);
 
-                            // Get.offAllNamed(AppRoutes.Application);
-                            // Get.toNamed(AppRoutes.Application);
+
                           }
-                          // Utils().toastMsg('Clicked!!');
+
                         }),
                   ),
                 ),

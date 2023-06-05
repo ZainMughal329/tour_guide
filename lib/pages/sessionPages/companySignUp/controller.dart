@@ -21,7 +21,8 @@ class CompanySignUpController extends GetxController {
   // final _db = FirebaseFirestore.instance.collection('users');
   final auth=FirebaseAuth.instance;
 
-
+//   this is to register with email and password
+  // after registeration , store the user in database
   void registerUserWithEmailAndPassword(CompanyModel Compuser,String email,String password) async {
     state.loading.value = true;
     try {
@@ -57,7 +58,7 @@ class CompanySignUpController extends GetxController {
   }
 
 
-
+// this function is to store user in Firebase FireStore
   create(CompanyModel user) async{
     state.loading.value=true;
     try{
@@ -80,24 +81,7 @@ class CompanySignUpController extends GetxController {
   }
 
 
-
-
-
-
-  createUser(CompanyModel user) async {
-    state.loading.value = true;
-    await _db.add(user.toJson()).whenComplete(() {
-      // sp.setIsFirstOpen(true);
-      toastInfo(msg: 'Successfully created account');
-      state.loading.value = false;
-    }).catchError((error, stackTrace) {
-      toastInfo(msg: "Error occurred");
-      print('Error is : ' + error.toString());
-      state.loading.value = false;
-    });
-  }
-
-//
+//  for registering and storing Company USer
   void storeUser(CompanyModel compUser, BuildContext context)  {
 
     registerUserWithEmailAndPassword(compUser,compUser.companyEmail, compUser.pass);

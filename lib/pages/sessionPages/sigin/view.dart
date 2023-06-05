@@ -13,9 +13,7 @@ class SignInPage extends GetView<SignInController> {
 
   Widget _buildLogo() {
     return Container(
-        // height: 400.h,
-        // width: 400.h,
-        // color: Colors.blue,
+
         child: Image(
       image: AssetImage('assets/images/loggin.jpg'),
     ));

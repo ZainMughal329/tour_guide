@@ -20,6 +20,7 @@ class SignInController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('users');
   final _dbCompnay = FirebaseFirestore.instance.collection('company');
+  final _dbCompanySnap =FirebaseFirestore.instance.collection('company').snapshots();
   var verificationId = "".obs;
 
   final emailController = TextEditingController();
@@ -69,6 +70,9 @@ class SignInController extends GetxController {
       var user = await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
+            userinfo.id=auth.currentUser!.uid.toString();
+            StorePrefrences sp= StorePrefrences();
+            sp.setIsFirstOpen(true);
         createUser(userinfo);
 
       }).onError((error, stackTrace) {
@@ -93,31 +97,13 @@ class SignInController extends GetxController {
           .then((value) {
             print(value);
 
-        print("auth id :"+auth.currentUser!.uid.toString());
-        print("dbCOmmpany idL :"+_dbCompnay.doc(auth.currentUser!.uid).id);
-
-
-
-            // _dbCompnay.get().then((QuerySnapshot querySnapshot) {
-            //   querySnapshot.docs.forEach((DocumentSnapshot documentSnapshot) {
-            //     String docId = documentSnapshot.id;
-            //     // Use the docId as needed
-            //   });
-            //
-            //
-
-
         if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
 
           _dbCompnay
               .doc(auth.currentUser!.uid)
               .get()
               .then((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
-            // print("line after 111");
-            //
-            // print(documentSnapshot['status']);
 
-            // var user = CompanyModel.fromJson(documentSnapshot);
             if (documentSnapshot.exists) {
               var status = documentSnapshot['status'];
               print(status.toString());
@@ -125,18 +111,18 @@ class SignInController extends GetxController {
             }
           }).onError((error, stackTrace) {
             toastInfo(msg: error.toString());
-            // print(error.toString());
 
-            // print("inside company login code");
           });
         }
-            // if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id)
+
+
+
         else if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id){
           Get.offAndToNamed(AppRoutes.Application);
           toastInfo(msg: 'Successfully log in');
           StorePrefrences sp = StorePrefrences();
           sp.setIsFirstOpen(true);
-          // print("inside user login code");
+
         }
 
         state.loading.value = false;
@@ -185,16 +171,16 @@ class SignInController extends GetxController {
     state.loading.value = true;
     await _db.doc(auth.currentUser!.uid).set(user.toJson()).whenComplete(() {
       print("insdie create 2nd line");
-      // sp.setIsFirstOpen(true);
+
       toastInfo(msg: 'Successfully created account');
-      // state.loading.value = false;
+
       state.loading.value = false;
       StorePrefrences sp = StorePrefrences();
       sp.setIsFirstOpen(true);
       Get.offAllNamed(AppRoutes.Application);
     }).catchError((error, stackTrace) {
       toastInfo(msg: "Error occurred");
-      print('Error is : ' + error.toString());
+      // print('Error is : ' + error.toString());
       state.loading.value = false;
     });
   }
@@ -203,168 +189,10 @@ class SignInController extends GetxController {
   void storeUser(UserModel user, BuildContext context) async {
     registerUserWithEmailAndPassword( user,user.email, user.password);
 
-    // registerUserWithEmailAndPassword(user.email, user.password);
   }
 
   updateUserData(UserModel user) async {
     await db.collection('users').doc(user.id).update(user.toJson());
   }
 
-// Future<void> handleGoogleSignIn() async {
-//   state.loading.value = true;
-//   print('Enter inside func');
-//   try {
-//     var user = await _googleSignIn.signIn();
-//     if (user != null) {
-//       state.loading.value = false;
-//       final _gAuthentication = await user.authentication;
-//       final credential = GoogleAuthProvider.credential(
-//         idToken: _gAuthentication.idToken,
-//         accessToken: _gAuthentication.accessToken,
-//       );
-//       await FirebaseAuth.instance.signInWithCredential(credential);
-//
-//       // String? displayName = user.displayName ?? user.email;
-//       // String? email = user.email;
-//       // String id = user.id;
-//       // String photoUrl = user.photoUrl ?? '';
-//       // UserModel userModel = UserModel(
-//       //     userName: displayName, phone: '', email: email, photoUrl: photoUrl);
-//       //
-//       var userbase = await db
-//           .collection('users')
-//           .withConverter(
-//             fromFirestore: UserModel.fromJson,
-//             toFirestore: (UserData userdata, options) =>
-//                 userdata.toFirestore(),
-//           )
-//           .where("id", isEqualTo: id)
-//           .get();
-//
-//       if (userbase.docs.isEmpty) {
-//         final data = UserData(
-//           id: id,
-//           email: email,
-//           name: displayName,
-//           location: "",
-//           fcmtoken: "",
-//           photourl: photoUrl,
-//           addtime: Timestamp.now(),
-//         );
-//         await db
-//             .collection('users')
-//             .withConverter(
-//               fromFirestore: UserData.fromFirestore,
-//               toFirestore: (UserData userdata, options) =>
-//                   userdata.toFirestore(),
-//             )
-//             .add(data);
-//       }
-//       toastInfo(msg: 'Login Successfull');
-//       // Get.offAndToNamed(AppRoutes.Application);
-//       Get.toNamed(AppRoutes.Application);
-//     }
-//   } catch (e) {
-//     toastInfo(msg: 'Error Occured');
-//     print("Error is : " + e.toString());
-//     state.loading.value = false;
-//   }
-// }
-// /
-// handleSignIn(BuildContext context, String email, String password) async {
-//   state.loading.value = true;
-//
-//   print('Enter inside func');
-//   try {
-//     // var user = await _googleSignIn.signIn();
-//     var user = await FirebaseAuth.instance
-//         .createUserWithEmailAndPassword(email: email, password: password)
-//         .then((value) {
-//
-
-//       // toastInfo(msg: "Account Created Successfully");
-//     }).onError((error, stackTrace) {
-//       // toastInfo(msg: error.toString());
-//     });
-//     var auth = await FirebaseAuth.instance;
-//     // if (user != null) {
-//     //   state.loading.value = false;
-//     //   await _db.doc('outer').collection('email_users').add(user.toJson()).whenComplete(() {
-//     //     Get.snackbar(
-//     //       'Congrats',
-//     //       'Your account has successfully created',
-//     //       snackPosition: SnackPosition.BOTTOM,
-//     //       colorText: Colors.green,
-//     //       backgroundColor: Colors.green.withOpacity(0.1),
-//     //     );
-//     //   }).catchError((error, stackTrace) {
-//     //     Get.snackbar(
-//     //       'Error',
-//     //       'Something went wrong ' + error.toString(),
-//     //       snackPosition: SnackPosition.BOTTOM,
-//     //       colorText: Colors.green,
-//     //       backgroundColor: Colors.green.withOpacity(0.1),
-//     //     );
-//     //   });
-//     // }
-//   } catch (e) {
-//     toastInfo(msg: 'Error Occured');
-//     print("Error is" + e.toString());
-//     state.loading.value = false;
-//   }
-// }
-//
-//   handleSignIn(String email , password , BuildContext context) async {
-//     var user = await auth.createUserWithEmailAndPassword(email: email, password: password);
-//     String userName = user.user.u
-//
-//
-//     if(user == null) {
-//       var data = UserModel(userName: '', phone: phone, email: email, photoUrl: photoUrl)
-//     }
-// await db.collection('users').withConverter(fromFirestore: UserModel.fromJson, toFirestore: (UserModel userModel ,options) => userModel.toJson()).add(data);
-//   }
-//
-//   Future<UserModel> getUserData(String email) async {
-//     final snapshot = await _db.where('Email', isEqualTo: email).get();
-//     final userData = snapshot.docs.map((e) => UserModel.fromSnapshot(e)).single;
-//     return userData;
-//   }
-//
-
-//
-//   // @override
-//   // void onReady() {
-//   //   // TODO: implement onReady
-//   //   super.onReady();
-//   //   FirebaseAuth.instance.authStateChanges().listen((User? user) {
-//   //     if (user == null) {
-//   //       print('User is log out');
-//   //     } else {
-//   //       print('User is login');
-//   //     }
-//   //   });
-//   // }
-//
-//   void login(String email, String password) {
-//     state.loading.value = true;
-//     try {
-//       FirebaseAuth.instance
-//           .signInWithEmailAndPassword(email: email, password: password)
-//           .then((value) {
-//         StorePrefrences sp = StorePrefrences();
-//         sp.setIsFirstOpen(true);
-//         state.loading.value = false;
-//         Get.offAndToNamed(AppRoutes.Application);
-//         toastInfo(msg: 'Login successfull');
-//       }).onError((error, stackTrace) {
-//         state.loading.value = false;
-//         toastInfo(msg: 'Error occured \n' + error.toString());
-//       });
-//     } catch (e) {
-//       toastInfo(msg: e.toString());
-//       state.loading.value = false;
-//     }
-//   }
-//
 }
