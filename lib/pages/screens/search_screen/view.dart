@@ -4,59 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
-import 'controller.dart';
+// import 'controller.dart';
 // import 'controller.dart';
 
 class SearchView extends GetView<SearchController> {
   const SearchView({Key? key}) : super(key: key);
 
-  // AppBar _buildAppBar() {
-  //   return AppBar(
-  //     backgroundColor: Colors.white,
-  //     elevation: 0,
-  //     title: Container(
-  //       margin: EdgeInsets.only(left: 7.w, right: 7.w),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           SizedBox(
-  //             width: 15.w,
-  //             height: 12.h,
-  //             child: Icon(
-  //               Icons.sort_rounded,
-  //               color: Colors.black,
-  //               size: 28,
-  //             ),
-  //           ),
-  //           Container(
-  //             padding: EdgeInsets.only(top: 10.h),
-  //             child: Text(
-  //               'Search',
-  //               style: TextStyle(
-  //                 color: Colors.black,
-  //                 fontSize: 18,
-  //                 fontWeight: FontWeight.w500,
-  //               ),
-  //             ),
-  //           ),
-  //           GestureDetector(
-  //             child: Container(
-  //               padding: EdgeInsets.only(top: 10.h),
-  //               height: 40.h,
-  //               width: 40.w,
-  //               child: Icon(
-  //                 Icons.person_outline,
-  //                 color: Colors.black,
-  //                 size: 28,
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+
 
   Widget _searchBarView() {
     return Row(

@@ -20,9 +20,7 @@ class SignInController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('users');
   final _dbCompnay = FirebaseFirestore.instance.collection('company');
-  // final _dbCompanySnap =FirebaseFirestore.instance.collection('company').snapshots();
-  final _dbUserSnap =FirebaseFirestore.instance.collection('users').snapshots();
-
+  final _dbCompanySnap =FirebaseFirestore.instance.collection('company').snapshots();
   var verificationId = "".obs;
 
   final emailController = TextEditingController();
@@ -98,18 +96,23 @@ class SignInController extends GetxController {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
 
-            print(value);
-            print('ourside if');
-            final companyData = await _dbCompnay.where('id',isEqualTo: auth.currentUser!.uid.toString()).get();
-            if(companyData.docs.isNotEmpty) {
-              print('Inside if');
-              Get.offAndToNamed(AppRoutes.Company_Home);
-              print('Executed');
-            }else {
-              print('inside else');
-              Get.offAndToNamed(AppRoutes.Application);
-            }
-            //
+        print(value);
+        print('ourside if');
+        final companyData = await _dbCompnay.where('id',isEqualTo: auth.currentUser!.uid.toString()).get();
+        if(companyData.docs.isNotEmpty) {
+          print("Printinting value is true or not"+companyData.docs.isEmpty.toString());
+
+          StorePrefrences().setIsFirstOpen(true);
+
+          print('Inside if');
+          Get.offAndToNamed(AppRoutes.Company_Home);
+          print('Executed');
+        }else {
+          print('inside else');
+          StorePrefrences().setIsFirstOpen(true);
+          Get.offAndToNamed(AppRoutes.Application);
+        }
+        //
         // if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
         //
         //   _dbCompnay
@@ -173,6 +176,11 @@ class SignInController extends GetxController {
     }
   }
 
+  Future<UserModel> getUserData(String email) async {
+    final snapshot = await _db.where('email', isEqualTo: email).get();
+    final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
+    return userData;
+  }
 
   createUser(UserModel user) async {
     print("inside create user");
@@ -199,6 +207,8 @@ class SignInController extends GetxController {
 
   }
 
-
+  updateUserData(UserModel user) async {
+    await db.collection('users').doc(user.id).update(user.toJson());
+  }
 
 }

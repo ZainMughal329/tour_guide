@@ -47,6 +47,10 @@ class AdminHomePage extends GetView<AdminController> {
                 print('Inside snapshot');
                 return Center(child: CircularProgressIndicator());
               }
+
+
+
+
               var len = snapshot.data!.docs.toList();
               return ListView.builder(
                   itemCount: len.length,
