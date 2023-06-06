@@ -21,6 +21,7 @@ class _CompanyHomeState extends State<CompanyHome>
     with TickerProviderStateMixin {
   final controller = Get.put(CompanyHomeController());
 
+
   // _CompanyHomeState(this._tabController);
 
   // final tabController = Get.put(TabBarController());
@@ -118,8 +119,12 @@ class _CompanyHomeState extends State<CompanyHome>
                               controller: _tabController,
                               children: [
                                 Center(child: Text('Hello')),
-                                Center(child: AddTourScreen()),
-                                Container(child: CompanyProfileView()),
+                                Center(child: CompanyAddTourScreen(
+
+                                )),
+                                Container(child: CompanyProfileView(
+
+                                )),
 
                                 // CompanyProfileView(
                                 //   id: company.id.toString(),

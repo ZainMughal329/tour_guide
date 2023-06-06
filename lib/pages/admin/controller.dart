@@ -15,8 +15,8 @@ class AdminController extends GetxController {
   updateCompanyData(String id) async {
     print('Inside update');
     print('update id : ' + id);
-    ref.doc(id).update({
-      'status': 'approved',
+    await ref.doc(id).update({
+      'status': 'true',
     }).then((value) {
       Get.snackbar('Approved', 'Congrats');
     }).onError((error, stackTrace) {
@@ -27,7 +27,7 @@ class AdminController extends GetxController {
   }
 
   deleteCompanyData(String id) async {
-    ref.doc(id).delete().then((value) {
+    await  ref.doc(id).delete().then((value) {
       Get.snackbar('Delete', 'Successfully Deleted');
     }).onError((error, stackTrace) {
       Get.snackbar('Error', 'Something went wrong');

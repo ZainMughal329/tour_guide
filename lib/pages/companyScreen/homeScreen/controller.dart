@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../../ReUsable/models/companyModel.dart';
-import '../../sessionPages/sigin/controller.dart';
 
 class CompanyHomeController extends GetxController {
   // final signInController = Get.put(SignInController());

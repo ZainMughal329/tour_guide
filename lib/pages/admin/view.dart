@@ -90,7 +90,7 @@ class AdminHomePage extends GetView<AdminController> {
                               ),
                               snapshot.data!.docs[index]['status']
                                   .toString() ==
-                                  'notApproved'
+                                  'false'
                                   ? Row(
                                 mainAxisAlignment:
                                 MainAxisAlignment.spaceEvenly,

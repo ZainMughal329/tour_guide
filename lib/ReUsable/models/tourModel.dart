@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TourModel {
   final String? id;
-  final String tourCityName;
-  final String tourCountryName;
+  final String title;
+  final String location;
 
   final String tourDescription;
 
@@ -13,18 +13,18 @@ class TourModel {
 
   final String price;
 
-  final String tourRating;
+  // final String tourRating;
 
-  final String tourImages;
+  final String tourImage;
 
   TourModel({
     this.id,
-    required this.tourCountryName,
+    required this.title,
     required this.tourCategory,
     required this.tourDescription,
-    required this.tourImages,
-    required this.tourCityName,
-    required this.tourRating,
+    required this.tourImage,
+    required this.location,
+    // required this.tourRating,
     required this.people,
     required this.price,
   });
@@ -33,10 +33,10 @@ class TourModel {
     return {
       "tourCategory": tourCategory,
       "tourDescription": tourDescription,
-      "tourCityName": tourCityName,
-      "tourCountryName": tourCountryName,
-      "tourRating": tourRating,
-      "tourImages": tourImages,
+      "title": title,
+      "location": location,
+      // "tourRating": tourRating,
+      "tourImage": tourImage,
       "price": price,
       "people": people,
     };
@@ -45,13 +45,13 @@ class TourModel {
   factory TourModel.fromJson(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data()!;
     return TourModel(
-      id: snapshot.id,
+      id: data["id"],
       tourCategory: data["tourCategory"],
       tourDescription: data["tourDescription"],
-      tourImages: data["tourImages"],
-      tourCityName: data["tourCityName"],
-      tourRating: data["tourRating"],
-      tourCountryName: data["tourCountryName"],
+      tourImage: data["tourImage"],
+      title: data["title"],
+      // tourRating: data["tourRating"],
+      location: data["location"],
       people: data["people"],
       price: data["price"],
     );
