@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../ReUsable/models/companyModel.dart';
 
 class CompanyHomeController extends GetxController {
-  // final signInController = Get.put(SignInController());
   final auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('company');
 
@@ -14,18 +13,16 @@ class CompanyHomeController extends GetxController {
     final comData = snapshot.docs.map((e) => CompanyModel.fromJson(e)).single;
     return comData;
   }
-  getUsersData() async{
+
+  getUsersData() async {
     print('INSIDE FUNC');
     final id = auth.currentUser!.uid.toString();
-    print('Id is : ' +id.toString());
-    if(id != '') {
+    if (id != '') {
       print('object');
-      final data =  await getUserData(id);
-      print('Data is : ' + data.toString());
+      final data = await getUserData(id);
       return data;
-    }else {
+    } else {
       Get.snackbar('Error', 'Something went wrong');
     }
   }
-
 }

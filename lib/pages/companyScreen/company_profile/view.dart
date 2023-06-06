@@ -9,21 +9,21 @@ import 'package:tours_guide/pages/companyScreen/company_profile/update.dart';
 import 'controller.dart';
 
 class CompanyProfileView extends GetView<CompanyProfileController> {
-
-  const CompanyProfileView({Key? key,}) : super(key: key);
+  const CompanyProfileView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w , vertical: 10.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
           child: Container(
             child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
               stream: controller.getNodeData(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  // Access the data using snapshot.data
                   return Container(
                     padding: const EdgeInsets.all(10),
                     child: Column(
@@ -46,16 +46,16 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 borderRadius: BorderRadius.circular(25),
                                 child: snapshot.data!['logo'].toString() == ''
                                     ? Icon(
-                                  Icons.person_outline,
-                                  size: 30,
-                                  color: Colors.white,
-                                )
+                                        Icons.person_outline,
+                                        size: 30,
+                                        color: Colors.white,
+                                      )
                                     : Image(
-                                  image: NetworkImage(
-                                    snapshot.data!['logo'].toString(),
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
+                                        image: NetworkImage(
+                                          snapshot.data!['logo'].toString(),
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
                             ),
                             title: Text(
@@ -96,12 +96,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                     style: TextStyle(color: Colors.white),
                                   ),
                                   trailing: InkWell(
-                                    onTap: () {
-                                      print('object');
-                                      // Get.isDarkMode ? themeController.changeTheme(AppThemes.lightTheme) : themeController.changeTheme(AppThemes.darkTheme);
-                                      // themeController.isDarkMode.value ? AppThemes.lightTheme : AppThemes.darkTheme ;
-                                      print('object2');
-                                    },
+                                    onTap: () {},
                                     child: Icon(
                                       Icons.radio_button_on,
                                       color: Colors.white,
@@ -229,7 +224,6 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                         Center(
                           child: InkWell(
                             onTap: () {
-                              // LoginController.instance.register(email.text.trim(), password.text.trim());
                               final auth = FirebaseAuth.instance;
                               auth.signOut().then((value) {
                                 Get.offAndToNamed(AppRoutes.SIGN_IN);
@@ -238,15 +232,17 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   'Successfully logOut ',
                                   snackPosition: SnackPosition.BOTTOM,
                                   colorText: Colors.green,
-                                  backgroundColor: Colors.green.withOpacity(0.1),
+                                  backgroundColor:
+                                      Colors.green.withOpacity(0.1),
                                 );
                               }).onError((error, stackTrace) {
                                 Get.snackbar(
                                   'Error',
-                                  'Aomething went wrong + ' + error.toString(),
+                                  'Something went wrong + ' + error.toString(),
                                   snackPosition: SnackPosition.BOTTOM,
                                   colorText: Colors.green,
-                                  backgroundColor: Colors.green.withOpacity(0.1),
+                                  backgroundColor:
+                                      Colors.green.withOpacity(0.1),
                                 );
                               });
                             },
@@ -256,9 +252,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 width: 300,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
-                                    color: Colors.blue
-                                  // color: AppColors.buttonBgColor,
-                                ),
+                                    color: Colors.blue),
                                 child: Center(
                                   child: Text(
                                     'Logout',
@@ -269,12 +263,13 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               ),
                               onTap: () {
                                 final auth = FirebaseAuth.instance;
-                                auth.signOut().then((value) {
-                                  Get.snackbar('Successfull', 'Log Out');
-                                  Get.offAndToNamed(AppRoutes.SIGN_IN);
-                                }).onError((error, stackTrace) {
+                                auth.signOut().then(
+                                  (value) {
+                                    Get.snackbar('Successful', 'Log Out');
+                                    Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                  },
+                                ).onError((error, stackTrace) {
                                   Get.snackbar('Error', 'Something goes wrong');
-                                  print('Error is : ' + error.toString());
                                 });
                               },
                             ),
@@ -283,9 +278,6 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                       ],
                     ),
                   );
-
-                  // Build your UI using the retrieved data
-                  // return Text(data.toString());
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {

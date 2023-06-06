@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
-import '../sessionPages/sigin/view.dart';
 import 'controller.dart';
 
 class AdminHomePage extends GetView<AdminController> {
@@ -26,7 +24,6 @@ class AdminHomePage extends GetView<AdminController> {
                 Get.snackbar('Success', 'Logout success');
               }).onError((error, stackTrace) {
                 Get.snackbar('Error', 'Something went wrong');
-                print('Error while logging out is :  ' + error.toString());
               });
             },
             icon: Icon(Icons.logout),
@@ -39,13 +36,10 @@ class AdminHomePage extends GetView<AdminController> {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             try {
-              print('Inside try');
               if (snapshot.connectionState == ConnectionState.waiting) {
-                print('Connection is not ok');
                 return Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                print('Inside snapshot');
                 return Center(child: CircularProgressIndicator());
               }
               return snapshot.data!.docs.length != 0
@@ -108,11 +102,7 @@ class AdminHomePage extends GetView<AdminController> {
                                       )
                                     : Container(
                                         child: TextButton(
-                                          onPressed: () async {
-                                            print('removing at : ' +
-                                                index.toString());
-                                            controller.removeItem(index);
-                                          },
+                                          onPressed: () async {},
                                           child: Text('Approved'),
                                         ),
                                       ),
@@ -134,9 +124,6 @@ class AdminHomePage extends GetView<AdminController> {
                       ],
                     );
             } catch (e) {
-              print(
-                'Exception is : ' + e.toString(),
-              );
               return Text(
                 'data : ' + e.toString(),
               );

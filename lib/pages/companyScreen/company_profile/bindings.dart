@@ -7,5 +7,4 @@ class CompanyProfileBinding implements Bindings {
     // TODO: implement dependencies
     Get.lazyPut<CompanyProfileController>(() => CompanyProfileController());
   }
-
 }

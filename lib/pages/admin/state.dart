@@ -1,1 +1,1 @@
-class AdminState{}
+class AdminState {}

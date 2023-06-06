@@ -21,10 +21,6 @@ class _CompanyHomeState extends State<CompanyHome>
     with TickerProviderStateMixin {
   final controller = Get.put(CompanyHomeController());
 
-  // _CompanyHomeState(this._tabController);
-
-  // final tabController = Get.put(TabBarController());
-
   @override
   Widget build(BuildContext context) {
     final _tabController = TabController(length: 3, vsync: this);
@@ -46,7 +42,6 @@ class _CompanyHomeState extends State<CompanyHome>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            // color: Colors.red,
                             padding: const EdgeInsets.only(
                               left: 20,
                               top: 20,
@@ -56,9 +51,7 @@ class _CompanyHomeState extends State<CompanyHome>
                                 Icon(Icons.menu,
                                     size: 30, color: Colors.black54),
                                 Expanded(
-                                  child: Container(
-                                      // child: Text("asdkfja;slkd"),
-                                      ),
+                                  child: Container(),
                                 ),
                                 Container(
                                   width: 30,
@@ -95,12 +88,13 @@ class _CompanyHomeState extends State<CompanyHome>
                             height: 30,
                           ),
                           Container(
-                              padding: EdgeInsets.only(left: 5.w, right: 5.w),
-                              child: Center(
-                                child: BigAppText(
-                                    text: company.companyName.toString(),
-                                    size: 30),
-                              )),
+                            padding: EdgeInsets.only(left: 5.w, right: 5.w),
+                            child: Center(
+                              child: BigAppText(
+                                  text: company.companyName.toString(),
+                                  size: 30),
+                            ),
+                          ),
                           const SizedBox(
                             height: 30,
                           ),
@@ -139,10 +133,6 @@ class _CompanyHomeState extends State<CompanyHome>
                                 Center(child: Text('Hello')),
                                 Center(child: CompanyAddTourScreen()),
                                 Container(child: CompanyProfileView()),
-
-                                // CompanyProfileView(
-                                //   id: company.id.toString(),
-                                // ),
                               ],
                             ),
                           ),
@@ -197,7 +187,6 @@ class _CompanyHomeState extends State<CompanyHome>
                 );
               }
             } else {
-              print('Snapshot not has data');
               return Scaffold(
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -211,7 +200,6 @@ class _CompanyHomeState extends State<CompanyHome>
               );
             }
           } else {
-            print('Connection state error occurs : ');
             return Scaffold(
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

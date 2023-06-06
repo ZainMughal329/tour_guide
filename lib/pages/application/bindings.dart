@@ -9,10 +9,20 @@ import 'controller.dart';
 class ApplicationBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ApplicationController>(() => ApplicationController());
-    Get.lazyPut<HomeController>(() => HomeController());
-    Get.lazyPut<SearchController>(() => SearchController());
-    Get.lazyPut<MapController>(() => MapController());
-    Get.lazyPut<PersonController>(() => PersonController());
+    Get.lazyPut<ApplicationController>(
+      () => ApplicationController(),
+    );
+    Get.lazyPut<HomeController>(
+      () => HomeController(),
+    );
+    Get.lazyPut<SearchController>(
+      () => SearchController(),
+    );
+    Get.lazyPut<MapController>(
+      () => MapController(),
+    );
+    Get.lazyPut<PersonController>(
+      () => PersonController(),
+    );
   }
 }

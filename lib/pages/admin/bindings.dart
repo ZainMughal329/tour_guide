@@ -6,5 +6,4 @@ class AdminBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<AdminController>(() => AdminController());
   }
-
 }

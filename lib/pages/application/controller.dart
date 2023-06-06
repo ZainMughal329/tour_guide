@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/pages/application/state.dart';
@@ -27,7 +25,7 @@ class ApplicationController extends GetxController {
     // TODO: implement onInit
     super.onInit();
 
-    tabTitles = ['Home', 'Search', 'Map' , 'Person'];
+    tabTitles = ['Home', 'Search', 'Map', 'Person'];
     bottomTabs = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
           icon: Icon(

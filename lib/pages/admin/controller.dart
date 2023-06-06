@@ -1,20 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AdminController extends GetxController {
-  RxList<DocumentSnapshot> data = RxList<DocumentSnapshot>(
-
-  );
+  RxList<DocumentSnapshot> data = RxList<DocumentSnapshot>();
   final db = FirebaseFirestore.instance;
   CollectionReference ref = FirebaseFirestore.instance.collection('company');
-  final firestore =
-  FirebaseFirestore.instance.collection('company').where('status' , isEqualTo: 'false').snapshots();
-
-
-  //
-  // var val = FirebaseFirestore.instance.collection('company');
-  // var len = val.where('status' , isEqualTo: 'false').get();
+  final firestore = FirebaseFirestore.instance
+      .collection('company')
+      .where('status', isEqualTo: 'false')
+      .snapshots();
 
   updateCompanyData(String id) async {
     print('Inside update');
@@ -24,22 +18,15 @@ class AdminController extends GetxController {
     }).then((value) {
       Get.snackbar('Approved', 'Congrats');
     }).onError((error, stackTrace) {
-      Get.snackbar('Error', 'SOmething went wrong');
-      print("Error while updating is : " + error.toString());
+      Get.snackbar('Error', 'Something went wrong');
     });
-
   }
 
   deleteCompanyData(String id) async {
-    await  ref.doc(id).delete().then((value) {
+    await ref.doc(id).delete().then((value) {
       Get.snackbar('Delete', 'Successfully Deleted');
     }).onError((error, stackTrace) {
       Get.snackbar('Error', 'Something went wrong');
-      print('Error while deleting is : ' + error.toString());
     });
-  }
-
-  Future<void> removeItem(int index) async {
-    // firestore.
   }
 }
