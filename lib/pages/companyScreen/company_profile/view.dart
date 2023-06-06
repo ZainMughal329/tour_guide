@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
+import 'package:tours_guide/pages/companyScreen/company_profile/update.dart';
 
 import 'controller.dart';
 
@@ -36,15 +37,25 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           ),
                           child: ListTile(
                             onTap: () {
-                              // Get.to(() => UpdateScreen());
+                              Get.to(() => UpdateCompanyData());
                             },
                             leading: Container(
                               height: 50,
                               width: 50,
-                              child: Icon(
-                                Icons.person_outline,
-                                size: 30,
-                                color: Colors.white,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(25),
+                                child: snapshot.data!['logo'].toString() == ''
+                                    ? Icon(
+                                  Icons.person_outline,
+                                  size: 30,
+                                  color: Colors.white,
+                                )
+                                    : Image(
+                                  image: NetworkImage(
+                                    snapshot.data!['logo'].toString(),
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             title: Text(

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CompanyModel {
-  String? id;
+  String id;
   final String companyName;
 
   final String companyEmail;
@@ -10,7 +10,9 @@ class CompanyModel {
 
   final String companyDescription;
 
-  final String status;
+  final String? status;
+
+  final String logo;
 
   final String pass;
 
@@ -22,14 +24,16 @@ class CompanyModel {
       required this.companyName,
       required this.companyPhone,
       required this.companyDescription,
+      required this.logo,
       required this.pass,
-      this.status = 'false'});
+      this.status});
 
   Map<String, dynamic> toJson() {
     return {
       "CompanyName": companyName,
       "CompanyEmail": companyEmail,
       "companyPhone": companyPhone,
+      "logo": logo,
       "companyDescription": companyDescription,
       "password": pass,
       "id": id,
@@ -44,6 +48,7 @@ class CompanyModel {
       id: data["id"],
       companyEmail: data["CompanyEmail"],
       companyName: data["CompanyName"],
+      logo: data["logo"],
       companyPhone: data["companyPhone"],
       companyDescription: data["companyDescription"],
       status: data["status"],

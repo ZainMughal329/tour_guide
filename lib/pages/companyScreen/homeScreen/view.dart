@@ -21,7 +21,6 @@ class _CompanyHomeState extends State<CompanyHome>
     with TickerProviderStateMixin {
   final controller = Get.put(CompanyHomeController());
 
-
   // _CompanyHomeState(this._tabController);
 
   // final tabController = Get.put(TabBarController());
@@ -50,21 +49,40 @@ class _CompanyHomeState extends State<CompanyHome>
                             // color: Colors.red,
                             padding: const EdgeInsets.only(
                               left: 20,
-
                               top: 20,
                             ),
                             child: Row(
                               children: [
-                                Icon(Icons.menu, size: 30, color: Colors.black54),
-                                Expanded(child: Container(
-                                  // child: Text("asdkfja;slkd"),
-                                  )),
+                                Icon(Icons.menu,
+                                    size: 30, color: Colors.black54),
+                                Expanded(
+                                  child: Container(
+                                      // child: Text("asdkfja;slkd"),
+                                      ),
+                                ),
                                 Container(
                                   width: 30,
                                   height: 30,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(15),
                                     color: Colors.grey[500],
+                                    border: Border.all(
+                                        color: Colors.black, width: 2.0),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(25),
+                                    child: company.logo.toString() == ''
+                                        ? Icon(
+                                            Icons.person_outline,
+                                            size: 30,
+                                            color: Colors.white,
+                                          )
+                                        : Image(
+                                            image: NetworkImage(
+                                              company.logo.toString(),
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                                 SizedBox(
@@ -77,10 +95,11 @@ class _CompanyHomeState extends State<CompanyHome>
                             height: 30,
                           ),
                           Container(
-                              padding:  EdgeInsets.only(left: 5.w,right: 5.w),
+                              padding: EdgeInsets.only(left: 5.w, right: 5.w),
                               child: Center(
                                 child: BigAppText(
-                                    text: company.companyName.toString(), size: 30),
+                                    text: company.companyName.toString(),
+                                    size: 30),
                               )),
                           const SizedBox(
                             height: 30,
@@ -104,7 +123,6 @@ class _CompanyHomeState extends State<CompanyHome>
                                   Tab(
                                     text: 'Add tour',
                                   ),
-
                                   Tab(
                                     text: 'Profile',
                                   ),
@@ -119,12 +137,8 @@ class _CompanyHomeState extends State<CompanyHome>
                               controller: _tabController,
                               children: [
                                 Center(child: Text('Hello')),
-                                Center(child: CompanyAddTourScreen(
-
-                                )),
-                                Container(child: CompanyProfileView(
-
-                                )),
+                                Center(child: CompanyAddTourScreen()),
+                                Container(child: CompanyProfileView()),
 
                                 // CompanyProfileView(
                                 //   id: company.id.toString(),
@@ -158,7 +172,7 @@ class _CompanyHomeState extends State<CompanyHome>
                             child: Center(
                               child: Text(
                                 'We have recieved your information.\n'
-                                    'You will get confirmation shortly.\nThank You.',
+                                'You will get confirmation shortly.\nThank You.',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w300,
                                   fontSize: 20,
@@ -169,7 +183,7 @@ class _CompanyHomeState extends State<CompanyHome>
                           ),
                         ),
                         TextButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             await controller.auth.signOut();
                             StorePrefrences sp = StorePrefrences();
                             sp.setIsFirstOpen(false);
