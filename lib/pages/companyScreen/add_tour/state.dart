@@ -17,4 +17,6 @@ class CompanyAddTourState {
   final catValue = "".obs;
 
   final tourPeople = "".obs;
+
+  final loading = false.obs;
 }

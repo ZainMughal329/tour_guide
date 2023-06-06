@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
-import 'controller.dart';
+// import 'controller.dart';
 
 class SearchView extends GetView<SearchController> {
   const SearchView({Key? key}) : super(key: key);

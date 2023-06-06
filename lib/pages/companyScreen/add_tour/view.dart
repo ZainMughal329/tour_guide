@@ -5,10 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/round_button.dart';
+import 'package:tours_guide/ReUsable/Components/toast_info.dart';
+import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/controller.dart';
 
 class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   CompanyAddTourScreen({Key? key}) : super(key: key);
+
+  final _formKey = GlobalKey<FormState>();
 
   Widget _textField(TextEditingController contr, FocusNode focNode,
       String labelText, String descrip) {
@@ -132,6 +136,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryBackground,
       resizeToAvoidBottomInset: true,
       body: Padding(
         padding: EdgeInsets.all(10.w),
@@ -155,93 +160,172 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                     child: Container(
                       height: 150.h,
                       width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: controller.image == null
-                            ? Icon(
-                                Icons.person,
-                                size: 50,
-                              )
-                            : Image.file(
-                                File(controller.image!.path).absolute,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: controller.image == null
+                                ? Icon(
+                              Icons.person,
+                              size: 50,
+                              color: AppColors.activeTabElementColor,
+                            )
+                                : Image.file(
+                              File(controller.image!.path).absolute,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          SizedBox(height: 10.h,),
+                          Text("Tap to Upload Image"),
+                        ],
+                      )
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                _textField(
-                    controller.state.titleController,
-                    controller.state.titleNode,
-                    "Title",
-                    "Enter name for your tour"),
-                _textField(
-                    controller.state.locationController,
-                    controller.state.locationNode,
-                    "Location",
-                    "Enter Location of your tour"),
-                _textField(
-                    controller.state.priceController,
-                    controller.state.priceNode,
-                    "Price",
-                    "Enter Price for your tour in Rs"),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Center(
-                        child: Text("Choose Category",
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall!
-                                .copyWith(fontSize: 20.sp)),
+                Column(
+                  children: [
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          _textField(
+                              controller.state.titleController,
+                              controller.state.titleNode,
+                              "Title",
+                              "Enter name for your tour"),
+                          _textField(
+                              controller.state.locationController,
+                              controller.state.locationNode,
+                              "Location",
+                              "Enter Location of your tour"),
+                          _textField(
+                              controller.state.priceController,
+                              controller.state.priceNode,
+                              "Price",
+                              "Enter Price for your tour in Rs"),
+                        ],
                       ),
-                      SizedBox(
-                        width: 40.w,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: TextField(
+                        controller: controller.state.descrepController,
+                        focusNode: controller.state.descrepNode,
+                        onEditingComplete: () {},
+                        onSubmitted: (value) {},
+                        decoration: InputDecoration(
+                            labelText: "Tour Description",
+                            hintText: "Enter long description about you tour",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.r),
+                            )),
+                        maxLines: 5,
                       ),
-                      _buildCatList(),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Center(
-                        child: Text("No of People",
-                            style: Theme.of(context)
-                                .textTheme
-                                .displaySmall!
-                                .copyWith(fontSize: 20.sp)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Center(
+                            child: Text("Choose Category",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(fontSize: 20.sp)),
+                          ),
+                          SizedBox(
+                            width: 40.w,
+                          ),
+                          _buildCatList(),
+                        ],
                       ),
-                      SizedBox(
-                        width: 40.w,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Center(
+                            child: Text("No of People",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall!
+                                    .copyWith(fontSize: 20.sp)),
+                          ),
+                          SizedBox(
+                            width: 40.w,
+                          ),
+                          _buildPeopleList(),
+                        ],
                       ),
-                      _buildPeopleList(),
-                    ],
-                  ),
-                ),
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: "Tour Description",
-                      hintText: "Enter long description about you tour",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.r),
-                      )),
-                  maxLines: 5,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 25.h),
-                  child: RoundButton(
-                    title: "Add Tour",
-                    onPress: () {},
-                  ),
-                ),
+                    ),
+                    Obx((){
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 25.h),
+                        child: controller.state.loading.value==true ? CircularProgressIndicator(color: AppColors.activeTabElementColor,) : RoundButton(
+                          title: "Add Tour",
+                          onPress: () {
+                            if (controller.state.titleController.value.text
+                                .trim()
+                                .toString() !=
+                                null &&
+                                controller.state.catValue.value.toString() !=
+                                    "" &&
+                                controller.state.descrepController.value.text
+                                    .trim()
+                                    .toString() !=
+                                    null &&
+                                controller.image!.path.toString() != ""  &&
+                                controller.state.locationController.value.text
+                                    .trim()
+                                    .toString() !=
+                                    null &&
+                                controller.state.tourPeople.value.toString() !=
+                                    "" &&
+                                controller.state.priceController.value.text
+                                    .trim()
+                                    .toString() !=
+                                    null) {
+                              print("validated");
+
+                              var tour = TourModel(
+                                title: controller.state.titleController.value.text
+                                    .trim()
+                                    .toString(),
+                                tourCategory:
+                                controller.state.catValue.value.toString(),
+                                tourDescription: controller
+                                    .state.descrepController.value.text
+                                    .trim()
+                                    .toString(),
+                                tourImage: controller.image!.path.toString(),
+                                location: controller
+                                    .state.locationController.value.text
+                                    .trim()
+                                    .toString(),
+                                people:
+                                controller.state.tourPeople.value.toString(),
+                                price: controller.state.priceController.value.text
+                                    .trim()
+                                    .toString(),
+                              );
+                              print(tour.toJson().toString());
+                              controller.addTour(tour);
+                            } else {
+                              print("Not validated");
+                              toastInfo(msg: "Please Enter all Fields");
+                            }
+                          },
+                        ),
+                      );
+                    })
+                  ],
+                )
               ],
             ),
           ),

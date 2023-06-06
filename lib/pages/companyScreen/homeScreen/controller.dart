@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
 
 import '../../../ReUsable/models/companyModel.dart';
 
 class CompanyHomeController extends GetxController {
+  final state=CompanyHomeState();
   final auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('company');
 
@@ -25,4 +28,6 @@ class CompanyHomeController extends GetxController {
       Get.snackbar('Error', 'Something went wrong');
     }
   }
+
+
 }
