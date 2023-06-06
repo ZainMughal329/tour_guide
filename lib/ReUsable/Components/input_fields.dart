@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// import '../values/colors.dart';
-
 class InputTextField extends StatelessWidget {
   final TextEditingController controller;
   final FocusNode focusnode;
@@ -34,7 +32,6 @@ class InputTextField extends StatelessWidget {
       child: Container(
         height: 54.h,
         width: 280.w,
-        // padding: EdgeInsets.all(10.w),
         margin: EdgeInsets.only(bottom: 15.h),
         decoration: BoxDecoration(
           color: Colors.black12,
@@ -53,7 +50,6 @@ class InputTextField extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           cursorColor: Colors.black12,
-          // cursorHeight: 2.0,
           obscureText: obsecure,
           keyboardType: keyboardType,
           onFieldSubmitted: onFieldSubmitedVlaue,

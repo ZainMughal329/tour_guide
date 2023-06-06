@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
 class BuildAppBar extends StatelessWidget {
-  String title ;
+  String title;
   IconData icon1;
   IconData icon2;
-  BuildAppBar({Key? key , required this.title , required this.icon1 , required this.icon2}) : super(key: key);
+  BuildAppBar(
+      {Key? key, required this.title, required this.icon1, required this.icon2})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,9 @@ class BuildAppBar extends StatelessWidget {
       padding: EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: ()async{
-              // Scaffold.of(context).openDrawer();
+            onTap: () async {
               await FirebaseAuth.instance.signOut();
               Get.offAllNamed(AppRoutes.SIGN_IN);
             },
@@ -45,20 +44,13 @@ class BuildAppBar extends StatelessWidget {
           ),
           Text(
             title,
-
             style: TextStyle(
               fontSize: 24.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
           InkWell(
-            onTap: () {
-
-              // await ConfigStore.to.setFirstOpen(false);
-
-
-
-            },
+            onTap: () {},
             child: Tooltip(
               message: 'LogOut',
               child: Container(

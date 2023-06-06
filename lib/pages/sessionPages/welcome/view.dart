@@ -4,12 +4,8 @@ import 'package:get/get.dart';
 
 import 'controller.dart';
 
-// import '../../welcome/controller.dart';dart
-
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +62,7 @@ class WelcomePage extends GetView<WelcomeController> {
                 ),
                 InkWell(
                   onTap: () {
-                    controller.handleSignIn() ;
+                    controller.handleSignIn();
                   },
                   child: Ink(
                     padding: EdgeInsets.all(15),

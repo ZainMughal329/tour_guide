@@ -19,8 +19,6 @@ class AppRoutes {
   static const Tourist_Home = '/tourist_home';
   static const Add_Tour = '/add_tour';
 
-
-
   static const Application = '/application';
   //contact
   static const Contact = '/contact';
@@ -32,5 +30,4 @@ class AppRoutes {
   static const Chat = '/chat';
 
   static const Photoimgview = '/photoimgview';
-
 }

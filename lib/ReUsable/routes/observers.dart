@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tours_guide/ReUsable/routes/pages.dart';
 
-
 class RouteObservers<R extends Route<dynamic>> extends RouteObserver<R> {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

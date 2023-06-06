@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -18,10 +17,8 @@ class _DetailScreenState extends State<DetailScreen> {
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(
-        // color: Colors.redAccent,
         image: DecorationImage(
           image: AssetImage('assets/images/pic2.jpg'),
-          // opacity: 0.7,
           fit: BoxFit.cover,
         ),
       ),
