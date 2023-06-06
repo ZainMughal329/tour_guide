@@ -47,7 +47,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                       TextEditingController(text: companyModel.companyName);
                       final des = TextEditingController(
                           text: companyModel.companyDescription);
-                      // final id = TextEditingController(text: companyModel.id);
+                      final status = TextEditingController(text: companyModel.status);
 
                       return Column(
                         children: [
@@ -179,7 +179,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                     onPressed: () async {
                                       var userData = CompanyModel(
                                         id: auth.currentUser!.uid.toString(),
-                                          // status: companyModel.,
+                                          status: companyModel.status,
                                           companyEmail: email.text.trim(),
                                           companyName: name.text.trim(),
                                           companyPhone: phone.text.trim(),

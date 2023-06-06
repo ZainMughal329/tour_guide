@@ -9,8 +9,12 @@ class AdminController extends GetxController {
   final db = FirebaseFirestore.instance;
   CollectionReference ref = FirebaseFirestore.instance.collection('company');
   final firestore =
-  FirebaseFirestore.instance.collection('company').snapshots();
+  FirebaseFirestore.instance.collection('company').where('status' , isEqualTo: 'false').snapshots();
 
+
+  //
+  // var val = FirebaseFirestore.instance.collection('company');
+  // var len = val.where('status' , isEqualTo: 'false').get();
 
   updateCompanyData(String id) async {
     print('Inside update');
