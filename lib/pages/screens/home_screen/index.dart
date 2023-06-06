@@ -1,4 +1,4 @@
-library home ;
+library home;
 
 export './bindings.dart';
 export './controller.dart';

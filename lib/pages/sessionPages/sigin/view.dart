@@ -1,11 +1,10 @@
-// import 'package:air_proj_comp/pages/sigin/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
+
 import '../../../ReUsable/Components/round_button.dart';
 import '../../../ReUsable/routes/names.dart';
-import '../../admin/view.dart';
 import 'controller.dart';
 
 class SignInPage extends GetView<SignInController> {
@@ -27,49 +26,47 @@ class SignInPage extends GetView<SignInController> {
         style: TextStyle(color: Colors.black, fontSize: 30.sp),
       ),
       backgroundColor: Colors.white,
-      // shadowColor: Colors.white,
       elevation: 0.3,
     );
   }
 
   Widget _buildForm() {
     return Form(
-        key: _formKwy,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 8.0.h, bottom: 4.h),
-              child: InputTextField(
-                  icon: Icons.email_outlined,
-                  controller: controller.emailController,
-                  focusnode: controller.emailFocus,
-                  onFieldSubmitedVlaue: (value) {},
-                  formfieldValidator: (value) {},
-                  keyboardType: TextInputType.emailAddress,
-                  obsecure: false,
-                  hint: 'Email'),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0.h),
-              child: InputTextField(
-                  icon: Icons.lock_open,
-                  controller: controller.passwordController,
-                  focusnode: controller.passwordFocus,
-                  onFieldSubmitedVlaue: (value) {},
-                  formfieldValidator: (value) {},
-                  keyboardType: TextInputType.visiblePassword,
-                  obsecure: true,
-                  hint: 'Password'),
-            ),
-          ],
-        ));
+      key: _formKwy,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 8.0.h, bottom: 4.h),
+            child: InputTextField(
+                icon: Icons.email_outlined,
+                controller: controller.emailController,
+                focusnode: controller.emailFocus,
+                onFieldSubmitedVlaue: (value) {},
+                formfieldValidator: (value) {},
+                keyboardType: TextInputType.emailAddress,
+                obsecure: false,
+                hint: 'Email'),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 8.0.h),
+            child: InputTextField(
+                icon: Icons.lock_open,
+                controller: controller.passwordController,
+                focusnode: controller.passwordFocus,
+                onFieldSubmitedVlaue: (value) {},
+                formfieldValidator: (value) {},
+                keyboardType: TextInputType.visiblePassword,
+                obsecure: true,
+                hint: 'Password'),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildThirdPartyServices(String loginType, String logo) {
     return GestureDetector(
-      onTap: () {
-        // controller.handleGoogleSignIn();
-      },
+      onTap: () {},
       child: Container(
         height: 54.h,
         width: 280.w,
@@ -146,8 +143,9 @@ class SignInPage extends GetView<SignInController> {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),
-                  child: Obx(() {
-                    return RoundButton(
+                  child: Obx(
+                    () {
+                      return RoundButton(
                         title: 'LogIn',
                         loading: controller.state.loading.value,
                         onPress: () {
@@ -164,9 +162,10 @@ class SignInPage extends GetView<SignInController> {
                               );
                             }
                           }
-                          // Utils().toastMsg('Clicked!!');
-                        });
-                  }),
+                        },
+                      );
+                    },
+                  ),
                 ),
                 _buildThirdPartyServices('Google', 'google'),
                 SizedBox(height: 15.h),
@@ -176,7 +175,7 @@ class SignInPage extends GetView<SignInController> {
                   },
                   child: Text.rich(
                     TextSpan(
-                      text: 'Don\'t have an accont?',
+                      text: 'Don\'t have an account?',
                       style: Theme.of(context).textTheme.bodyMedium,
                       children: [
                         TextSpan(

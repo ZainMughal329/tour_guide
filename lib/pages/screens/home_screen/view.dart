@@ -1,9 +1,9 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
+
 import '../../../ReUsable/Components/app_bar.dart';
 import '../../../ReUsable/Components/details.dart';
 import 'controller.dart';
@@ -16,10 +16,9 @@ class HomePage extends GetView<HomeController> {
       padding: EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: () async{
+            onTap: () async {
               await FirebaseAuth.instance.signOut();
               Get.offAllNamed(AppRoutes.SIGN_IN);
               // Scaffold.of(context).openDrawer();
@@ -46,7 +45,6 @@ class HomePage extends GetView<HomeController> {
                 color: Color(0xfff65959),
               ),
               Text(
-                // controller.state.currentLocation.toString(),
                 "Sawat",
                 style: TextStyle(
                   fontSize: 18,
@@ -77,8 +75,6 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,38 +88,37 @@ class HomePage extends GetView<HomeController> {
       ),
       // drawer: BuildDrawer.buildDrawer(context),
       body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 30.w),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 200,
-                      child: ListView.builder(
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 30.w),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 200,
+                        child: ListView.builder(
                           itemCount: 6,
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
-                              onTap: () {
-
-                              },
+                              onTap: () {},
                               child: Container(
                                 width: 160,
                                 padding: EdgeInsets.all(10.w),
                                 margin: EdgeInsets.only(left: 20.w),
                                 decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(15),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/pic${index + 1}.jpg'),
-                                      fit: BoxFit.cover,
-                                      opacity: 0.7,
-                                    )),
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/pic${index + 1}.jpg'),
+                                    fit: BoxFit.cover,
+                                    opacity: 0.7,
+                                  ),
+                                ),
                                 child: Column(
                                   children: [
                                     Container(
@@ -150,50 +145,51 @@ class HomePage extends GetView<HomeController> {
                                 ),
                               ),
                             );
-                          }),
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Row(
+                      children: [
+                        for (int i = 0; i < 6; i++)
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 10.w),
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 4,
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              controller.category[i],
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < 6; i++)
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 10.w),
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            controller.category[i],
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                    ],
-                  ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ListView.builder(
+                SizedBox(
+                  height: 10,
+                ),
+                ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: 6,
@@ -224,35 +220,51 @@ class HomePage extends GetView<HomeController> {
                               ),
                             ),
                           ),
-                          Padding(padding: EdgeInsets.only(top: 10) ,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('City Name' , style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),),
-                              Icon(Icons.more_vert , size: 30,)
-                            ],
-                          ),),
-                          SizedBox(height: 5,),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'City Name',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.more_vert,
+                                  size: 30,
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Row(
                             children: [
-                              Icon(Icons.star , color: Colors.amber, size: 20,),
-                              Text('4.5' , style: TextStyle(fontWeight: FontWeight.w500),),
+                              Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                                size: 20,
+                              ),
+                              Text(
+                                '4.5',
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
                             ],
                           )
                         ],
                       ),
-
                     );
-                  }),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }
-
-

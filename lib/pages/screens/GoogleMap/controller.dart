@@ -15,39 +15,44 @@ class MapController extends GetxController {
   final List<Marker> marker = [];
   final List<Marker> _list = const [
     Marker(
-        markerId: MarkerId('1'),
-        infoWindow: InfoWindow(title: 'My Position'),
-        position: LatLng(37.42796133580664, -122.085749655962)),
+      markerId: MarkerId('1'),
+      infoWindow: InfoWindow(title: 'My Position'),
+      position: LatLng(37.42796133580664, -122.085749655962),
+    ),
     Marker(
-        markerId: MarkerId('2'),
-        infoWindow: InfoWindow(title: 'My Position 2'),
-        position: LatLng(37.52796133580664, -122.085749655962)),
+      markerId: MarkerId('2'),
+      infoWindow: InfoWindow(title: 'My Position 2'),
+      position: LatLng(37.52796133580664, -122.085749655962),
+    ),
     Marker(
-        markerId: MarkerId('3'),
-        infoWindow: InfoWindow(title: 'My Position 3'),
-        position: LatLng(35.42796133580664, -122.085749655962)),
+      markerId: MarkerId('3'),
+      infoWindow: InfoWindow(title: 'My Position 3'),
+      position: LatLng(35.42796133580664, -122.085749655962),
+    ),
     Marker(
-        markerId: MarkerId('4'),
-        infoWindow: InfoWindow(title: 'My Position 4'),
-        position: LatLng(34.42796133580664, -122.085749655962)),
+      markerId: MarkerId('4'),
+      infoWindow: InfoWindow(title: 'My Position 4'),
+      position: LatLng(34.42796133580664, -122.085749655962),
+    ),
     Marker(
-        markerId: MarkerId('5'),
-        infoWindow: InfoWindow(title: 'Sargodha'),
-        position: LatLng(32.082466, 72.669128))
+      markerId: MarkerId('5'),
+      infoWindow: InfoWindow(title: 'Sargodha'),
+      position: LatLng(32.082466, 72.669128),
+    )
   ];
 
-
   Future<Position> getUserLocation() async {
-    print('Enter in the function');
-    await Geolocator.requestPermission().then((value) {
-
-    }).onError((error, stackTrace) async{
-      print(error.toString());
-      await Geolocator.requestPermission();
-    });
+    await Geolocator.requestPermission()
+        .then(
+      (value) {},
+    )
+        .onError(
+      (error, stackTrace) async {
+        await Geolocator.requestPermission();
+      },
+    );
     return await Geolocator.getCurrentPosition();
   }
-
 
   @override
   void onInit() {
@@ -60,9 +65,6 @@ class MapController extends GetxController {
     completer = Completer();
     marker.addAll(_list);
 
-
-
     getUserLocation();
   }
-
 }

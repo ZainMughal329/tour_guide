@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,21 +11,16 @@ import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
-import 'package:tours_guide/ReUsable/models/userModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'index.dart';
-
-
 
 class CompanySignUpController extends GetxController {
   final state = CompanySignUpState();
   CompanySignUpController();
 
   final _db = FirebaseFirestore.instance.collection('company');
-  // final _db = FirebaseFirestore.instance.collection('users');
-  final auth=FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
 
   XFile? _image;
 
@@ -32,28 +28,24 @@ class CompanySignUpController extends GetxController {
 
 //   this is to register with email and password
   // after registeration , store the user in database
-  void registerUserWithEmailAndPassword(CompanyModel Compuser,String email,String password) async {
+  void registerUserWithEmailAndPassword(
+      CompanyModel Compuser, String email, String password) async {
     state.loading.value = true;
     try {
       var user = await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-            print(value.user!.uid.toString());
-            toastInfo(msg: "Information Recieved");
-            toastInfo(msg: "You'll recieve confirmation \nmail shortyly");
-            Get.to(() => SignUpMsg());
+        toastInfo(msg: "Information Received");
+        toastInfo(msg: "You'll receive confirmation \nmail shortly");
+        Get.to(() => SignUpMsg());
 
         state.loading.value = false;
         StorePrefrences sp = StorePrefrences();
         sp.setIsFirstOpen(true);
-        Compuser.id=auth.currentUser!.uid.toString();
+        Compuser.id = auth.currentUser!.uid.toString();
         // Write code to move to screen that show unApproved Status
-           create(Compuser);
-
-
-
+        create(Compuser);
       }).onError((error, stackTrace) {
-        print("this is error block of registery code");
         state.loading.value = false;
         toastInfo(msg: error.toString());
       });
@@ -61,41 +53,35 @@ class CompanySignUpController extends GetxController {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
       state.loading.value = false;
-      print('Firebase Auth Exception : ' + e.code.toString());
     } catch (_) {
       state.loading.value = false;
     }
   }
 
-
 // this function is to store user in Firebase FireStore
-  create(CompanyModel user) async{
-    state.loading.value=true;
-    try{
-
-      await _db.doc(auth.currentUser!.uid.toString()).set(user.toJson()).then((value){
-        print("Successfully created user in doc ");
+  create(CompanyModel user) async {
+    state.loading.value = true;
+    try {
+      await _db
+          .doc(auth.currentUser!.uid.toString())
+          .set(user.toJson())
+          .then((value) {
         auth.signOut();
         Get.offAllNamed(AppRoutes.SIGN_IN);
-        state.loading.value=false;
-
-      }).onError((error, stackTrace){
-        state.loading.value=false;
+        state.loading.value = false;
+      }).onError((error, stackTrace) {
+        state.loading.value = false;
         toastInfo(msg: error.toString());
-        print("inside create code");
       });
-    }catch(e){
+    } catch (e) {
       toastInfo(msg: e.toString());
-      print(" Error Inside create user code");
     }
   }
 
-
 //  for registering and storing Company USer
-  void storeUser(CompanyModel compUser, BuildContext context)  {
-
-    registerUserWithEmailAndPassword(compUser,compUser.companyEmail, compUser.pass);
-
+  void storeUser(CompanyModel compUser, BuildContext context) {
+    registerUserWithEmailAndPassword(
+        compUser, compUser.companyEmail, compUser.pass);
   }
 
   final picker = ImagePicker();
@@ -103,33 +89,27 @@ class CompanySignUpController extends GetxController {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
-
   // picking up image from gallery
 
-  Future pickedImageFromGallery(
-      BuildContext context) async {
+  Future pickedImageFromGallery(BuildContext context) async {
     final pickedImage =
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-      print('Image path is : ' + _image!.path.toString());
       uploadImage(context);
       update();
     }
   }
 
   // picking up image from camera
-  Future pickedImageFromCamera(
-      BuildContext context) async {
+  Future pickedImageFromCamera(BuildContext context) async {
     final pickedImage =
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-      print('Image path is : ' + _image!.path.toString());
       uploadImage(context);
-      // notifyListeners();
       update();
     }
   }
@@ -144,7 +124,6 @@ class CompanySignUpController extends GetxController {
           content: Container(
             height: 130,
             child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 ListTile(
                   onTap: () {
@@ -177,17 +156,11 @@ class CompanySignUpController extends GetxController {
         .FirebaseStorage.instance
         .ref('/companyLogo' + DateTime.now().toString());
     firebase_storage.UploadTask uploadTask =
-    storageRef.putFile(File(image!.path).absolute);
+        storageRef.putFile(File(image!.path).absolute);
 
-    print('upload task is : ' + uploadTask.toString());
     await Future.value(uploadTask);
 
     state.companyLogo = await storageRef.getDownloadURL();
-    print(state.companyLogo.toString());
     return state.companyLogo;
-
-
   }
-
-
 }

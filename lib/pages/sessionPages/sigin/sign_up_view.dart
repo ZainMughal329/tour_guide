@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,7 +13,6 @@ class SignUpView extends GetView<SignInController> {
   SignUpView({Key? key}) : super(key: key);
 
   final _formKwy = GlobalKey<FormState>();
-
 
   Widget _buildLogo() {
     return Container(
@@ -86,25 +83,27 @@ class SignUpView extends GetView<SignInController> {
                   () => Padding(
                     padding: EdgeInsets.symmetric(vertical: 15.h),
                     child: RoundButton(
-                        title: 'SignUp',
-                        loading: controller.state.loading.value,
-                        onPress: () {
-                          if (_formKwy.currentState!.validate()) {
-
-                            var user = UserModel(
-                              email: controller.emailController.text.trim().toString(),
-                              password:
-                                  controller.passwordController.text.trim().toString(),
-                              phone: '+92**********',
-                              userName: controller.userController.text.trim().toString(),
-                              photoUrl: '',
-                            );
-                            controller.storeUser(user, context);
-
-
-                          }
-
-                        }),
+                      title: 'SignUp',
+                      loading: controller.state.loading.value,
+                      onPress: () {
+                        if (_formKwy.currentState!.validate()) {
+                          var user = UserModel(
+                            email: controller.emailController.text
+                                .trim()
+                                .toString(),
+                            password: controller.passwordController.text
+                                .trim()
+                                .toString(),
+                            phone: '+92**********',
+                            userName: controller.userController.text
+                                .trim()
+                                .toString(),
+                            photoUrl: '',
+                          );
+                          controller.storeUser(user, context);
+                        }
+                      },
+                    ),
                   ),
                 ),
                 InkWell(
@@ -143,9 +142,8 @@ class SignUpView extends GetView<SignInController> {
                       'Click to \n Sign up as a Tour Company',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: AppColors.textButtonColor,
-                      ),
-
+                            color: AppColors.textButtonColor,
+                          ),
                     ),
                   ),
                 ),

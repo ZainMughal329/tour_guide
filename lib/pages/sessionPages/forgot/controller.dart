@@ -1,15 +1,14 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/pages/sessionPages/forgot/state.dart';
 
-class ForgotPassController extends GetxController{
+class ForgotPassController extends GetxController {
   ForgotPassState state = ForgotPassState();
   ForgotPassController();
   final auth = FirebaseAuth.instance;
 
-  void setLoading(bool value){
-    state.loading.value=value;
+  void setLoading(bool value) {
+    state.loading.value = value;
   }
 
 // void sendResetMail (String email)async{
@@ -28,5 +27,4 @@ class ForgotPassController extends GetxController{
 //     SnackBar.showSnackBar("Error", e.toString());
 //   }
 // }
-
 }

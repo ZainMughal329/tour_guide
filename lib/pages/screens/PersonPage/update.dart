@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
 import 'package:tours_guide/pages/screens/PersonPage/view.dart';
+
 import '../../../ReUsable/models/userModel.dart';
 import 'controller.dart';
 
@@ -45,69 +45,70 @@ class _UpdateScreenState extends State<UpdateScreen> {
                   final phone = TextEditingController(text: userModel.phone);
                   final pass = TextEditingController(text: userModel.password);
                   final name = TextEditingController(text: userModel.userName);
-                  // final user = TextEditingController(text: 'user');
                   final id = TextEditingController(text: userModel.id);
 
                   return Column(
                     children: [
-                      GetBuilder<PersonController>(builder: (controller) {
-                        return Stack(
-                          children: [
-                            Container(
-                              height: 120,
-                              width: 120,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                border: Border.all(color: Colors.black),
+                      GetBuilder<PersonController>(
+                        builder: (controller) {
+                          return Stack(
+                            children: [
+                              Container(
+                                height: 120,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(color: Colors.black),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: controller.image == null
+                                      ? userModel.photoUrl == ''
+                                          ? Icon(
+                                              Icons.person,
+                                              size: 50,
+                                            )
+                                          : Image(
+                                              image: NetworkImage(
+                                                  userModel.photoUrl),
+                                              fit: BoxFit.cover,
+                                            )
+                                      : Image.file(
+                                          File(controller.image!.path).absolute,
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: controller.image == null
-                                    ? userModel.photoUrl == ''
-                                        ? Icon(
-                                            Icons.person,
-                                            size: 50,
-                                          )
-                                        : Image(
-                                            image: NetworkImage(
-                                                userModel.photoUrl),
-                                            fit: BoxFit.cover,
-                                          )
-                                    : Image.file(
-                                        File(controller.image!.path).absolute,
-                                        fit: BoxFit.cover,
+                              Positioned(
+                                right: 10,
+                                bottom: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    controller.showImage(context, userModel);
+                                  },
+                                  child: Container(
+                                    height: 25,
+                                    width: 25,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(100),
+                                      border: Border.all(color: Colors.black),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: const Icon(
+                                        Icons.edit,
+                                        size: 20,
+                                        color: Colors.white,
                                       ),
-                              ),
-                            ),
-                            Positioned(
-                              right: 10,
-                              bottom: 0,
-                              child: InkWell(
-                                onTap: () {
-                                  controller.showImage(context, userModel);
-                                },
-                                child: Container(
-                                  height: 25,
-                                  width: 25,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black,
-                                    borderRadius: BorderRadius.circular(100),
-                                    border: Border.all(color: Colors.black),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: const Icon(
-                                      Icons.edit,
-                                      size: 20,
-                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      }),
+                            ],
+                          );
+                        },
+                      ),
                       SizedBox(
                         height: 20,
                       ),
@@ -124,7 +125,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               hint: 'UserName',
                               keyboardType: TextInputType.text,
                             ),
-
                             InputTextField(
                               controller: email,
                               formfieldValidator: (value) {},
@@ -135,7 +135,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               hint: 'Email',
                               keyboardType: TextInputType.emailAddress,
                             ),
-
                             InputTextField(
                               controller: pass,
                               formfieldValidator: (value) {},
@@ -146,7 +145,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               hint: 'Password',
                               keyboardType: TextInputType.visiblePassword,
                             ),
-
                             InputTextField(
                               controller: phone,
                               formfieldValidator: (value) {},
@@ -157,7 +155,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               hint: 'Phone',
                               keyboardType: TextInputType.phone,
                             ),
-
                           ],
                         ),
                       ),
@@ -186,16 +183,17 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             shape: const StadiumBorder(),
                           ),
                           child: const Center(
-                              child: Text(
-                            'Save Profile',
-                            style: TextStyle(color: Colors.white, fontSize: 18),
-                          )),
+                            child: Text(
+                              'Save Profile',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   );
                 } else if (snapshot.hasError) {
-                  print('Error is : ' + snapshot.error.toString());
                   return Center(
                     child: CircularProgressIndicator(),
                   );

@@ -20,20 +20,24 @@ class MapPage extends GetView<MapController> {
         zoomControlsEnabled: false,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
-          controller.getUserLocation().then((value) async{
-            print('Latitude is :' + value.latitude.toString());
-
-            controller.marker.add(Marker(
-                markerId: MarkerId('1'),
-                position: LatLng(value.latitude , value.longitude),
-                icon: BitmapDescriptor.defaultMarker),);
-            CameraPosition cameraPosition = CameraPosition(target: LatLng(value.latitude , value.longitude) , zoom: 14);
-            GoogleMapController mapController = await controller.completer.future;
-            mapController.animateCamera(
-              CameraUpdate.newCameraPosition(cameraPosition),
-            );
-          });
+        onPressed: () async {
+          controller.getUserLocation().then(
+            (value) async {
+              controller.marker.add(
+                Marker(
+                    markerId: MarkerId('1'),
+                    position: LatLng(value.latitude, value.longitude),
+                    icon: BitmapDescriptor.defaultMarker),
+              );
+              CameraPosition cameraPosition = CameraPosition(
+                  target: LatLng(value.latitude, value.longitude), zoom: 14);
+              GoogleMapController mapController =
+                  await controller.completer.future;
+              mapController.animateCamera(
+                CameraUpdate.newCameraPosition(cameraPosition),
+              );
+            },
+          );
         },
         child: Icon(Icons.my_location),
       ),

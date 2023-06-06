@@ -1,24 +1,20 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 
 import '../../../ReUsable/models/userModel.dart';
 import '../../../ReUsable/routes/names.dart';
-import '../../sessionPages/sigin/controller.dart';
 import 'index.dart';
 
 class PersonController extends GetxController {
   PersonController();
-
-  // String? name;
 
   final emailFocus = FocusNode();
   final passwordFocus = FocusNode();
@@ -27,12 +23,13 @@ class PersonController extends GetxController {
   final phoneFocus = FocusNode();
 
   final state = PersonState();
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: <String>[
-    'openid',
-  ]);
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'openid',
+    ],
+  );
   final auth = FirebaseAuth.instance;
 
-  // final db = FirebaseFirestore.instance.collection('admin');
   final _db = FirebaseFirestore.instance;
 
   void setLoading(bool value) {
@@ -57,7 +54,6 @@ class PersonController extends GetxController {
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-      print('Image path is : ' + _image!.path.toString());
       uploadImage(context, userModel);
       update();
     }
@@ -71,9 +67,7 @@ class PersonController extends GetxController {
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-      print('Image path is : ' + _image!.path.toString());
       uploadImage(context, userModel);
-      // notifyListeners();
       update();
     }
   }
@@ -120,12 +114,9 @@ class PersonController extends GetxController {
     firebase_storage.UploadTask uploadTask =
         storageRef.putFile(File(image!.path).absolute);
 
-    print('upload task is : ' + uploadTask.toString());
     await Future.value(uploadTask);
 
     final newUrl = await storageRef.getDownloadURL();
-    print(newUrl.toString());
-    // return newUrl;
 
     _db.collection('users').doc(userModel.id).update({
       'photoUrl': newUrl.toString(),
@@ -145,8 +136,6 @@ class PersonController extends GetxController {
         StorePrefrences sp = StorePrefrences();
         await sp.setIsFirstOpen(false);
 
-        print("user data is ssss" + auth.currentUser.toString());
-
         Get.snackbar('Sign Out ', 'Successfully');
         setLoading(false);
         Get.offAllNamed(AppRoutes.SIGN_IN);
@@ -159,8 +148,6 @@ class PersonController extends GetxController {
     }
   }
 
-  // final signInController = Get.put(SignInController());
-
   Future<UserModel> getUserData(String id) async {
     final snapshot =
         await _db.collection('users').where('id', isEqualTo: id).get();
@@ -169,9 +156,7 @@ class PersonController extends GetxController {
   }
 
   getUsersData() async {
-    print('INSIDE FUNC');
     final id = auth.currentUser!.uid.toString();
-    print('Email is : ' + id.toString());
     if (id != '') {
       return await getUserData(id);
     } else {
@@ -180,7 +165,9 @@ class PersonController extends GetxController {
   }
 
   updateUserData(UserModel user) async {
-    await _db.collection('users').doc(user.id).update(user.toJson());
+    await _db.collection('users').doc(user.id).update(
+          user.toJson(),
+        );
   }
 
   updateUser(UserModel user) async {

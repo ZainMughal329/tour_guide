@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
-import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/state.dart';
 
 import '../../../ReUsable/models/userModel.dart';
@@ -20,7 +18,6 @@ class SignInController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('users');
   final _dbCompnay = FirebaseFirestore.instance.collection('company');
-  final _dbCompanySnap =FirebaseFirestore.instance.collection('company').snapshots();
   var verificationId = "".obs;
 
   final emailController = TextEditingController();
@@ -32,7 +29,6 @@ class SignInController extends GetxController {
 
   void dispose() {
     // TODO: implement dispose
-    // super.dispose();
     emailController.dispose();
     passwordController.dispose();
     emailFocus.dispose();
@@ -51,7 +47,6 @@ class SignInController extends GetxController {
 
   _initialScreen(User? user) {
     if (user == null) {
-      print('Login Page');
       Get.offAll(() => AppRoutes.SIGN_IN);
     } else {
       Get.offAll(() => AppRoutes.Application);
@@ -64,17 +59,17 @@ class SignInController extends GetxController {
 
   final db = FirebaseFirestore.instance;
 
-  void registerUserWithEmailAndPassword(UserModel userinfo,String email, password) async {
+  void registerUserWithEmailAndPassword(
+      UserModel userinfo, String email, password) async {
     state.loading.value = true;
     try {
       var user = await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-            userinfo.id=auth.currentUser!.uid.toString();
-            StorePrefrences sp= StorePrefrences();
-            sp.setIsFirstOpen(true);
+        userinfo.id = auth.currentUser!.uid.toString();
+        StorePrefrences sp = StorePrefrences();
+        sp.setIsFirstOpen(true);
         createUser(userinfo);
-
       }).onError((error, stackTrace) {
         state.loading.value = false;
         toastInfo(msg: error.toString());
@@ -83,7 +78,6 @@ class SignInController extends GetxController {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
       state.loading.value = false;
-      print('Firebase Auth Exception : ' + e.code.toString());
     } catch (_) {
       state.loading.value = false;
     }
@@ -95,20 +89,14 @@ class SignInController extends GetxController {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
-
-        print(value);
-        print('ourside if');
-        final companyData = await _dbCompnay.where('id',isEqualTo: auth.currentUser!.uid.toString()).get();
-        if(companyData.docs.isNotEmpty) {
-          print("Printinting value is true or not"+companyData.docs.isEmpty.toString());
-
+        final companyData = await _dbCompnay
+            .where('id', isEqualTo: auth.currentUser!.uid.toString())
+            .get();
+        if (companyData.docs.isNotEmpty) {
           StorePrefrences().setIsFirstOpen(true);
 
-          print('Inside if');
           Get.offAndToNamed(AppRoutes.Company_Home);
-          print('Executed');
-        }else {
-          print('inside else');
+        } else {
           StorePrefrences().setIsFirstOpen(true);
           Get.offAndToNamed(AppRoutes.Application);
         }
@@ -148,26 +136,22 @@ class SignInController extends GetxController {
       }).onError((error, stackTrace) {
         final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
         toastInfo(msg: ex.toString());
-        print('Error is : ' + error.toString());
         state.loading.value = false;
       });
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
       state.loading.value = false;
-      print('Firebase Auth Exception : ' + e.code.toString());
     } catch (_) {
       state.loading.value = false;
     }
   }
 
-  handelNavigation(String status) async{
-
+  handelNavigation(String status) async {
     if (status == "notApproved") {
       await auth.signOut();
       toastInfo(msg: "Verification Still in Progress");
-      toastInfo(msg: "You'll get verification mail shortyly");
-
+      toastInfo(msg: "You'll get verification mail shortly");
     } else {
       StorePrefrences sp = StorePrefrences();
       sp.setIsFirstOpen(true);
@@ -183,11 +167,8 @@ class SignInController extends GetxController {
   }
 
   createUser(UserModel user) async {
-    print("inside create user");
     state.loading.value = true;
     await _db.doc(auth.currentUser!.uid).set(user.toJson()).whenComplete(() {
-      print("insdie create 2nd line");
-
       toastInfo(msg: 'Successfully created account');
 
       state.loading.value = false;
@@ -196,19 +177,15 @@ class SignInController extends GetxController {
       Get.offAllNamed(AppRoutes.Application);
     }).catchError((error, stackTrace) {
       toastInfo(msg: "Error occurred");
-      // print('Error is : ' + error.toString());
       state.loading.value = false;
     });
   }
 
-//
   void storeUser(UserModel user, BuildContext context) async {
-    registerUserWithEmailAndPassword( user,user.email, user.password);
-
+    registerUserWithEmailAndPassword(user, user.email, user.password);
   }
 
   updateUserData(UserModel user) async {
     await db.collection('users').doc(user.id).update(user.toJson());
   }
-
 }

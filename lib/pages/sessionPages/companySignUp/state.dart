@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CompanySignUpState {
-  // var index = 0.obs;
   final loading = false.obs;
 
   var companyLogo = '';
-
 
   TextEditingController nameController = TextEditingController();
   FocusNode nameNode = FocusNode();

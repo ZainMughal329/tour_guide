@@ -1,4 +1,4 @@
-library SplashScreen ;
+library SplashScreen;
 
 export './bindings.dart';
 export './controller.dart';

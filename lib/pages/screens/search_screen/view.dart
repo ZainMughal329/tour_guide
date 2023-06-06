@@ -1,16 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
 import 'controller.dart';
-// import 'controller.dart';
 
 class SearchView extends GetView<SearchController> {
   const SearchView({Key? key}) : super(key: key);
-
-
 
   Widget _searchBarView() {
     return Row(
@@ -42,8 +38,6 @@ class SearchView extends GetView<SearchController> {
                 width: 240.w,
                 child: TextField(
                   obscureText: false,
-
-                  // onChanged: (){},
                   keyboardType: TextInputType.multiline,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(5, 5, 0, 5),
@@ -91,7 +85,6 @@ class SearchView extends GetView<SearchController> {
             decoration: BoxDecoration(
               color: Colors.blueAccent,
               borderRadius: BorderRadius.circular(13.w),
-
             ),
             child: Icon(
               Icons.keyboard_option_key,
@@ -114,7 +107,6 @@ class SearchView extends GetView<SearchController> {
           icon2: Icons.person_outline,
         ),
       ),
-      // drawer: BuildDrawer.buildDrawer(context),
       body: Padding(
         padding: EdgeInsets.only(left: 20.w, right: 20.w),
         child: Column(

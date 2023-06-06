@@ -1,6 +1,6 @@
 library search;
 
-    export './bindings.dart';
+export './bindings.dart';
 export './controller.dart';
 export './index.dart';
 export './state.dart';

@@ -6,9 +6,11 @@ import 'controller.dart';
 class WelcomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(CompanyProfileController());
-    Get.lazyPut<HomeController> ( () => HomeController());
-
+    Get.put(
+      CompanyProfileController(),
+    );
+    Get.lazyPut<HomeController>(
+      () => HomeController(),
+    );
   }
-
 }
