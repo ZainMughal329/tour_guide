@@ -28,6 +28,8 @@ class PersonController extends GetxController {
       'openid',
     ],
   );
+
+  String userProfileImage = '';
   final auth = FirebaseAuth.instance;
 
   final _db = FirebaseFirestore.instance;
@@ -116,10 +118,10 @@ class PersonController extends GetxController {
 
     await Future.value(uploadTask);
 
-    final newUrl = await storageRef.getDownloadURL();
+    userProfileImage = await storageRef.getDownloadURL();
 
-    _db.collection('users').doc(userModel.id).update({
-      'photoUrl': newUrl.toString(),
+    _db.collection('users').doc(auth.currentUser!.uid.toString()).update({
+      'photoUrl': userProfileImage.toString(),
     }).then((value) {
       // setLoading(false);
       Get.snackbar('Congrats', 'Update successfull');

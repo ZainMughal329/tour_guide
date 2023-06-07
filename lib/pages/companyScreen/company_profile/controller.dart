@@ -145,5 +145,6 @@ class CompanyProfileController extends GetxController {
 
   updateUser(CompanyModel companyModel) async {
     await updateUserData(companyModel);
+
   }
 }

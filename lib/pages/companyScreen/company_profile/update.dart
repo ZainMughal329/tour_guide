@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 
 import 'controller.dart';
@@ -179,6 +180,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                         logo: companyModel.logo.toString(),
                                         pass: pass.text.trim());
                                     await controller.updateUser(userData);
+                                    Get.offAllNamed(AppRoutes.SIGN_IN);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.black,

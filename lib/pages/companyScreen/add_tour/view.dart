@@ -158,43 +158,45 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                       _showCustomDialog(context, controller);
                     },
                     child: Container(
-                      height: 150.h,
-                      width: double.infinity,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          GetBuilder<CompanyAddTourController>(builder: (controller){
-                            return Column(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: controller.image == null
-                                      ? Icon(
-                                    Icons.image,
-                                    size: 50,
-                                    color: AppColors.activeTabElementColor,
-                                  )
-                                      : Container(
-                                    height: 120.h,
-                                        width: double.infinity,
-                                        child: Image.file(
-                                    File(controller.image!.path).absolute,
-                                    fit: BoxFit.cover,
+                        height: 150.h,
+                        width: double.infinity,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GetBuilder<CompanyAddTourController>(
+                                builder: (controller) {
+                              return Column(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: controller.image == null
+                                        ? Icon(
+                                            Icons.image,
+                                            size: 50,
+                                            color:
+                                                AppColors.activeTabElementColor,
+                                          )
+                                        : Container(
+                                            height: 120.h,
+                                            width: double.infinity,
+                                            child: Image.file(
+                                              File(controller.image!.path)
+                                                  .absolute,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                   ),
-                                      ),
-                                ),
-                                SizedBox(height: 10.h,),
-
-                                controller.image == null
-                                    ? Text("Tap to Upload Image") : Text(''),
-                              ],
-                            );
-
-                          }),
-
-                        ],
-                      )
-                    ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  controller.image == null
+                                      ? Text("Tap to Upload Image")
+                                      : Text(''),
+                                ],
+                              );
+                            }),
+                          ],
+                        )),
                   ),
                 ),
                 SizedBox(
@@ -278,65 +280,81 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                         ],
                       ),
                     ),
-                    Obx((){
+                    Obx(() {
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 25.h),
-                        child: controller.state.loading.value==true ? CircularProgressIndicator(color: AppColors.activeTabElementColor,) : RoundButton(
-                          title: "Add Tour",
-                          onPress: () {
-                            if (controller.state.titleController.value.text
-                                .trim()
-                                .toString() !=
-                                null &&
-                                controller.state.catValue.value.toString() !=
-                                    "" &&
-                                controller.state.descrepController.value.text
-                                    .trim()
-                                    .toString() !=
-                                    null &&
-                                controller.image!.path.toString() != ""  &&
-                                controller.state.locationController.value.text
-                                    .trim()
-                                    .toString() !=
-                                    null &&
-                                controller.state.tourPeople.value.toString() !=
-                                    "" &&
-                                controller.state.priceController.value.text
-                                    .trim()
-                                    .toString() !=
-                                    null) {
-                              print("validated");
+                        child: controller.state.loading.value == true
+                            ? CircularProgressIndicator(
+                                color: AppColors.activeTabElementColor,
+                              )
+                            : RoundButton(
+                                title: "Add Tour",
+                                onPress: () {
+                                  if (controller
+                                              .state.titleController.value.text
+                                              .trim()
+                                              .toString() !=
+                                          null &&
+                                      controller.state.catValue.value
+                                              .toString() !=
+                                          "" &&
+                                      controller.state.descrepController.value.text
+                                              .trim()
+                                              .toString() !=
+                                          null &&
+                                      controller.image!.path.toString() != "" &&
+                                      controller.state.locationController.value
+                                              .text
+                                              .trim()
+                                              .toString() !=
+                                          null &&
+                                      controller.state.tourPeople.value
+                                              .toString() !=
+                                          "" &&
+                                      controller
+                                              .state.priceController.value.text
+                                              .trim()
+                                              .toString() !=
+                                          null) {
+                                    print("validated");
 
-                              var tour = TourModel(
-                                // id: ,
-                                title: controller.state.titleController.value.text
-                                    .trim()
-                                    .toString(),
-                                tourCategory:
-                                controller.state.catValue.value.toString(),
-                                tourDescription: controller
-                                    .state.descrepController.value.text
-                                    .trim()
-                                    .toString(),
-                                tourImage: controller.image!.path.toString(),
-                                location: controller
-                                    .state.locationController.value.text
-                                    .trim()
-                                    .toString(),
-                                people:
-                                controller.state.tourPeople.value.toString(),
-                                price: controller.state.priceController.value.text
-                                    .trim()
-                                    .toString(),
-                              );
-                              print(tour.toJson().toString());
-                              controller.addTour(tour);
-                            } else {
-                              print("Not validated");
-                              toastInfo(msg: "Please Enter all Fields");
-                            }
-                          },
-                        ),
+                                    controller.addTour(
+                                      // id: ,
+                                      controller
+                                          .state.titleController.value.text
+                                          .trim()
+                                          .toString(),
+                                      controller
+                                          .state.locationController.value.text
+                                          .trim()
+                                          .toString(),
+
+                                      controller
+                                          .state.descrepController.value.text
+                                          .trim()
+                                          .toString(),
+
+                                      controller.state.catValue.value
+                                          .toString(),
+
+
+
+                                      controller.state.tourPeople.value
+                                          .toString(),
+                                      controller
+                                          .state.priceController.value.text
+                                          .trim()
+                                          .toString(),
+                                      controller.image!.path.toString(),
+                                    );
+                                    // print(tour.toJson().toString());
+                                    // c
+                                  } else {
+                                    print("Not validated");
+                                    toastInfo(msg: "Please Enter all Fields");
+                                  }
+                                },
+                              ),
                       );
                     })
                   ],

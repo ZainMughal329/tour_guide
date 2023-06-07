@@ -6,6 +6,7 @@ import 'package:tours_guide/ReUsable/routes/names.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
 import '../../../ReUsable/Components/details.dart';
+import '../../../ReUsable/Components/drawer.dart';
 import 'controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -86,7 +87,7 @@ class HomePage extends GetView<HomeController> {
           icon2: Icons.more_vert_rounded,
         ),
       ),
-      // drawer: BuildDrawer.buildDrawer(context),
+      drawer: BuildDrawer.buildDrawer(context),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 30.w),

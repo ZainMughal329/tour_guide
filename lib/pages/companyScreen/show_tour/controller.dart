@@ -127,7 +127,7 @@ class CompanyShowTourController extends GetxController {
     final newUrl = await storageRef.getDownloadURL();
 
     _db.doc(id).update({
-      'logo': newUrl.toString(),
+      'tourImage': newUrl.toString(),
     }).then((value) {
       // setLoading(false);
       Get.snackbar('Congrats', 'Update successfully');
@@ -135,6 +135,9 @@ class CompanyShowTourController extends GetxController {
     }).onError((error, stackTrace) {
       // setLoading(false);
       Get.snackbar('Error is', error.toString());
+    });
+    _dbTours.doc(id).update({
+      'tourImage': newUrl.toString(),
     });
   }
 

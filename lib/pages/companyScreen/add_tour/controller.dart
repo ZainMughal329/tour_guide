@@ -75,7 +75,14 @@ class CompanyAddTourController extends GetxController {
     }
   }
 
-  void addTour(TourModel tour) async {
+  void addTour(
+      String title,
+      String location,
+      String tourDescription,
+      String tourCategory,
+      String people,
+      String price,
+      String tourImage) async {
     state.loading.value = true;
     String timeStamp = DateTime.now().microsecondsSinceEpoch.toString();
     try {
@@ -83,9 +90,32 @@ class CompanyAddTourController extends GetxController {
           .doc(auth.currentUser!.uid.toString())
           .collection('tour')
           .doc(timeStamp)
-          .set(tour.toJson())
+          .set(
+            TourModel(
+                    id: timeStamp,
+                    title: title,
+                    tourCategory: tourCategory,
+                    tourDescription: tourDescription,
+                    tourImage: tourImage,
+                    location: location,
+                    people: people,
+                    price: price)
+                .toJson(),
+          )
           .then((value) async {
-        await allTours.doc(timeStamp).set(tour.toJson()).then((value) {
+        await allTours
+            .doc(timeStamp)
+            .set(TourModel(
+                    id: timeStamp,
+                    title: title,
+                    tourCategory: tourCategory,
+                    tourDescription: tourDescription,
+                    tourImage: tourImage,
+                    location: location,
+                    people: people,
+                    price: price)
+                .toJson())
+            .then((value) {
           toastInfo(msg: "Successfully Added Tour");
           // toastInfo(msg: "Updating ...");
 

@@ -18,7 +18,7 @@ class TourModel {
   final String tourImage;
 
   TourModel({
-    this.id,
+    required this.id,
     required this.title,
     required this.tourCategory,
     required this.tourDescription,

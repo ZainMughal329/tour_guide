@@ -21,8 +21,7 @@ class CompanyShowTourState {
   final loading = false.obs;
 
   final location = TextEditingController();
-  final price = TextEditingController();
-  final people = TextEditingController();
+
   final title = TextEditingController();
   final des = TextEditingController();
   final category = TextEditingController();

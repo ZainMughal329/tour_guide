@@ -172,7 +172,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               phone: phone.text.trim(),
                               password: pass.text.trim(),
                               userName: name.text.trim(),
-                              photoUrl: userModel.photoUrl,
+                              photoUrl: controller.userProfileImage,
                             );
                             await controller.updateUser(userData);
                             Get.to(() => PersonView());

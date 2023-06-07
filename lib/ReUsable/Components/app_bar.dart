@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
+import 'drawer.dart';
+
 class BuildAppBar extends StatelessWidget {
   String title;
   IconData icon1;
@@ -23,6 +25,7 @@ class BuildAppBar extends StatelessWidget {
             onTap: () async {
               // await FirebaseAuth.instance.signOut();
               // Get.offAllNamed(AppRoutes.SIGN_IN);
+              BuildDrawer.buildDrawer(context);
             },
             child: Tooltip(
               message: 'Drawer',

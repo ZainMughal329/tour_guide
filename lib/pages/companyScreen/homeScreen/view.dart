@@ -27,7 +27,8 @@ class _CompanyHomeState extends State<CompanyHome>
     final _tabController = TabController(length: 3, vsync: this);
 
     return Container(
-      child: FutureBuilder(
+      child:
+      FutureBuilder(
         future: controller.getUsersData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
