@@ -11,9 +11,9 @@ import 'package:tours_guide/pages/companyScreen/show_tour/controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp() ;
+  await Firebase.initializeApp();
   Get.put(CompanyProfileController());
-  // Get.put(CompanyShowTourController());
+  Get.lazyPut<CompanyShowTourController>(() => CompanyShowTourController());
   runApp(const MyApp());
 }
 
@@ -32,6 +32,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

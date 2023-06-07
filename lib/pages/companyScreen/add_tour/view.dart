@@ -308,6 +308,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                               print("validated");
 
                               var tour = TourModel(
+                                // id: ,
                                 title: controller.state.titleController.value.text
                                     .trim()
                                     .toString(),

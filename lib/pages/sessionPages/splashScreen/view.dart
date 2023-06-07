@@ -24,7 +24,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
             .where('id', isEqualTo: auth.currentUser!.uid.toString())
             .get();
         if (companyData.docs.isNotEmpty) {
-          Get.offAndToNamed(AppRoutes.Company_Home);
+          Get.offAllNamed(AppRoutes.Company_Home);
         } else {
           Get.offAndToNamed(AppRoutes.Application);
         }

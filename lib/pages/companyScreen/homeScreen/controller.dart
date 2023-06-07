@@ -17,6 +17,12 @@ class CompanyHomeController extends GetxController {
     return comData;
   }
 
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getNodeData() {
+    return FirebaseFirestore.instance
+        .collection('company')
+        .doc(FirebaseAuth.instance.currentUser!.uid.toString())
+        .snapshots();
+  }
   getUsersData() async {
     print('INSIDE FUNC');
     final id = auth.currentUser!.uid.toString();

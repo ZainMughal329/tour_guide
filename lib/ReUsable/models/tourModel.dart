@@ -36,6 +36,7 @@ class TourModel {
       "title": title,
       "location": location,
       // "tourRating": tourRating,
+      'id' : id,
       "tourImage": tourImage,
       "price": price,
       "people": people,
