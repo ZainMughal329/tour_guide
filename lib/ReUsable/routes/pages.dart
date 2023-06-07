@@ -2,10 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/pages/admin/index.dart';
+
 // import 'package:tours_guide/pages/companyScreen/add_tour/bindings.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
+import 'package:tours_guide/pages/companyScreen/show_tour/index.dart';
+
 // import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
 import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
 
@@ -99,6 +102,12 @@ class AppPages {
       name: AppRoutes.Company_AddTour,
       page: () => CompanyAddTourScreen(),
       binding: CompanyAddTourBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.Company_ShowTour,
+      page: () => CompanyShowTourScreen(),
+      binding: CompanyShowTourBinding(),
     ),
 
     //

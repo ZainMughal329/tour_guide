@@ -8,6 +8,7 @@ import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 
 import '../../../ReUsable/Components/tab_bar_settings.dart';
 import '../../../ReUsable/models/companyModel.dart';
+import '../show_tour/view.dart';
 import 'controller.dart';
 
 class CompanyHome extends StatefulWidget {
@@ -29,8 +30,6 @@ class _CompanyHomeState extends State<CompanyHome>
       child: FutureBuilder(
         future: controller.getUsersData(),
         builder: (context, snapshot) {
-
-
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
               CompanyModel company = snapshot.data as CompanyModel;
@@ -68,16 +67,16 @@ class _CompanyHomeState extends State<CompanyHome>
                                     borderRadius: BorderRadius.circular(25),
                                     child: company.logo.toString() == ''
                                         ? Icon(
-                                      Icons.person_outline,
-                                      size: 30,
-                                      color: Colors.white,
-                                    )
+                                            Icons.person_outline,
+                                            size: 30,
+                                            color: Colors.white,
+                                          )
                                         : Image(
-                                      image: NetworkImage(
-                                        company.logo.toString(),
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
+                                            image: NetworkImage(
+                                              company.logo.toString(),
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                                 SizedBox(
@@ -106,7 +105,7 @@ class _CompanyHomeState extends State<CompanyHome>
                               child: TabBar(
                                 isScrollable: true,
                                 labelPadding:
-                                EdgeInsets.only(right: 20.w, left: 20.w),
+                                    EdgeInsets.only(right: 20.w, left: 20.w),
                                 indicator: CircleTabIndicator(
                                     color: Colors.black, radius: 4),
                                 controller: _tabController,
@@ -132,9 +131,15 @@ class _CompanyHomeState extends State<CompanyHome>
                             child: TabBarView(
                               controller: _tabController,
                               children: [
-                                Center(child: Text('Hello')),
-                                Center(child: CompanyAddTourScreen()),
-                                Container(child: CompanyProfileView()),
+                                Center(
+                                  child: CompanyShowTourScreen(),
+                                ),
+                                Center(
+                                  child: CompanyAddTourScreen(),
+                                ),
+                                Container(
+                                  child: CompanyProfileView(),
+                                ),
                               ],
                             ),
                           ),
@@ -147,45 +152,45 @@ class _CompanyHomeState extends State<CompanyHome>
                 return Scaffold(
                   body: SafeArea(
                       child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: double.infinity,
-                                height: 200.h,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFEDE2E6),
-                                  borderRadius: BorderRadius.circular(15),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            width: double.infinity,
+                            height: 200.h,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFEDE2E6),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'We have recieved your information.\n'
+                                'You will get confirmation shortly.\nThank You.',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 20,
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    'We have recieved your information.\n'
-                                        'You will get confirmation shortly.\nThank You.',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                ),
+                                textAlign: TextAlign.justify,
                               ),
                             ),
-                            TextButton(
-                              onPressed: () async {
-                                await controller.auth.signOut();
-                                StorePrefrences sp = StorePrefrences();
-                                sp.setIsFirstOpen(false);
-                                Get.offAndToNamed(AppRoutes.SIGN_IN);
-                              },
-                              child: Text('Back to login page'),
-                            ),
-                          ],
+                          ),
                         ),
-                      )),
+                        TextButton(
+                          onPressed: () async {
+                            await controller.auth.signOut();
+                            StorePrefrences sp = StorePrefrences();
+                            sp.setIsFirstOpen(false);
+                            Get.offAndToNamed(AppRoutes.SIGN_IN);
+                          },
+                          child: Text('Back to login page'),
+                        ),
+                      ],
+                    ),
+                  )),
                 );
               }
             } else {
@@ -207,11 +212,8 @@ class _CompanyHomeState extends State<CompanyHome>
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-
                 children: [
-
                   Center(
-
                     child: CircularProgressIndicator(),
                   ),
                 ],

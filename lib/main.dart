@@ -7,11 +7,13 @@ import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/ReUsable/routes/pages.dart';
 import 'package:tours_guide/fucntions_call.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/controller.dart';
+import 'package:tours_guide/pages/companyScreen/show_tour/controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp() ;
   Get.put(CompanyProfileController());
+  // Get.put(CompanyShowTourController());
   runApp(const MyApp());
 }
 

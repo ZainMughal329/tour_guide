@@ -24,24 +24,22 @@ class CompanyAddTourController extends GetxController {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
-
   Stream<DocumentSnapshot<Map<String, dynamic>>> getNodeData() {
     return FirebaseFirestore.instance
         .collection('company')
         .doc(auth.currentUser!.uid.toString())
         .snapshots();
   }
-  dispose(){
-    _image=null;
+
+  dispose() {
+    _image = null;
     state.titleController.clear();
     state.locationController.clear();
     state.priceController.clear();
     state.descrepController.clear();
-    state.catValue.value="";
-    state.tourPeople.value="";
+    state.catValue.value = "";
+    state.tourPeople.value = "";
   }
-
-
 
   final picker = ImagePicker();
 
@@ -77,33 +75,26 @@ class CompanyAddTourController extends GetxController {
     }
   }
 
-  void addTour(TourModel tour) async{
-    state.loading.value=true;
-    String timeStamp=DateTime.now().microsecondsSinceEpoch.toString();
-    try{
-      await _dbCompany.doc(auth.currentUser!.uid.toString()).collection(timeStamp).doc(timeStamp).set(tour.toJson()).then((value)async{
-
-        await allTours.doc(timeStamp).set(tour.toJson()).then((value){
-
-
-
-
+  void addTour(TourModel tour) async {
+    state.loading.value = true;
+    String timeStamp = DateTime.now().microsecondsSinceEpoch.toString();
+    try {
+      await _dbCompany
+          .doc(auth.currentUser!.uid.toString())
+          .collection('tour')
+          .doc(timeStamp)
+          .set(tour.toJson())
+          .then((value) async {
+        await allTours.doc(timeStamp).set(tour.toJson()).then((value) {
           toastInfo(msg: "Successfully Added Tour");
           // toastInfo(msg: "Updating ...");
 
-
           uploadImage(timeStamp);
           Get.offAllNamed(AppRoutes.Company_Home);
-
-
-        }).onError((error, stackTrace){
-          state.loading.value=false;
-
+        }).onError((error, stackTrace) {
+          state.loading.value = false;
         });
-      }).onError((error, stackTrace){
-
-      });
-
+      }).onError((error, stackTrace) {});
 
       //
       // await _dbCompany.doc(auth.currentUser!.uid.toString()).collection(timeStamp).add(tour.toJson()).then((value)async{
@@ -116,62 +107,46 @@ class CompanyAddTourController extends GetxController {
       //   toastInfo(msg: error.toString());
       //
       // });
-    }catch(e){
+    } catch (e) {
       toastInfo(msg: e.toString());
     }
-
   }
-
 
   Future uploadImage(String timeStamp) async {
     Get.snackbar('Wait', "Updating...");
-    state.loading.value=true;
-    firebase_storage.Reference storageRef = firebase_storage
-        .FirebaseStorage.instance
-        .ref('/tourPic' + timeStamp);
+    state.loading.value = true;
+    firebase_storage.Reference storageRef =
+        firebase_storage.FirebaseStorage.instance.ref('/tourPic' + timeStamp);
     firebase_storage.UploadTask uploadTask =
-    storageRef.putFile(File(image!.path).absolute);
+        storageRef.putFile(File(image!.path).absolute);
 
     await Future.value(uploadTask);
 
     final newUrl = await storageRef.getDownloadURL();
 
-    _dbCompany.doc(auth.currentUser!.uid.toString()).collection(timeStamp).doc(timeStamp).update({
-
-      "tourImage" : newUrl.toString(),
-
-    }).then((value) async{
-
-
-     await allTours.doc(timeStamp).update({
-       "tourImage" : newUrl.toString(),
-      }).then((value){
-       state.loading.value=false;
+    _dbCompany
+        .doc(auth.currentUser!.uid.toString())
+        .collection('tour')
+        .doc(timeStamp)
+        .update({
+      "tourImage": newUrl.toString(),
+    }).then((value) async {
+      await allTours.doc(timeStamp).update({
+        "tourImage": newUrl.toString(),
+      }).then((value) {
+        state.loading.value = false;
         Get.snackbar('Congrats', 'Update Successfully');
 
         dispose();
 
-
-
-
-
         _image = null;
-      }).onError((error, stackTrace){
-       state.loading.value=false;
-       Get.snackbar('Error Occured', error.toString());
+      }).onError((error, stackTrace) {
+        state.loading.value = false;
+        Get.snackbar('Error Occurred', error.toString());
       });
     }).onError((error, stackTrace) {
-      state.loading.value=false;
-      Get.snackbar('Error Occured', error.toString());
+      state.loading.value = false;
+      Get.snackbar('Error Occurred', error.toString());
     });
-
-
-
   }
-
-
-
-
-
-
 }

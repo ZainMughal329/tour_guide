@@ -163,21 +163,35 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: controller.image == null
-                                ? Icon(
-                              Icons.person,
-                              size: 50,
-                              color: AppColors.activeTabElementColor,
-                            )
-                                : Image.file(
-                              File(controller.image!.path).absolute,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          SizedBox(height: 10.h,),
-                          Text("Tap to Upload Image"),
+                          GetBuilder<CompanyAddTourController>(builder: (controller){
+                            return Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: controller.image == null
+                                      ? Icon(
+                                    Icons.image,
+                                    size: 50,
+                                    color: AppColors.activeTabElementColor,
+                                  )
+                                      : Container(
+                                    height: 120.h,
+                                        width: double.infinity,
+                                        child: Image.file(
+                                    File(controller.image!.path).absolute,
+                                    fit: BoxFit.cover,
+                                  ),
+                                      ),
+                                ),
+                                SizedBox(height: 10.h,),
+
+                                controller.image == null
+                                    ? Text("Tap to Upload Image") : Text(''),
+                              ],
+                            );
+
+                          }),
+
                         ],
                       )
                     ),

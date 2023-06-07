@@ -21,8 +21,8 @@ class BuildAppBar extends StatelessWidget {
         children: [
           InkWell(
             onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              Get.offAllNamed(AppRoutes.SIGN_IN);
+              // await FirebaseAuth.instance.signOut();
+              // Get.offAllNamed(AppRoutes.SIGN_IN);
             },
             child: Tooltip(
               message: 'Drawer',
