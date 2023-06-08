@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
+import '../../../ReUsable/Components/drawer.dart';
 import 'controller.dart';
 
 class SearchView extends GetView<SearchController> {
@@ -99,6 +100,8 @@ class SearchView extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: BuildDrawer.buildDrawer(context),
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100.0),
         child: BuildAppBar(

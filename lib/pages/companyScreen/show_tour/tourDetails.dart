@@ -45,12 +45,12 @@ class TourDetailScreen extends StatelessWidget {
                   child: Container(),
                 ),
                 Container(
-                  width: 30,
-                  height: 30,
+                  width: 30.w,
+                  height: 30.h,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.grey[500],
-                    border: Border.all(color: Colors.black, width: 2.0),
+                    border: Border.all(color: Colors.black, width: 2.0.w),
                   ),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
@@ -61,17 +61,16 @@ class TourDetailScreen extends StatelessWidget {
                       )),
                 ),
                 SizedBox(
-                  width: 20,
+                  width: 20.w,
                 )
               ],
             ),
           ),
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: 30.h,
           ),
           Container(
             height: 270.h,
-
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -112,7 +111,7 @@ class PostBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: 340.h,
       decoration: BoxDecoration(
         color: Color(0xFFEDE2E6),
         borderRadius: BorderRadius.only(
@@ -199,6 +198,7 @@ class PostBottomBar extends StatelessWidget {
                   height: 80.h,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Container(
                         padding: EdgeInsets.all(10),
@@ -232,7 +232,7 @@ class PostBottomBar extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ],

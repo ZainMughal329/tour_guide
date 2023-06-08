@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/drawer.dart';
 import 'package:tours_guide/pages/screens/PersonPage/update.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/view.dart';
 
@@ -16,6 +18,7 @@ class PersonView extends GetView<PersonController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: BuildDrawer.buildDrawer(context),
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {},
@@ -56,6 +59,13 @@ class PersonView extends GetView<PersonController> {
                               leading: Container(
                                 height: 50,
                                 width: 50,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 2.0.w,
+                                  ),
+                                ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
                                   child: controller.image == null
@@ -63,6 +73,7 @@ class PersonView extends GetView<PersonController> {
                                           ? Icon(
                                               Icons.person,
                                               size: 50,
+                                              color: Colors.white,
                                             )
                                           : Image(
                                               image: NetworkImage(
@@ -253,7 +264,7 @@ class PersonView extends GetView<PersonController> {
                                 }).onError((error, stackTrace) {
                                   Get.snackbar(
                                     'Error',
-                                    'Aomething went wrong + ' +
+                                    'Something went wrong + ' +
                                         error.toString(),
                                     snackPosition: SnackPosition.BOTTOM,
                                     colorText: Colors.green,

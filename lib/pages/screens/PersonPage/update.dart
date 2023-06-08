@@ -74,7 +74,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                               fit: BoxFit.cover,
                                             )
                                       : Image.file(
-                                          File(controller.image!.path).absolute,
+                                          File(controller.image!.path)
+                                              .absolute,
                                           fit: BoxFit.cover,
                                         ),
                                 ),
@@ -172,7 +173,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               phone: phone.text.trim(),
                               password: pass.text.trim(),
                               userName: name.text.trim(),
-                              photoUrl: controller.userProfileImage,
+                              photoUrl: controller.userProfileImage == ''
+                                  ? userModel.photoUrl.toString()
+                                  : controller.userProfileImage,
                             );
                             await controller.updateUser(userData);
                             Get.to(() => PersonView());

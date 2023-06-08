@@ -26,7 +26,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
         if (companyData.docs.isNotEmpty) {
           Get.offAllNamed(AppRoutes.Company_Home);
         } else {
-          Get.offAndToNamed(AppRoutes.Application);
+          Get.offAllNamed(AppRoutes.Application);
         }
       } else if (val == false && auth.currentUser == null || val == null) {
         Get.offAllNamed(AppRoutes.Welcome);

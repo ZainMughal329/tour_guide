@@ -52,7 +52,7 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
           iconEnabledColor: AppColors.SuccessColor,
           iconSize: 40.0.h,
           hint: controller.state.catValue.value == ""
-              ? Text("Category")
+              ? Text(cat)
               : Text(controller.state.catValue.value),
           items: [
             DropdownMenuItem(
@@ -88,7 +88,7 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
           iconEnabledColor: AppColors.SuccessColor,
           iconSize: 40.0.h,
           hint: controller.state.tourPeople.value == ""
-              ? Text("1 to 10")
+              ? Text(people)
               : Text(controller.state.tourPeople.value),
           items: [
             DropdownMenuItem(
