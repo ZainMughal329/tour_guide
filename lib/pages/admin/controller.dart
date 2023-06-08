@@ -16,7 +16,7 @@ class AdminController extends GetxController {
     await ref.doc(id).update({
       'status': 'true',
     }).then((value) {
-      Get.snackbar('Approved', 'Congrats');
+      Get.snackbar('St', 'Congrats');
     }).onError((error, stackTrace) {
       Get.snackbar('Error', 'Something went wrong');
     });

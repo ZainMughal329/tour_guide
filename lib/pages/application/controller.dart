@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/pages/application/state.dart';
@@ -11,6 +12,9 @@ class ApplicationController extends GetxController {
   late final List<String> tabTitles;
   late final PageController pageController;
   late final List<BottomNavigationBarItem> bottomTabs;
+  
+  final fireStoreTours = FirebaseFirestore.instance.collection("allTours").snapshots();
+  
 
   void handlePageChanged(int index) {
     state.page = index;

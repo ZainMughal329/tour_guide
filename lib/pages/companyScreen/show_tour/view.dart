@@ -30,7 +30,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               print('Waiting...');
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               print('Error occurs');

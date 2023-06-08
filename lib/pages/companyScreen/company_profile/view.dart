@@ -221,57 +221,64 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                         SizedBox(
                           height: 15,
                         ),
-                        Center(
-                          child: InkWell(
-                            onTap: () {
-                              final auth = FirebaseAuth.instance;
-                              auth.signOut().then((value) {
-                                Get.offAndToNamed(AppRoutes.SIGN_IN);
-                                Get.snackbar(
-                                  'Congrats',
-                                  'Successfully logOut ',
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  colorText: Colors.green,
-                                  backgroundColor:
-                                      Colors.green.withOpacity(0.1),
-                                );
-                              }).onError((error, stackTrace) {
-                                Get.snackbar(
-                                  'Error',
-                                  'Something went wrong + ' + error.toString(),
-                                  snackPosition: SnackPosition.BOTTOM,
-                                  colorText: Colors.green,
-                                  backgroundColor:
-                                      Colors.green.withOpacity(0.1),
-                                );
-                              });
-                            },
+                        Padding(
+                          padding:  EdgeInsets.only(bottom: 15.h),
+                          child: Center(
                             child: InkWell(
-                              child: Container(
-                                height: 50,
-                                width: 300,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: Colors.blue),
-                                child: Center(
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 17),
-                                  ),
-                                ),
-                              ),
                               onTap: () {
                                 final auth = FirebaseAuth.instance;
-                                auth.signOut().then(
-                                  (value) {
-                                    Get.snackbar('Successful', 'Log Out');
-                                    Get.offAndToNamed(AppRoutes.SIGN_IN);
-                                  },
-                                ).onError((error, stackTrace) {
-                                  Get.snackbar('Error', 'Something goes wrong');
+                                auth.signOut().then((value) {
+                                  Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                  Get.snackbar(
+                                    'Congrats',
+                                    'Successfully logOut ',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    colorText: Colors.green,
+                                    backgroundColor:
+                                        Colors.green.withOpacity(0.1),
+                                  );
+                                }).onError((error, stackTrace) {
+                                  Get.snackbar(
+                                    'Error',
+                                    'Something went wrong + ' + error.toString(),
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    colorText: Colors.green,
+                                    backgroundColor:
+                                        Colors.green.withOpacity(0.1),
+                                  );
                                 });
                               },
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 15.h),
+                                child: InkWell(
+                                  child: Container(
+                                    height: 50,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Colors.blue),
+                                    child: Center(
+                                      child: Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 17),
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+
+                                    final auth = FirebaseAuth.instance;
+                                    auth.signOut().then(
+                                      (value) {
+                                        Get.snackbar('Successful', 'Log Out');
+                                        Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                      },
+                                    ).onError((error, stackTrace) {
+                                      Get.snackbar('Error', 'Something goes wrong');
+                                    });
+                                  },
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -281,7 +288,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else {
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 }
               },
             ),

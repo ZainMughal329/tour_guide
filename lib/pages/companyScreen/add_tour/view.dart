@@ -17,7 +17,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   Widget _textField(TextEditingController contr, FocusNode focNode,
       String labelText, String descrip) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: TextFormField(
         controller: contr,
         focusNode: focNode,
@@ -151,14 +151,14 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    vertical: 20.h,
+                    vertical: 1.h,
                   ),
                   child: InkWell(
                     onTap: () {
                       _showCustomDialog(context, controller);
                     },
                     child: Container(
-                        height: 150.h,
+                        height: 200.h,
                         width: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +168,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                               return Column(
                                 children: [
                                   ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
+                                    borderRadius: BorderRadius.circular(100.r),
                                     child: controller.image == null
                                         ? Icon(
                                             Icons.image,
@@ -177,12 +177,15 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                                 AppColors.activeTabElementColor,
                                           )
                                         : Container(
-                                            height: 120.h,
+                                            height: 150.h,
                                             width: double.infinity,
-                                            child: Image.file(
-                                              File(controller.image!.path)
-                                                  .absolute,
-                                              fit: BoxFit.cover,
+                                            child: Padding(
+                                              padding:  EdgeInsets.all(0.w),
+                                              child: Image.file(
+                                                File(controller.image!.path)
+                                                    .absolute,
+                                                fit: BoxFit.fitWidth,
+                                              ),
                                             ),
                                           ),
                                   ),
