@@ -36,7 +36,7 @@ class HomePage extends GetView<HomeController> {
           );
         },
         child: Container(
-          height: 300,
+          // height: 300,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40),
