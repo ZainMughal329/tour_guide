@@ -28,14 +28,15 @@ class ApplicationPage extends GetView<ApplicationController> {
   Widget _buildNavBar() {
     return Obx(
       () => BottomNavigationBar(
+        backgroundColor: AppColors.unActiveIconColor.withOpacity(0.4),
         items: controller.bottomTabs,
         currentIndex: controller.state.page,
         onTap: controller.handleNavBarChange,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        selectedItemColor: AppColors.activeTabElementColor,
-        unselectedItemColor: AppColors.unActiveTabElementColor,
+        selectedItemColor: Colors.white ,
+        unselectedItemColor: Colors.white,
       ),
     );
   }
@@ -43,6 +44,7 @@ class ApplicationPage extends GetView<ApplicationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: AppColors.unActiveIconColor.withOpacity(0.5),
       body: _buildPage(),
       bottomNavigationBar: _buildNavBar(),
     );

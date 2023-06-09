@@ -18,61 +18,67 @@ class BuildAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom:10.h,top: 10.h,left: 5.w,right: 5.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            onTap: () async {
-              // await FirebaseAuth.instance.signOut();
-              // Get.offAllNamed(AppRoutes.SIGN_IN);
-              BuildDrawer.buildDrawer(context);
-            },
-            child: Tooltip(
-              message: 'Drawer',
-              child: Container(
-                padding: EdgeInsets.all(10.w),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(color: Colors.black26, blurRadius: 6),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  icon1,
-                  size: 28,
-                ),
-              ),
-            ),
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          InkWell(
-            onTap: () {},
-            child: Tooltip(
-              message: 'LogOut',
-              child: Container(
-                padding: EdgeInsets.all(10.w),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(color: Colors.black26, blurRadius: 6),
-                  ],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  icon2,
-                  size: 28,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+          // color: Colors.red
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            InkWell(
+              onTap: () async {
+                // await FirebaseAuth.instance.signOut();
+                // Get.offAllNamed(AppRoutes.SIGN_IN);
+                BuildDrawer.buildDrawer(context);
+              },
+              child: Tooltip(
+                message: 'Drawer',
+                child: Container(
+                  padding: EdgeInsets.all(10.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, blurRadius: 6),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    icon1,
+                    size: 28,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Tooltip(
+                message: 'LogOut',
+                child: Container(
+                  padding: EdgeInsets.all(10.w),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, blurRadius: 6),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    icon2,
+                    size: 28,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
