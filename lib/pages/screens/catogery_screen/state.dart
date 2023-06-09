@@ -1,0 +1,3 @@
+class catogeryScreenState {
+var fireStoreTourRef;
+}

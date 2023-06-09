@@ -2,12 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/ReUsable/models/userModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
+import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
 import '../../../ReUsable/Components/details.dart';
@@ -17,8 +20,8 @@ import 'controller.dart';
 class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
-  Widget _buildCard(
-      String title, String loc, String price, String des, String imageUrl) {
+  Widget _buildCard(BuildContext context, String title, String loc,
+      String price, String des, String imageUrl) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -33,7 +36,7 @@ class HomePage extends GetView<HomeController> {
           );
         },
         child: Container(
-          height: 300.h,
+          height: 300,
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40),
@@ -201,98 +204,168 @@ class HomePage extends GetView<HomeController> {
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
             child: Column(
               children: [
-                Container(
-                  child: FutureBuilder(
-                    future: controller.getUsersData(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        print('waiting for connection state');
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        print('Inside snapshot error');
-                        return CircularProgressIndicator();
-                      }
-                      UserModel userModel = snapshot.data as UserModel;
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 50.w,
-                                height: 50.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2.0.w,
-                                  ),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child: userModel.photoUrl.toString() == ''
-                                      ? Icon(
-                                          Icons.person_outline,
-                                          size: 30,
-                                          color: Colors.white,
-                                        )
-                                      : Image(
-                                          image: NetworkImage(
-                                            userModel.photoUrl.toString(),
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15.w,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Welcome back 🖐🏻',
-                                    style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(
-                                    height: 3.h,
-                                  ),
-                                  Text(
-                                    userModel.userName.toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                Padding(
+                  padding: EdgeInsets.all(10.h),
+                  child: Container(
+                    child: FutureBuilder(
+                      future: controller.getUsersData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          // print('waiting for connection state');
+                          toastInfo(
+                              msg: "waiting for connection ...",
+                              length: Toast.LENGTH_SHORT);
+                          return Center(
+                            child: SizedBox(),
+                          );
+                        }
+                        if (snapshot.hasError) {
+                          toastInfo(msg: "Something went wrong");
+                          print('Inside snapshot error');
+                          return SizedBox();
+                        }
+                        UserModel userModel = snapshot.data as UserModel;
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 50.w,
+                                  height: 50.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2.0.w,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: 50.h,
-                            width: 50.w,
-                            decoration: BoxDecoration(
-                              color: Colors.brown,
-                              borderRadius: BorderRadius.circular(50),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child: userModel.photoUrl.toString() == ''
+                                        ? Icon(
+                                            Icons.person_outline,
+                                            size: 30,
+                                            color: Colors.white,
+                                          )
+                                        : Image(
+                                            image: NetworkImage(
+                                              userModel.photoUrl.toString(),
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15.w,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Welcome back 🖐🏻',
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    Text(
+                                      userModel.userName.toString(),
+                                      style: TextStyle(
+                                        fontSize: 20.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            child: Center(
-                              child: Icon(
-                                Icons.notifications,
-                                color: Colors.white,
+                            Container(
+                              height: 50.h,
+                              width: 50.w,
+                              decoration: BoxDecoration(
+                                color: Colors.brown,
+                                borderRadius: BorderRadius.circular(50),
                               ),
-                            ),
-                          )
-                        ],
-                      );
-                    },
+                              child: Center(
+                                child: Icon(
+                                  Icons.notifications,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    ),
                   ),
+                ),
+                FutureBuilder(
+                  future: controller.getUsersData(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // print('waiting for connection state');
+                      toastInfo(
+                          msg: "waiting for connection ...",
+                          length: Toast.LENGTH_SHORT);
+                      return Center(
+                        child: SizedBox(),
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      toastInfo(msg: "Something went wrong");
+                      print('Inside snapshot error');
+                      return SizedBox();
+                    }
+
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.w, vertical: 5.h),
+                        child: Row(
+                          children: [
+                            for (int i = 0; i < 6; i++)
+                              InkWell(
+
+                                child: Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 10.w),
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        blurRadius: 4,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    controller.category[i],
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                                onTap: (){
+                                  // Get.toNamed(AppRoutes.catScreen);
+                                  Get.to(()=>catogeryScreenPage(catogery: controller.category[i],));
+                                  // Get.to(()=>catogeryScreenPage());
+
+                                },
+                              ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 Container(
                   child: FutureBuilder<List<TourModel>>(
@@ -312,7 +385,8 @@ class HomePage extends GetView<HomeController> {
                         print(snapshot.data!.length.toString());
                         return snapshot.data!.length != 0
                             ? Container(
-                                height: 400.h,
+                                height:
+                                    MediaQuery.of(context).size.height - 160.h,
                                 child: ListView.builder(
                                     // shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
@@ -320,62 +394,8 @@ class HomePage extends GetView<HomeController> {
                                     itemBuilder: (context, index) {
                                       return Column(
                                         children: [
-                                          index == 0
-                                              ? SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8.w,
-                                                            vertical: 5.h),
-                                                    child: Row(
-                                                      children: [
-                                                        for (int i = 0;
-                                                            i < 6;
-                                                            i++)
-                                                          Container(
-                                                            margin: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        10.w),
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black26,
-                                                                  blurRadius: 4,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            child: Text(
-                                                              controller
-                                                                  .category[i],
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500),
-                                                            ),
-                                                          ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                )
-                                              : Container(),
                                           _buildCard(
+                                            context,
                                             snapshot.data![index].title
                                                 .toString(),
                                             snapshot.data![index].location
@@ -387,7 +407,6 @@ class HomePage extends GetView<HomeController> {
                                                 .toString(),
                                             snapshot.data![index].tourImage
                                                 .toString(),
-
                                           ),
                                         ],
                                       );

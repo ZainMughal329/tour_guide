@@ -21,6 +21,7 @@ class AppRoutes {
   static const Add_Tour = '/add_tour';
 
   static const Application = '/application';
+  static const catScreen = '/catogery_screen';
   //contact
   static const Contact = '/contact';
   // message

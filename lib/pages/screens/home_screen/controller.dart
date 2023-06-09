@@ -60,12 +60,12 @@ class HomeController extends GetxController {
     super.onInit();
 
     category = [
-      'Best Places',
-      'Most Visited',
+      'Adventure',
+      'Cultural',
+      'Hiking',
+      'Mountains',
       'Favourites',
-      'Hotels',
-      'New Added',
-      'Restaurants',
+      '3+ ratings',
     ];
   }
 }

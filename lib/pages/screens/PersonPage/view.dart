@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/drawer.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/PersonPage/update.dart';
 import 'package:tours_guide/pages/sessionPages/sigin/view.dart';
 
@@ -20,10 +21,15 @@ class PersonView extends GetView<PersonController> {
     return Scaffold(
       drawer: BuildDrawer.buildDrawer(context),
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.arrow_back),
-        ),
+        // elevation: 1,
+        // leading: IconButton(
+        //   onPressed: () {
+        //     // Get.toNamed(AppRoutes.Application);
+        //     // Navigator.pop(context);
+        //     // GetToNamed(AppRoutes.Application);
+        //   },
+        //   icon: const Icon(Icons.arrow_back),
+        // ),
         title: const Text('Profile'),
         backgroundColor: Colors.black,
         centerTitle: true,
@@ -273,42 +279,32 @@ class PersonView extends GetView<PersonController> {
                                   );
                                 });
                               },
-                              child: InkWell(
-                                child: Container(
-                                  height: 50,
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: AppColors.buttonBgColor,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'Logout',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 17),
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(vertical: 30.h),
+                                child: InkWell(
+                                  child: Container(
+                                    height: 50,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: AppColors.buttonBgColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 17),
+                                      ),
                                     ),
                                   ),
+                                  onTap: () {
+                                    controller.signOut();
+                                  },
                                 ),
-                                onTap: () {
-                                  controller.signOut();
-                                },
                               ),
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: TextButton(
-                              child: Text("Login as Admin"),
-                              onPressed: () {},
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: TextButton(
-                              child: Text("Login as User"),
-                              onPressed: () {},
-                            ),
-                          ),
+
                         ],
                       ),
                     );

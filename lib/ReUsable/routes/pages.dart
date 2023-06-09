@@ -8,6 +8,7 @@ import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/index.dart';
+import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
 
 // import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
 import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
@@ -47,6 +48,12 @@ class AppPages {
       // ],
     ),
     //
+    // GetPage(
+    //   name: AppRoutes.catScreen,
+    //   page: () => catogeryScreenPage(catogery: '',),
+    //   binding: catogeryScreenBinding(),
+    // ),
+
     GetPage(
       name: AppRoutes.SIGN_IN,
       page: () => SignInPage(),
