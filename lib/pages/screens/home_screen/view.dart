@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/ReUsable/models/userModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
@@ -16,141 +17,161 @@ import 'controller.dart';
 class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
-  Widget _buildCard(String title, String loc, String price, String imageUrl) {
+  Widget _buildCard(
+      String title, String loc, String price, String des, String imageUrl) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: Container(
-        height: 200,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.white,
-        ),
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                  border: Border.all(width: 0.9, color: Colors.black)),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.fill,
-                  height: 200,
-                  width: double.infinity,
-                ),
-              ),
-            ),
-            Positioned(
-              top: 10,
-              left: 10,
-              child: Container(
+      child: InkWell(
+        onTap: () {
+          Get.to(
+            () => DetailScreen(
+                title: title,
+                price: price,
+                location: loc,
+                des: des,
+                img: imageUrl),
+          );
+        },
+        child: Container(
+          height: 300.h,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40),
+            color: Colors.white,
+          ),
+          child: Stack(
+            children: [
+              Container(
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  "\$ " + price + "/person",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.all(8),
-                child: Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 45,
-              left: 10,
-              child: Container(
-                decoration: BoxDecoration(
-                  // color: Colors.black.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 10,
-              left: 10,
-              child: Container(
-                decoration: BoxDecoration(
-                  // color: Colors.grey,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      color: Colors.grey,
-                      size: 15,
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      loc,
-                      style: TextStyle(
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
                         color: Colors.grey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+                        spreadRadius: 1,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: Container(
-                decoration: BoxDecoration(
-                  // color: Colors.black.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding: EdgeInsets.all(8),
-                child: IconButton(
-                  icon: FaIcon(
-                    FontAwesomeIcons.arrowUpRightFromSquare,
+                    ],
+                    border: Border.all(width: 0.9, color: Colors.black)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.fill,
+                    height: 300.h,
+                    width: double.infinity,
                   ),
-                  color: Colors.grey,
-                  onPressed: () {
-                    // Perform arrow button action here
-                  },
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(8),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '\$${price}',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          '/Person',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white.withOpacity(0.8),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 10,
+                right: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 45,
+                left: 10,
+                child: Container(
+                  width: 100,
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                left: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    // color: Colors.grey,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      FaIcon(
+                        Icons.location_on_outlined,
+                        color: Colors.white,
+                        size: 17.sp,
+                      ),
+                      Text(
+                        " " + loc,
+                        style: TextStyle(color: Colors.white, fontSize: 14.sp
+                            // fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                right: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                    // color: Colors.black.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: EdgeInsets.all(8),
+                  child: IconButton(
+                    icon: FaIcon(
+                      FontAwesomeIcons.arrowUpRightFromSquare,
+                    ),
+                    color: Colors.grey,
+                    onPressed: () {
+                      // Perform arrow button action here
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -174,8 +195,8 @@ class HomePage extends GetView<HomeController> {
       //   ),
       // ),
       drawer: BuildDrawer.buildDrawer(context),
-      body: SingleChildScrollView(
-        child: SafeArea(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
             child: Column(
@@ -198,46 +219,59 @@ class HomePage extends GetView<HomeController> {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 50.w,
-                            height: 50.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2.0.w,
-                              ),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: userModel.photoUrl.toString() == ''
-                                  ? Icon(
-                                      Icons.person_outline,
-                                      size: 30,
-                                      color: Colors.white,
-                                    )
-                                  : Image(
-                                      image: NetworkImage(
-                                        userModel.photoUrl.toString(),
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                          ),
-                          Column(
+                          Row(
                             children: [
-                              Text(
-                                'Welcome back 🖐🏻',
-                                style: TextStyle(
-                                    fontSize: 15.sp, color: Colors.grey),
-                              ),
-                              Text(
-                                userModel.userName.toString(),
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                              Container(
+                                width: 50.w,
+                                height: 50.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 2.0.w,
+                                  ),
                                 ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: userModel.photoUrl.toString() == ''
+                                      ? Icon(
+                                          Icons.person_outline,
+                                          size: 30,
+                                          color: Colors.white,
+                                        )
+                                      : Image(
+                                          image: NetworkImage(
+                                            userModel.photoUrl.toString(),
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Welcome back 🖐🏻',
+                                    style: TextStyle(
+                                        fontSize: 13.sp,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    height: 3.h,
+                                  ),
+                                  Text(
+                                    userModel.userName.toString(),
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -261,10 +295,9 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
                 Container(
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: controller.fireStoreTourRef,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                  child: FutureBuilder<List<TourModel>>(
+                    future: controller.getAndShowALlToursData(),
+                    builder: (BuildContext context, snapshot) {
                       try {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -275,87 +308,106 @@ class HomePage extends GetView<HomeController> {
                           print("inside 2nd circle");
                           return Center(child: CircularProgressIndicator());
                         }
-                        print(snapshot.data!.docs.length.toString());
-                        return ListView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (context, index) {
-                              return snapshot.data!.docs.length != 0
-                                  ? Column(
-                                      children: [
-                                        index == 0
-                                            ? Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 8.w,
-                                                    vertical: 5.h),
-                                                child: Row(
-                                                  children: [
-                                                    for (int i = 0; i < 6; i++)
-                                                      Container(
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal:
-                                                                    10.w),
-                                                        padding:
-                                                            EdgeInsets.all(10),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              blurRadius: 4,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        child: Text(
-                                                          controller
-                                                              .category[i],
-                                                          style: TextStyle(
+                        // TourModel tourModel = snapshot.data as TourModel;
+                        print(snapshot.data!.length.toString());
+                        return snapshot.data!.length != 0
+                            ? Container(
+                                height: 400.h,
+                                child: ListView.builder(
+                                    // shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        children: [
+                                          index == 0
+                                              ? SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8.w,
+                                                            vertical: 5.h),
+                                                    child: Row(
+                                                      children: [
+                                                        for (int i = 0;
+                                                            i < 6;
+                                                            i++)
+                                                          Container(
+                                                            margin: EdgeInsets
+                                                                .symmetric(
+                                                                    horizontal:
+                                                                        10.w),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    10),
+                                                            decoration:
+                                                                BoxDecoration(
                                                               color:
-                                                                  Colors.black,
-                                                              fontSize: 15,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ),
-                                                  ],
-                                                ),
-                                              )
-                                            : Container(),
-                                        _buildCard(
-                                          snapshot.data!.docs[index]['title']
-                                              .toString(),
-                                          snapshot.data!.docs[index]['location']
-                                              .toString(),
-                                          snapshot.data!.docs[index]['price']
-                                              .toString(),
-                                          snapshot
-                                              .data!.docs[index]['tourImage']
-                                              .toString(),
-                                        ),
-                                      ],
-                                    )
-                                  : Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Center(
-                                          child: Text(
-                                            'No new companies to approved',
-                                            style: TextStyle(fontSize: 30),
+                                                                  Colors.white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  blurRadius: 4,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            child: Text(
+                                                              controller
+                                                                  .category[i],
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                          ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container(),
+                                          _buildCard(
+                                            snapshot.data![index].title
+                                                .toString(),
+                                            snapshot.data![index].location
+                                                .toString(),
+                                            snapshot.data![index].price
+                                                .toString(),
+                                            snapshot
+                                                .data![index].tourDescription
+                                                .toString(),
+                                            snapshot.data![index].tourImage
+                                                .toString(),
+
                                           ),
-                                        ),
-                                      ],
-                                    );
-                            });
+                                        ],
+                                      );
+                                    }),
+                              )
+                            : Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'No new companies to approved',
+                                      style: TextStyle(fontSize: 30),
+                                    ),
+                                  ),
+                                ],
+                              );
+                        ;
                       } catch (e) {
+                        print('Error is : ' + e.toString());
                         return Text(
                           'data : ' + e.toString(),
                         );
@@ -365,6 +417,100 @@ class HomePage extends GetView<HomeController> {
                 ),
               ],
             ),
+            // Container(
+            //   child: StreamBuilder<QuerySnapshot>(
+            //     stream: controller.fireStoreTourRef,
+            //     builder: (BuildContext context,
+            //         AsyncSnapshot<QuerySnapshot> snapshot) {
+            //       try {
+            //         if (snapshot.connectionState == ConnectionState.waiting) {
+            //           print("inside first circle");
+            //           return Center(child: CircularProgressIndicator());
+            //         }
+            //         if (snapshot.hasError) {
+            //           print("inside 2nd circle");
+            //           return Center(child: CircularProgressIndicator());
+            //         }
+            //         print(snapshot.data!.docs.length.toString());
+            //         return snapshot.data!.docs.length != 0
+            //             ? ListView.builder(
+            //                 itemCount: snapshot.data!.docs.length,
+            //                 itemBuilder: (context, index) {
+            //                   return Column(
+            //                     children: [
+            //
+            //                       index == 0
+            //                           ? SingleChildScrollView(
+            //                         scrollDirection: Axis.horizontal,
+            //                             child: Padding(
+            //                                 padding: EdgeInsets.symmetric(
+            //                                     horizontal: 8.w, vertical: 5.h),
+            //                                 child: Row(
+            //                                   children: [
+            //                                     for (int i = 0; i < 6; i++)
+            //                                       Container(
+            //                                         margin: EdgeInsets.symmetric(
+            //                                             horizontal: 10.w),
+            //                                         padding: EdgeInsets.all(10),
+            //                                         decoration: BoxDecoration(
+            //                                           color: Colors.white,
+            //                                           borderRadius:
+            //                                               BorderRadius.circular(10),
+            //                                           boxShadow: [
+            //                                             BoxShadow(
+            //                                               color: Colors.black26,
+            //                                               blurRadius: 4,
+            //                                             ),
+            //                                           ],
+            //                                         ),
+            //                                         child: Text(
+            //                                           controller.category[i],
+            //                                           style: TextStyle(
+            //                                               color: Colors.black,
+            //                                               fontSize: 15,
+            //                                               fontWeight:
+            //                                                   FontWeight.w500),
+            //                                         ),
+            //                                       ),
+            //                                   ],
+            //                                 ),
+            //                               ),
+            //                           )
+            //                           : Container(),
+            //                       _buildCard(
+            //                         snapshot.data!.docs[index]['title']
+            //                             .toString(),
+            //                         snapshot.data!.docs[index]['location']
+            //                             .toString(),
+            //                         snapshot.data!.docs[index]['price']
+            //                             .toString(),
+            //                         snapshot.data!.docs[index]['tourImage']
+            //                             .toString(),
+            //                       ),
+            //                     ],
+            //                   );
+            //                 })
+            //             : Column(
+            //                 mainAxisAlignment: MainAxisAlignment.center,
+            //                 crossAxisAlignment: CrossAxisAlignment.center,
+            //                 children: [
+            //                   Center(
+            //                     child: Text(
+            //                       'No new companies to approved',
+            //                       style: TextStyle(fontSize: 30),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               );
+            //         ;
+            //       } catch (e) {
+            //         return Text(
+            //           'data : ' + e.toString(),
+            //         );
+            //       }
+            //     },
+            //   ),
+            // ),
           ),
         ),
       ),
