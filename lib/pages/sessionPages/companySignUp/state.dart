@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CompanySignUpState {
+
   final loading = false.obs;
+  final keyboardStatus=false.obs;
 
   var companyLogo = '';
 

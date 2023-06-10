@@ -18,8 +18,14 @@ class catogeryScreenController extends GetxController {
         .collection('allTours')
         .where('tourCategory', isEqualTo: catogery)
         .snapshots();
+  }
 
+  void setRatingTourRef(String catogery){
 
+    state.fireStoreTourRef=  FirebaseFirestore.instance
+        .collection('allTours')
+        .where('people', isEqualTo: "2")
+        .snapshots();
   }
 
 @override

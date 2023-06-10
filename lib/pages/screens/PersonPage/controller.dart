@@ -133,6 +133,7 @@ class PersonController extends GetxController {
   }
 
   void signOut() async {
+    setLoading(true);
     try {
       await auth.signOut().then((value) async {
         StorePrefrences sp = StorePrefrences();
@@ -146,6 +147,7 @@ class PersonController extends GetxController {
         Get.snackbar('Error', error.toString());
       });
     } catch (e) {
+      setLoading(false);
       Get.snackbar("Error while logout", e.toString());
     }
   }

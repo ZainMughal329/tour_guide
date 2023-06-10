@@ -189,7 +189,8 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
 
   @override
   Widget build(BuildContext context) {
-      controller.setTourRef(catogery);
+    catogery=="2 persons" ?
+      controller.setRatingTourRef(catogery) : controller.setTourRef(catogery);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
@@ -264,6 +265,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
             }
           },
         ),)));
+
 
   }
 

@@ -13,7 +13,7 @@ class AppColors {
   static const Color activeTabElementColor = Color(0xFF567189);
   static const Color unActiveTabElementColor = Color(0xFF7B8FA1);
 
-  static const Color warningColor = Color(0xFFFFA000);
+  static const Color warningColor = Color(0xFF72727E);
   static const Color infoColor = Color(0xFF212A3E);
   static const Color backgroundOverlayColor = Color(0x99000000);
 

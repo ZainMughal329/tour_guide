@@ -44,7 +44,9 @@ class MapController extends GetxController {
   Future<Position> getUserLocation() async {
     await Geolocator.requestPermission()
         .then(
-      (value) {},
+      (value) {
+
+      },
     )
         .onError(
       (error, stackTrace) async {

@@ -21,15 +21,7 @@ class PersonView extends GetView<PersonController> {
     return Scaffold(
       drawer: BuildDrawer.buildDrawer(context),
       appBar: AppBar(
-        // elevation: 1,
-        // leading: IconButton(
-        //   onPressed: () {
-        //     // Get.toNamed(AppRoutes.Application);
-        //     // Navigator.pop(context);
-        //     // GetToNamed(AppRoutes.Application);
-        //   },
-        //   icon: const Icon(Icons.arrow_back),
-        // ),
+
         title: const Text('Profile'),
         backgroundColor: Colors.black,
         centerTitle: true,
@@ -289,15 +281,18 @@ class PersonView extends GetView<PersonController> {
                                       borderRadius: BorderRadius.circular(15),
                                       color: AppColors.buttonBgColor,
                                     ),
-                                    child: Center(
-                                      child: Text(
-                                        'Logout',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 17),
-                                      ),
-                                    ),
+                                    child: Obx((){
+                                      return controller.state.loading.value ? CircularProgressIndicator() : Center(
+                                        child: Text(
+                                          'Logout',
+                                          style: TextStyle(
+                                              color: Colors.white, fontSize: 17),
+                                        ),
+                                      );
+                                    })
                                   ),
                                   onTap: () {
+
                                     controller.signOut();
                                   },
                                 ),
@@ -309,12 +304,24 @@ class PersonView extends GetView<PersonController> {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                      child: Column(
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
                   } else {
                     return Text('Something went wrong');
                   }
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: Column(
+                      children: [
+                        CircularProgressIndicator(),
+                      ],
+                    ),
+                  );
                 }
               },
             ),

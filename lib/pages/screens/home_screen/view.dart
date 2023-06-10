@@ -69,7 +69,9 @@ class HomePage extends GetView<HomeController> {
                 left: 10,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.1),
+                    // color: AppColors.warningColor,
+                    color: Color(0xFF4D4D8E),
+                    // color: Colors.black.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   padding: EdgeInsets.all(8),
@@ -105,10 +107,10 @@ class HomePage extends GetView<HomeController> {
                     color: Colors.black.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(2.w),
                   child: Icon(
                     Icons.favorite,
-                    color: Colors.white,
+                    color: Colors.red,
                   ),
                 ),
               ),
@@ -116,13 +118,20 @@ class HomePage extends GetView<HomeController> {
                 bottom: 45,
                 left: 10,
                 child: Container(
-                  width: 100,
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  // width: 150.w,
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -132,10 +141,10 @@ class HomePage extends GetView<HomeController> {
                 left: 10,
                 child: Container(
                   decoration: BoxDecoration(
-                    // color: Colors.grey,
+                    color: Colors.black.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Row(
                     children: [
                       FaIcon(
@@ -145,7 +154,7 @@ class HomePage extends GetView<HomeController> {
                       ),
                       Text(
                         " " + loc,
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp
+                        style: TextStyle(color: Colors.white, fontSize: 16.sp
                             // fontWeight: FontWeight.w600,
                             ),
                       ),
@@ -182,8 +191,8 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.unActiveIconColor.withOpacity(0.2),
+    return Scaffold(   
+      backgroundColor: AppColors.warningColor,
       // appBar: PreferredSize(
       //   preferredSize: Size.fromHeight(50.0.h),
       //   child: Column(

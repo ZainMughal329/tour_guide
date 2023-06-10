@@ -20,7 +20,11 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
 
   @override
   Widget build(BuildContext context) {
+
+    
+    // final viewInsets = mediaQuery.viewInsets;
     return Scaffold(
+      // resizeToAvoidBottomInset: controller.state.keyboardStatus.value,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Company Info'),
@@ -46,13 +50,13 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                           borderRadius: BorderRadius.circular(100),
                           child: con.state.companyLogo == ''
                               ? Icon(
-                                  Icons.person,
-                                  size: 50,
-                                )
+                            Icons.person,
+                            size: 50,
+                          )
                               : Image.file(
-                                  File(con.image!.path).absolute,
-                                  fit: BoxFit.cover,
-                                ),
+                            File(con.image!.path).absolute,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Positioned(
@@ -144,30 +148,30 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
                               final CompanyUser =
-                                  CompanyModel(
-                                      companyEmail: controller
-                                          .state.emailController.text
-                                          .trim()
-                                          .toString(),
-                                      companyName: controller
-                                          .state.nameController.text
-                                          .trim()
-                                          .toString(),
-                                      status: 'false',
-                                      companyPhone: controller
-                                          .state.phoneNumberController.text
-                                          .trim()
-                                          .toString(),
-                                      companyDescription:
-                                          controller
-                                              .state.descController.text
-                                              .trim()
-                                              .toString(),
-                                      pass: controller.state.passController.text
-                                          .trim()
-                                          .toString(),
-                                      logo: controller.state.companyLogo
-                                          .toString());
+                              CompanyModel(
+                                  companyEmail: controller
+                                      .state.emailController.text
+                                      .trim()
+                                      .toString(),
+                                  companyName: controller
+                                      .state.nameController.text
+                                      .trim()
+                                      .toString(),
+                                  status: 'false',
+                                  companyPhone: controller
+                                      .state.phoneNumberController.text
+                                      .trim()
+                                      .toString(),
+                                  companyDescription:
+                                  controller
+                                      .state.descController.text
+                                      .trim()
+                                      .toString(),
+                                  pass: controller.state.passController.text
+                                      .trim()
+                                      .toString(),
+                                  logo: controller.state.companyLogo
+                                      .toString());
                               controller.storeUser(CompanyUser, context);
                             }
                           },
@@ -182,22 +186,14 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                               child: controller.state.loading.value == true
                                   ? CircularProgressIndicator()
                                   : Text(
-                                      "Sign In",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                                "Sign In",
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                         );
                       }),
-                      TextButton(
-                        onPressed: () async {
-                          await FirebaseAuth.instance.signOut();
-                          StorePrefrences sp = StorePrefrences();
-                          sp.setIsFirstOpen(false);
-                          Get.offAllNamed(AppRoutes.SIGN_IN);
-                        },
-                        child: Text('Logout'),
-                      ),
+
                     ],
                   ),
                 ),

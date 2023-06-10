@@ -26,6 +26,11 @@ class CompanySignUpController extends GetxController {
 
   XFile? get image => _image;
 
+  void setKeyStatus(bool status){
+    state.keyboardStatus.value=status;
+  }
+
+
 //   this is to register with email and password
   // after registeration , store the user in database
   void registerUserWithEmailAndPassword(

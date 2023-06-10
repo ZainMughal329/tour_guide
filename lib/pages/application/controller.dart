@@ -51,7 +51,7 @@ class ApplicationController extends GetxController {
             Icons.search,
             color: AppColors.activeIconColor,
           ),
-          label: 'Contact',
+          label: 'Map',
           backgroundColor: AppColors.primaryBackground),
       const BottomNavigationBarItem(
           icon: Icon(

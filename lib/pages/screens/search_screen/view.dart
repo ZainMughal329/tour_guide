@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
 import '../../../ReUsable/Components/drawer.dart';
-import '../../../pages/screens/search_screen/controller.dart';
+// import '../../../pages/screens/search_screen/controller.dart';
 // import 'controller.dart';
 
 class SearchView extends GetView<SearchController> {

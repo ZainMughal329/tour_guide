@@ -65,7 +65,7 @@ class HomeController extends GetxController {
       'Hiking',
       'Mountains',
       'Favourites',
-      '3+ ratings',
+      '2 persons',
     ];
   }
 }
