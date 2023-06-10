@@ -45,7 +45,7 @@ class MapController extends GetxController {
     await Geolocator.requestPermission()
         .then(
       (value) {
-
+        // cameraPosition = CameraPosition(target: LatLng(value.))
       },
     )
         .onError(

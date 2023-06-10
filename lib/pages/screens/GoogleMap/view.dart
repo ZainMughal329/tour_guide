@@ -25,7 +25,7 @@ class MapPage extends GetView<MapController> {
             (value) async {
               controller.marker.add(
                 Marker(
-                    markerId: MarkerId('1'),
+                    markerId: MarkerId('10'),
                     position: LatLng(value.latitude, value.longitude),
                     icon: BitmapDescriptor.defaultMarker),
               );

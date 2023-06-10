@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
+import 'package:tours_guide/pages/screens/home_screen/index.dart';
 
 import '../../pages/screens/PersonPage/controller.dart';
 import '../models/userModel.dart';
@@ -60,8 +62,9 @@ class BuildDrawer {
                     leading: Icon(Icons.home),
                     title: Text('Home'),
                     onTap: () {
-                      // Handle home tap
                       Navigator.pop(context);
+                      Get.offAndToNamed(AppRoutes.Application);
+
                     },
                   ),
                   ListTile(
