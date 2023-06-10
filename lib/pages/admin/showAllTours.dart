@@ -34,7 +34,7 @@ class ShowAllTours extends GetView<AdminController> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-<<<<<<< HEAD
+
                     child: InkWell(
                       onTap: () {
                         showDialog(context: context, builder: (context) {
@@ -229,176 +229,179 @@ class ShowAllTours extends GetView<AdminController> {
                         //     ),
                         //   ],
                         // ),
-                      ),
-=======
-                    child: Container(
-                      width: double.infinity,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(35),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              snapshot.data![index].tourImage
-                                  .toString(),
-                            ),
-                            fit: BoxFit.cover),
-                      ),
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                top: 5, right: 10, left: 10),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      height: 50.h,
-                                      width: 120.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(50),
-                                        // color: Color(0xffced7d7)
-                                        color: Colors.transparent
-                                            .withOpacity(0.2),
-                                      ),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              '\$${snapshot.data![index].price}',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight:
-                                                  FontWeight.w500),
-                                            ),
-                                            Text(
-                                              '/Person',
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.white
-                                                    .withOpacity(0.8),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 50.h,
-                                      width: 50.w,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(50),
-                                        // color: Color(0xffced7d7)
-                                        color: Colors.transparent
-                                            .withOpacity(0.2),
-                                      ),
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.favorite_outline,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      alignment: Alignment.topRight,
-                                      child: Text(
-                                        snapshot.data!
-                                            [index].title
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(Icons.location_pin , color: Colors.grey,size: 18.sp,),
-                                            Text(
-                                              snapshot
-                                                  .data!
-                                                  [index].location
 
-                                                  .toString(),
-                                              style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 13.sp
-                                                // fontWeight: FontWeight.w600,
-
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(bottom: 5),
-                                          height: 50.h,
-                                          width: 50.w,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(50),
-                                            // color: Color(0xffced7d7)
-                                            color:
-                                            Colors.lightGreenAccent,
-                                          ),
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                      // child: Column(
-                      //   children: [
-                      //     ListTile(
-                      //       leading: Icon(Icons.person_outline),
-                      //       title: Text(snapshot
-                      //           .data!.docs[index]['tourCityName']
-                      //           .toString()),
-                      //       subtitle: Text(snapshot
-                      //           .data!.docs[index]['tourCategory']
-                      //           .toString()),
-                      //       trailing: Text(snapshot
-                      //           .data!.docs[index]['tourRating']
-                      //           .toString()),
-                      //     ),
-                      //     SizedBox(
-                      //       height: 20,
-                      //     ),
-                      //   ],
-                      // ),
->>>>>>> origin/master
-                    ),
+                    // child: Container(
+                    //   width: double.infinity,
+                    //   height: 250,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(35),
+                    //     image: DecorationImage(
+                    //         image: NetworkImage(
+                    //           snapshot.data![index].tourImage
+                    //               .toString(),
+                    //         ),
+                    //         fit: BoxFit.cover),
+                    //   ),
+                    //   child: Stack(
+                    //     children: [
+                    //       Padding(
+                    //         padding: const EdgeInsets.only(
+                    //             top: 5, right: 10, left: 10),
+                    //         child: Column(
+                    //           children: [
+                    //             Row(
+                    //               mainAxisAlignment:
+                    //               MainAxisAlignment.spaceBetween,
+                    //               children: [
+                    //                 Container(
+                    //                   height: 50.h,
+                    //                   width: 120.w,
+                    //                   decoration: BoxDecoration(
+                    //                     borderRadius:
+                    //                     BorderRadius.circular(50),
+                    //                     // color: Color(0xffced7d7)
+                    //                     color: Colors.transparent
+                    //                         .withOpacity(0.2),
+                    //                   ),
+                    //                   child: Center(
+                    //                     child: Row(
+                    //                       mainAxisAlignment:
+                    //                       MainAxisAlignment.center,
+                    //                       crossAxisAlignment:
+                    //                       CrossAxisAlignment.center,
+                    //                       children: [
+                    //                         Text(
+                    //                           '\$${snapshot.data![index].price}',
+                    //                           style: TextStyle(
+                    //                               fontSize: 20,
+                    //                               color: Colors.white,
+                    //                               fontWeight:
+                    //                               FontWeight.w500),
+                    //                         ),
+                    //                         Text(
+                    //                           '/Person',
+                    //                           style: TextStyle(
+                    //                             fontSize: 18,
+                    //                             color: Colors.white
+                    //                                 .withOpacity(0.8),
+                    //                           ),
+                    //                         )
+                    //                       ],
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Container(
+                    //                   height: 50.h,
+                    //                   width: 50.w,
+                    //                   decoration: BoxDecoration(
+                    //                     borderRadius:
+                    //                     BorderRadius.circular(50),
+                    //                     // color: Color(0xffced7d7)
+                    //                     color: Colors.transparent
+                    //                         .withOpacity(0.2),
+                    //                   ),
+                    //                   child: Center(
+                    //                     child: Icon(
+                    //                       Icons.favorite_outline,
+                    //                       color: Colors.white,
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //             Spacer(),
+                    //             Column(
+                    //               crossAxisAlignment: CrossAxisAlignment.start,
+                    //               children: [
+                    //                 Container(
+                    //                   width: 100,
+                    //                   alignment: Alignment.topRight,
+                    //                   child: Text(
+                    //                     snapshot.data!
+                    //                         [index].title
+                    //                         .toString(),
+                    //                     style: TextStyle(
+                    //                       fontSize: 22,
+                    //                       color: Colors.white,
+                    //                     ),
+                    //                   ),
+                    //                 ),
+                    //                 Row(
+                    //                   mainAxisAlignment:
+                    //                   MainAxisAlignment.spaceBetween,
+                    //                   children: [
+                    //                     Row(
+                    //                       children: [
+                    //                         Icon(Icons.location_pin , color: Colors.grey,size: 18.sp,),
+                    //                         Text(
+                    //                           snapshot
+                    //                               .data!
+                    //                               [index].location
+                    //
+                    //                               .toString(),
+                    //                           style: TextStyle(
+                    //                             color: Colors.grey,
+                    //                             fontSize: 13.sp
+                    //                             // fontWeight: FontWeight.w600,
+                    //
+                    //                           ),
+                    //                         ),
+                    //                       ],
+                    //                     ),
+                    //                     Container(
+                    //                       margin: EdgeInsets.only(bottom: 5),
+                    //                       height: 50.h,
+                    //                       width: 50.w,
+                    //                       decoration: BoxDecoration(
+                    //                         borderRadius:
+                    //                         BorderRadius.circular(50),
+                    //                         // color: Color(0xffced7d7)
+                    //                         color:
+                    //                         Colors.lightGreenAccent,
+                    //                       ),
+                    //                       child: Center(
+                    //                         child: Icon(
+                    //                           Icons.arrow_forward_ios,
+                    //                           color: Colors.black,
+                    //                         ),
+                    //                       ),
+                    //                     ),
+                    //                   ],
+                    //                 )
+                    //               ],
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       )
+                    //     ],
+                    //   ),
+                    //   // child: Column(
+                    //   //   children: [
+                    //   //     ListTile(
+                    //   //       leading: Icon(Icons.person_outline),
+                    //   //       title: Text(snapshot
+                    //   //           .data!.docs[index]['tourCityName']
+                    //   //           .toString()),
+                    //   //       subtitle: Text(snapshot
+                    //   //           .data!.docs[index]['tourCategory']
+                    //   //           .toString()),
+                    //   //       trailing: Text(snapshot
+                    //   //           .data!.docs[index]['tourRating']
+                    //   //           .toString()),
+                    //   //     ),
+                    //   //     SizedBox(
+                    //   //       height: 20,
+                    //   //     ),
+                    //   //   ],
+                    //   // ),
+                    //
+                    // ),
+                  // )
+                  )
+                    )
                   );
-                })
+                }
+                )
                 : Center(
               child: Text('No tours added now.'),
             );
