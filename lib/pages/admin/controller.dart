@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 
 import '../../ReUsable/models/tourModel.dart';
 
@@ -58,56 +57,5 @@ class AdminController extends GetxController with GetTickerProviderStateMixin {
 
   Future<List<TourModel>> getAndShowALlToursData() async {
     return await getAllTourData();
-  }
-
-  TextEditingController feedbackController = TextEditingController();
-
-  void showFeedbackDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Provide Feedback'),
-        content: TextField(
-          controller: feedbackController,
-          decoration: InputDecoration(
-            hintText: 'Enter your feedback',
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Close the dialog
-              if (feedbackController.text.isEmpty) {
-                toastInfo( msg:
-                  'Feedback Required \nPlease provide feedback before deleting.',
-                  // snackPosition: SnackPosition.BOTTOM,
-                );
-              } else {
-                deleteItem();
-              }
-              feedbackController.clear(); // Clear the text field
-            },
-            child: Text('Delete'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void deleteItem() {
-    // Perform the delete operation
-    toastInfo( msg:
-      'Item Deleted. \nThe item has been successfully deleted.',
-      // snackPosition: SnackPosition.BOTTOM,
-    );
-
-
-
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    feedbackController.dispose();
   }
 }
