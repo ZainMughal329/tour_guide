@@ -209,7 +209,7 @@ class PostBottomBar extends StatelessWidget {
                   ),
                   textAlign: TextAlign.justify,
                 ),
-                SizedBox(height: 15.h),
+                SizedBox(height: 50.h),
                 Container(
                   height: 80.h,
                   child: Row(
