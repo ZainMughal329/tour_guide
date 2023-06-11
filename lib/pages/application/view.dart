@@ -28,7 +28,8 @@ class ApplicationPage extends GetView<ApplicationController> {
   Widget _buildNavBar() {
     return Obx(
       () => BottomNavigationBar(
-        backgroundColor: AppColors.unActiveIconColor.withOpacity(0.4),
+        // backgroundColor: AppColors.unActiveIconColor.withOpacity(0.4),
+        backgroundColor: Colors.blue.withOpacity(0.1),
         items: controller.bottomTabs,
         currentIndex: controller.state.page,
         onTap: controller.handleNavBarChange,

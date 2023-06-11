@@ -12,34 +12,34 @@ class MapController extends GetxController {
 
   late final CameraPosition cameraPosition;
   late final Completer<GoogleMapController> completer;
-  final List<Marker> marker = [];
-  final List<Marker> _list = const [
-    Marker(
-      markerId: MarkerId('1'),
-      infoWindow: InfoWindow(title: 'My Position'),
-      position: LatLng(37.42796133580664, -122.085749655962),
-    ),
-    Marker(
-      markerId: MarkerId('2'),
-      infoWindow: InfoWindow(title: 'My Position 2'),
-      position: LatLng(37.52796133580664, -122.085749655962),
-    ),
-    Marker(
-      markerId: MarkerId('3'),
-      infoWindow: InfoWindow(title: 'My Position 3'),
-      position: LatLng(35.42796133580664, -122.085749655962),
-    ),
-    Marker(
-      markerId: MarkerId('4'),
-      infoWindow: InfoWindow(title: 'My Position 4'),
-      position: LatLng(34.42796133580664, -122.085749655962),
-    ),
-    Marker(
-      markerId: MarkerId('5'),
-      infoWindow: InfoWindow(title: 'Sargodha'),
-      position: LatLng(32.082466, 72.669128),
-    )
-  ];
+  final List<Marker> marker = <Marker>[];
+  // final List<Marker> _list = const [
+  //   Marker(
+  //     markerId: MarkerId('1'),
+  //     infoWindow: InfoWindow(title: 'My Position'),
+  //     position: LatLng(37.42796133580664, -122.085749655962),
+  //   ),
+  //   Marker(
+  //     markerId: MarkerId('2'),
+  //     infoWindow: InfoWindow(title: 'My Position 2'),
+  //     position: LatLng(37.52796133580664, -122.085749655962),
+  //   ),
+  //   Marker(
+  //     markerId: MarkerId('3'),
+  //     infoWindow: InfoWindow(title: 'My Position 3'),
+  //     position: LatLng(35.42796133580664, -122.085749655962),
+  //   ),
+  //   Marker(
+  //     markerId: MarkerId('4'),
+  //     infoWindow: InfoWindow(title: 'My Position 4'),
+  //     position: LatLng(34.42796133580664, -122.085749655962),
+  //   ),
+  //   Marker(
+  //     markerId: MarkerId('5'),
+  //     infoWindow: InfoWindow(title: 'Sargodha'),
+  //     position: LatLng(32.082466, 72.669128),
+  //   )
+  // ];
 
   Future<Position> getUserLocation() async {
     await Geolocator.requestPermission()
@@ -65,7 +65,7 @@ class MapController extends GetxController {
       zoom: 14,
     );
     completer = Completer();
-    marker.addAll(_list);
+    // marker.addAll(_list);
 
     getUserLocation();
   }

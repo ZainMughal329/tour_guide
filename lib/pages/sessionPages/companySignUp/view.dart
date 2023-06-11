@@ -9,6 +9,7 @@ import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
+import '../../../ReUsable/Components/input_fields.dart';
 import 'controller.dart';
 
 class CompanySignUpPage extends GetView<CompanySignUpController> {
@@ -20,8 +21,6 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
 
   @override
   Widget build(BuildContext context) {
-
-    
     // final viewInsets = mediaQuery.viewInsets;
     return Scaffold(
       // resizeToAvoidBottomInset: controller.state.keyboardStatus.value,
@@ -50,13 +49,13 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                           borderRadius: BorderRadius.circular(100),
                           child: con.state.companyLogo == ''
                               ? Icon(
-                            Icons.person,
-                            size: 50,
-                          )
+                                  Icons.person,
+                                  size: 50,
+                                )
                               : Image.file(
-                            File(con.image!.path).absolute,
-                            fit: BoxFit.cover,
-                          ),
+                                  File(con.image!.path).absolute,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
                       Positioned(
@@ -93,85 +92,91 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      TextFormField(
-                        controller: controller.state.nameController,
-                        focusNode: controller.state.nameNode,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {},
-                        decoration: InputDecoration(
-                          labelText: "Name",
-                        ),
+                      SizedBox(
+                        height: 15.h,
                       ),
-                      SizedBox(height: 16.0.h),
-                      TextFormField(
-                        controller: controller.state.emailController,
-                        focusNode: controller.state.emailNode,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {},
-                        decoration: InputDecoration(
-                          labelText: "Company's Email",
-                        ),
+                      InputTextField(
+                          obsecure: false,
+                          keyboardType: TextInputType.text,
+                          icon: Icons.person_outline,
+                          contr: controller.state.nameController,
+                          descrip: 'Enter company name',
+                          focNode: controller.state.nameNode,
+                          labelText: 'Name'),
+                      SizedBox(
+                        height: 8.h,
                       ),
-                      SizedBox(height: 16.0.h),
-                      TextFormField(
-                        controller: controller.state.phoneNumberController,
-                        focusNode: controller.state.phoneNumberNode,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {},
-                        decoration: InputDecoration(
-                          labelText: "Phone Number",
-                        ),
+                      InputTextField(
+                          obsecure: false,
+                          keyboardType: TextInputType.emailAddress,
+                          icon: Icons.email_outlined,
+                          contr: controller.state.emailController,
+                          descrip: 'Enter company email',
+                          focNode: controller.state.emailNode,
+                          labelText: 'Company\'s email'),
+                      SizedBox(
+                        height: 8.h,
                       ),
-                      SizedBox(height: 16.0.h),
-                      TextFormField(
-                        controller: controller.state.descController,
-                        focusNode: controller.state.descNode,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {},
-                        decoration: InputDecoration(
-                          labelText: "Description",
-                        ),
+                      InputTextField(
+                          obsecure: false,
+                          keyboardType: TextInputType.phone,
+                          icon: Icons.phone,
+                          contr: controller.state.phoneNumberController,
+                          descrip: 'Enter company phoneNumber',
+                          focNode: controller.state.phoneNumberNode,
+                          labelText: 'Company\'s Phone'),
+                      SizedBox(
+                        height: 8.h,
                       ),
-                      SizedBox(height: 16.0.h),
-                      TextFormField(
-                        controller: controller.state.passController,
-                        focusNode: controller.state.passNode,
-                        onFieldSubmitted: (value) {},
-                        validator: (value) {},
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                        ),
+                      InputTextField(
+                          obsecure: false,
+                          keyboardType: TextInputType.text,
+                          icon: Icons.description,
+                          contr: controller.state.descController,
+                          descrip: 'Enter company description',
+                          focNode: controller.state.descNode,
+                          labelText: 'Company\'s description'),
+                      SizedBox(
+                        height: 8.h,
                       ),
+                      InputTextField(
+                          obsecure: true,
+                          keyboardType: TextInputType.visiblePassword,
+                          icon: Icons.lock_open,
+                          contr: controller.state.passController,
+                          descrip: 'Enter password',
+                          focNode: controller.state.passNode,
+                          labelText: 'Password'),
                       SizedBox(height: 32.0.h),
                       Obx(() {
                         return InkWell(
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
                               final CompanyUser =
-                              CompanyModel(
-                                  companyEmail: controller
-                                      .state.emailController.text
-                                      .trim()
-                                      .toString(),
-                                  companyName: controller
-                                      .state.nameController.text
-                                      .trim()
-                                      .toString(),
-                                  status: 'false',
-                                  companyPhone: controller
-                                      .state.phoneNumberController.text
-                                      .trim()
-                                      .toString(),
-                                  companyDescription:
-                                  controller
-                                      .state.descController.text
-                                      .trim()
-                                      .toString(),
-                                  pass: controller.state.passController.text
-                                      .trim()
-                                      .toString(),
-                                  logo: controller.state.companyLogo
-                                      .toString());
+                                  CompanyModel(
+                                      companyEmail: controller
+                                          .state.emailController.text
+                                          .trim()
+                                          .toString(),
+                                      companyName: controller
+                                          .state.nameController.text
+                                          .trim()
+                                          .toString(),
+                                      status: 'false',
+                                      companyPhone: controller
+                                          .state.phoneNumberController.text
+                                          .trim()
+                                          .toString(),
+                                      companyDescription:
+                                          controller
+                                              .state.descController.text
+                                              .trim()
+                                              .toString(),
+                                      pass: controller.state.passController.text
+                                          .trim()
+                                          .toString(),
+                                      logo: controller.state.companyLogo
+                                          .toString());
                               controller.storeUser(CompanyUser, context);
                             }
                           },
@@ -186,14 +191,13 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                               child: controller.state.loading.value == true
                                   ? CircularProgressIndicator()
                                   : Text(
-                                "Sign In",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                                      "Sign In",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                             ),
                           ),
                         );
                       }),
-
                     ],
                   ),
                 ),
