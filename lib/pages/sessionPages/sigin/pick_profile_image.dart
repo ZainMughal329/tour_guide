@@ -102,7 +102,7 @@ class PickProfileImage extends GetView<SignInController> {
                         controller.passwordController.text.trim().toString(),
                     phone: '+92**********',
                     userName: controller.userController.text.trim().toString(),
-                    photoUrl: controller.image!.path.toString(),
+                    photoUrl: controller.state.userProfileImage,
                   );
                   controller.storeUser(user, context);
                 },

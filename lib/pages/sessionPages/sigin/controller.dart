@@ -26,6 +26,8 @@ class SignInController extends GetxController {
   final _dbCompnay = FirebaseFirestore.instance.collection('company');
   var verificationId = "".obs;
 
+  final state = SignInState();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final userController = TextEditingController();
@@ -43,7 +45,6 @@ class SignInController extends GetxController {
   XFile? get image => _image;
 
 
-  String userProfileImage = '';
   Future pickedImageFromGallery(
       BuildContext context) async {
     final pickedImage =
@@ -113,8 +114,9 @@ class SignInController extends GetxController {
 
     await Future.value(uploadTask);
 
-    userProfileImage = await storageRef.getDownloadURL();
-    return userProfileImage;
+    state.userProfileImage = await storageRef.getDownloadURL();
+    print('path is : ' + state.userProfileImage);
+    return state.userProfileImage;
 
 
     // _db.collection('users').doc(auth.currentUser!.uid.toString()).update({
@@ -130,6 +132,7 @@ class SignInController extends GetxController {
   }
 
   void dispose() {
+    super.dispose();
     // TODO: implement dispose
     emailController.dispose();
     passwordController.dispose();
@@ -155,7 +158,7 @@ class SignInController extends GetxController {
     }
   }
 
-  final state = SignInState();
+  // final state = SignInState();
 
   SignInController();
 
