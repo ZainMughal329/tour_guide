@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
@@ -10,6 +14,8 @@ import 'package:tours_guide/pages/sessionPages/sigin/state.dart';
 
 import '../../../ReUsable/models/userModel.dart';
 import '../../../ReUsable/routes/names.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 
 GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -26,6 +32,102 @@ class SignInController extends GetxController {
   final emailFocus = FocusNode();
   final userFocus = FocusNode();
   final passwordFocus = FocusNode();
+
+  final picker = ImagePicker();
+
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
+  XFile? _image;
+
+  XFile? get image => _image;
+
+
+  String userProfileImage = '';
+  Future pickedImageFromGallery(
+      BuildContext context) async {
+    final pickedImage =
+    await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+
+    if (pickedImage != null) {
+      _image = XFile(pickedImage.path);
+      uploadImage(context);
+      update();
+    }
+  }
+
+  //
+  Future pickedImageFromCamera(
+      BuildContext context) async {
+    final pickedImage =
+    await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
+
+    if (pickedImage != null) {
+      _image = XFile(pickedImage.path);
+      uploadImage(context);
+      update();
+    }
+  }
+
+  void showImage(context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Container(
+            height: 130,
+            child: Column(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                ListTile(
+                  onTap: () {
+                    pickedImageFromCamera(context);
+                    Navigator.pop(context);
+                  },
+                  leading: Icon(Icons.camera),
+                  title: Text('Camera'),
+                ),
+                ListTile(
+                  onTap: () {
+                    pickedImageFromGallery(context);
+                    Navigator.pop(context);
+                  },
+                  leading: Icon(Icons.image),
+                  title: Text('Gallery'),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future uploadImage(BuildContext context) async {
+    // state.loading.value = true;
+    firebase_storage.Reference storageRef = firebase_storage
+        .FirebaseStorage.instance
+        .ref('/profileImage' + DateTime.now().toString());
+    firebase_storage.UploadTask uploadTask =
+    storageRef.putFile(File(image!.path).absolute);
+
+    await Future.value(uploadTask);
+
+    userProfileImage = await storageRef.getDownloadURL();
+    return userProfileImage;
+
+
+    // _db.collection('users').doc(auth.currentUser!.uid.toString()).update({
+    //   'photoUrl': userProfileImage.toString(),
+    // }).then((value) {
+    //   // setLoading(false);
+    //   Get.snackbar('Congrats', 'Update successfull');
+    //   _image = null;
+    // }).onError((error, stackTrace) {
+    //   // setLoading(false);
+    //   Get.snackbar('Error is', error.toString());
+    // });
+  }
 
   void dispose() {
     // TODO: implement dispose
@@ -82,6 +184,7 @@ class SignInController extends GetxController {
       state.loading.value = false;
     }
   }
+
 
   void loginUserWithEmailAndPassword(String email, password) async {
     state.loading.value = true;
