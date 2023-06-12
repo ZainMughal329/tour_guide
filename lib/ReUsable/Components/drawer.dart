@@ -10,52 +10,46 @@ import '../../pages/screens/PersonPage/controller.dart';
 import '../models/userModel.dart';
 
 class BuildDrawer {
-  static Drawer buildDrawer(BuildContext context){
+  static Drawer buildDrawer(BuildContext context) {
     var controller = Get.put(PersonController());
     return Drawer(
       width: 300.w,
       child: FutureBuilder(
         future: controller.getUsersData(),
-        builder: (context , snapshot) {
-          if(snapshot.connectionState == ConnectionState.done) {
-            if(snapshot.hasData) {
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
               UserModel userModel = snapshot.data as UserModel;
               return ListView(
                 children: [
                   UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(color: Colors.blue),
                     accountName: Text(userModel.userName),
                     accountEmail: Text(userModel.email),
                     currentAccountPicture: Container(
                       height: 120,
                       width: 120,
                       decoration: BoxDecoration(
-                        borderRadius:
-                        BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(100),
                         border: Border.all(color: Colors.black),
                       ),
                       child: ClipRRect(
-                        borderRadius:
-                        BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(100),
                         child: controller.image == null
                             ? userModel.photoUrl == ''
-                            ? Icon(
-                          Icons.person,
-                          size: 50,
-                        )
-                            : Image(
-                          image: NetworkImage(
-                              userModel.photoUrl),
-                          fit: BoxFit.cover,
-                        )
+                                ? Icon(
+                                    Icons.person,
+                                    size: 50,
+                                  )
+                                : Image(
+                                    image: NetworkImage(userModel.photoUrl),
+                                    fit: BoxFit.cover,
+                                  )
                             : Image.file(
-                          File(controller.image!.path)
-                              .absolute,
-                          fit: BoxFit.cover,
-                        ),
+                                File(controller.image!.path).absolute,
+                                fit: BoxFit.cover,
+                              ),
                       ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.teal.shade900,
                     ),
                   ),
                   ListTile(
@@ -64,7 +58,6 @@ class BuildDrawer {
                     onTap: () {
                       Navigator.pop(context);
                       Get.offAndToNamed(AppRoutes.Application);
-
                     },
                   ),
                   ListTile(
@@ -110,19 +103,19 @@ class BuildDrawer {
                   ),
                 ],
               );
-            }else if(snapshot.hasError) {
+            } else if (snapshot.hasError) {
               print('Error is : ' + snapshot.error.toString());
-              return Center(child: CircularProgressIndicator(),);
-            }else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
               return Text('Something went wrong');
             }
-          }else {
+          } else {
             return Center(child: CircularProgressIndicator());
           }
         },
-
       ),
     );
   }
-
 }

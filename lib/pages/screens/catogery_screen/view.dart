@@ -17,12 +17,10 @@ import '../../../ReUsable/Components/drawer.dart';
 import 'controller.dart';
 
 class catogeryScreenPage extends GetView<catogeryScreenController> {
-  String catogery='';
-  catogeryScreenPage({Key? key,required this.catogery}) : super(key: key);
-   catogeryScreenController controller = Get.put(catogeryScreenController());
+  String catogery = '';
 
-
-
+  catogeryScreenPage({Key? key, required this.catogery}) : super(key: key);
+  catogeryScreenController controller = Get.put(catogeryScreenController());
 
   Widget _buildCard(BuildContext context, String title, String loc,
       String price, String des, String imageUrl) {
@@ -31,13 +29,12 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
       child: InkWell(
         onTap: () {
           Get.to(
-                () =>
-                DetailScreen(
-                    title: title,
-                    price: price,
-                    location: loc,
-                    des: des,
-                    img: imageUrl),
+            () => DetailScreen(
+                title: title,
+                price: price,
+                location: loc,
+                des: des,
+                img: imageUrl),
           );
         },
         child: Container(
@@ -151,8 +148,8 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                       Text(
                         " " + loc,
                         style: TextStyle(color: Colors.white, fontSize: 14.sp
-                          // fontWeight: FontWeight.w600,
-                        ),
+                            // fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ],
                   ),
@@ -185,91 +182,93 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    catogery=="2 persons" ?
-      controller.setRatingTourRef(catogery) : controller.setTourRef(catogery);
+    catogery == "2 persons"
+        ? controller.setRatingTourRef(catogery)
+        : controller.setTourRef(catogery);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: Text(catogery,style: TextStyle(fontSize: 30.sp),),
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.grey.withOpacity(0.9),
-
-      drawer: BuildDrawer.buildDrawer(context),
-      body: SafeArea(
-        child: Container(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: controller.state.fireStoreTourRef,
-          builder: (BuildContext context,
-              AsyncSnapshot<QuerySnapshot> snapshot) {
-            try {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                print("inside first circle");
-                return Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                print("inside 2nd circle");
-                return Center(child: CircularProgressIndicator());
-              }
-              print(snapshot.data!.docs.length.toString());
-              return snapshot.data!.docs.length != 0
-                  ? ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding:  EdgeInsets.all(10.h),
-                      child: Column(
+        appBar: AppBar(
+          backgroundColor: AppColors.activeIconColor,
+          title: Text(
+            catogery,
+            style: TextStyle(fontSize: 20.sp),
+          ),
+          centerTitle: true,
+          leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(Icons.arrow_back),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        drawer: BuildDrawer.buildDrawer(context),
+        body: SafeArea(
+            child: Container(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.state.fireStoreTourRef,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              try {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  print("inside first circle");
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  print("inside 2nd circle");
+                  return Center(child: CircularProgressIndicator());
+                }
+                print(snapshot.data!.docs.length.toString());
+                return snapshot.data!.docs.length != 0
+                    ? ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.all(10.h),
+                            child: Column(
+                              children: [
+                                _buildCard(
+                                  context,
+                                  snapshot.data!.docs[index]['title']
+                                      .toString(),
+                                  snapshot.data!.docs[index]['location']
+                                      .toString(),
+                                  snapshot.data!.docs[index]['price']
+                                      .toString(),
+                                  snapshot.data!.docs[index]['tourDescription']
+                                      .toString(),
+                                  snapshot.data!.docs[index]['tourImage']
+                                      .toString(),
+                                ),
+                              ],
+                            ),
+                          );
+                        })
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-
-
-                          _buildCard(
-                            context,
-                            snapshot.data!.docs[index]['title']
-                                .toString(),
-                            snapshot.data!.docs[index]['location']
-                                .toString(),
-                            snapshot.data!.docs[index]['price']
-                                .toString(),
-                            snapshot.data!.docs[index]['tourDescription']
-                                .toString(),
-                            snapshot.data!.docs[index]['tourImage']
-                                .toString(),
+                          Center(
+                            child: Center(
+                              child: Text(
+                                'Currently,We have no tours in\nthis Catogery',
+                                style: TextStyle(fontSize: 30),
+                              ),
+                            ),
                           ),
                         ],
-                      ),
-                    );
-                  })
-                  : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Center(
-                      child: Text(
-                        'Currently,We have no tours in\nthis Catogery',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-              ;
-            } catch (e) {
-              return Text(
-                'data : ' + e.toString(),
-              );
-            }
-          },
-        ),)));
-
-
+                      );
+                ;
+              } catch (e) {
+                return Text(
+                  'data : ' + e.toString(),
+                );
+              }
+            },
+          ),
+        )));
   }
-
-
 }
 // _buildCard("Naran Kaghan","Peshawar","200",'assets/images/pic1.jpg')
 

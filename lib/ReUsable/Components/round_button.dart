@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'app_colors.dart';
+
 class RoundButton extends StatelessWidget {
   final String title;
   final Color color, textcolor, borderColor;
@@ -25,9 +27,9 @@ class RoundButton extends StatelessWidget {
         padding: EdgeInsets.all(10.w),
         margin: EdgeInsets.only(bottom: 15.h),
         decoration: BoxDecoration(
-          color: color,
+          color: AppColors.activeIconColor,
           borderRadius: const BorderRadius.all(
-            Radius.circular(5),
+            Radius.circular(15),
           ),
           boxShadow: [
             BoxShadow(

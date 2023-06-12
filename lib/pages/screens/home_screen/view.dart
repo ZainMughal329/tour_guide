@@ -260,7 +260,7 @@ class HomePage extends GetView<HomeController> {
                                         ? Icon(
                                             Icons.person_outline,
                                             size: 30,
-                                            color: Colors.white,
+                                            color: Colors.black,
                                           )
                                         : Image(
                                             image: NetworkImage(

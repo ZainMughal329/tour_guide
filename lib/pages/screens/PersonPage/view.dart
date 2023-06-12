@@ -19,6 +19,7 @@ class PersonView extends GetView<PersonController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       drawer: BuildDrawer.buildDrawer(context),
       appBar: AppBar(
 
@@ -48,7 +49,7 @@ class PersonView extends GetView<PersonController> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: Colors.black,
+                              color: Color(0xff11151c),
                             ),
                             child: ListTile(
                               onTap: () {
@@ -68,11 +69,13 @@ class PersonView extends GetView<PersonController> {
                                   borderRadius: BorderRadius.circular(100),
                                   child: controller.image == null
                                       ? userModel.photoUrl == ''
-                                          ? Icon(
-                                              Icons.person,
-                                              size: 50,
-                                              color: Colors.white,
-                                            )
+                                          ? Center(
+                                            child: Icon(
+                                                Icons.person,
+                                                size: 30,
+                                                color: Colors.white,
+                                              ),
+                                          )
                                           : Image(
                                               image: NetworkImage(
                                                   userModel.photoUrl),
@@ -103,7 +106,7 @@ class PersonView extends GetView<PersonController> {
                             height: 120,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: Color(0xff11151c),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
@@ -160,7 +163,7 @@ class PersonView extends GetView<PersonController> {
                             height: 270,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: Color(0xff11151c),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
@@ -279,7 +282,7 @@ class PersonView extends GetView<PersonController> {
                                     width: 300,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(15),
-                                      color: AppColors.buttonBgColor,
+                                      color: AppColors.activeIconColor,
                                     ),
                                     child: Obx((){
                                       return controller.state.loading.value ? CircularProgressIndicator() : Center(

@@ -7,6 +7,6 @@ class PersonBindings implements Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.lazyPut<SearchController>(() => SearchController());
+    Get.lazyPut<SearchBarController>(() => SearchBarController());
   }
 }

@@ -15,8 +15,8 @@ class ApplicationBinding implements Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-    Get.lazyPut<SearchController>(
-      () => SearchController(),
+    Get.lazyPut<SearchBarController>(
+      () => SearchBarController(),
     );
     Get.lazyPut<MapController>(
       () => MapController(),

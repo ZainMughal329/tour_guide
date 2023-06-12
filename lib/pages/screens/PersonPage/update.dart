@@ -170,7 +170,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                   : controller.userProfileImage,
                             );
                             await controller.updateUser(userData);
-                            Get.to(() => PersonView());
+                            // Get.to(() => PersonView());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black,

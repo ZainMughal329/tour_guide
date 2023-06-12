@@ -105,17 +105,37 @@ class SignUpView extends GetView<SignInController> {
                 //   ),
                 // ),
                 SizedBox(height: 20.h),
-                RoundButton(
-                    title: 'Next',
-                    onPress: () {
-                      Get.to(
-                        () => PickProfileImage(
-                            email: controller.emailController.text,
-                            pass: controller.passwordController.text,
-                            name: controller.userController.text,
-                            phone: '+92-xxxxxxx'),
-                      );
-                    }),
+                // RoundButton(
+                //     title: 'Next',
+                //     onPress: () {
+                //       Get.to(
+                //         () => PickProfileImage(
+                //             email: controller.emailController.text,
+                //             pass: controller.passwordController.text,
+                //             name: controller.userController.text,
+                //             phone: '+92-xxxxxxx'),
+                //       );
+                //     }),
+                Obx(
+                      () => Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15.h),
+                    child: RoundButton(
+                      title: 'SignUp',
+                      loading: controller.state.loading.value,
+                      onPress: () {
+                        var user = UserModel(
+                          email: controller.emailController.text.trim().toString(),
+                          password:
+                          controller.passwordController.text.trim().toString(),
+                          phone: '+92**********',
+                          userName: controller.userController.text.trim().toString(),
+                          photoUrl: '',
+                        );
+                        controller.storeUser(user, context);
+                      },
+                    ),
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Get.offAllNamed(AppRoutes.SIGN_IN);
