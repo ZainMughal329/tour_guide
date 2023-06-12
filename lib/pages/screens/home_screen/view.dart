@@ -121,13 +121,13 @@ class HomePage extends GetView<HomeController> {
                   width: 100.w,
 
                   decoration: BoxDecoration(
-                    // color: Colors.black.withOpacity(0.1),
-                    // borderRadius: BorderRadius.circular(10),
-                  ),
+                      // color: Colors.black.withOpacity(0.1),
+                      // borderRadius: BorderRadius.circular(10),
+                      ),
                   // width: 150.w,
                   alignment: Alignment.topLeft,
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 8.0.w),
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                     child: Text(
                       title,
                       style: TextStyle(
@@ -155,7 +155,7 @@ class HomePage extends GetView<HomeController> {
                         size: 20.sp,
                       ),
                       Text(
-                         loc,
+                        loc,
                         style: TextStyle(color: Colors.white, fontSize: 14.sp
                             // fontWeight: FontWeight.w600,
                             ),
@@ -193,9 +193,42 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
+  Widget _buildCardView(String title, String img) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          height: 30.h,
+          width: 30.w,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.black,
+            ),
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image(
+              image: AssetImage(img),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 5.w,
+        ),
+        Text(
+          title,
+          style: TextStyle(
+              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(   
+    return Scaffold(
       backgroundColor: Colors.white,
       // appBar: PreferredSize(
       //   preferredSize: Size.fromHeight(50.0.h),
@@ -350,9 +383,9 @@ class HomePage extends GetView<HomeController> {
                           children: [
                             for (int i = 0; i < 6; i++)
                               InkWell(
-
                                 child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 10.w),
+                                  margin:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -364,19 +397,17 @@ class HomePage extends GetView<HomeController> {
                                       ),
                                     ],
                                   ),
-                                  child: Text(
+                                  child: _buildCardView(
                                     controller.category[i],
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500),
+                                    "assets/images/img${i}.jpg",
                                   ),
                                 ),
-                                onTap: (){
+                                onTap: () {
                                   // Get.toNamed(AppRoutes.catScreen);
-                                  Get.to(()=>catogeryScreenPage(catogery: controller.category[i],));
+                                  Get.to(() => catogeryScreenPage(
+                                        catogery: controller.category[i],
+                                      ));
                                   // Get.to(()=>catogeryScreenPage());
-
                                 },
                               ),
                           ],
