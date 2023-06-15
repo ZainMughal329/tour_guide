@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 
 import '../../../ReUsable/models/userModel.dart';
@@ -15,6 +16,15 @@ import 'index.dart';
 
 class PersonController extends GetxController {
   PersonController();
+
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    _loadThemeMode();
+    super.onInit();
+
+  }
 
   final emailFocus = FocusNode();
   final passwordFocus = FocusNode();
@@ -177,4 +187,22 @@ class PersonController extends GetxController {
   updateUser(UserModel user) async {
     await updateUserData(user);
   }
+
+
+  void _saveThemeMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isDarkMode', state.isDarkMode.value);
+  }
+
+  void _loadThemeMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    state.isDarkMode.value = prefs.getBool('isDarkMode') ?? false;
+  }
+  void toggleTheme() {
+    state.isDarkMode.value = !state.isDarkMode.value;
+    Get.changeThemeMode(state.isDarkMode.value? ThemeMode.dark : ThemeMode.light);
+
+    _saveThemeMode(); // Save the theme mode when it changes
+  }
+
 }

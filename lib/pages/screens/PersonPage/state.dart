@@ -8,4 +8,5 @@ class PersonState {
   var to_location = ''.obs;
   RxString name = 'John Doe'.obs;
   RxString email = 'email@gmail.com'.obs;
+  RxBool isDarkMode = false.obs;
 }

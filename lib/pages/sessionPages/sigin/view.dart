@@ -97,7 +97,7 @@ class SignInPage extends GetView<SignInController> {
             Text(
               'Sign in with $loginType',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 14.sp,
                 fontWeight: FontWeight.normal,
               ),

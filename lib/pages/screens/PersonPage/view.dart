@@ -44,61 +44,64 @@ class PersonView extends GetView<PersonController> {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Container(
-                            height: 70,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Color(0xff11151c),
-                            ),
-                            child: ListTile(
-                              onTap: () {
-                                Get.to(() => UpdateScreen());
-                              },
-                              leading: Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2.0.w,
+                          Obx((){
+                            return Container(
+                              height: 70,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                // color: Color(0xff11151c),
+                                color:  controller.state.isDarkMode.value ? Colors.black : Colors.white,
+                              ),
+                              child: ListTile(
+                                onTap: () {
+                                  Get.to(() => UpdateScreen());
+                                },
+                                leading: Container(
+                                  height: 50,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                      width: 2.0.w,
+                                    ),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(100),
+                                    child: controller.image == null
+                                        ? userModel.photoUrl == ''
+                                        ? Center(
+                                      child: Icon(
+                                        Icons.person,
+                                        size: 30,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                        : Image(
+                                      image: NetworkImage(
+                                          userModel.photoUrl),
+                                      fit: BoxFit.cover,
+                                    )
+                                        : Image.file(
+                                      File(controller.image!.path).absolute,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: controller.image == null
-                                      ? userModel.photoUrl == ''
-                                          ? Center(
-                                            child: Icon(
-                                                Icons.person,
-                                                size: 30,
-                                                color: Colors.white,
-                                              ),
-                                          )
-                                          : Image(
-                                              image: NetworkImage(
-                                                  userModel.photoUrl),
-                                              fit: BoxFit.cover,
-                                            )
-                                      : Image.file(
-                                          File(controller.image!.path).absolute,
-                                          fit: BoxFit.cover,
-                                        ),
+                                title: Text(
+                                  userModel.email,
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                subtitle: Text(userModel.phone,
+                                    style: TextStyle(color: Colors.white)),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
                                 ),
                               ),
-                              title: Text(
-                                userModel.email,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              subtitle: Text(userModel.phone,
-                                  style: TextStyle(color: Colors.white)),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                            );
+                          }),
                           const SizedBox(
                             height: 10,
                           ),
@@ -147,10 +150,21 @@ class PersonView extends GetView<PersonController> {
                                       'Dark Mode',
                                       style: TextStyle(color: Colors.white),
                                     ),
-                                    trailing: Icon(
-                                      Icons.radio_button_on_outlined,
-                                      color: Colors.white,
-                                    ),
+                                    trailing: Obx((){
+                                      return Switch(value: controller.state.isDarkMode.value, onChanged: (value){
+                                        controller.toggleTheme();
+
+                                      });
+                                    }),
+
+                                    // trailing:  Obx(
+                                    //       () => Switch(
+                                    //     value: ThemeService().isDarkModeOn.value,
+                                    //     onChanged: (value) {
+                                    //       ThemeService().changeTheme(value);
+                                    //     },
+                                    //   ),
+                                    // ),
                                   ),
                                 ),
                               ],
@@ -260,7 +274,7 @@ class PersonView extends GetView<PersonController> {
                                     snackPosition: SnackPosition.BOTTOM,
                                     colorText: Colors.green,
                                     backgroundColor:
-                                        Colors.green.withOpacity(0.1),
+                                    Colors.green.withOpacity(0.1),
                                   );
                                 }).onError((error, stackTrace) {
                                   Get.snackbar(
@@ -270,7 +284,7 @@ class PersonView extends GetView<PersonController> {
                                     snackPosition: SnackPosition.BOTTOM,
                                     colorText: Colors.green,
                                     backgroundColor:
-                                        Colors.green.withOpacity(0.1),
+                                    Colors.green.withOpacity(0.1),
                                   );
                                 });
                               },
@@ -278,21 +292,21 @@ class PersonView extends GetView<PersonController> {
                                 padding:  EdgeInsets.symmetric(vertical: 30.h),
                                 child: InkWell(
                                   child: Container(
-                                    height: 50,
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: AppColors.activeIconColor,
-                                    ),
-                                    child: Obx((){
-                                      return controller.state.loading.value ? CircularProgressIndicator() : Center(
-                                        child: Text(
-                                          'Logout',
-                                          style: TextStyle(
-                                              color: Colors.white, fontSize: 17),
-                                        ),
-                                      );
-                                    })
+                                      height: 50,
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: AppColors.activeIconColor,
+                                      ),
+                                      child: Obx((){
+                                        return controller.state.loading.value ? CircularProgressIndicator() : Center(
+                                          child: Text(
+                                            'Logout',
+                                            style: TextStyle(
+                                                color: Colors.white, fontSize: 17),
+                                          ),
+                                        );
+                                      })
                                   ),
                                   onTap: () {
 
