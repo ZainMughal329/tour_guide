@@ -50,6 +50,11 @@ class CompanySignUpController extends GetxController {
         Compuser.id = auth.currentUser!.uid.toString();
         // Write code to move to screen that show unApproved Status
         create(Compuser);
+        state.emailController.clear();
+        state.passController.clear();
+        state.nameController.clear();
+        state.descController.clear();
+        state.phoneNumberController.clear();
       }).onError((error, stackTrace) {
         state.loading.value = false;
         toastInfo(msg: error.toString());

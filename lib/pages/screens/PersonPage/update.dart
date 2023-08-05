@@ -117,6 +117,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           children: [
                             InputTextField(
                                 obsecure: false,
+                                textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.text,
                                 icon: Icons.person,
                                 contr: name,
@@ -130,8 +131,10 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                 contr: email,
                                 descrip: 'Enter your email',
                                 focNode: controller.emailFocus,
+                                textInputAction: TextInputAction.next,
                                 labelText: 'Email'),
                             InputTextField(
+                                textInputAction: TextInputAction.next,
 
                                 obsecure: true,
                                 keyboardType: TextInputType.visiblePassword,
@@ -144,6 +147,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               obsecure: false,
                                 keyboardType: TextInputType.phone,
                                 icon: Icons.phone,
+                                textInputAction: TextInputAction.done,
                                 contr: phone,
                                 descrip: 'Enter your phone number',
                                 focNode: controller.phoneFocus,

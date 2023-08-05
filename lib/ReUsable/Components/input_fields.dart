@@ -1,12 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+class SignInInputTextField extends StatelessWidget {
+  // final TextEditingController controller;
+  // final FocusNode focusnode;
+  // final FormFieldSetter onFieldSubmitedVlaue;
+  // final FormFieldValidator formfieldValidator;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  // final String hint;
+  final bool obsecure;
+  // final bool enable, autoFocus;
+  IconData icon;
+  TextEditingController contr; FocusNode focNode;
+  String labelText; String descrip;
+
+  SignInInputTextField(
+      {super.key,
+        required this.contr,
+        required this.descrip,
+        required this.focNode,
+        required this.labelText,
+        required this.textInputAction,
+        // required this.controller,
+        // required this.focusnode,
+        // required this.onFieldSubmitedVlaue,
+        // required this.formfieldValidator,
+        required this.keyboardType,
+        // this.autoFocus = false,
+        required this.obsecure,
+        // this.enable = true,
+        required this.icon,
+        // required this.hint
+        //
+      });
+
+  @override
+  Widget build(BuildContext context)  {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.w , vertical: 5.h),
+      child: TextFormField(
+        style: TextStyle(color: Colors.white),
+        controller: contr,
+        textInputAction: textInputAction,
+        obscureText: obsecure,
+        keyboardType: keyboardType,
+        focusNode: focNode,
+        validator: (value) {},
+        onFieldSubmitted: (value) {},
+        decoration: InputDecoration(
+
+          // fillColor: Colors.grey.shade100,
+          // filled: true,
+          // hintText: "Email",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          prefixIcon: Icon(icon , color: Colors.white,),
+          hintText: descrip,
+          labelText: labelText,
+          labelStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color:Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+          ),
+
+        ),
+      ),
+    );
+  }
+
+}
+
 class InputTextField extends StatelessWidget {
   // final TextEditingController controller;
   // final FocusNode focusnode;
   // final FormFieldSetter onFieldSubmitedVlaue;
   // final FormFieldValidator formfieldValidator;
   final TextInputType keyboardType;
+  final TextInputAction textInputAction;
   // final String hint;
   final bool obsecure;
   // final bool enable, autoFocus;
@@ -20,6 +101,7 @@ class InputTextField extends StatelessWidget {
         required this.descrip,
         required this.focNode,
         required this.labelText,
+        required this.textInputAction,
       // required this.controller,
       // required this.focusnode,
       // required this.onFieldSubmitedVlaue,
@@ -39,6 +121,7 @@ class InputTextField extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 8.w , vertical: 5.h),
         child: TextFormField(
           controller: contr,
+          textInputAction: textInputAction,
           obscureText: obsecure,
           keyboardType: keyboardType,
           focusNode: focNode,
@@ -46,17 +129,23 @@ class InputTextField extends StatelessWidget {
           onFieldSubmitted: (value) {},
           decoration: InputDecoration(
 
+              fillColor: Colors.grey.shade100,
+              filled: true,
+              // hintText: "Email",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             prefixIcon: Icon(icon),
             hintText: descrip,
             labelText: labelText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30.r),
-                bottomRight: Radius.circular(30.r),
-                topRight: Radius.circular(30.r),
-                bottomLeft: Radius.circular(30.r),
-              ),
-            ),
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.only(
+            //     topLeft: Radius.circular(30.r),
+            //     bottomRight: Radius.circular(30.r),
+            //     topRight: Radius.circular(30.r),
+            //     bottomLeft: Radius.circular(30.r),
+            //   ),
+            // ),
           ),
         ),
       );
