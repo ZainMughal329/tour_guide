@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "645527773643",
-    "project_id": "tour-guide-ba60a",
-    "storage_bucket": "tour-guide-ba60a.appspot.com"
+    "project_number": "304009638263",
+    "project_id": "tourisam-1589b",
+    "storage_bucket": "tourisam-1589b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:645527773643:android:649f54b9c0d6d17ee2564e",
+        "mobilesdk_app_id": "1:304009638263:android:28b160689bfd23705b7172",
         "android_client_info": {
-          "package_name": "com.example.tours_guide"
+          "package_name": "com.tour_app.tours_guide"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "304009638263-7aqu6co774sjk828kqe5pvqn4evhc2cn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDV4r3AcJ2ISGRdO7WXxIBZEkbE0d85B3U"
+          "current_key": "AIzaSyBAEMWEgMQjCV2y7eQAX0wqhyD4sv2nOAU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304009638263-7aqu6co774sjk828kqe5pvqn4evhc2cn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -35,160 +35,215 @@ class HomePage extends GetView<HomeController> {
                 img: imageUrl),
           );
         },
-        child: Container(
-          // height: 300,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            color: Colors.white,
-          ),
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                    border: Border.all(width: 0.9, color: Colors.black)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    imageUrl,
-                    fit: BoxFit.fill,
-                    height: 300.h,
-                    width: double.infinity,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                left: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    // color: AppColors.warningColor,
-                    color: Colors.transparent.withOpacity(0.3),
-                    // color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: EdgeInsets.all(8.w),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          '\$${price}',
-                          style: TextStyle(
-                              fontSize: 17.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          '/Person',
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(2.w),
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 45,
-                left: 10,
-                child: Container(
-                  width: 100.w,
-
-                  decoration: BoxDecoration(
-                      // color: Colors.black.withOpacity(0.1),
-                      // borderRadius: BorderRadius.circular(10),
-                      ),
-                  // width: 150.w,
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 18.0),
+          child: Container(
+            height: 297,
+            width: 201,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                  image: NetworkImage(imageUrl), fit: BoxFit.cover),
+              color: Colors.transparent,
+            ),
+            child: Container(
+              height: 297,
+              width: 201,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(colors: [
+                    Color(0xff061627).withOpacity(0),
+                    Color(0xff082F45),
+                    // Colors.black
+                  ], stops: [
+                    0.35,
+                    1.0
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Text(
                       title,
                       style: TextStyle(
-                        fontSize: 22.sp,
                         color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
                     ),
                   ),
-                ),
-              ),
-              Positioned(
-                bottom: 17,
-                left: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Row(
-                    children: [
-                      FaIcon(
-                        Icons.location_on_outlined,
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                    child: Text(
+                      'Starting at \$' + price.toString(),
+                      style: TextStyle(
                         color: Colors.white,
-                        size: 20.sp,
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 10,
                       ),
-                      Text(
-                        loc,
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp
-                            // fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 15,
-                right: 10,
-                child: Container(
-                  height: 50.h,
-                  width: 50.w,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: IconButton(
-                    icon: FaIcon(
-                      FontAwesomeIcons.arrowUpRightFromSquare,
                     ),
-                    color: Colors.white,
-                    onPressed: () {
-                      // Perform arrow button action here
-                    },
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
+        // Container(
+        //   // height: 300,
+        //   width: double.infinity,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(40),
+        //     color: Colors.white,
+        //   ),
+        //   child: Stack(
+        //     children: [
+        //       Container(
+        //         decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(15),
+        //             boxShadow: [
+        //               BoxShadow(
+        //                 color: Colors.grey,
+        //                 spreadRadius: 1,
+        //               ),
+        //             ],
+        //             border: Border.all(width: 0.9, color: Colors.black)),
+        //         child: ClipRRect(
+        //           borderRadius: BorderRadius.circular(15),
+        //           child: Image.network(
+        //             imageUrl,
+        //             fit: BoxFit.fill,
+        //             height: 300.h,
+        //             width: double.infinity,
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         top: 10,
+        //         left: 10,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //             // color: AppColors.warningColor,
+        //             color: Colors.transparent.withOpacity(0.3),
+        //             // color: Colors.black.withOpacity(0.1),
+        //             borderRadius: BorderRadius.circular(30),
+        //           ),
+        //           padding: EdgeInsets.all(8.w),
+        //           child: Center(
+        //             child: Row(
+        //               mainAxisAlignment: MainAxisAlignment.center,
+        //               crossAxisAlignment: CrossAxisAlignment.center,
+        //               children: [
+        //                 Text(
+        //                   '\$${price}',
+        //                   style: TextStyle(
+        //                       fontSize: 17.sp,
+        //                       color: Colors.white,
+        //                       fontWeight: FontWeight.w500),
+        //                 ),
+        //                 Text(
+        //                   '/Person',
+        //                   style: TextStyle(
+        //                     fontSize: 15.sp,
+        //                     color: Colors.white.withOpacity(0.8),
+        //                   ),
+        //                 )
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         top: 10,
+        //         right: 10,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //             color: Colors.black.withOpacity(0.1),
+        //             borderRadius: BorderRadius.circular(10),
+        //           ),
+        //           padding: EdgeInsets.all(2.w),
+        //           child: Icon(
+        //             Icons.favorite,
+        //             color: Colors.red,
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         bottom: 45,
+        //         left: 10,
+        //         child: Container(
+        //           width: 100.w,
+        //
+        //           decoration: BoxDecoration(
+        //               // color: Colors.black.withOpacity(0.1),
+        //               // borderRadius: BorderRadius.circular(10),
+        //               ),
+        //           // width: 150.w,
+        //           alignment: Alignment.topLeft,
+        //           child: Padding(
+        //             padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+        //             child: Text(
+        //               title,
+        //               style: TextStyle(
+        //                 fontSize: 22.sp,
+        //                 color: Colors.white,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         bottom: 17,
+        //         left: 10,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //             // color: Colors.black.withOpacity(0.1),
+        //             borderRadius: BorderRadius.circular(10),
+        //           ),
+        //           padding: EdgeInsets.symmetric(horizontal: 8.w),
+        //           child: Row(
+        //             children: [
+        //               FaIcon(
+        //                 Icons.location_on_outlined,
+        //                 color: Colors.white,
+        //                 size: 20.sp,
+        //               ),
+        //               Text(
+        //                 loc,
+        //                 style: TextStyle(color: Colors.white, fontSize: 14.sp
+        //                     // fontWeight: FontWeight.w600,
+        //                     ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         bottom: 15,
+        //         right: 10,
+        //         child: Container(
+        //           height: 50.h,
+        //           width: 50.w,
+        //           decoration: BoxDecoration(
+        //             color: Colors.blue,
+        //             borderRadius: BorderRadius.circular(50),
+        //           ),
+        //           padding: EdgeInsets.all(8),
+        //           child: IconButton(
+        //             icon: FaIcon(
+        //               FontAwesomeIcons.arrowUpRightFromSquare,
+        //             ),
+        //             color: Colors.white,
+        //             onPressed: () {
+        //               // Perform arrow button action here
+        //             },
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
@@ -202,7 +257,7 @@ class HomePage extends GetView<HomeController> {
           width: 30.w,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.black,
+              color: Colors.blue,
             ),
             borderRadius: BorderRadius.circular(50),
           ),
@@ -220,7 +275,7 @@ class HomePage extends GetView<HomeController> {
         Text(
           title,
           style: TextStyle(
-              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
         ),
       ],
     );
@@ -229,7 +284,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xff081921),
       // appBar: PreferredSize(
       //   preferredSize: Size.fromHeight(50.0.h),
       //   child: Column(
@@ -247,11 +302,12 @@ class HomePage extends GetView<HomeController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(10.h),
+                  padding: EdgeInsets.only(top: 10.h),
                   child: Container(
                     child: FutureBuilder(
                       future: controller.getUsersData(),
@@ -278,83 +334,102 @@ class HomePage extends GetView<HomeController> {
                             Row(
                               children: [
                                 Container(
-                                  width: 50.w,
-                                  height: 50.h,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                      color: Colors.black,
-                                      width: 1.0.w,
-                                    ),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
-                                    child: userModel.photoUrl.toString() == ''
-                                        ? Icon(
-                                            Icons.person_outline,
-                                            size: 30,
-                                            color: Colors.black,
-                                          )
-                                        : Image(
-                                            image: NetworkImage(
-                                              userModel.photoUrl.toString(),
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
+                                  child: Icon(
+                                    Icons.menu,
+                                    color: Colors.blue,
+                                    size: 30,
                                   ),
                                 ),
                                 SizedBox(
                                   width: 15.w,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Welcome back 🖐🏻',
-                                      style: TextStyle(
-                                          fontSize: 13.sp,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    SizedBox(
-                                      height: 3.h,
-                                    ),
-                                    Text(
-                                      userModel.userName.toString(),
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
+                                Center(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Welcome back 🖐🏻',
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 3.h,
+                                      ),
+                                      Text(
+                                        userModel.userName
+                                            .toString()
+                                            .capitalizeFirst
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                             Container(
-                              height: 50.h,
                               width: 50.w,
+                              height: 50.h,
                               decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
-
                                 borderRadius: BorderRadius.circular(50),
-                                // border: Border.all(
-                                //   color: Colors.black,
-                                //   width: 1.0.w,
-                                // ),
-                              ),
-                              child: Center(
-                                child: FaIcon(
-                                  FontAwesomeIcons.bell,
-                                  color: Colors.black.withOpacity(0.7),
+                                border: Border.all(
+                                  color: userModel.photoUrl.toString() == ''
+                                      ? Colors.blue
+                                      : Colors.white,
+                                  width: 1.0.w,
                                 ),
                               ),
-                            )
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: userModel.photoUrl.toString() == ''
+                                    ? Icon(
+                                        Icons.person_outline,
+                                        size: 30,
+                                        color: Colors.blue,
+                                      )
+                                    : Image(
+                                        image: NetworkImage(
+                                          userModel.photoUrl.toString(),
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                            ),
                           ],
                         );
                       },
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Text(
+                  'Discover',
+                  style: TextStyle(
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                Text(
+                  'Explore the best places in the world!',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal),
+                ),
+                SizedBox(
+                  height: 20.h,
                 ),
                 FutureBuilder(
                   future: controller.getUsersData(),
@@ -376,45 +451,50 @@ class HomePage extends GetView<HomeController> {
 
                     return SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.w, vertical: 5.h),
-                        child: Row(
-                          children: [
-                            for (int i = 0; i < 6; i++)
-                              InkWell(
-                                child: Container(
-                                  margin:
-                                      EdgeInsets.symmetric(horizontal: 10.w),
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        blurRadius: 4,
-                                      ),
-                                    ],
-                                  ),
-                                  child: _buildCardView(
-                                    controller.category[i],
-                                    "assets/images/img${i}.jpg",
-                                  ),
+                      child: Row(
+                        children: [
+                          for (int i = 0; i < 6; i++)
+                            InkWell(
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: 10.w),
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Color(0xff0c3e4f),
+                                  // gradient: LinearGradient(
+                                  //     colors: [
+                                  //       Color(0xff11C4EC),
+                                  //       Color(0xff0388D3),
+                                  //     ],
+                                  //     begin: Alignment.topCenter,
+                                  //     end: Alignment.bottomCenter),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      blurRadius: 4,
+                                    ),
+                                  ],
                                 ),
-                                onTap: () {
-                                  // Get.toNamed(AppRoutes.catScreen);
-                                  Get.to(() => catogeryScreenPage(
-                                        catogery: controller.category[i],
-                                      ));
-                                  // Get.to(()=>catogeryScreenPage());
-                                },
+                                child: _buildCardView(
+                                  controller.category[i],
+                                  "assets/images/img${i}.jpg",
+                                ),
                               ),
-                          ],
-                        ),
+                              onTap: () {
+                                // Get.toNamed(AppRoutes.catScreen);
+                                Get.to(() => catogeryScreenPage(
+                                      catogery: controller.category[i],
+                                    ));
+                                // Get.to(()=>catogeryScreenPage());
+                              },
+                            ),
+                        ],
                       ),
                     );
                   },
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Container(
                   child: FutureBuilder<List<TourModel>>(
@@ -434,14 +514,15 @@ class HomePage extends GetView<HomeController> {
                         print(snapshot.data!.length.toString());
                         return snapshot.data!.length != 0
                             ? Container(
-                                height:
-                                    MediaQuery.of(context).size.height - 160.h,
+                                height: 330.h,
                                 child: ListView.builder(
                                     // shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
+                                    scrollDirection: Axis.horizontal,
                                     itemCount: snapshot.data!.length,
                                     itemBuilder: (context, index) {
                                       return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           _buildCard(
                                             context,
@@ -482,6 +563,142 @@ class HomePage extends GetView<HomeController> {
                       }
                     },
                   ),
+                ),
+                // SizedBox(height: 20),
+                Text(
+                  'Popular Categories',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18.sp),
+                ),
+                SizedBox(height: 20.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            color: Color(0xff1C939B),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.airplanemode_active,
+                              color: Colors.white,
+                              size: 40.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          'Trips',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            color: Color(0xffDB8D1E),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            Icons.hotel,
+                            color: Colors.white,
+                            size: 40.sp,
+                          )),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          'Hotels',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            color: Color(0xffE5291D),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.event,
+                              color: Colors.white,
+                              size: 40.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          'Events',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          height: 60.h,
+                          width: 60.w,
+                          decoration: BoxDecoration(
+                            color: Color(0xff3E79EA),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.car_rental,
+                              color: Colors.white,
+                              size: 40.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(
+                          'Transport',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 50.h,
                 ),
               ],
             ),

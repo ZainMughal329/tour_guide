@@ -190,15 +190,17 @@ class SignInController extends GetxController {
 
 
   void loginUserWithEmailAndPassword(String email, password) async {
-    state.loading.value = true;
+    // state.loading.value = true;
     try {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
+            print('inside then');
         final companyData = await _dbCompnay
             .where('id', isEqualTo: auth.currentUser!.uid.toString())
             .get();
         if (companyData.docs.isNotEmpty) {
+          print('inside company if');
           StorePrefrences().setIsFirstOpen(true);
 
           Get.offAndToNamed(AppRoutes.Company_Home);

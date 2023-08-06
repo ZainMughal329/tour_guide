@@ -29,7 +29,7 @@ class ApplicationPage extends GetView<ApplicationController> {
     return Obx(
       () => BottomNavigationBar(
         // backgroundColor: AppColors.unActiveIconColor.withOpacity(0.4),
-        backgroundColor: Colors.blue.withOpacity(0.1),
+        backgroundColor: Color(0xff06141B),
         items: controller.bottomTabs,
         currentIndex: controller.state.page,
         onTap: controller.handleNavBarChange,
