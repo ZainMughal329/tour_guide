@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/update.dart';
 
@@ -16,6 +17,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
@@ -26,6 +28,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                 if (snapshot.hasData) {
                   return Container(
                     padding: const EdgeInsets.all(10),
+                    // color: AppColors.bgColor,
                     child: Column(
                       children: [
                         Container(
@@ -33,7 +36,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.black,
+                            color: AppColors.cardBgColor,
                           ),
                           child: ListTile(
                             onTap: () {
@@ -67,7 +70,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 style: TextStyle(color: Colors.white)),
                             trailing: Icon(
                               Icons.arrow_forward_ios,
-                              color: Colors.white,
+                              color: AppColors.iconsColor,
                             ),
                           ),
                         ),
@@ -78,7 +81,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           height: 120,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: AppColors.cardBgColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
@@ -99,7 +102,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                     onTap: () {},
                                     child: Icon(
                                       Icons.radio_button_on,
-                                      color: Colors.white,
+                                      color: AppColors.iconsColor,
                                     ),
                                   ),
                                 ),
@@ -135,7 +138,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           height: 270,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.black,
+                            color: AppColors.cardBgColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
@@ -150,7 +153,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: Colors.white,
+                                    color: AppColors.iconsColor,
                                   ),
                                 ),
                               ),
@@ -165,7 +168,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: Colors.white,
+                                    color: AppColors.iconsColor,
                                   ),
                                 ),
                               ),
@@ -180,7 +183,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: Colors.white,
+                                    color: AppColors.iconsColor,
                                   ),
                                 ),
                               ),
@@ -195,7 +198,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: Colors.white,
+                                    color: AppColors.iconsColor,
                                   ),
                                 ),
                               ),
@@ -210,7 +213,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: Colors.white,
+                                    color: AppColors.iconsColor,
                                   ),
                                 ),
                               ),

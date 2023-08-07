@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/input_fields.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
@@ -21,10 +22,21 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.iconsColor,
+          ),
+        ),
         centerTitle: true,
         title: Text('Company Info'),
-        backgroundColor: AppColors.activeIconColor,
+        backgroundColor: AppColors.bgColor,
+        elevation: 0,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -66,6 +78,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                           ? Icon(
                                               Icons.person,
                                               size: 50,
+                                              color: AppColors.iconsColor,
                                             )
                                           : Image(
                                               image: NetworkImage(
@@ -89,7 +102,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                     height: 25,
                                     width: 25,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: AppColors.iconsColor,
                                       borderRadius: BorderRadius.circular(100),
                                       border: Border.all(color: Colors.black),
                                     ),
@@ -115,61 +128,80 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              TextFormField(
-                                controller: name,
-                                focusNode: controller.state.nameNode,
-                                onFieldSubmitted: (value) {},
-                                validator: (value) {},
-                                decoration: InputDecoration(
-                                  labelText: "Name",
-                                ),
-                              ),
-                              SizedBox(height: 16.0.h),
-                              TextFormField(
-                                controller: email,
-                                focusNode: controller.state.emailNode,
-                                onFieldSubmitted: (value) {},
-                                validator: (value) {},
-                                decoration: InputDecoration(
-                                  labelText: "Company's Email",
-                                ),
-                              ),
-                              SizedBox(height: 16.0.h),
-                              TextFormField(
-                                controller: phone,
-                                focusNode: controller.state.phoneNumberNode,
-                                onFieldSubmitted: (value) {},
-                                validator: (value) {},
-                                decoration: InputDecoration(
-                                  labelText: "Phone Number",
-                                ),
-                              ),
-                              SizedBox(height: 16.0.h),
-                              TextFormField(
-                                controller: des,
-                                focusNode: controller.state.descNode,
-                                onFieldSubmitted: (value) {},
-                                validator: (value) {},
-                                decoration: InputDecoration(
-                                  labelText: "Description",
-                                ),
-                              ),
-                              SizedBox(height: 16.0.h),
-                              TextFormField(
-                                controller: pass,
-                                focusNode: controller.state.passNode,
-                                onFieldSubmitted: (value) {},
-                                validator: (value) {},
-                                decoration: InputDecoration(
-                                  labelText: "Password",
-                                ),
-                              ),
+                              UpdateInputTextField(
+                                  contr: name,
+                                  descrip: 'Company Name',
+                                  focNode: controller.state.nameNode,
+                                  labelText: 'Name',
+                                  textInputAction: TextInputAction.next,
+                                  filledColor: AppColors.cardBgColor,
+                                  color: Colors.white,
+                                  textColor: Colors.white,
+                                  keyboardType: TextInputType.text,
+                                  obsecure: false,
+                                  icon: Icons.person),
+                              SizedBox(height: 5.0.h),
+                              UpdateInputTextField(
+                                  contr: email,
+                                  descrip: 'Company Email',
+                                  focNode: controller.state.emailNode,
+                                  labelText: 'Email',
+                                  textInputAction: TextInputAction.next,
+                                  filledColor: AppColors.cardBgColor,
+                                  color: Colors.white,
+                                  textColor: Colors.white,
+                                  keyboardType: TextInputType.text,
+                                  obsecure: false,
+                                  icon: Icons.person),
+                              SizedBox(height: 5.0.h),
+                              UpdateInputTextField(
+                                  contr: phone,
+                                  descrip: 'Company Phone',
+                                  focNode: controller.state.phoneNumberNode,
+                                  labelText: 'PhoneNo',
+                                  textInputAction: TextInputAction.next,
+                                  filledColor: AppColors.cardBgColor,
+                                  color: Colors.white,
+                                  textColor: Colors.white,
+                                  keyboardType: TextInputType.text,
+                                  obsecure: false,
+                                  icon: Icons.person),
+
+
+                              SizedBox(height: 5.0.h),
+                              UpdateInputTextField(
+                                  contr: des,
+                                  descrip: 'Company Description',
+                                  focNode: controller.state.descNode,
+                                  labelText: 'Description',
+                                  textInputAction: TextInputAction.next,
+                                  filledColor: AppColors.cardBgColor,
+                                  color: Colors.white,
+                                  textColor: Colors.white,
+                                  keyboardType: TextInputType.text,
+                                  obsecure: false,
+                                  icon: Icons.person),
+
+
+                              SizedBox(height: 5.0.h),
+                              UpdateInputTextField(
+                                  contr: pass,
+                                  descrip: 'Company Password',
+                                  focNode: controller.state.passNode,
+                                  labelText: 'Password',
+                                  textInputAction: TextInputAction.done,
+                                  filledColor: AppColors.cardBgColor,
+                                  color: Colors.white,
+                                  textColor: Colors.white,
+                                  keyboardType: TextInputType.text,
+                                  obsecure: false,
+                                  icon: Icons.person),
+
                               SizedBox(height: 32.0.h),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 50,
-                                child: ElevatedButton(
-                                  onPressed: () async {
+
+                              Center(
+                                child: InkWell(
+                                  onTap: () async {
                                     var userData = CompanyModel(
                                         id: auth.currentUser!.uid.toString(),
                                         status: companyModel.status,
@@ -182,20 +214,62 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                     await controller.updateUser(userData);
                                     Get.offAllNamed(AppRoutes.SIGN_IN);
                                   },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.black,
-                                    side: BorderSide.none,
-                                    shape: const StadiumBorder(),
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      'Save Profile',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18),
-                                    ),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 30.h),
+                                    child: Container(
+                                        height: 50,
+                                        width: 300,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: AppColors.activeIconColor,
+                                        ),
+                                        child: Obx(() {
+                                          return controller.state.loading.value
+                                              ? CircularProgressIndicator()
+                                              : Center(
+                                            child: Text(
+                                              'Save Profile',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 17),
+                                            ),
+                                          );
+                                        })),
                                   ),
                                 ),
                               ),
+
+                              // SizedBox(
+                              //   width: double.infinity,
+                              //   height: 50,
+                              //   child: ElevatedButton(
+                              //     onPressed: () async {
+                              //       var userData = CompanyModel(
+                              //           id: auth.currentUser!.uid.toString(),
+                              //           status: companyModel.status,
+                              //           companyEmail: email.text.trim(),
+                              //           companyName: name.text.trim(),
+                              //           companyPhone: phone.text.trim(),
+                              //           companyDescription: des.text.trim(),
+                              //           logo: companyModel.logo.toString(),
+                              //           pass: pass.text.trim());
+                              //       await controller.updateUser(userData);
+                              //       Get.offAllNamed(AppRoutes.SIGN_IN);
+                              //     },
+                              //     style: ElevatedButton.styleFrom(
+                              //       backgroundColor: Colors.black,
+                              //       side: BorderSide.none,
+                              //       shape: const StadiumBorder(),
+                              //     ),
+                              //     child: const Center(
+                              //       child: Text(
+                              //         'Save Profile',
+                              //         style: TextStyle(
+                              //             color: Colors.white, fontSize: 18),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

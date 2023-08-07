@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color titleTextColor = Color(0xFF27374D);
+  static const Color bgColor = Color(0xff081921);
   static const Color subtitleTextColor = Color(0xFF526D82);
   static const Color primaryBackground = Color(0xFFFFFFFF);
   static const Color iconColor = Color(0xFF27374D);
+  static const Color iconsColor = Colors.blue;
+  static const Color cardBgColor = Color(0xff0c3e4f);
+
   static const Color activeIconColor = Color(0xff11C3EB);
   static const Color unActiveIconColor = Color(0xFF394867);
   static const Color buttonBgColor = Color(0xFF394867);

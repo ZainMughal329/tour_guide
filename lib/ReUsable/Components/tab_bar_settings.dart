@@ -13,7 +13,7 @@ class BigAppText extends StatelessWidget {
       style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: size.toDouble(),
-          color: Colors.black),
+          color: Colors.white),
     );
   }
 }

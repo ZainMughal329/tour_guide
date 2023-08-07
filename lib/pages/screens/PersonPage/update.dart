@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
 import 'package:tours_guide/pages/screens/PersonPage/view.dart';
 
@@ -21,15 +23,20 @@ class _UpdateScreenState extends State<UpdateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.iconsColor,
+          ),
         ),
         title: const Text('Edit Profile'),
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.bgColor,
+        elevation: 0,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -58,7 +65,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(color: Colors.black),
+                                  border:
+                                      Border.all(color: AppColors.iconsColor),
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
@@ -90,7 +98,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                     height: 25,
                                     width: 25,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: Colors.blue,
                                       borderRadius: BorderRadius.circular(100),
                                       border: Border.all(color: Colors.black),
                                     ),
@@ -115,17 +123,26 @@ class _UpdateScreenState extends State<UpdateScreen> {
                       Form(
                         child: Column(
                           children: [
-                            InputTextField(
+                            UpdateInputTextField(
                                 obsecure: false,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.text,
                                 icon: Icons.person,
                                 contr: name,
+                                textColor: Colors.white,
+                                filledColor: AppColors.cardBgColor,
                                 descrip: 'Enter your username',
                                 focNode: controller.userFocus,
+                                color: Colors.white,
                                 labelText: 'Username'),
-                            InputTextField(
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            UpdateInputTextField(
                                 obsecure: false,
+                                color: Colors.white,
+                                textColor: Colors.white,
+                                filledColor: AppColors.cardBgColor,
                                 keyboardType: TextInputType.emailAddress,
                                 icon: Icons.email_outlined,
                                 contr: email,
@@ -133,19 +150,30 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                 focNode: controller.emailFocus,
                                 textInputAction: TextInputAction.next,
                                 labelText: 'Email'),
-                            InputTextField(
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            UpdateInputTextField(
                                 textInputAction: TextInputAction.next,
-
+                                color: Colors.white,
+                                textColor: Colors.white,
+                                filledColor: AppColors.cardBgColor,
                                 obsecure: true,
                                 keyboardType: TextInputType.visiblePassword,
                                 icon: Icons.lock_open,
                                 contr: pass,
                                 descrip: 'Enter your password',
                                 focNode: controller.passwordFocus,
-                                labelText: 'Username'),
-                            InputTextField(
-                              obsecure: false,
+                                labelText: 'Password'),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            UpdateInputTextField(
+                                obsecure: false,
                                 keyboardType: TextInputType.phone,
+                                color: Colors.white,
+                                textColor: Colors.white,
+                                filledColor: AppColors.cardBgColor,
                                 icon: Icons.phone,
                                 textInputAction: TextInputAction.done,
                                 contr: phone,
@@ -155,14 +183,12 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () async {
+                        height: 20.h,
+                      ),
+                      Center(
+                        child: InkWell(
+                          onTap: () async {
                             var userData = UserModel(
                               id: id.text,
                               email: email.text.trim(),
@@ -176,20 +202,62 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             await controller.updateUser(userData);
                             // Get.to(() => PersonView());
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            side: BorderSide.none,
-                            shape: const StadiumBorder(),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'Save Profile',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 30.h),
+                            child: Container(
+                                height: 50,
+                                width: 300,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: AppColors.activeIconColor,
+                                ),
+                                child: Obx(() {
+                                  return controller.state.loading.value
+                                      ? CircularProgressIndicator()
+                                      : Center(
+                                          child: Text(
+                                            'Save Profile',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 17),
+                                          ),
+                                        );
+                                })),
                           ),
                         ),
                       ),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   height: 50,
+                      //   child: ElevatedButton(
+                      //     onPressed: () async {
+                      //       var userData = UserModel(
+                      //         id: id.text,
+                      //         email: email.text.trim(),
+                      //         phone: phone.text.trim(),
+                      //         password: pass.text.trim(),
+                      //         userName: name.text.trim(),
+                      //         photoUrl: controller.userProfileImage == ''
+                      //             ? userModel.photoUrl.toString()
+                      //             : controller.userProfileImage,
+                      //       );
+                      //       await controller.updateUser(userData);
+                      //       // Get.to(() => PersonView());
+                      //     },
+                      //     style: ElevatedButton.styleFrom(
+                      //       backgroundColor: Colors.black,
+                      //       side: BorderSide.none,
+                      //       shape: const StadiumBorder(),
+                      //     ),
+                      //     child: const Center(
+                      //       child: Text(
+                      //         'Save Profile',
+                      //         style:
+                      //             TextStyle(color: Colors.white, fontSize: 18),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   );
                 } else if (snapshot.hasError) {

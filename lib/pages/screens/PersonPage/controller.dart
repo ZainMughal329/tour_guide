@@ -181,7 +181,9 @@ class PersonController extends GetxController {
   updateUserData(UserModel user) async {
     await _db.collection('users').doc(user.id).update(
           user.toJson(),
-        );
+        ).then((value) {
+          Get.snackbar('Update', 'Successfully Updated');
+    });
   }
 
   updateUser(UserModel user) async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
@@ -36,8 +37,9 @@ class _CompanyHomeState extends State<CompanyHome>
                 CompanyModel company = snapshot.data as CompanyModel;
                 if (company.status == 'true') {
                   return Scaffold(
+
                     resizeToAvoidBottomInset: false,
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColors.bgColor,
                     body: SafeArea(
                       child: SingleChildScrollView(
                         child: Column(
@@ -51,16 +53,16 @@ class _CompanyHomeState extends State<CompanyHome>
                               child: Row(
                                 children: [
                                   Icon(Icons.menu,
-                                      size: 30, color: Colors.black54),
+                                      size: 30, color: AppColors.iconsColor),
                                   Expanded(
                                     child: Container(),
                                   ),
                                   Container(
-                                    width: 30,
-                                    height: 30,
+                                    width: 40,
+                                    height: 40,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Colors.grey[500],
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: AppColors.iconsColor,
                                       border: Border.all(
                                           color: Colors.black, width: 2.0),
                                     ),
@@ -69,8 +71,8 @@ class _CompanyHomeState extends State<CompanyHome>
                                       child: company.logo.toString() == ''
                                           ? Icon(
                                         Icons.person_outline,
-                                        size: 30,
-                                        color: Colors.white,
+                                        size: 20,
+                                        color: AppColors.bgColor,
                                       )
                                           : Image(
                                         image: NetworkImage(
@@ -93,7 +95,7 @@ class _CompanyHomeState extends State<CompanyHome>
                               padding: EdgeInsets.only(left: 5.w, right: 5.w),
                               child: Center(
                                 child: BigAppText(
-                                    text: company.companyName.toString(),
+                                    text: company.companyName.toString().capitalizeFirst.toString(),
                                     size: 30),
                               ),
                             ),
@@ -108,13 +110,14 @@ class _CompanyHomeState extends State<CompanyHome>
                                   labelPadding:
                                   EdgeInsets.only(right: 20.w, left: 20.w),
                                   indicator: CircleTabIndicator(
-                                      color: Colors.black, radius: 4),
+                                      color: AppColors.iconsColor, radius: 4),
                                   controller: _tabController,
-                                  labelColor: Colors.black,
+                                  labelColor: Colors.white,
                                   unselectedLabelColor: Colors.grey,
                                   tabs: [
                                     Tab(
                                       text: 'Profile',
+
                                     ),
                                     Tab(
                                       text: 'All tour',

@@ -19,16 +19,28 @@ class PersonView extends GetView<PersonController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bgColor,
       drawer: BuildDrawer.buildDrawer(context),
       appBar: AppBar(
-
-        title: const Text('Profile'),
-        backgroundColor: Colors.black,
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.menu,
+            color: Colors.blue,
+          ),
+        ),
+        title: const Text('Profile', ),
+        backgroundColor: AppColors.bgColor,
+        elevation: 0,
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {}, icon: const Icon(Icons.dark_mode_outlined))
+            onPressed: () {},
+            icon: const Icon(
+              Icons.dark_mode_outlined,
+              color: Colors.blue,
+            ),
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -44,14 +56,19 @@ class PersonView extends GetView<PersonController> {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          Obx((){
-                            return Container(
+                          // Obx(()
+                          // {
+                          //   return
+                        Container(
                               height: 70,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 // color: Color(0xff11151c),
-                                color:  controller.state.isDarkMode.value ? Colors.black : Colors.white,
+                                // color: controller.state.isDarkMode.value
+                                //     ? Colors.black
+                                //     : Colors.white,
+                                color: Color(0xff0c3e4f),
                               ),
                               child: ListTile(
                                 onTap: () {
@@ -63,7 +80,7 @@ class PersonView extends GetView<PersonController> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
                                     border: Border.all(
-                                      color: Colors.white,
+                                      color: Colors.blue,
                                       width: 2.0.w,
                                     ),
                                   ),
@@ -71,22 +88,23 @@ class PersonView extends GetView<PersonController> {
                                     borderRadius: BorderRadius.circular(100),
                                     child: controller.image == null
                                         ? userModel.photoUrl == ''
-                                        ? Center(
-                                      child: Icon(
-                                        Icons.person,
-                                        size: 30,
-                                        color: Colors.white,
-                                      ),
-                                    )
-                                        : Image(
-                                      image: NetworkImage(
-                                          userModel.photoUrl),
-                                      fit: BoxFit.cover,
-                                    )
+                                            ? Center(
+                                                child: Icon(
+                                                  Icons.person,
+                                                  size: 30,
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            : Image(
+                                                image: NetworkImage(
+                                                    userModel.photoUrl),
+                                                fit: BoxFit.cover,
+                                              )
                                         : Image.file(
-                                      File(controller.image!.path).absolute,
-                                      fit: BoxFit.cover,
-                                    ),
+                                            File(controller.image!.path)
+                                                .absolute,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                                 title: Text(
@@ -97,11 +115,12 @@ class PersonView extends GetView<PersonController> {
                                     style: TextStyle(color: Colors.white)),
                                 trailing: Icon(
                                   Icons.arrow_forward_ios,
-                                  color: Colors.white,
+                                  color: Colors.blue,
                                 ),
                               ),
-                            );
-                          }),
+                            ),
+                          // }
+                          // ),
                           const SizedBox(
                             height: 10,
                           ),
@@ -109,7 +128,7 @@ class PersonView extends GetView<PersonController> {
                             height: 120,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Color(0xff11151c),
+                              color: Color(0xff0c3e4f),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
@@ -150,11 +169,13 @@ class PersonView extends GetView<PersonController> {
                                       'Dark Mode',
                                       style: TextStyle(color: Colors.white),
                                     ),
-                                    trailing: Obx((){
-                                      return Switch(value: controller.state.isDarkMode.value, onChanged: (value){
-                                        controller.toggleTheme();
-
-                                      });
+                                    trailing: Obx(() {
+                                      return Switch(
+                                          value:
+                                              controller.state.isDarkMode.value,
+                                          onChanged: (value) {
+                                            controller.toggleTheme();
+                                          });
                                     }),
 
                                     // trailing:  Obx(
@@ -177,7 +198,7 @@ class PersonView extends GetView<PersonController> {
                             height: 270,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Color(0xff11151c),
+                              color: Color(0xff0c3e4f),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
@@ -192,7 +213,7 @@ class PersonView extends GetView<PersonController> {
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: Colors.white,
+                                      color: AppColors.iconsColor,
                                     ),
                                   ),
                                 ),
@@ -207,7 +228,7 @@ class PersonView extends GetView<PersonController> {
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: Colors.white,
+                                      color: AppColors.iconsColor,
                                     ),
                                   ),
                                 ),
@@ -222,7 +243,7 @@ class PersonView extends GetView<PersonController> {
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: Colors.white,
+                                      color: AppColors.iconsColor,
                                     ),
                                   ),
                                 ),
@@ -237,7 +258,7 @@ class PersonView extends GetView<PersonController> {
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: Colors.white,
+                                      color: AppColors.iconsColor,
                                     ),
                                   ),
                                 ),
@@ -252,7 +273,7 @@ class PersonView extends GetView<PersonController> {
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: Colors.white,
+                                      color: AppColors.iconsColor,
                                     ),
                                   ),
                                 ),
@@ -274,7 +295,7 @@ class PersonView extends GetView<PersonController> {
                                     snackPosition: SnackPosition.BOTTOM,
                                     colorText: Colors.green,
                                     backgroundColor:
-                                    Colors.green.withOpacity(0.1),
+                                        Colors.green.withOpacity(0.1),
                                   );
                                 }).onError((error, stackTrace) {
                                   Get.snackbar(
@@ -284,12 +305,12 @@ class PersonView extends GetView<PersonController> {
                                     snackPosition: SnackPosition.BOTTOM,
                                     colorText: Colors.green,
                                     backgroundColor:
-                                    Colors.green.withOpacity(0.1),
+                                        Colors.green.withOpacity(0.1),
                                   );
                                 });
                               },
                               child: Padding(
-                                padding:  EdgeInsets.symmetric(vertical: 30.h),
+                                padding: EdgeInsets.symmetric(vertical: 30.h),
                                 child: InkWell(
                                   child: Container(
                                       height: 50,
@@ -298,25 +319,25 @@ class PersonView extends GetView<PersonController> {
                                         borderRadius: BorderRadius.circular(15),
                                         color: AppColors.activeIconColor,
                                       ),
-                                      child: Obx((){
-                                        return controller.state.loading.value ? CircularProgressIndicator() : Center(
-                                          child: Text(
-                                            'Logout',
-                                            style: TextStyle(
-                                                color: Colors.white, fontSize: 17),
-                                          ),
-                                        );
-                                      })
-                                  ),
+                                      child: Obx(() {
+                                        return controller.state.loading.value
+                                            ? CircularProgressIndicator()
+                                            : Center(
+                                                child: Text(
+                                                  'Logout',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 17),
+                                                ),
+                                              );
+                                      })),
                                   onTap: () {
-
                                     controller.signOut();
                                   },
                                 ),
                               ),
                             ),
                           ),
-
                         ],
                       ),
                     );
