@@ -27,18 +27,18 @@ class RoundButton extends StatelessWidget {
         padding: EdgeInsets.all(10.w),
         margin: EdgeInsets.only(bottom: 15.h),
         decoration: BoxDecoration(
-          color: AppColors.activeIconColor,
+          color: color,
           borderRadius: const BorderRadius.all(
             Radius.circular(15),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 2,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey.withOpacity(0.3),
+          //     spreadRadius: 1,
+          //     blurRadius: 2,
+          //     offset: const Offset(0, 2),
+          //   ),
+          // ],
         ),
         child: Center(
           child: loading
