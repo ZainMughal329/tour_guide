@@ -69,7 +69,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(color: Colors.black),
+                                  border: Border.all(color: AppColors.iconsColor),
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),

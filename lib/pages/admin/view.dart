@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/admin/showAllTours.dart';
 import 'package:tours_guide/pages/admin/show_companies.dart';
@@ -16,11 +17,13 @@ class AdminHomePage extends GetView<AdminController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        leading: IconButton(onPressed: (){}, icon: Icon(Icons.menu , color: AppColors.iconsColor,),),
+        backgroundColor: AppColors.bgColor,
         elevation: 0,
         title: Text('Admin Panel' , style: TextStyle(
-          color: Colors.black
+          color: Colors.white
         ),),
         centerTitle: true,
         actions: [
@@ -34,7 +37,7 @@ class AdminHomePage extends GetView<AdminController> {
                 Get.snackbar('Error', 'Something went wrong');
               });
             },
-            icon: Icon(Icons.logout,color: Colors.black,),
+            icon: Icon(Icons.logout,color: AppColors.iconsColor,),
           ),
         ],
       ),
@@ -47,9 +50,9 @@ class AdminHomePage extends GetView<AdminController> {
                 child: TabBar(
                   isScrollable: true,
                   labelPadding: EdgeInsets.only(right: 20.w, left: 20.w),
-                  indicator: CircleTabIndicator(color: Colors.black, radius: 4),
+                  indicator: CircleTabIndicator(color: AppColors.iconsColor, radius: 4),
                   controller: controller.tabController,
-                  labelColor: Colors.black,
+                  labelColor: Colors.white,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
                     Tab(

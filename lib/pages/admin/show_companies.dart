@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/pages/admin/controller.dart';
 
 class ShowCompanies extends GetView<AdminController> {
@@ -31,24 +33,49 @@ class ShowCompanies extends GetView<AdminController> {
                       width: double.infinity,
                       height: 150,
                       decoration: BoxDecoration(
-                        color: Color(0xffB0C3D9FF),
+                        color: AppColors.cardBgColor,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Column(
                         children: [
                           ListTile(
-                            leading: Icon(Icons.person_outline),
+                            leading: Container(
+                              height: 40.h,
+                              width: 40.w,
+                              decoration: BoxDecoration(
+                                color: AppColors.iconsColor,
+                                border: Border.all(
+                                  color: AppColors.iconsColor,
+                                ),
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: snapshot.data!.docs[index]['logo'].toString() == ''
+                                    ? Icon(
+                                  Icons.person_outline,
+                                  size: 30,
+                                  color: Colors.white,
+                                )
+                                    : Image(
+                                  image: NetworkImage(
+                                    snapshot.data!.docs[index]['logo'].toString(),
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                             title: Text(
                               snapshot.data!.docs[index]['CompanyEmail']
-                                  .toString(),
+                                  .toString(),style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
                               snapshot.data!.docs[index]['CompanyName']
-                                  .toString(),
+                                  .toString(),style: TextStyle(color: Colors.white),
                             ),
                             trailing: Text(
                               snapshot.data!.docs[index]['companyPhone']
-                                  .toString(),
+                                  .toString(),style: TextStyle(color: Colors.white),
                             ),
                           ),
                           SizedBox(
@@ -67,7 +94,7 @@ class ShowCompanies extends GetView<AdminController> {
                                       snapshot.data!.docs[index].id
                                           .toString());
                                 },
-                                child: Text('Decline'),
+                                child: Text('Decline' , style: TextStyle(color: Colors.white),),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -75,7 +102,7 @@ class ShowCompanies extends GetView<AdminController> {
                                       snapshot.data!.docs[index].id
                                           .toString());
                                 },
-                                child: Text('Approve'),
+                                child: Text('Approve' , style: TextStyle(color: AppColors.iconsColor),),
                               ),
                             ],
                           )
@@ -92,12 +119,13 @@ class ShowCompanies extends GetView<AdminController> {
                 })
                 : Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Center(
                   child: Text(
-                    'No new companies to approved',
-                    style: TextStyle(fontSize: 30),
+                    'No new companies to approved!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 30 , color: Colors.white),
                   ),
                 ),
               ],

@@ -15,7 +15,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   final _formKey = GlobalKey<FormState>();
 
   Widget _textField(TextEditingController contr, FocusNode focNode,
-      String labelText, String  descrip, TextInputAction action) {
+      String labelText, String descrip, TextInputAction action) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h),
       child: TextFormField(
@@ -26,7 +26,6 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
         validator: (value) {},
         onFieldSubmitted: (value) {},
         decoration: InputDecoration(
-
           hintText: descrip,
           hintStyle: TextStyle(color: Colors.white),
           filled: true,
@@ -53,10 +52,18 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
         flex: 0,
         child: DropdownButton(
           iconEnabledColor: AppColors.iconsColor,
+          dropdownColor: AppColors.cardBgColor,
+          style: TextStyle(color: Colors.white),
           iconSize: 40.0.h,
           hint: controller.state.catValue.value == ""
-              ? Text("Category",style:TextStyle(color: Colors.white ),)
-              : Text(controller.state.catValue.value),
+              ? Text(
+                  "Category",
+                  style: TextStyle(color: Colors.white),
+                )
+              : Text(
+                  controller.state.catValue.value,
+                  style: TextStyle(color: Colors.white),
+                ),
           items: [
             DropdownMenuItem(
               child: Text("Adventure"),
@@ -89,10 +96,18 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
         flex: 0,
         child: DropdownButton(
           iconEnabledColor: AppColors.iconsColor,
+          dropdownColor: AppColors.cardBgColor,
+          style: TextStyle(color: Colors.white),
           iconSize: 40.0.h,
           hint: controller.state.tourPeople.value == ""
-              ? Text("1 to 10" , style: TextStyle(color: Colors.white),)
-              : Text(controller.state.tourPeople.value),
+              ? Text(
+                  "1 to 10",
+                  style: TextStyle(color: Colors.white),
+                )
+              : Text(
+                  controller.state.tourPeople.value,
+                  style: TextStyle(color: Colors.white),
+                ),
           // style: TextStyle(color: Colors.white),
           items: [
             DropdownMenuItem(
@@ -172,9 +187,13 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                         height: 200.h,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: controller.image == null ?  AppColors.cardBgColor : AppColors.bgColor,
+                          color: controller.image == null
+                              ? AppColors.cardBgColor
+                              : AppColors.bgColor,
                           border: Border.all(
-                            color: controller.image == null ? AppColors.iconsColor : AppColors.bgColor,
+                            color: controller.image == null
+                                ? AppColors.iconsColor
+                                : AppColors.bgColor,
                             // width: 3.0,
                           ),
                         ),
@@ -192,8 +211,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                         ? Icon(
                                             Icons.image,
                                             size: 50,
-                                            color:
-                                                AppColors.iconsColor,
+                                            color: AppColors.iconsColor,
                                           )
                                         : Container(
                                             height: 185.h,
@@ -209,7 +227,10 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                     height: 10.h,
                                   ),
                                   controller.image == null
-                                      ? Text("Tap to Upload Image" , style: TextStyle(color: Colors.white),)
+                                      ? Text(
+                                          "Tap to Upload Image",
+                                          style: TextStyle(color: Colors.white),
+                                        )
                                       : Container(),
                                 ],
                               );
@@ -228,21 +249,26 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                       child: Column(
                         children: [
                           _textField(
-                              controller.state.titleController,
-                              controller.state.titleNode,
-                              "Title",
-                              "Enter name for your tour",
-                          TextInputAction.next,),
+                            controller.state.titleController,
+                            controller.state.titleNode,
+                            "Title",
+                            "Enter name for your tour",
+                            TextInputAction.next,
+                          ),
                           _textField(
-                              controller.state.locationController,
-                              controller.state.locationNode,
-                              "Location",
-                              "Enter Location of your tour",TextInputAction.next,),
+                            controller.state.locationController,
+                            controller.state.locationNode,
+                            "Location",
+                            "Enter Location of your tour",
+                            TextInputAction.next,
+                          ),
                           _textField(
-                              controller.state.priceController,
-                              controller.state.priceNode,
-                              "Price",
-                              "Enter Price for your tour in Rs",TextInputAction.next,),
+                            controller.state.priceController,
+                            controller.state.priceNode,
+                            "Price",
+                            "Enter Price for your tour in Rs",
+                            TextInputAction.next,
+                          ),
                         ],
                       ),
                     ),
@@ -277,7 +303,10 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                         children: [
                           Center(
                             child: Text("Choose Category",
-                                style: TextStyle(color: Colors.white , fontWeight: FontWeight.w500, fontSize: 20.sp)),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20.sp)),
                           ),
                           SizedBox(
                             width: 40.w,
@@ -292,8 +321,13 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Center(
-                            child: Text("No of People",
-                                style: TextStyle(color: Colors.white , fontWeight: FontWeight.w500, fontSize: 20.sp),),
+                            child: Text(
+                              "No of People",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20.sp),
+                            ),
                           ),
                           SizedBox(
                             width: 40.w,
@@ -310,7 +344,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 color: AppColors.activeTabElementColor,
                               )
                             : RoundButton(
-                          color: Colors.blue,
+                                color: Colors.blue,
                                 title: "Add Tour",
                                 onPress: () {
                                   if (controller
@@ -359,8 +393,6 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
 
                                       controller.state.catValue.value
                                           .toString(),
-
-
 
                                       controller.state.tourPeople.value
                                           .toString(),
