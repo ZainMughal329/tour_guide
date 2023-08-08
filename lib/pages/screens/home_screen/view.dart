@@ -20,6 +20,8 @@ import 'controller.dart';
 class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   Widget _buildCard(BuildContext context, String title, String loc,
       String price, String des, String imageUrl) {
     return Padding(
@@ -285,19 +287,8 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff081921),
-      // appBar: PreferredSize(
-      //   preferredSize: Size.fromHeight(50.0.h),
-      //   child: Column(
-      //     children: [
-      //       BuildAppBar(
-      //         title: 'Profile',
-      //         icon1: Icons.sort_rounded,
-      //         icon2: Icons.more_vert_rounded,
-      //       ),
-      //
-      //     ],
-      //   ),
-      // ),
+      key: _scaffoldKey,
+
       drawer: BuildDrawer.buildDrawer(context),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -334,10 +325,15 @@ class HomePage extends GetView<HomeController> {
                             Row(
                               children: [
                                 Container(
-                                  child: Icon(
-                                    Icons.menu,
-                                    color: Colors.blue,
-                                    size: 30,
+                                  child: InkWell(
+                                    onTap: () {
+                                      _scaffoldKey.currentState!.openDrawer();
+                                    },
+                                    child: Icon(
+                                      Icons.menu,
+                                      color: Colors.blue,
+                                      size: 30,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(

@@ -30,6 +30,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
           width: 201,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: AppColors.iconsColor),
             image: DecorationImage(
                 image: NetworkImage(imageUrl), fit: BoxFit.cover),
             color: Colors.transparent,

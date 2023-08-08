@@ -222,7 +222,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           ),
                         ),
                         SizedBox(
-                          height: 15,
+                          height: 25.h,
                         ),
                         Padding(
                           padding:  EdgeInsets.only(bottom: 15.h),

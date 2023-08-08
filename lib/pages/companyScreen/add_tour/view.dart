@@ -306,7 +306,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 20.sp)),
+                                    fontSize: 20.sp),),
                           ),
                           SizedBox(
                             width: 40.w,

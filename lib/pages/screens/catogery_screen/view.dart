@@ -25,7 +25,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
   Widget _buildCard(BuildContext context, String title, String loc,
       String price, String des, String imageUrl) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 2.h),
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
         onTap: () {
           Get.to(
@@ -37,147 +37,215 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                 img: imageUrl),
           );
         },
-        child: Container(
-          // height: 300,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            color: Colors.white,
-          ),
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                    border: Border.all(width: 0.9, color: Colors.black)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    imageUrl,
-                    fit: BoxFit.fill,
-                    height: 300.h,
-                    width: double.infinity,
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                left: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          '\$${price}',
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Text(
-                          '/Person',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 45,
-                left: 10,
-                child: Container(
-                  width: 100,
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 10,
-                left: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.grey,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: Row(
-                    children: [
-                      FaIcon(
-                        Icons.location_on_outlined,
+        child: Padding(
+          padding: const EdgeInsets.only(right: 18.0),
+          child: Container(
+            height: 297,
+            width: 201,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                  image: NetworkImage(imageUrl), fit: BoxFit.cover),
+              color: Colors.transparent,
+            ),
+            child: Container(
+              height: 297,
+              width: 201,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(colors: [
+                    Color(0xff061627).withOpacity(0),
+                    Color(0xff082F45),
+                    // Colors.black
+                  ], stops: [
+                    0.35,
+                    1.0
+                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    child: Text(
+                      title,
+                      style: TextStyle(
                         color: Colors.white,
-                        size: 17.sp,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
                       ),
-                      Text(
-                        " " + loc,
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp
-                            // fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                    // color: Colors.black.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: EdgeInsets.all(8),
-                  child: IconButton(
-                    icon: FaIcon(
-                      FontAwesomeIcons.arrowUpRightFromSquare,
                     ),
-                    color: Colors.grey,
-                    onPressed: () {
-                      // Perform arrow button action here
-                    },
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
+                    child: Text(
+                      'Starting at \$' + price.toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        // fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
+        // Container(
+        //   // height: 300,
+        //   width: double.infinity,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(40),
+        //     color: Colors.white,
+        //   ),
+        //   child: Stack(
+        //     children: [
+        //       Container(
+        //         decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(15),
+        //             boxShadow: [
+        //               BoxShadow(
+        //                 color: Colors.grey,
+        //                 spreadRadius: 1,
+        //               ),
+        //             ],
+        //             border: Border.all(width: 0.9, color: Colors.black)),
+        //         child: ClipRRect(
+        //           borderRadius: BorderRadius.circular(15),
+        //           child: Image.network(
+        //             imageUrl,
+        //             fit: BoxFit.fill,
+        //             height: 300.h,
+        //             width: double.infinity,
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         top: 10,
+        //         left: 10,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //             // color: AppColors.warningColor,
+        //             color: Colors.transparent.withOpacity(0.3),
+        //             // color: Colors.black.withOpacity(0.1),
+        //             borderRadius: BorderRadius.circular(30),
+        //           ),
+        //           padding: EdgeInsets.all(8.w),
+        //           child: Center(
+        //             child: Row(
+        //               mainAxisAlignment: MainAxisAlignment.center,
+        //               crossAxisAlignment: CrossAxisAlignment.center,
+        //               children: [
+        //                 Text(
+        //                   '\$${price}',
+        //                   style: TextStyle(
+        //                       fontSize: 17.sp,
+        //                       color: Colors.white,
+        //                       fontWeight: FontWeight.w500),
+        //                 ),
+        //                 Text(
+        //                   '/Person',
+        //                   style: TextStyle(
+        //                     fontSize: 15.sp,
+        //                     color: Colors.white.withOpacity(0.8),
+        //                   ),
+        //                 )
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         top: 10,
+        //         right: 10,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //             color: Colors.black.withOpacity(0.1),
+        //             borderRadius: BorderRadius.circular(10),
+        //           ),
+        //           padding: EdgeInsets.all(2.w),
+        //           child: Icon(
+        //             Icons.favorite,
+        //             color: Colors.red,
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         bottom: 45,
+        //         left: 10,
+        //         child: Container(
+        //           width: 100.w,
+        //
+        //           decoration: BoxDecoration(
+        //               // color: Colors.black.withOpacity(0.1),
+        //               // borderRadius: BorderRadius.circular(10),
+        //               ),
+        //           // width: 150.w,
+        //           alignment: Alignment.topLeft,
+        //           child: Padding(
+        //             padding: EdgeInsets.symmetric(horizontal: 8.0.w),
+        //             child: Text(
+        //               title,
+        //               style: TextStyle(
+        //                 fontSize: 22.sp,
+        //                 color: Colors.white,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         bottom: 17,
+        //         left: 10,
+        //         child: Container(
+        //           decoration: BoxDecoration(
+        //             // color: Colors.black.withOpacity(0.1),
+        //             borderRadius: BorderRadius.circular(10),
+        //           ),
+        //           padding: EdgeInsets.symmetric(horizontal: 8.w),
+        //           child: Row(
+        //             children: [
+        //               FaIcon(
+        //                 Icons.location_on_outlined,
+        //                 color: Colors.white,
+        //                 size: 20.sp,
+        //               ),
+        //               Text(
+        //                 loc,
+        //                 style: TextStyle(color: Colors.white, fontSize: 14.sp
+        //                     // fontWeight: FontWeight.w600,
+        //                     ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //       ),
+        //       Positioned(
+        //         bottom: 15,
+        //         right: 10,
+        //         child: Container(
+        //           height: 50.h,
+        //           width: 50.w,
+        //           decoration: BoxDecoration(
+        //             color: Colors.blue,
+        //             borderRadius: BorderRadius.circular(50),
+        //           ),
+        //           padding: EdgeInsets.all(8),
+        //           child: IconButton(
+        //             icon: FaIcon(
+        //               FontAwesomeIcons.arrowUpRightFromSquare,
+        //             ),
+        //             color: Colors.white,
+        //             onPressed: () {
+        //               // Perform arrow button action here
+        //             },
+        //           ),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }
@@ -188,21 +256,27 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
         ? controller.setRatingTourRef(catogery)
         : controller.setTourRef(catogery);
     return Scaffold(
+
         appBar: AppBar(
-          backgroundColor: AppColors.activeIconColor,
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.iconsColor,
+            ),
+          ),
+          elevation: 0,
+          backgroundColor: AppColors.bgColor,
           title: Text(
             catogery,
             style: TextStyle(fontSize: 20.sp),
           ),
           centerTitle: true,
-          leading: InkWell(
-            onTap: () {
-              Get.back();
-            },
-            child: Icon(Icons.arrow_back),
-          ),
+
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.bgColor,
         drawer: BuildDrawer.buildDrawer(context),
         body: SafeArea(
             child: Container(
@@ -220,40 +294,87 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                   return Center(child: CircularProgressIndicator());
                 }
                 print(snapshot.data!.docs.length.toString());
-                return snapshot.data!.docs.length != 0
-                    ? ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.all(10.h),
-                            child: Column(
-                              children: [
-                                _buildCard(
+                var len = snapshot.data!.docs.length;
+
+                print('Length is' + len.toString());
+                List<Widget> cardRows = [];
+                for (int i = 0; i < snapshot.data!.docs.length; i += 2) {
+                  if (i + 1 < snapshot.data!.docs.length) {
+                    cardRows.add(Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 330.h,
+                              child: _buildCard(
                                   context,
-                                  snapshot.data!.docs[index]['title']
-                                      .toString(),
-                                  snapshot.data!.docs[index]['location']
-                                      .toString(),
-                                  snapshot.data!.docs[index]['price']
-                                      .toString(),
-                                  snapshot.data!.docs[index]['tourDescription']
-                                      .toString(),
-                                  snapshot.data!.docs[index]['tourImage']
-                                      .toString(),
-                                ),
-                              ],
+                                  snapshot.data!.docs[i]['title'],
+                                  snapshot.data!.docs[i]['location'],
+                                  snapshot.data!.docs[i]['price'],
+                                  snapshot.data!.docs[i]['tourDescription'],
+                                  snapshot.data!.docs[i]['tourImage']),
                             ),
-                          );
-                        })
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 330.h,
+                              child: _buildCard(
+                                  context,
+                                  snapshot.data!.docs[i + 1]['title'],
+                                  snapshot.data!.docs[i + 1]['location'],
+                                  snapshot.data!.docs[i + 1]['price'],
+                                  snapshot.data!.docs[i + 1]
+                                      ['tourDescription'],
+                                  snapshot.data!.docs[i + 1]['tourImage']),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ));
+                  } else {
+                    cardRows.add(Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 330.h,
+                              child: _buildCard(
+                                  context,
+                                  snapshot.data!.docs[i]['title'],
+                                  snapshot.data!.docs[i]['location'],
+                                  snapshot.data!.docs[i]['price'],
+                                  snapshot.data!.docs[i]['tourDescription'],
+                                  snapshot.data!.docs[i]['tourImage']),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ));
+                  }
+                }
+                return snapshot.data!.docs.length != 0
+                    ? ListView(
+                        children: cardRows,
+                      )
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Center(
                             child: Center(
                               child: Text(
-                                'Currently,We have no tours in\nthis Catogery',
-                                style: TextStyle(fontSize: 30),
+
+                                'Currently,We have no tours in\nthis Category',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 20 , color: Colors.white,letterSpacing: 2),
                               ),
                             ),
                           ),

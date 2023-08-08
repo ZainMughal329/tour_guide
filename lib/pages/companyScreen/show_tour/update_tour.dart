@@ -10,6 +10,7 @@ import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 
+import '../../../ReUsable/Components/round_button.dart';
 import 'controller.dart';
 
 class UpdateTourData extends GetView<CompanyShowTourController> {
@@ -22,18 +23,27 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
   final _formKey = GlobalKey<FormState>();
 
   Widget _textField(TextEditingController contr, FocusNode focNode,
-      String labelText, String descrip) {
+      String labelText, String descrip, TextInputAction action) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 5.h),
       child: TextFormField(
         controller: contr,
         focusNode: focNode,
+        textInputAction: action,
+        style: TextStyle(color: Colors.white),
         validator: (value) {},
         onFieldSubmitted: (value) {},
         decoration: InputDecoration(
           hintText: descrip,
+          hintStyle: TextStyle(color: Colors.white),
+          filled: true,
+          fillColor: AppColors.cardBgColor,
           labelText: labelText,
+          labelStyle: TextStyle(color: Colors.white),
           border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColors.iconsColor,
+            ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.r),
               bottomRight: Radius.circular(40.r),
@@ -49,11 +59,13 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
       () => Expanded(
         flex: 0,
         child: DropdownButton(
-          iconEnabledColor: AppColors.SuccessColor,
+          iconEnabledColor: AppColors.iconsColor,
+          dropdownColor: AppColors.cardBgColor,
+          style: TextStyle(color: Colors.white),
           iconSize: 40.0.h,
           hint: controller.state.catValue.value == ""
-              ? Text(cat)
-              : Text(controller.state.catValue.value),
+              ? Text(cat , style: TextStyle(color: Colors.white),)
+              : Text(controller.state.catValue.value, style: TextStyle(color: Colors.white),),
           items: [
             DropdownMenuItem(
               child: Text("Adventure"),
@@ -85,11 +97,13 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
       () => Expanded(
         flex: 0,
         child: DropdownButton(
-          iconEnabledColor: AppColors.SuccessColor,
+          iconEnabledColor: AppColors.iconsColor,
+          dropdownColor: AppColors.cardBgColor,
+          style: TextStyle(color: Colors.white),
           iconSize: 40.0.h,
           hint: controller.state.tourPeople.value == ""
-              ? Text(people)
-              : Text(controller.state.tourPeople.value),
+              ? Text(people, style: TextStyle(color: Colors.white),)
+              : Text(controller.state.tourPeople.value, style: TextStyle(color: Colors.white),),
           items: [
             DropdownMenuItem(
               child: Text("1"),
@@ -144,10 +158,21 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.iconsColor,
+          ),
+        ),
         centerTitle: true,
         title: Text('Company Info'),
-        backgroundColor: AppColors.activeIconColor,
+        backgroundColor: AppColors.bgColor,
+        elevation: 0,
       ),
+      backgroundColor: AppColors.bgColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -195,17 +220,18 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                         controller.showImage(context, id);
                                       },
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(100),
+                                        // borderRadius: BorderRadius.circular(100),
                                         child: controller.image == null
-                                            ? tourModel.tourImage.toString() == ''
+                                            ? tourModel.tourImage.toString() ==
+                                                    ''
                                                 ? Icon(
                                                     Icons.person,
                                                     size: 50,
                                                   )
                                                 : Image(
-                                                    image: NetworkImage(tourModel
-                                                        .tourImage
-                                                        .toString()),
+                                                    image: NetworkImage(
+                                                        tourModel.tourImage
+                                                            .toString()),
                                                     fit: BoxFit.cover,
                                                   )
                                             : Image.file(
@@ -220,8 +246,11 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                     height: 10.h,
                                   ),
                                   controller.image == null
-                                      ? Text("Tap to Update Image")
-                                      : Text(''),
+                                      ? Text(
+                                          "Tap to Update Image",
+                                          style: TextStyle(color: Colors.white),
+                                        )
+                                      : Container(),
                                 ],
                               );
                               //   Stack(
@@ -292,34 +321,49 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                   child: Column(
                                     children: [
                                       _textField(
-                                          title,
-                                          controller.state.titleNode,
-                                          "Title",
-                                          "Enter name for your tour"),
+                                        title,
+                                        controller.state.titleNode,
+                                        "Title",
+                                        "Enter name for your tour",
+                                        TextInputAction.next,
+                                      ),
+                                      SizedBox(height: 5.0,),
                                       _textField(
-                                          location,
-                                          controller.state.locationNode,
-                                          "Location",
-                                          "Enter Location of your tour"),
+                                        location,
+                                        controller.state.locationNode,
+                                        "Location",
+                                        "Enter Location of your tour",
+                                        TextInputAction.next,
+                                      ),
+                                      SizedBox(height: 5.0,),
                                       _textField(
-                                          price,
-                                          controller.state.priceNode,
-                                          "Price",
-                                          "Enter Price for your tour in Rs"),
+                                        price,
+                                        controller.state.priceNode,
+                                        "Price",
+                                        "Enter Price for your tour in Rs",
+                                        TextInputAction.next,
+                                      ),
                                     ],
                                   ),
                                 ),
+                                SizedBox(height: 5.0,),
                                 Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10.h),
                                   child: TextField(
+                                    style:  TextStyle(color: Colors.white),
                                     controller: des,
                                     focusNode: controller.state.descrepNode,
                                     onEditingComplete: () {},
                                     onSubmitted: (value) {},
                                     decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: AppColors.cardBgColor,
                                       labelText: "Tour Description",
+                                      labelStyle: TextStyle(color: Colors.white),
+
                                       hintText:
                                           "Enter long description about you tour",
+                                      hintStyle:  TextStyle(color: Colors.white),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.r),
@@ -336,10 +380,10 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                     children: [
                                       Center(
                                         child: Text("Choose Category",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displaySmall!
-                                                .copyWith(fontSize: 20.sp)),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 20.sp),),
                                       ),
                                       SizedBox(
                                         width: 40.w,
@@ -356,10 +400,10 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                     children: [
                                       Center(
                                         child: Text("No of People",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .displaySmall!
-                                                .copyWith(fontSize: 20.sp)),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 20.sp),),
                                       ),
                                       SizedBox(
                                         width: 40.w,
@@ -370,40 +414,68 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 32.0.h),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  var tourData = TourModel(
-                                    id: id,
-                                    title: title.text.toString(),
-                                    tourCategory:
-                                        controller.state.catValue.value,
-                                    tourDescription: des.text.toString(),
-                                    tourImage: tourModel.tourImage.toString(),
-                                    location: location.text.toString(),
-                                    people: controller.state.tourPeople.value,
-                                    price: price.text.toString(),
-                                  );
+                            SizedBox(height: 10.0.h),
+                            Obx(() {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(vertical: 25.h),
+                                child: controller.state.loading.value == true
+                                    ? CircularProgressIndicator(
+                                  color: AppColors.activeTabElementColor,
+                                )
+                                    : RoundButton(
+                                  color: Colors.blue,
+                                  title: "Save",
+                                  onPress: () async {
+                                    var tourData = TourModel(
+                                      id: id,
+                                      title: title.text.toString(),
+                                      tourCategory:
+                                      controller.state.catValue.value,
+                                      tourDescription: des.text.toString(),
+                                      tourImage: tourModel.tourImage.toString(),
+                                      location: location.text.toString(),
+                                      people: controller.state.tourPeople.value,
+                                      price: price.text.toString(),
+                                    );
 
-                                  await controller.updateTour(tourData, id);
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                  side: BorderSide.none,
-                                  shape: const StadiumBorder(),
+                                    await controller.updateTour(tourData, id);
+                                  },
                                 ),
-                                child: const Center(
-                                  child: Text(
-                                    'Save Profile',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                  ),
-                                ),
-                              ),
-                            ),
+                              );
+                            }),
+                            // SizedBox(
+                            //   width: double.infinity,
+                            //   height: 50,
+                            //   child: ElevatedButton(
+                            //     onPressed: () async {
+                            //       var tourData = TourModel(
+                            //         id: id,
+                            //         title: title.text.toString(),
+                            //         tourCategory:
+                            //             controller.state.catValue.value,
+                            //         tourDescription: des.text.toString(),
+                            //         tourImage: tourModel.tourImage.toString(),
+                            //         location: location.text.toString(),
+                            //         people: controller.state.tourPeople.value,
+                            //         price: price.text.toString(),
+                            //       );
+                            //
+                            //       await controller.updateTour(tourData, id);
+                            //     },
+                            //     style: ElevatedButton.styleFrom(
+                            //       backgroundColor: Colors.black,
+                            //       side: BorderSide.none,
+                            //       shape: const StadiumBorder(),
+                            //     ),
+                            //     child: const Center(
+                            //       child: Text(
+                            //         'Save Profile',
+                            //         style: TextStyle(
+                            //             color: Colors.white, fontSize: 18),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       );

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/home_screen/index.dart';
 
@@ -14,6 +15,7 @@ class BuildDrawer {
     var controller = Get.put(PersonController());
     return Drawer(
       width: 300.w,
+      backgroundColor: AppColors.bgColor,
       child: FutureBuilder(
         future: controller.getUsersData(),
         builder: (context, snapshot) {
@@ -23,15 +25,15 @@ class BuildDrawer {
               return ListView(
                 children: [
                   UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(color: Colors.blue),
-                    accountName: Text(userModel.userName),
+                    decoration: BoxDecoration(color: AppColors.activeIconColor),
+                    accountName: Text(userModel.userName.capitalize.toString()),
                     accountEmail: Text(userModel.email),
                     currentAccountPicture: Container(
                       height: 120,
                       width: 120,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: Colors.black),
+                        border: Border.all(color: AppColors.bgColor),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
@@ -40,6 +42,7 @@ class BuildDrawer {
                                 ? Icon(
                                     Icons.person,
                                     size: 50,
+                          color: AppColors.iconsColor,
                                   )
                                 : Image(
                                     image: NetworkImage(userModel.photoUrl),
@@ -53,32 +56,34 @@ class BuildDrawer {
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Icons.home),
-                    title: Text('Home'),
+                    // style: ListTileStyle.list,
+                    // tileColor: AppColors.bgColor,
+                    leading: Icon(Icons.home , color: AppColors.iconsColor,),
+                    title: Text('Home',style: TextStyle(color: Colors.white),),
                     onTap: () {
                       Navigator.pop(context);
                       Get.offAndToNamed(AppRoutes.Application);
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('My Profile'),
+                    leading: Icon(Icons.person , color: AppColors.iconsColor,),
+                    title: Text('My Profile',style: TextStyle(color: Colors.white),),
                     onTap: () {
                       // Handle profile tap
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.work),
-                    title: Text('My Network'),
+                    leading: Icon(Icons.work,color: AppColors.iconsColor,),
+                    title: Text('My Network',style: TextStyle(color: Colors.white),),
                     onTap: () {
                       // Handle network tap
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.message),
-                    title: Text('Messaging'),
+                    leading: Icon(Icons.message,color: AppColors.iconsColor,),
+                    title: Text('Messaging',style: TextStyle(color: Colors.white),),
                     onTap: () {
                       // Handle messaging tap
                       Navigator.pop(context);
@@ -86,16 +91,16 @@ class BuildDrawer {
                   ),
                   Divider(),
                   ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings & Privacy'),
+                    leading: Icon(Icons.settings,color: AppColors.iconsColor,),
+                    title: Text('Settings & Privacy',style: TextStyle(color: Colors.white),),
                     onTap: () {
                       // Handle settings tap
                       Navigator.pop(context);
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.help),
-                    title: Text('Help & Support'),
+                    leading: Icon(Icons.help,color: AppColors.iconsColor,),
+                    title: Text('Help & Support',style: TextStyle(color: Colors.white),),
                     onTap: () {
                       // Handle help tap
                       Navigator.pop(context);
