@@ -53,6 +53,7 @@ dependencies:
   cloud_functions:
   location:
   font_awesome_flutter: ^10.4.0
+  animations:
 
 dev_dependencies:
   flutter_test:

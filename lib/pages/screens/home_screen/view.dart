@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -53,20 +54,25 @@ class HomePage extends GetView<HomeController> {
               width: 201,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(colors: [
-                    Color(0xff061627).withOpacity(0),
-                    Color(0xff082F45),
-                    // Colors.black
-                  ], stops: [
-                    0.35,
-                    1.0
-                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                  gradient: LinearGradient(
+                      colors: [
+                        Color(0xff061627).withOpacity(0),
+                        Color(0xff082F45),
+                        // Colors.black
+                      ],
+                      stops: [
+                        0.35,
+                        1.0
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Text(
                       title,
                       style: TextStyle(
@@ -520,19 +526,29 @@ class HomePage extends GetView<HomeController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          _buildCard(
-                                            context,
-                                            snapshot.data![index].title
-                                                .toString(),
-                                            snapshot.data![index].location
-                                                .toString(),
-                                            snapshot.data![index].price
-                                                .toString(),
-                                            snapshot
-                                                .data![index].tourDescription
-                                                .toString(),
-                                            snapshot.data![index].tourImage
-                                                .toString(),
+                                          PageTransitionSwitcher(
+                                            duration: Duration(seconds: 1),
+                                            transitionBuilder: (child, animation, secondaryAnimation) =>
+                                                FadeThroughTransition(
+                                                  fillColor: Colors.transparent,
+                                                  animation: animation,
+                                                  secondaryAnimation: secondaryAnimation,
+                                                  child: child,
+                                                ),
+                                            child: _buildCard(
+                                              context,
+                                              snapshot.data![index].title
+                                                  .toString(),
+                                              snapshot.data![index].location
+                                                  .toString(),
+                                              snapshot.data![index].price
+                                                  .toString(),
+                                              snapshot
+                                                  .data![index].tourDescription
+                                                  .toString(),
+                                              snapshot.data![index].tourImage
+                                                  .toString(),
+                                            ),
                                           ),
                                         ],
                                       );

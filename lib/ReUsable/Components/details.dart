@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 
 import 'app_bar.dart';
 
@@ -54,13 +55,13 @@ class _DetailScreenState extends State<DetailScreen> {
                     height: 50.h,
                     width: 50.w,
                     decoration: BoxDecoration(
-                      color: Colors.transparent.withOpacity(0.4),
+                      color: AppColors.bgColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Center(
                       child: Icon(
                         Icons.arrow_back_ios_new,
-                        color: Colors.white,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
@@ -73,13 +74,13 @@ class _DetailScreenState extends State<DetailScreen> {
                     height: 50.h,
                     width: 50.w,
                     decoration: BoxDecoration(
-                      color: Colors.transparent.withOpacity(0.2),
+                      color: AppColors.bgColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Center(
                       child: Icon(
                         Icons.favorite_outline,
-                        color: Colors.white,
+                        color: AppColors.iconsColor,
                       ),
                     ),
                   ),
@@ -118,7 +119,7 @@ class PostBottomBar extends StatelessWidget {
       padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
       height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.cardBgColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),
@@ -142,6 +143,7 @@ class PostBottomBar extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 23,
+                            color: Colors.white,
                           ),
                         ),
                         SizedBox(
@@ -151,13 +153,14 @@ class PostBottomBar extends StatelessWidget {
                           children: [
                             FaIcon(
                               Icons.location_on_outlined,
-                              color: Colors.deepOrange,
+                              color: AppColors.iconsColor,
                               size: 17.sp,
                             ),
                             Text(
                               location,
                               style:
-                                  TextStyle(color: Colors.grey, fontSize: 14.sp
+                                  TextStyle(                             color: Colors.white,
+                                      fontSize: 14.sp
                                       // fontWeight: FontWeight.w600,
                                       ),
                             ),
@@ -173,7 +176,7 @@ class PostBottomBar extends StatelessWidget {
                             Text(
                               '\$',
                               style: TextStyle(
-                                  color: Colors.deepOrange,
+                                  color: Colors.blue,
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -182,6 +185,7 @@ class PostBottomBar extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
+                                color: Colors.white,
                                 // fontWeight: FontWeight.w600
                               ),
                             ),
@@ -192,7 +196,7 @@ class PostBottomBar extends StatelessWidget {
                         ),
                         Text(
                           '/per person',
-                          style: TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.blue),
                         ),
                       ],
                     )
@@ -205,7 +209,7 @@ class PostBottomBar extends StatelessWidget {
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                   style: TextStyle(
                     fontSize: 15,
-                    color: Colors.black54,
+                    color: Colors.white,
                   ),
                   textAlign: TextAlign.justify,
                 ),
@@ -219,7 +223,7 @@ class PostBottomBar extends StatelessWidget {
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
+                          color: AppColors.bgColor,
                           boxShadow: [
                             BoxShadow(color: Colors.black54, blurRadius: 4),
                           ],
@@ -227,6 +231,7 @@ class PostBottomBar extends StatelessWidget {
                         child: Icon(
                           Icons.bookmark_border_outlined,
                           size: 30,
+                          color: AppColors.iconsColor,
                         ),
                       ),
                       Container(
@@ -234,7 +239,7 @@ class PostBottomBar extends StatelessWidget {
                             vertical: 15.h, horizontal: 25.w),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.redAccent,
+                          color: Colors.blue,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black54,
