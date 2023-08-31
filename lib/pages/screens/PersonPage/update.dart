@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -198,6 +199,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               photoUrl: controller.userProfileImage == ''
                                   ? userModel.photoUrl.toString()
                                   : controller.userProfileImage,
+                              location: '',
+                              fcmToken: '',
+                              addTime: Timestamp.now(),
                             );
                             await controller.updateUser(userData);
                             // Get.to(() => PersonView());

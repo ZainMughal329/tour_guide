@@ -12,7 +12,7 @@ import 'package:tours_guide/pages/companyScreen/add_tour/controller.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/tourDetails.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/update_tour.dart';
 
-import '../../../ReUsable/Components/details.dart';
+import '../../screens/home_screen/details.dart';
 import 'controller.dart';
 
 class CompanyShowTourScreen extends GetView<CompanyShowTourController> {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,7 +70,8 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(color: AppColors.iconsColor),
+                                  border:
+                                      Border.all(color: AppColors.iconsColor),
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
@@ -167,7 +169,6 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                   obsecure: false,
                                   icon: Icons.person),
 
-
                               SizedBox(height: 5.0.h),
                               UpdateInputTextField(
                                   contr: des,
@@ -181,7 +182,6 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                   keyboardType: TextInputType.text,
                                   obsecure: false,
                                   icon: Icons.person),
-
 
                               SizedBox(height: 5.0.h),
                               UpdateInputTextField(
@@ -203,37 +203,43 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                 child: InkWell(
                                   onTap: () async {
                                     var userData = CompanyModel(
-                                        id: auth.currentUser!.uid.toString(),
-                                        status: companyModel.status,
-                                        companyEmail: email.text.trim(),
-                                        companyName: name.text.trim(),
-                                        companyPhone: phone.text.trim(),
-                                        companyDescription: des.text.trim(),
-                                        logo: companyModel.logo.toString(),
-                                        pass: pass.text.trim());
+                                      id: auth.currentUser!.uid.toString(),
+                                      status: companyModel.status,
+                                      companyEmail: email.text.trim(),
+                                      companyName: name.text.trim(),
+                                      companyPhone: phone.text.trim(),
+                                      companyDescription: des.text.trim(),
+                                      logo: companyModel.logo.toString(),
+                                      pass: pass.text.trim(),
+                                      location: '',
+                                      fcmToken: '',
+                                      addTime: Timestamp.now(),
+                                    );
                                     await controller.updateUser(userData);
                                     Get.offAllNamed(AppRoutes.SIGN_IN);
                                   },
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 30.h),
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 30.h),
                                     child: Container(
                                         height: 50,
                                         width: 300,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
                                           color: AppColors.activeIconColor,
                                         ),
                                         child: Obx(() {
                                           return controller.state.loading.value
                                               ? CircularProgressIndicator()
                                               : Center(
-                                            child: Text(
-                                              'Save Profile',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 17),
-                                            ),
-                                          );
+                                                  child: Text(
+                                                    'Save Profile',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 17),
+                                                  ),
+                                                );
                                         })),
                                   ),
                                 ),

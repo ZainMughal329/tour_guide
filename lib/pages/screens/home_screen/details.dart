@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/models/companyModel.dart';
+import 'package:tours_guide/pages/screens/home_screen/controller.dart';
 
-import 'app_bar.dart';
+import '../../../ReUsable/Components/app_bar.dart';
 
-class DetailScreen extends StatefulWidget {
+class DetailScreen extends GetView<HomeController> {
   final String img;
   final String title;
   final String price;
@@ -22,11 +24,7 @@ class DetailScreen extends StatefulWidget {
       required this.img})
       : super(key: key);
 
-  @override
-  State<DetailScreen> createState() => _DetailScreenState();
-}
 
-class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,67 +32,63 @@ class _DetailScreenState extends State<DetailScreen> {
       width: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(widget.img),
+          image: NetworkImage(img),
           fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: Padding(
-            padding: EdgeInsets.only(top: 30.h, left: 20.w, right: 20.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Container(
-                    height: 50.h,
-                    width: 50.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.bgColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.blue,
+          backgroundColor: Colors.transparent,
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100.0),
+            child: Padding(
+              padding: EdgeInsets.only(top: 30.h, left: 20.w, right: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: 50.w,
+                      decoration: BoxDecoration(
+                        color: AppColors.bgColor,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.blue,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Get.back();
-                  },
-                  child: Container(
-                    height: 50.h,
-                    width: 50.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.bgColor,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.favorite_outline,
-                        color: AppColors.iconsColor,
+                  InkWell(
+                    onTap: () {
+                      // Get.back();
+                    },
+                    child: Container(
+                      height: 50.h,
+                      width: 50.w,
+                      decoration: BoxDecoration(
+                        color: AppColors.bgColor,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.favorite_outline,
+                          color: AppColors.iconsColor,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        bottomNavigationBar: PostBottomBar(
-            title: widget.title,
-            price: widget.price,
-            location: widget.location,
-            des: widget.des),
-      ),
+          bottomNavigationBar: PostBottomBar(
+              title: title, price: price, location: location, des: des)),
     );
   }
 }
@@ -159,8 +153,7 @@ class PostBottomBar extends StatelessWidget {
                             Text(
                               location,
                               style:
-                                  TextStyle(                             color: Colors.white,
-                                      fontSize: 14.sp
+                                  TextStyle(color: Colors.white, fontSize: 14.sp
                                       // fontWeight: FontWeight.w600,
                                       ),
                             ),
@@ -219,19 +212,47 @@ class PostBottomBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.bgColor,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black54, blurRadius: 4),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.bookmark_border_outlined,
-                          size: 30,
-                          color: AppColors.iconsColor,
+                      // Container(
+                      //   padding: EdgeInsets.all(10),
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(10),
+                      //     color: AppColors.bgColor,
+                      //     boxShadow: [
+                      //       BoxShadow(color: Colors.black54, blurRadius: 4),
+                      //     ],
+                      //   ),
+                      //   child: Icon(
+                      //     Icons.bookmark_border_outlined,
+                      //     size: 30,
+                      //     color: AppColors.iconsColor,
+                      //   ),
+                      // ),
+                      InkWell(
+                        onTap: () {
+                          // if(item.id != null) {
+                          //   controller.goChat(item);
+                          // }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.h, horizontal: 25.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.bgColor,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            'Chat Now',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                       Container(

@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/pages/screens/home_screen/state.dart';
 
+import '../../../ReUsable/models/msg_model.dart';
 import '../../../ReUsable/models/userModel.dart';
 // import 'package:geocoding/geocoding.dart';
 
@@ -68,4 +70,6 @@ class HomeController extends GetxController {
       '2 persons',
     ];
   }
+
+
 }

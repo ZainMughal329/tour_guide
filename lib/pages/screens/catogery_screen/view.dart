@@ -12,7 +12,7 @@ import 'package:tours_guide/ReUsable/models/userModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
-import '../../../ReUsable/Components/details.dart';
+import '../home_screen/details.dart';
 import '../../../ReUsable/Components/drawer.dart';
 import 'controller.dart';
 

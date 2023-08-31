@@ -9,13 +9,21 @@ class UserModel {
   final String? password;
   final String photoUrl;
 
+   final String location;
+   final String fcmToken;
+   final Timestamp addTime;
+
   UserModel(
       {this.id='',
       required this.userName,
       required this.phone,
       required this.email,
       this.password,
-      required this.photoUrl});
+        required this.location,
+      required this.photoUrl,
+      required this.fcmToken,
+        required this.addTime,
+      });
 
   toJson() {
     return {
@@ -25,6 +33,9 @@ class UserModel {
       'email': email,
       'password': password,
       'photoUrl': photoUrl,
+      'location' : location,
+      'fcmToken' : fcmToken,
+      'addTime' : addTime,
     };
   }
 
@@ -38,6 +49,9 @@ class UserModel {
       password: json["password"],
       email: json["email"],
       photoUrl: json["photoUrl"],
+      location: json["location"],
+      fcmToken: json["fcmToken"],
+      addTime: json["addTime"],
     );
   }
 }

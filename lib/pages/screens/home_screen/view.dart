@@ -14,7 +14,7 @@ import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
-import '../../../ReUsable/Components/details.dart';
+import 'details.dart';
 import '../../../ReUsable/Components/drawer.dart';
 import 'controller.dart';
 

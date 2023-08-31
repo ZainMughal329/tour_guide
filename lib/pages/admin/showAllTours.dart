@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/pages/admin/controller.dart';
 
-import '../../ReUsable/Components/details.dart';
+import '../screens/home_screen/details.dart';
 
 class ShowAllTours extends GetView<AdminController> {
   const ShowAllTours({Key? key}) : super(key: key);

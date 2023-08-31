@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -103,6 +104,9 @@ class PickProfileImage extends GetView<SignInController> {
                     phone: '+92**********',
                     userName: controller.userController.text.trim().toString(),
                     photoUrl: controller.state.userProfileImage,
+                    location: '',
+                    fcmToken: '',
+                    addTime: Timestamp.now(),
                   );
                   controller.storeUser(user, context);
                 },

@@ -16,17 +16,25 @@ class CompanyModel {
 
   final String pass;
 
+  final String location;
+  final String fcmToken;
+  final Timestamp addTime;
+
   // final String status;
 
-  CompanyModel(
-      {this.id = '',
-      required this.companyEmail,
-      required this.companyName,
-      required this.companyPhone,
-      required this.companyDescription,
-      required this.logo,
-      required this.pass,
-      this.status});
+  CompanyModel({
+    this.id = '',
+    required this.companyEmail,
+    required this.companyName,
+    required this.companyPhone,
+    required this.companyDescription,
+    required this.logo,
+    required this.pass,
+    this.status,
+    required this.location,
+    required this.addTime,
+    required this.fcmToken,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -37,7 +45,10 @@ class CompanyModel {
       "companyDescription": companyDescription,
       "password": pass,
       "id": id,
-      "status": "false"
+      "status": "false",
+      "location": location,
+      "fcmToken": fcmToken,
+      "addTime": addTime,
     };
   }
 
@@ -53,6 +64,9 @@ class CompanyModel {
       companyDescription: data["companyDescription"],
       status: data["status"],
       pass: data["password"],
+      location: data["location"],
+      fcmToken: data["fcmToken"],
+      addTime: data["addTime"],
     );
   }
 }

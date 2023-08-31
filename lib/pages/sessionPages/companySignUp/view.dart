@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -268,28 +269,32 @@ class CompanySignUpPage extends GetView<CompanySignUpController> {
                                     onPressed: () {
                                       if (_formKey.currentState!.validate()) {
                                         final CompanyUser = CompanyModel(
-                                            companyEmail: controller
-                                                .state.emailController.text
-                                                .trim()
-                                                .toString(),
-                                            companyName: controller
-                                                .state.nameController.text
-                                                .trim()
-                                                .toString(),
-                                            status: 'false',
-                                            companyPhone: controller.state
-                                                .phoneNumberController.text
-                                                .trim()
-                                                .toString(),
-                                            companyDescription: controller
-                                                .state.descController.text
-                                                .trim()
-                                                .toString(),
-                                            pass: controller
-                                                .state.passController.text
-                                                .trim()
-                                                .toString(),
-                                            logo: '');
+                                          companyEmail: controller
+                                              .state.emailController.text
+                                              .trim()
+                                              .toString(),
+                                          companyName: controller
+                                              .state.nameController.text
+                                              .trim()
+                                              .toString(),
+                                          status: 'false',
+                                          companyPhone: controller
+                                              .state.phoneNumberController.text
+                                              .trim()
+                                              .toString(),
+                                          companyDescription: controller
+                                              .state.descController.text
+                                              .trim()
+                                              .toString(),
+                                          pass: controller
+                                              .state.passController.text
+                                              .trim()
+                                              .toString(),
+                                          logo: '',
+                                          location: '',
+                                          fcmToken: '',
+                                          addTime: Timestamp.now(),
+                                        );
                                         controller.storeUser(
                                             CompanyUser, context);
                                       }
