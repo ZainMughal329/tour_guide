@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/home_screen/controller.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
@@ -255,25 +256,31 @@ class PostBottomBar extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 15.h, horizontal: 25.w),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black54,
-                              blurRadius: 4,
-                            ),
-                          ],
-                        ),
-                        child: Text(
-                          'Book Now',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
+                      InkWell(
+                        onTap: (){
+                          Get.toNamed(AppRoutes.Booking_Screen);
+
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15.h, horizontal: 25.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.blue,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            'Book Now',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                     ],

@@ -8,6 +8,8 @@ import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/index.dart';
+import 'package:tours_guide/pages/screens/booking_screen/bindings.dart';
+import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
 
 // import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
@@ -115,6 +117,14 @@ class AppPages {
       name: AppRoutes.Company_ShowTour,
       page: () => CompanyShowTourScreen(),
       binding: CompanyShowTourBinding(),
+    ),
+
+
+
+    GetPage(
+      name: AppRoutes.Booking_Screen,
+      page: () => BookingView(),
+      binding: BookingBindings(),
     ),
 
     //

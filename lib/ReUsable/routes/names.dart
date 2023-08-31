@@ -20,8 +20,10 @@ class AppRoutes {
   static const Tourist_Home = '/tourist_home';
   static const Add_Tour = '/add_tour';
 
+
   static const Application = '/application';
   static const catScreen = '/catogery_screen';
+  static const Booking_Screen = '/booking_screen';
   //contact
   static const Contact = '/contact';
   // message
