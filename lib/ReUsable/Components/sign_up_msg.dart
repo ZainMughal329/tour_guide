@@ -47,7 +47,7 @@ class SignUpMsg extends StatelessWidget {
                     print("Error while signing out is : " + error.toString());
                   });
 
-                  Get.offAndToNamed(AppRoutes.SIGN_IN);
+                  Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
                 },
                 child: Text('Back to login page'),
               ),

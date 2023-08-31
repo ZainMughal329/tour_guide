@@ -31,7 +31,7 @@ class AdminHomePage extends GetView<AdminController> {
             onPressed: () {
               final auth = FirebaseAuth.instance;
               auth.signOut().then((value) {
-                Get.offAndToNamed(AppRoutes.SIGN_IN);
+                Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
                 Get.snackbar('Success', 'Logout success');
               }).onError((error, stackTrace) {
                 Get.snackbar('Error', 'Something went wrong');

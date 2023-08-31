@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const double defaultPadding = 16.0;
   static const Color titleTextColor = Color(0xFF27374D);
   static const Color bgColor = Color(0xff081921);
   static const Color subtitleTextColor = Color(0xFF526D82);
@@ -23,4 +24,9 @@ class AppColors {
 
   static const Color SuccessColor = Color(0xFF43A047);
   static const Color textButtonColor = Colors.blue;
+
+  static const Color kPrimaryColor = Colors.cyan;
+
+  static Color kPrimaryLightColor = Colors.cyanAccent.withOpacity(0.3);
+
 }

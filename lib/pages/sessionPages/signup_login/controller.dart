@@ -2,53 +2,122 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tours_guide/ReUsable/Components/sign_up_msg.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
-import 'package:tours_guide/pages/sessionPages/sigin/state.dart';
+import 'package:tours_guide/ReUsable/models/companyModel.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 
 import '../../../ReUsable/models/userModel.dart';
-import '../../../ReUsable/routes/names.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'index.dart';
 
+class SignupLoginController extends GetxController with GetTickerProviderStateMixin {
+  final state = SignupLoginState();
 
-GoogleSignIn _googleSignIn = GoogleSignIn();
+  SignupLoginController();
 
-class SignInController extends GetxController {
-  late final Rx<User?> firebaseUser;
-  FirebaseAuth auth = FirebaseAuth.instance;
-  final _db = FirebaseFirestore.instance.collection('users');
-  final _dbCompnay = FirebaseFirestore.instance.collection('company');
-  var verificationId = "".obs;
+  late TabController tabController;
 
-  final state = SignInState();
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    tabController = TabController(length: 3, vsync: this);
 
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final userController = TextEditingController();
-  final emailFocus = FocusNode();
-  final userFocus = FocusNode();
-  final passwordFocus = FocusNode();
+  }
+  // {
 
-  final picker = ImagePicker();
+  // functions for company signUp
 
-  firebase_storage.FirebaseStorage storage =
-      firebase_storage.FirebaseStorage.instance;
+  final _dbCompany = FirebaseFirestore.instance.collection('company');
+  final auth = FirebaseAuth.instance;
 
   XFile? _image;
 
   XFile? get image => _image;
 
+  final picker = ImagePicker();
 
-  Future pickedImageFromGallery(
-      BuildContext context) async {
+  void setKeyStatus(bool status) {
+    state.keyboardStatus.value = status;
+  }
+
+//   this is to register with email and password
+  // after registeration , store the user in database
+  void registerCompanyWithEmailAndPassword(
+      CompanyModel Compuser, String email, String password) async {
+    state.loading.value = true;
+    try {
+      await auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        toastInfo(msg: "Information Received");
+        toastInfo(msg: "You'll receive confirmation \nmail shortly");
+        Get.to(() => SignUpMsg());
+
+        state.loading.value = false;
+        StorePrefrences sp = StorePrefrences();
+        sp.setIsFirstOpen(true);
+        Compuser.id = auth.currentUser!.uid.toString();
+        // Write code to move to screen that show unApproved Status
+        createCompany(Compuser);
+        state.companyEmailController.clear();
+        state.companyPassController.clear();
+        state.companyNameController.clear();
+        state.companyDescController.clear();
+        state.companyPhoneNumberController.clear();
+      }).onError((error, stackTrace) {
+        state.loading.value = false;
+        toastInfo(msg: error.toString());
+      });
+    } on FirebaseAuthException catch (e) {
+      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      toastInfo(msg: ex.toString());
+      state.loading.value = false;
+    } catch (_) {
+      state.loading.value = false;
+    }
+  }
+
+// this function is to store user in Firebase FireStore
+  createCompany(CompanyModel user) async {
+    state.loading.value = true;
+    try {
+      await _dbCompany
+          .doc(auth.currentUser!.uid.toString())
+          .set(user.toJson())
+          .then((value) {
+        auth.signOut();
+        Get.offAllNamed(AppRoutes.SIGN_IN);
+        state.loading.value = false;
+      }).onError((error, stackTrace) {
+        state.loading.value = false;
+        toastInfo(msg: error.toString());
+      });
+    } catch (e) {
+      toastInfo(msg: e.toString());
+    }
+  }
+
+//  for registering and storing Company USer
+  void storeCompany(CompanyModel compUser, BuildContext context) {
+    registerCompanyWithEmailAndPassword(
+        compUser, compUser.companyEmail, compUser.pass);
+  }
+
+  firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
+
+  // picking up image from gallery
+
+  Future pickedImageFromGallery(BuildContext context) async {
     final pickedImage =
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
@@ -57,11 +126,10 @@ class SignInController extends GetxController {
     }
   }
 
-  //
-  Future pickedImageFromCamera(
-      BuildContext context) async {
+  // picking up image from camera
+  Future pickedImageFromCamera(BuildContext context) async {
     final pickedImage =
-    await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
 
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
@@ -69,6 +137,8 @@ class SignInController extends GetxController {
       update();
     }
   }
+
+  // showing dialog box
 
   void showImage(context) {
     showDialog(
@@ -78,7 +148,6 @@ class SignInController extends GetxController {
           content: Container(
             height: 130,
             child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
               children: [
                 ListTile(
                   onTap: () {
@@ -104,65 +173,26 @@ class SignInController extends GetxController {
     );
   }
 
+  // uploading image to storage and storing its url in companyLogo
   Future uploadImage(BuildContext context) async {
-    // state.loading.value = true;
+    // setLoading(true);
     firebase_storage.Reference storageRef = firebase_storage
         .FirebaseStorage.instance
-        .ref('/profileImage' + DateTime.now().toString());
+        .ref('/companyLogo' + DateTime.now().toString());
     firebase_storage.UploadTask uploadTask =
-    storageRef.putFile(File(image!.path).absolute);
+        storageRef.putFile(File(image!.path).absolute);
 
     await Future.value(uploadTask);
 
-    state.userProfileImage = await storageRef.getDownloadURL();
-    print('path is : ' + state.userProfileImage);
-    return state.userProfileImage;
-
-
-    // _db.collection('users').doc(auth.currentUser!.uid.toString()).update({
-    //   'photoUrl': userProfileImage.toString(),
-    // }).then((value) {
-    //   // setLoading(false);
-    //   Get.snackbar('Congrats', 'Update successfull');
-    //   _image = null;
-    // }).onError((error, stackTrace) {
-    //   // setLoading(false);
-    //   Get.snackbar('Error is', error.toString());
-    // });
+    state.companyLogo = await storageRef.getDownloadURL();
+    return state.companyLogo;
   }
 
-  void dispose() {
-    super.dispose();
-    // TODO: implement dispose
-    emailController.dispose();
-    passwordController.dispose();
-    emailFocus.dispose();
-    userFocus.dispose();
-    userController.dispose();
-    passwordFocus.dispose();
-  }
+// }
 
-  @override
-  void onReady() {
-    firebaseUser = Rx<User?>(auth.currentUser);
+  final _dbUser = FirebaseFirestore.instance.collection('users');
 
-    firebaseUser.bindStream(auth.userChanges());
-    ever(firebaseUser, _initialScreen);
-  }
-
-  _initialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() => AppRoutes.SIGN_IN);
-    } else {
-      Get.offAll(() => AppRoutes.Application);
-    }
-  }
-
-  // final state = SignInState();
-
-  SignInController();
-
-  final db = FirebaseFirestore.instance;
+  var verificationId = "".obs;
 
   void registerUserWithEmailAndPassword(
       UserModel userinfo, String email, password) async {
@@ -188,15 +218,14 @@ class SignInController extends GetxController {
     }
   }
 
-
   void loginUserWithEmailAndPassword(String email, password) async {
     // state.loading.value = true;
     try {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
-            print('inside then');
-        final companyData = await _dbCompnay
+        print('inside then');
+        final companyData = await _dbCompany
             .where('id', isEqualTo: auth.currentUser!.uid.toString())
             .get();
         if (companyData.docs.isNotEmpty) {
@@ -208,39 +237,11 @@ class SignInController extends GetxController {
           StorePrefrences().setIsFirstOpen(true);
           Get.offAndToNamed(AppRoutes.Application);
         }
-        //
-        // if (auth.currentUser!.uid == _dbCompnay.doc(auth.currentUser!.uid).id) {
-        //
-        //   _dbCompnay
-        //       .doc(auth.currentUser!.uid)
-        //       .get()
-        //       .then((DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
-        //
-        //     if (documentSnapshot.exists) {
-        //       var status = documentSnapshot['status'];
-        //       print(status.toString());
-        //       handelNavigation(status);
-        //     }
-        //   }).onError((error, stackTrace) {
-        //     toastInfo(msg: error.toString());
-        //
-        //   });
-        // }
-        //
-        //
-        //
-        // else if (auth.currentUser!.uid == db.doc(auth.currentUser!.uid).id){
-        //   Get.offAndToNamed(AppRoutes.Application);
-        //   toastInfo(msg: 'Successfully log in');
-        //   StorePrefrences sp = StorePrefrences();
-        //   sp.setIsFirstOpen(true);
-        //
-        // }
 
         state.loading.value = false;
-        emailController.clear();
-        passwordController.clear();
-        userController.clear();
+        state.loginEmailController.clear();
+        state.loginPasswordController.clear();
+        // userController.clear();
       }).onError((error, stackTrace) {
         final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
         toastInfo(msg: ex.toString());
@@ -269,14 +270,17 @@ class SignInController extends GetxController {
   }
 
   Future<UserModel> getUserData(String email) async {
-    final snapshot = await _db.where('email', isEqualTo: email).get();
+    final snapshot = await _dbUser.where('email', isEqualTo: email).get();
     final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
     return userData;
   }
 
   createUser(UserModel user) async {
     state.loading.value = true;
-    await _db.doc(auth.currentUser!.uid).set(user.toJson()).whenComplete(() {
+    await _dbUser
+        .doc(auth.currentUser!.uid)
+        .set(user.toJson())
+        .whenComplete(() {
       toastInfo(msg: 'Successfully created account');
 
       state.loading.value = false;
@@ -294,8 +298,15 @@ class SignInController extends GetxController {
   }
 
   updateUserData(UserModel user) async {
-    await db.collection('users').doc(user.id).update(user.toJson());
+    await _dbUser.doc(user.id).update(user.toJson());
   }
 
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    state.loginPasswordController.dispose();
+    state.loginEmailController.dispose();
+    tabController.dispose();
+  }
 }

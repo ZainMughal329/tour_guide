@@ -19,7 +19,7 @@ class WelcomeController extends GetxController {
       if (auth.currentUser != null) {
         Get.offAllNamed(AppRoutes.Application);
       } else {
-        Get.offAndToNamed(AppRoutes.SIGN_IN);
+        Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
       }
     } catch (e) {
       SnackBar.showSnackBar('Error', e.toString());

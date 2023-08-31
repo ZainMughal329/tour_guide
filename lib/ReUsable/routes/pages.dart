@@ -14,6 +14,7 @@ import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
 
 // import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
 import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
+import 'package:tours_guide/pages/sessionPages/signup_login/index.dart';
 
 import '../../pages/application/index.dart';
 import '../../pages/sessionPages/sigin/index.dart';
@@ -41,6 +42,7 @@ class AppPages {
       // ],
     ),
 
+
     GetPage(
       name: AppRoutes.Welcome,
       page: () => const WelcomePage(),
@@ -56,6 +58,14 @@ class AppPages {
     //   binding: catogeryScreenBinding(),
     // ),
 
+    GetPage(
+      name: AppRoutes.LOGIN_SIGN_UP,
+      page: () => SignupLoginView(),
+      binding: SignupLoginBinding(),
+      // middlewares: [
+      //   RouteWelcomeMiddleware(priority: 1),
+      // ],
+    ),
     GetPage(
       name: AppRoutes.SIGN_IN,
       page: () => SignInPage(),

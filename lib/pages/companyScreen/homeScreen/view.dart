@@ -189,7 +189,7 @@ class _CompanyHomeState extends State<CompanyHome>
                                   await controller.auth.signOut();
                                   StorePrefrences sp = StorePrefrences();
                                   sp.setIsFirstOpen(false);
-                                  Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                  Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
                                 },
                                 child: Text('Back to login page'),
                               ),

@@ -3,6 +3,8 @@ class AppRoutes {
   static const SplashScreen = '/splashScreen';
   static const SIGN_IN = '/sign_in';
   static const SIGN_UP = '/sign_up';
+  static const LOGIN_SIGN_UP = '/login_signup';
+
   static const Forgot_Password = '/forgot_pass';
   static const NotFound = '/not_found';
 

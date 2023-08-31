@@ -151,7 +151,7 @@ class PersonController extends GetxController {
 
         Get.snackbar('Sign Out ', 'Successfully');
         setLoading(false);
-        Get.offAllNamed(AppRoutes.SIGN_IN);
+        Get.toNamed(AppRoutes.LOGIN_SIGN_UP);
       }).onError((error, stackTrace) {
         setLoading(false);
         Get.snackbar('Error', error.toString());
