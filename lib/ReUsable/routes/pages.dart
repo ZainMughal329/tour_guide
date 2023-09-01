@@ -133,7 +133,7 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.Booking_Screen,
-      page: () => BookingView(),
+      page: () => BookingView(tourId: '',),
       binding: BookingBindings(),
     ),
 

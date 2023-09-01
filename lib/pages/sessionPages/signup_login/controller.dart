@@ -283,6 +283,7 @@ class SignupLoginController extends GetxController with GetTickerProviderStateMi
         .whenComplete(() {
       toastInfo(msg: 'Successfully created account');
 
+
       state.loading.value = false;
       StorePrefrences sp = StorePrefrences();
       sp.setIsFirstOpen(true);

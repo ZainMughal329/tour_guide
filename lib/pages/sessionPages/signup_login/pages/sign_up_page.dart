@@ -64,52 +64,50 @@ class SignUpPage extends GetView<SignupLoginController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            _buildForm(),
-            const SizedBox(height: 10),
-            Hero(
-              tag: "signUp_btn",
-              child: GestureDetector(
-                onTap: () {
-                  var user = UserModel(
-                    email: controller.state.signUpEmailController.text
-                        .trim()
-                        .toString(),
-                    password: controller.state.signUpPasswordController.text
-                        .trim()
-                        .toString(),
-                    phone: '+92**********',
-                    userName: controller.state.signUpUserController.text
-                        .trim()
-                        .toString(),
-                    photoUrl: '',
-                    location: '',
-                    fcmToken: '',
-                    addTime: Timestamp.now(),
-                  );
-                  controller.storeUser(user, context);
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: AppColors.kPrimaryColor,
-                    borderRadius: BorderRadius.circular(29),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "SignUp".toUpperCase(),
-                      style: TextStyle(color: Colors.white),
-                    ),
+      child: Column(
+        children: [
+          _buildForm(),
+          const SizedBox(height: 10),
+          Hero(
+            tag: "signUp_btn",
+            child: GestureDetector(
+              onTap: () {
+                var user = UserModel(
+                  email: controller.state.signUpEmailController.text
+                      .trim()
+                      .toString(),
+                  password: controller.state.signUpPasswordController.text
+                      .trim()
+                      .toString(),
+                  phone: '+92**********',
+                  userName: controller.state.signUpUserController.text
+                      .trim()
+                      .toString(),
+                  photoUrl: '',
+                  location: '',
+                  fcmToken: '',
+                  addTime: Timestamp.now(),
+                );
+                controller.storeUser(user, context);
+              },
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: AppColors.kPrimaryColor,
+                  borderRadius: BorderRadius.circular(29),
+                ),
+                child: Center(
+                  child: Text(
+                    "SignUp".toUpperCase(),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: AppColors.defaultPadding),
-          ],
-        ),
+          ),
+          const SizedBox(height: AppColors.defaultPadding),
+        ],
       ),
     );
   }

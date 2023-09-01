@@ -24,7 +24,7 @@ class HomePage extends GetView<HomeController> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Widget _buildCard(BuildContext context, String title, String loc,
-      String price, String des, String imageUrl) {
+      String price, String des, String imageUrl,String id) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -35,7 +35,9 @@ class HomePage extends GetView<HomeController> {
                 price: price,
                 location: loc,
                 des: des,
-                img: imageUrl),
+                img: imageUrl,
+              id: id,
+            ),
           );
         },
         child: Padding(
@@ -548,6 +550,9 @@ class HomePage extends GetView<HomeController> {
                                                   .toString(),
                                               snapshot.data![index].tourImage
                                                   .toString(),
+                                              snapshot.data![index].id
+                                                  .toString(),
+
                                             ),
                                           ),
                                         ],

@@ -14,68 +14,71 @@ Widget LoginWidget(CountryCode code, Function changeCountry,TextEditingControlle
 
 
         Container(
-          height: 55,
+          height: 65,
           width: double.infinity,
           decoration: BoxDecoration(
             color: AppColors.kPrimaryLightColor,
             borderRadius: BorderRadius.circular(29),
 
           ),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  child: GestureDetector(
-                    onTap: () => changeCountry(),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(
-                          child: Container(
-                            child: code.flagImage(),
+          child: Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 5),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    child: GestureDetector(
+                      onTap: () => changeCountry(),
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 5,
                           ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        TextWidget(
-                          text: code.dialCode.toString(),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          color: Colors.black.withOpacity(0.4),
-                        )
-                      ],
+                          Expanded(
+                            child: Container(
+                              child: code.flagImage(),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          TextWidget(
+                            text: code.dialCode.toString(),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_down_outlined,
+                            color: Colors.black.withOpacity(0.4),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                height: 45,
-                width: 1,
-                color: Colors.black.withOpacity(0.1),
-              ),
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: TextField(
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.phone,
-                    controller: phone,
-                    decoration: InputDecoration(
-                      // hintStyle: TextStyle(
-                      //     fontWeight: FontWeight.normal, fontSize: 12),
-                      border: InputBorder.none,
-                      hintText: 'Enter number',
+                Container(
+                  height: 45,
+                  width: 1,
+                  color: Colors.black.withOpacity(0.1),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: TextField(
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.phone,
+                      controller: phone,
+                      decoration: InputDecoration(
+                        // hintStyle: TextStyle(
+                        //     fontWeight: FontWeight.normal, fontSize: 12),
+                        border: InputBorder.none,
+                        hintText: 'Enter number',
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],

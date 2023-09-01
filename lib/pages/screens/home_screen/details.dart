@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
+import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/home_screen/controller.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
@@ -15,6 +16,7 @@ class DetailScreen extends GetView<HomeController> {
   final String price;
   final String location;
   final String des;
+  final String id;
 
   DetailScreen(
       {Key? key,
@@ -22,7 +24,9 @@ class DetailScreen extends GetView<HomeController> {
       required this.price,
       required this.location,
       required this.des,
-      required this.img})
+      required this.img,
+      required this.id,
+      })
       : super(key: key);
 
 
@@ -89,7 +93,7 @@ class DetailScreen extends GetView<HomeController> {
             ),
           ),
           bottomNavigationBar: PostBottomBar(
-              title: title, price: price, location: location, des: des)),
+              title: title, price: price, location: location, des: des , id: id,)),
     );
   }
 }
@@ -99,6 +103,7 @@ class PostBottomBar extends StatelessWidget {
   final String price;
   final String location;
   final String des;
+  final String id;
 
   const PostBottomBar({
     Key? key,
@@ -106,6 +111,7 @@ class PostBottomBar extends StatelessWidget {
     required this.price,
     required this.location,
     required this.des,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -258,7 +264,14 @@ class PostBottomBar extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: (){
-                          Get.toNamed(AppRoutes.Booking_Screen);
+                          Get.to(()=> BookingView(tourId: id));
+
+
+
+                          // Get.toNamed(AppRoutes.Booking_Screen);
+                          // print(id.toString());
+
+
 
                         },
                         child: Container(

@@ -51,9 +51,9 @@ class CompanySignUp extends GetView<SignupLoginController> {
             ),
           ),
           Obx(
-            () => LoginWidget(
+                () => LoginWidget(
               controller.state.code.value,
-              () async {
+                  () async {
                 final code = await controller.state.countryPicker
                     .showPicker(context: context);
                 // Null check

@@ -23,7 +23,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
   catogeryScreenController controller = Get.put(catogeryScreenController());
 
   Widget _buildCard(BuildContext context, String title, String loc,
-      String price, String des, String imageUrl) {
+      String price, String des, String imageUrl, String id) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -34,7 +34,9 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                 price: price,
                 location: loc,
                 des: des,
-                img: imageUrl),
+                img: imageUrl,
+            id: id,
+            ),
           );
         },
         child: Padding(
@@ -313,7 +315,10 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                   snapshot.data!.docs[i]['location'],
                                   snapshot.data!.docs[i]['price'],
                                   snapshot.data!.docs[i]['tourDescription'],
-                                  snapshot.data!.docs[i]['tourImage']),
+                                  snapshot.data!.docs[i]['tourImage'],
+                                snapshot.data!.docs[i]['id'],
+
+                              ),
                             ),
                           ),
                         ),
@@ -329,7 +334,10 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                   snapshot.data!.docs[i + 1]['price'],
                                   snapshot.data!.docs[i + 1]
                                       ['tourDescription'],
-                                  snapshot.data!.docs[i + 1]['tourImage']),
+                                  snapshot.data!.docs[i + 1]['tourImage'],
+                                snapshot.data!.docs[i + 1]['id'],
+
+                              ),
                             ),
                           ),
                         ),
@@ -349,7 +357,10 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                   snapshot.data!.docs[i]['location'],
                                   snapshot.data!.docs[i]['price'],
                                   snapshot.data!.docs[i]['tourDescription'],
-                                  snapshot.data!.docs[i]['tourImage']),
+                                  snapshot.data!.docs[i]['tourImage'],
+                                snapshot.data!.docs[i]['id'],
+
+                              ),
                             ),
                           ),
                         ),
