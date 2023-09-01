@@ -8,6 +8,7 @@ import 'package:tours_guide/pages/sessionPages/sigin/controller.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/controller.dart';
 
 import '../../../../ReUsable/Components/input_fields.dart';
+import '../../../../ReUsable/Components/login_widget.dart';
 import '../../../../ReUsable/models/companyModel.dart';
 import '../../../../ReUsable/routes/names.dart';
 
@@ -16,7 +17,7 @@ class CompanySignUp extends GetView<SignupLoginController> {
 
   final formKey = GlobalKey<FormState>();
 
-  Widget _buildForm() {
+  Widget _buildForm(BuildContext context) {
     return Form(
       // key: formKey,
       child: Column(
@@ -49,20 +50,35 @@ class CompanySignUp extends GetView<SignupLoginController> {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 8.0, bottom: 4),
-            child: TextFieldContainer(
-              child: InputTextField(
-                textInputAction: TextInputAction.next,
-                obsecure: false,
-                keyboardType: TextInputType.phone,
-                icon: Icons.phone,
-                contr: controller.state.companyPhoneNumberController,
-                descrip: 'Enter company phoneNo.',
-                // focNode: controller.state.loginEmailFocus,
-              ),
+          Obx(
+            () => LoginWidget(
+              controller.state.code.value,
+              () async {
+                final code = await controller.state.countryPicker
+                    .showPicker(context: context);
+                // Null check
+                if (code != null) {
+                  controller.state.code.value = code;
+                };
+
+              },
+              controller.state.companyPhoneNumberController,
             ),
           ),
+          // Padding(
+          //   padding: EdgeInsets.only(top: 8.0, bottom: 4),
+          //   child: TextFieldContainer(
+          //     child: InputTextField(
+          //       textInputAction: TextInputAction.next,
+          //       obsecure: false,
+          //       keyboardType: TextInputType.phone,
+          //       icon: Icons.phone,
+          //       contr: controller.state.companyPhoneNumberController,
+          //       descrip: 'Enter company phoneNo.',
+          //       // focNode: controller.state.loginEmailFocus,
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.only(top: 8.0, bottom: 4),
             child: TextFieldContainer(
@@ -102,7 +118,7 @@ class CompanySignUp extends GetView<SignupLoginController> {
       child: Container(
         child: Column(
           children: [
-            _buildForm(),
+            _buildForm(context),
             const SizedBox(height: AppColors.defaultPadding),
             Hero(
               tag: "company_signUp_btn",
@@ -117,7 +133,7 @@ class CompanySignUp extends GetView<SignupLoginController> {
                         .trim()
                         .toString(),
                     status: 'false',
-                    companyPhone: controller
+                    companyPhone: controller.state.code.value.dialCode + controller
                         .state.companyPhoneNumberController.text
                         .trim()
                         .toString(),

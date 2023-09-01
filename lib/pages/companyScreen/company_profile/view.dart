@@ -231,7 +231,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               onTap: () {
                                 final auth = FirebaseAuth.instance;
                                 auth.signOut().then((value) {
-                                  Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                  Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
                                   Get.snackbar(
                                     'Congrats',
                                     'Successfully logOut ',

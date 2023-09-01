@@ -85,6 +85,9 @@ class CompanyAddTourController extends GetxController {
       String tourImage) async {
     state.loading.value = true;
     String timeStamp = DateTime.now().microsecondsSinceEpoch.toString();
+    final companyDoc = await _dbCompany.doc(auth.currentUser!.uid).get();
+    final companyPhone = companyDoc.data()!['companyPhone'];
+    print('Data is: ' + companyPhone.toString());
     try {
       await _dbCompany
           .doc(auth.currentUser!.uid.toString())
@@ -92,29 +95,31 @@ class CompanyAddTourController extends GetxController {
           .doc(timeStamp)
           .set(
             TourModel(
-                    id: timeStamp,
-                    title: title,
-                    tourCategory: tourCategory,
-                    tourDescription: tourDescription,
-                    tourImage: tourImage,
-                    location: location,
-                    people: people,
-                    price: price)
-                .toJson(),
+              id: timeStamp,
+              title: title,
+              tourCategory: tourCategory,
+              tourDescription: tourDescription,
+              tourImage: tourImage,
+              location: location,
+              people: people,
+              price: price,
+              companyPhone: companyPhone,
+            ).toJson(),
           )
           .then((value) async {
         await allTours
             .doc(timeStamp)
             .set(TourModel(
-                    id: timeStamp,
-                    title: title,
-                    tourCategory: tourCategory,
-                    tourDescription: tourDescription,
-                    tourImage: tourImage,
-                    location: location,
-                    people: people,
-                    price: price)
-                .toJson())
+              id: timeStamp,
+              title: title,
+              tourCategory: tourCategory,
+              tourDescription: tourDescription,
+              tourImage: tourImage,
+              location: location,
+              people: people,
+              price: price,
+              companyPhone: companyPhone,
+            ).toJson())
             .then((value) {
           toastInfo(msg: "Successfully Added Tour");
           // toastInfo(msg: "Updating ...");

@@ -1,3 +1,4 @@
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,11 @@ class SignupLoginState {
   final keyboardStatus = false.obs;
 
   var companyLogo = '';
+
+  final countryPicker = FlCountryCodePicker();
+
+  Rx<CountryCode> code =
+      CountryCode(name: 'Pakistan', code: 'PK', dialCode: '+92').obs;
 
   // controllers for login
   final loginEmailController = TextEditingController();

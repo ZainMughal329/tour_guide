@@ -17,10 +17,8 @@ import '../../../ReUsable/routes/names.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 
-GoogleSignIn _googleSignIn = GoogleSignIn();
 
 class SignInController extends GetxController {
-  late final Rx<User?> firebaseUser;
   FirebaseAuth auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('users');
   final _dbCompnay = FirebaseFirestore.instance.collection('company');
@@ -142,21 +140,7 @@ class SignInController extends GetxController {
     passwordFocus.dispose();
   }
 
-  @override
-  void onReady() {
-    firebaseUser = Rx<User?>(auth.currentUser);
 
-    firebaseUser.bindStream(auth.userChanges());
-    ever(firebaseUser, _initialScreen);
-  }
-
-  _initialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() => AppRoutes.SIGN_IN);
-    } else {
-      Get.offAll(() => AppRoutes.Application);
-    }
-  }
 
   // final state = SignInState();
 

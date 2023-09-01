@@ -17,6 +17,8 @@ class TourModel {
 
   final String tourImage;
 
+  final String? companyPhone;
+
   TourModel({
     required this.id,
     required this.title,
@@ -27,6 +29,7 @@ class TourModel {
     // required this.tourRating,
     required this.people,
     required this.price,
+    this.companyPhone,
   });
 
   Map<String, dynamic> toJson() {
@@ -36,10 +39,11 @@ class TourModel {
       "title": title,
       "location": location,
       // "tourRating": tourRating,
-      'id' : id,
+      'id': id,
       "tourImage": tourImage,
       "price": price,
       "people": people,
+      "companyPhone": companyPhone,
     };
   }
 
@@ -55,6 +59,7 @@ class TourModel {
       location: data["location"],
       people: data["people"],
       price: data["price"],
+      companyPhone: data["companyPhone"],
     );
   }
 }

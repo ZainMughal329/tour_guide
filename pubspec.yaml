@@ -54,6 +54,7 @@ dependencies:
   location:
   font_awesome_flutter: ^10.4.0
   animations:
+  fl_country_code_picker:
 
 dev_dependencies:
   flutter_test:
