@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/pages/screens/home_screen/state.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../ReUsable/models/msg_model.dart';
 import '../../../ReUsable/models/userModel.dart';
@@ -72,4 +77,23 @@ class HomeController extends GetxController {
   }
 
 
+  openwhatsapp(BuildContext context , String phone) async{
+    final Uri whatsapp =Uri.parse(phone);
+    final Uri whatsappURl_android = Uri.parse("whatsapp://send?phone="+whatsapp.toString()+"&text=hello");
+    // var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+
+      // android , web
+      if( await canLaunchUrl(whatsappURl_android)){
+        await launchUrl(whatsappURl_android);
+      }
+
+
+
+
+    }
+// openWhatsApp(BuildContext context , String phone) async{
+  //   final Uri phoneNumber = Uri.parse(phone);
+  //   final Uri whatsApp = Uri.parse('https://wa.me/1XXXXXXXXXX');
+  //
+  // }
 }

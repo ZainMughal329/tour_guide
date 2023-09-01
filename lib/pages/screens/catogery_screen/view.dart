@@ -23,7 +23,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
   catogeryScreenController controller = Get.put(catogeryScreenController());
 
   Widget _buildCard(BuildContext context, String title, String loc,
-      String price, String des, String imageUrl, String id) {
+      String price, String des, String imageUrl, String id,String phone) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -36,6 +36,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                 des: des,
                 img: imageUrl,
             id: id,
+              phone: phone,
             ),
           );
         },
@@ -317,6 +318,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                   snapshot.data!.docs[i]['tourDescription'],
                                   snapshot.data!.docs[i]['tourImage'],
                                 snapshot.data!.docs[i]['id'],
+                                  snapshot.data!.docs[i]['companyPhone'],
 
                               ),
                             ),
@@ -336,6 +338,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                       ['tourDescription'],
                                   snapshot.data!.docs[i + 1]['tourImage'],
                                 snapshot.data!.docs[i + 1]['id'],
+                                  snapshot.data!.docs[i+1]['companyPhone']
 
                               ),
                             ),
@@ -359,6 +362,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                   snapshot.data!.docs[i]['tourDescription'],
                                   snapshot.data!.docs[i]['tourImage'],
                                 snapshot.data!.docs[i]['id'],
+                                  snapshot.data!.docs[i]['companyPhone']
 
                               ),
                             ),

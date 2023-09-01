@@ -274,7 +274,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                     auth.signOut().then(
                                       (value) {
                                         Get.snackbar('Successful', 'Log Out');
-                                        Get.offAndToNamed(AppRoutes.SIGN_IN);
+                                        Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
                                       },
                                     ).onError((error, stackTrace) {
                                       Get.snackbar('Error', 'Something goes wrong');

@@ -16,13 +16,7 @@ class TopImage extends StatelessWidget {
             const Spacer(),
             Expanded(
               flex: 10,
-              child: Container(
-                margin: EdgeInsets.only(top: 50),
-                height: 300,
-                width: double.infinity,
-                color: Colors.white,
-                child: Image.asset("assets/icons/travel.jpg" , fit: BoxFit.fill,),
-              ),
+              child: Image.asset("assets/icons/travel.jpg" , fit: BoxFit.fill,),
             ),
             const Spacer(),
           ],

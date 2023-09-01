@@ -48,7 +48,7 @@ class SignUpPage extends GetView<SignupLoginController> {
               child: InputTextField(
                 obsecure: true,
                 textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.emailAddress,
+                keyboardType: TextInputType.text,
                 icon: Icons.lock_open,
                 contr: controller.state.signUpPasswordController,
                 descrip: 'Enter your password',
@@ -88,7 +88,14 @@ class SignUpPage extends GetView<SignupLoginController> {
                   fcmToken: '',
                   addTime: Timestamp.now(),
                 );
-                controller.storeUser(user, context);
+                controller.storeUser(
+                  user,
+                  context,
+                  controller.state.signUpEmailController.text.trim().toString(),
+                  controller.state.signUpPasswordController.text
+                      .trim()
+                      .toString(),
+                );
               },
               child: Container(
                 width: double.infinity,

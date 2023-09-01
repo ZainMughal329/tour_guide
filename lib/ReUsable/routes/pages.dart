@@ -66,11 +66,11 @@ class AppPages {
       //   RouteWelcomeMiddleware(priority: 1),
       // ],
     ),
-    GetPage(
-      name: AppRoutes.SIGN_IN,
-      page: () => SignInPage(),
-      binding: SignInBinding(),
-    ),
+    // GetPage(
+    //   name: AppRoutes.SIGN_IN,
+    //   page: () => SignInPage(),
+    //   binding: SignInBinding(),
+    // ),
     //
     //
     //
@@ -79,16 +79,16 @@ class AppPages {
     //   page: () => ForgotPasswordView(),
     //   binding: ForgotPassBinding(),
     // ),
-    GetPage(
-      name: AppRoutes.SIGN_UP,
-      page: () => SignUpView(),
-    ),
-
-    GetPage(
-      name: AppRoutes.Company_SignUp,
-      page: () => CompanySignUpPage(),
-      binding: CompanySignUpBinding(),
-    ),
+    // GetPage(
+    //   name: AppRoutes.SIGN_UP,
+    //   page: () => SignUpView(),
+    // ),
+    //
+    // GetPage(
+    //   name: AppRoutes.Company_SignUp,
+    //   page: () => CompanySignUpPage(),
+    //   binding: CompanySignUpBinding(),
+    // ),
 
     GetPage(
       name: AppRoutes.Company_Home,

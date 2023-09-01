@@ -93,7 +93,7 @@ class SignupLoginController extends GetxController with GetTickerProviderStateMi
           .set(user.toJson())
           .then((value) {
         auth.signOut();
-        Get.offAllNamed(AppRoutes.SIGN_IN);
+        Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
         state.loading.value = false;
       }).onError((error, stackTrace) {
         state.loading.value = false;
@@ -294,8 +294,8 @@ class SignupLoginController extends GetxController with GetTickerProviderStateMi
     });
   }
 
-  void storeUser(UserModel user, BuildContext context) async {
-    registerUserWithEmailAndPassword(user, user.email, user.password);
+  void storeUser(UserModel user, BuildContext context,String email , String pass) async {
+    registerUserWithEmailAndPassword(user, email, pass);
   }
 
   updateUserData(UserModel user) async {

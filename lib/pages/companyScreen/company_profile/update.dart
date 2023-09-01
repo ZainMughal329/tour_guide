@@ -216,7 +216,7 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
                                       addTime: Timestamp.now(),
                                     );
                                     await controller.updateUser(userData);
-                                    Get.offAllNamed(AppRoutes.SIGN_IN);
+                                    Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
                                   },
                                   child: Padding(
                                     padding:

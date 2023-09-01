@@ -17,18 +17,18 @@ class DetailScreen extends GetView<HomeController> {
   final String location;
   final String des;
   final String id;
+  final String phone;
 
-  DetailScreen(
-      {Key? key,
-      required this.title,
-      required this.price,
-      required this.location,
-      required this.des,
-      required this.img,
-      required this.id,
-      })
-      : super(key: key);
-
+  DetailScreen({
+    Key? key,
+    required this.title,
+    required this.price,
+    required this.location,
+    required this.des,
+    required this.img,
+    required this.id,
+    required this.phone,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,17 +93,24 @@ class DetailScreen extends GetView<HomeController> {
             ),
           ),
           bottomNavigationBar: PostBottomBar(
-              title: title, price: price, location: location, des: des , id: id,)),
+            title: title,
+            price: price,
+            location: location,
+            des: des,
+            id: id,
+            phone: phone,
+          )),
     );
   }
 }
 
-class PostBottomBar extends StatelessWidget {
+class PostBottomBar extends GetView<HomeController> {
   final String title;
   final String price;
   final String location;
   final String des;
   final String id;
+  final String phone;
 
   const PostBottomBar({
     Key? key,
@@ -112,6 +119,7 @@ class PostBottomBar extends StatelessWidget {
     required this.location,
     required this.des,
     required this.id,
+    required this.phone,
   }) : super(key: key);
 
   @override
@@ -236,9 +244,7 @@ class PostBottomBar extends StatelessWidget {
                       // ),
                       InkWell(
                         onTap: () {
-                          // if(item.id != null) {
-                          //   controller.goChat(item);
-                          // }
+                          controller.openwhatsapp(context, phone);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -254,7 +260,7 @@ class PostBottomBar extends StatelessWidget {
                             ],
                           ),
                           child: Text(
-                            'Chat Now',
+                            phone,
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -263,16 +269,11 @@ class PostBottomBar extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
-                          Get.to(()=> BookingView(tourId: id));
-
-
+                        onTap: () {
+                          Get.to(() => BookingView(tourId: id));
 
                           // Get.toNamed(AppRoutes.Booking_Screen);
                           // print(id.toString());
-
-
-
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
