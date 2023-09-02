@@ -22,7 +22,7 @@ class WelcomeController extends GetxController {
         Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
       }
     } catch (e) {
-      SnackBar.showSnackBar('Error', e.toString());
+      Snackbar.showSnackBar('Error', e.toString());
     }
   }
 }

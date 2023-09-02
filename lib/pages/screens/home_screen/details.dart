@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/booking_screen/view.dart';
@@ -270,7 +271,15 @@ class PostBottomBar extends GetView<HomeController> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(() => BookingView(tourId: id));
+
+                          controller.fetchUserData().then((value){
+                            Get.to(() => BookingView(tourId: id,name: controller.state.name ?? "" ,
+                            phoneNumber: controller.state.phoneNumber ?? "",
+                            ));
+                          }).onError((error, stackTrace){
+                            Snackbar.showSnackBar("Error", error.toString());
+                          });
+
 
                           // Get.toNamed(AppRoutes.Booking_Screen);
                           // print(id.toString());

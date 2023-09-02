@@ -1,1 +1,4 @@
-class HomeState {}
+class HomeState {
+  String? name;
+  String? phoneNumber;
+}

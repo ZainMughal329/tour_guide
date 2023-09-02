@@ -4,38 +4,111 @@ import 'package:tours_guide/pages/screens/booking_screen/controller.dart';
 
 class BookingView extends GetView<BookingController> {
   String tourId;
-   BookingView({required this.tourId,Key? key}) : super(key: key);
-   // final controller = Get.put<BookingController>(BookingController());
+  String name;
+  String phoneNumber;
+
+   BookingView({required this.tourId,
+     required this.name,
+     required this.phoneNumber,
+     Key? key}) : super(key: key);
+   final controller = Get.put<BookingController>(BookingController());
+  String? _selectedMonth;
+  String? _selectedPersons;
+  final _months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  final _persons = ["1", "2", "3", "4","5", "6","7","8","9","10"];
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 2,
-              child: Container(
-                child: Image(
-                  fit: BoxFit.fill,
-                  image: AssetImage('assets/images/booking.jpg'),
-                )
-
-              ),
-            ),
-            // Expanded(
-            //   // flex: 3,
-            //   child: Container(
-            //     color: Colors.green,
-            //
-            //   ),
-            // ),
-          ],
-        ),
-      ),
-
-    );
+    nameController.text=name.toString();
+    phoneController.text=phoneNumber.toString();
+     return Scaffold(
+       backgroundColor: Colors.white,
+       // appBar: AppBar(title: Text('Booking Page')),
+       body: SafeArea(
+         child: Container(
+           child: Padding(
+             padding: const EdgeInsets.all(16.0),
+             child: ListView(
+               children: [
+                 Image.asset('assets/images/booking.jpg'),
+                 SizedBox(height: 16),
+                 TextField(
+                   // controller: controller.state.nameController,
+                   controller: nameController,
+                   decoration: InputDecoration(labelText: 'Name'),
+                 ),
+                 SizedBox(height: 16),
+                 TextField(
+                   // controller: controller.state.phoneController,
+                   controller: phoneController,
+                   decoration: InputDecoration(labelText: 'Phone Number'),
+                   keyboardType: TextInputType.phone,
+                 ),
+                 SizedBox(height: 16),
+                 Obx((){
+                   return DropdownButton<String>(
+                     isExpanded: true,
+                     hint: Text(controller.state.personString.value),
+                     value: _selectedPersons,
+                     onChanged: (String? value) {
+                       controller.state.personString.value=value!;
+                     },
+                     items: _persons.map((String value) {
+                       return DropdownMenuItem<String>(
+                         value: value,
+                         child: Text(value),
+                       );
+                     }).toList(),
+                   );
+                 }),
+                 SizedBox(height: 16),
+                 Obx((){
+                   return DropdownButton<String>(
+                     isExpanded: true,
+                     hint: Text(controller.state.monthString.value),
+                     value: _selectedMonth,
+                     onChanged: (String? value) {
+                       controller.state.monthString.value=value!;
+                     },
+                     items: _months.map((String value) {
+                       return DropdownMenuItem<String>(
+                         value: value,
+                         child: Text(value),
+                       );
+                     }).toList(),
+                   );
+                 }),
+                 SizedBox(height: 32),
+                 ElevatedButton(
+                   onPressed: () {
+                     // Handle booking logic here
+                   },
+                   child: Text('Book Now'),
+                 ),
+               ],
+             ),
+           ),
+         ),
+       ),
+     );
   }
 }

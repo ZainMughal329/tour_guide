@@ -96,7 +96,10 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.Booking_Screen,
-      page: () => BookingView(tourId: '',),
+      page: () => BookingView(tourId: '',
+      name: '',
+        phoneNumber: '',
+      ),
       binding: BookingBindings(),
     ),
 
