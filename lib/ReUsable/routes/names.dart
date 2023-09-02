@@ -1,8 +1,6 @@
 class AppRoutes {
   static const Welcome = '/';
   static const SplashScreen = '/splashScreen';
-  static const SIGN_IN = '/sign_in';
-  static const SIGN_UP = '/sign_up';
   static const LOGIN_SIGN_UP = '/login_signup';
 
   static const Forgot_Password = '/forgot_pass';
@@ -12,7 +10,6 @@ class AppRoutes {
   static const Admin_Login = '/admin_login';
   static const Admin_Home = '/admin_home';
 
-  static const Company_SignUp = '/company_signup';
   static const Company_Home = '/company_home';
   static const Company_profile = '/company_profile';
   static const Company_AddTour = '/company_add_tour';

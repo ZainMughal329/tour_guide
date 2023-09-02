@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
+import 'package:tours_guide/pages/screens/home_screen/details.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
 import '../../../ReUsable/Components/drawer.dart';
@@ -180,53 +181,142 @@ class SearchView extends GetView<SearchBarController> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      // print('object');
-                                      // print('id is: ' + item['id'].toString());
-                                      // Get.to(() => UpdateScreen(
-                                      //   id: item['id'].toString(),
-                                      // ));
+                                      Get.to(() => DetailScreen(
+                                          title: item['title'].toString(),
+                                          price: item['price'].toString(),
+                                          location: item['location'].toString(),
+                                          des: item['tourDescription'].toString(),
+                                          img: item['tourImage'].toString(),
+                                          id: item['id'].toString(),
+                                          phone: item['companyPhone'].toString()));
                                     },
-                                    child: ListTile(
-                                      tileColor: AppColors.iconsColor,
-                                      leading: CircleAvatar(
-                                        backgroundColor: Colors.yellow,
-                                        child: Icon(
-                                          Icons.person,
-                                          color: Colors.white,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  height: 50.h,
+                                                  width: 50.w,
+                                                  child: item['tourImage']
+                                                              .toString() ==
+                                                          ''
+                                                      ? Icon(
+                                                          Icons.person,
+                                                          color: Colors.white,
+                                                        )
+                                                      : Image.network(
+                                                          item['tourImage']
+                                                              .toString(),
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                ),
+                                                SizedBox(
+                                                  width: 15.w,
+                                                ),
+                                                Container(
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        (item['title']
+                                                                .toString())
+                                                            .capitalizeFirst
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                      Text(
+                                                        (item['tourCategory']
+                                                                .toString())
+                                                            .capitalizeFirst
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 15.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons.people,
+                                                      color: Colors.white,
+                                                      size: 20,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 2.w,
+                                                    ),
+                                                    Text(
+                                                      item['people']
+                                                              .toString() +
+                                                          " person\'s",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Icon(
+                                                      Icons
+                                                          .location_on_outlined,
+                                                      color: Colors.white,
+                                                      size: 20,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 2.w,
+                                                    ),
+                                                    Text(
+                                                      item['location']
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      trailing: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Icon(
-                                            Icons.location_on_outlined,
-                                            color: Colors.white,
-                                            size: 30,
-                                          ),
-                                          Text(
-                                            item['location'].toString(),
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      title: Text(
-                                        (item['title'].toString())
-                                            .capitalizeFirst
-                                            .toString(),
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      subtitle: Text(
-                                        (item['tourCategory'].toString())
-                                            .toUpperCase(),
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600),
-                                      ),
+                                        Divider(
+                                          color: Colors.white,
+                                          thickness: 1,
+                                        ),
+                                        SizedBox(height: 10.h,),
+                                      ],
                                     ),
                                   ),
                                 ],

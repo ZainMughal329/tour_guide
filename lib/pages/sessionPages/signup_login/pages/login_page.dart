@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
-import 'package:tours_guide/pages/sessionPages/sigin/controller.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/controller.dart';
 
 import '../../../../ReUsable/Components/input_fields.dart';

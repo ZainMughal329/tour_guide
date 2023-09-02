@@ -8,7 +8,6 @@ import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/drawer.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/PersonPage/update.dart';
-import 'package:tours_guide/pages/sessionPages/sigin/view.dart';
 
 import '../../../ReUsable/models/userModel.dart';
 import 'controller.dart';
@@ -288,7 +287,7 @@ class PersonView extends GetView<PersonController> {
                               onTap: () {
                                 final auth = FirebaseAuth.instance;
                                 auth.signOut().then((value) {
-                                  Get.to(SignInPage());
+                                  Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
                                   Get.snackbar(
                                     'Congrats',
                                     'Successfully logOut ',

@@ -31,6 +31,7 @@ class ApplicationPage extends GetView<ApplicationController> {
         // backgroundColor: AppColors.unActiveIconColor.withOpacity(0.4),
         backgroundColor: Color(0xff06141B),
         items: controller.bottomTabs,
+        elevation: 0,
         currentIndex: controller.state.page,
         onTap: controller.handleNavBarChange,
         type: BottomNavigationBarType.fixed,

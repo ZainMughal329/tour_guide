@@ -13,12 +13,9 @@ import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
 
 // import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
-import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/index.dart';
 
 import '../../pages/application/index.dart';
-import '../../pages/sessionPages/sigin/index.dart';
-import '../../pages/sessionPages/sigin/sign_up_view.dart';
 import '../../pages/sessionPages/splashScreen/index.dart';
 import '../../pages/sessionPages/welcome/bindings.dart';
 import '../../pages/sessionPages/welcome/view.dart';
@@ -37,9 +34,7 @@ class AppPages {
       name: AppRoutes.SplashScreen,
       page: () => const SplashScreenView(),
       binding: SplashScreenBinding(),
-      // middlewares: [
-      //   RouteWelcomeMiddleware(priority: 1),
-      // ],
+
     ),
 
 
@@ -47,48 +42,16 @@ class AppPages {
       name: AppRoutes.Welcome,
       page: () => const WelcomePage(),
       binding: WelcomeBinding(),
-      // middlewares: [
-      //   RouteWelcomeMiddleware(priority: 1),
-      // ],
+
     ),
-    //
-    // GetPage(
-    //   name: AppRoutes.catScreen,
-    //   page: () => catogeryScreenPage(catogery: '',),
-    //   binding: catogeryScreenBinding(),
-    // ),
 
     GetPage(
       name: AppRoutes.LOGIN_SIGN_UP,
       page: () => SignupLoginView(),
       binding: SignupLoginBinding(),
-      // middlewares: [
-      //   RouteWelcomeMiddleware(priority: 1),
-      // ],
+
     ),
-    // GetPage(
-    //   name: AppRoutes.SIGN_IN,
-    //   page: () => SignInPage(),
-    //   binding: SignInBinding(),
-    // ),
-    //
-    //
-    //
-    // GetPage(
-    //   name: AppRoutes.Forgot_Password,
-    //   page: () => ForgotPasswordView(),
-    //   binding: ForgotPassBinding(),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.SIGN_UP,
-    //   page: () => SignUpView(),
-    // ),
-    //
-    // GetPage(
-    //   name: AppRoutes.Company_SignUp,
-    //   page: () => CompanySignUpPage(),
-    //   binding: CompanySignUpBinding(),
-    // ),
+
 
     GetPage(
       name: AppRoutes.Company_Home,
@@ -137,52 +100,5 @@ class AppPages {
       binding: BookingBindings(),
     ),
 
-    //
-    //
-    //
-    // // Admin Pages
-    // GetPage(
-    //   name: AppRoutes.Admin_Login,
-    //   page: () => AdminLoginView(),
-    //   binding: AdminLoginBinding(),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.Admin_Home,
-    //   page: () => AdminHomeView(),
-    //   binding: AdminHomeBinding(),
-    // ),
-    //
-    //
-    //
-    // // Tourist Pages
-    // GetPage(
-    //   name: AppRoutes.Tourist_Login,
-    //   page: () => TouristLoginView(),
-    //   binding: TouristLoginBinding(),
-    // ),
-    // GetPage(
-    //   name: AppRoutes.Tourist_Home,
-    //   page: () => TouristHomeView(),
-    //   binding: TouristHomeBinding(),
-    // ),
-    //
-    // GetPage(
-    //   name: AppRoutes.Add_Tour,
-    //   page: () => AddTourView(),
-    //   binding: AddTourBinding(),
-    // ),
-
-/*
-    // 最新路由
-    // 首页
-    GetPage(name: AppRoutes.Contact, page: () => ContactPage(), binding: ContactBinding()),
-    //消息
-    GetPage(name: AppRoutes.Message, page: () => MessagePage(), binding: MessageBinding()),
-    //我的
-    GetPage(name: AppRoutes.Me, page: () => MePage(), binding: MeBinding()),
-    //聊天详情
-    GetPage(name: AppRoutes.Chat, page: () => ChatPage(), binding: ChatBinding()),
-
-    GetPage(name: AppRoutes.Photoimgview, page: () => PhotoImgViewPage(), binding: PhotoImgViewBinding()),*/
-  ];
+   ];
 }

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
-import 'package:tours_guide/pages/sessionPages/companySignUp/index.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/pages/company_sign_up_page.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/pages/login_page.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/pages/sign_up_page.dart';
