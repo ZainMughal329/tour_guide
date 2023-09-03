@@ -24,23 +24,27 @@ class SearchView extends GetView<SearchBarController> {
     return TextFieldContainer(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 0, vertical: 5),
-        child: TextField(
-          onChanged: (value) {
-            controller.searchTours(value);
-          },
-          controller: controller.state.searchController,
-          textInputAction: TextInputAction.search,
+        child: GetBuilder<SearchBarController>(
+          builder: (con) {
+            return TextField(
+              onChanged: (value) {
+                controller.searchTours(value);
+              },
+              controller: controller.state.searchController,
+              textInputAction: TextInputAction.search,
 
-          keyboardType: TextInputType.text,
-          // focusNode: focNode,
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              Icons.search,
-              color: AppColors.kPrimaryColor,
-            ),
-            border: InputBorder.none,
-            hintText: 'Search tours here...',
-          ),
+              keyboardType: TextInputType.text,
+              // focusNode: focNode,
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: AppColors.lightTextFormFieldColor,
+                ),
+                border: InputBorder.none,
+                hintText: 'Search tours here...',
+              ),
+            );
+          },
         ),
       ),
     );
@@ -159,14 +163,8 @@ class SearchView extends GetView<SearchBarController> {
             child: Obx(
               () =>
                   // var tours = controller.filteredTourList;
-                  controller.filteredTourList.isEmpty
-                      ? Center(
-                          child: Text(
-                            'No searches yet',
-                            style: TextStyle(color: Colors.white, fontSize: 25),
-                          ),
-                        )
-                      : ListView.builder(
+                  controller.filteredTourList.length !=0
+                      ? ListView.builder(
                           itemCount: controller.filteredTourList.length,
                           itemBuilder: (context, index) {
                             print('Length iss :' +
@@ -185,10 +183,12 @@ class SearchView extends GetView<SearchBarController> {
                                           title: item['title'].toString(),
                                           price: item['price'].toString(),
                                           location: item['location'].toString(),
-                                          des: item['tourDescription'].toString(),
+                                          des: item['tourDescription']
+                                              .toString(),
                                           img: item['tourImage'].toString(),
                                           id: item['id'].toString(),
-                                          phone: item['companyPhone'].toString()));
+                                          phone:
+                                              item['companyPhone'].toString()));
                                     },
                                     child: Column(
                                       children: [
@@ -315,7 +315,9 @@ class SearchView extends GetView<SearchBarController> {
                                           color: Colors.white,
                                           thickness: 1,
                                         ),
-                                        SizedBox(height: 10.h,),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -323,6 +325,12 @@ class SearchView extends GetView<SearchBarController> {
                               ),
                             );
                           },
+                        )
+                      : Center(
+                          child: Text(
+                            'No searches yet',
+                            style: TextStyle(color: Colors.white, fontSize: 25),
+                          ),
                         ),
             ),
           ),

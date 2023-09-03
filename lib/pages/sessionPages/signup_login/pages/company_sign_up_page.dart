@@ -155,7 +155,7 @@ class CompanySignUp extends GetView<SignupLoginController> {
                   width: double.infinity,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: AppColors.kPrimaryColor,
+                    color: AppColors.lightBgColor,
                     borderRadius: BorderRadius.circular(29),
                   ),
                   child: Center(
@@ -188,7 +188,7 @@ class TextFieldContainer extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       width: size.width,
       decoration: BoxDecoration(
-        color: AppColors.kPrimaryLightColor,
+        color: AppColors.lightTextFormFieldColor,
         borderRadius: BorderRadius.circular(29),
       ),
       child: child,

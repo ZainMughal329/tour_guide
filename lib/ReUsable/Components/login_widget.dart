@@ -17,7 +17,7 @@ Widget LoginWidget(CountryCode code, Function changeCountry,TextEditingControlle
           height: 65,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: AppColors.kPrimaryLightColor,
+            color: AppColors.lightTextFormFieldColor,
             borderRadius: BorderRadius.circular(29),
 
           ),

@@ -25,8 +25,13 @@ class AppColors {
   static const Color SuccessColor = Color(0xFF43A047);
   static const Color textButtonColor = Colors.blue;
 
-  static const Color kPrimaryColor = Colors.cyan;
+  static const Color lightButtonColor = Colors.cyan;
 
-  static Color kPrimaryLightColor = Colors.cyanAccent.withOpacity(0.3);
+  static Color lightTextFormFieldColor = Colors.cyanAccent.withOpacity(0.3);
+
+  static const Color lightBgColor = Colors.white;
+
+  static const Color lightTextColor = Colors.black;
+
 
 }

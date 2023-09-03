@@ -40,7 +40,7 @@ class SearchBarController extends GetxController {
     final lowerCaseQuery = query.toLowerCase();
     List<DocumentSnapshot> results = [];
     if(query.isEmpty) {
-      results = tourData;
+      results = [];
     }else {
     results = tourData
         .where((ele) =>
@@ -49,8 +49,10 @@ class SearchBarController extends GetxController {
         ele['tourCategory'].toString().toLowerCase().contains(lowerCaseQuery) ||
         ele['tourDescription'].toString().toLowerCase().contains(lowerCaseQuery))
         .toList();
+
   }
     filteredTourList.value = results;
+    update();
   }
   toggleDropdown() {
     state.isDropdownOpen.value = !state.isDropdownOpen.value;

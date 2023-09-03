@@ -114,7 +114,7 @@ class InputTextField extends StatelessWidget {
         keyboardType: keyboardType,
         // focusNode: focNode,
         decoration: InputDecoration(
-          prefixIcon: Icon(icon , color: AppColors.kPrimaryColor,),
+          prefixIcon: Icon(icon , color: AppColors.lightBgColor,),
           border: InputBorder.none,
           hintText: descrip,
         ),
