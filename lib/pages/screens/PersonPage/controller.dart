@@ -162,6 +162,14 @@ class PersonController extends GetxController {
     }
   }
 
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getNodeData() {
+    return FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid.toString())
+        .snapshots();
+  }
+
   Future<UserModel> getUserData(String id) async {
     final snapshot =
         await _db.collection('users').where('id', isEqualTo: id).get();

@@ -95,7 +95,7 @@ class SearchView extends GetView<SearchBarController> {
                               child: Icon(
                                 Icons.menu,
                                 color: Colors.blue,
-                                size: 30,
+                                size: 35.sp,
                               ),
                             ),
                           ),
@@ -120,7 +120,7 @@ class SearchView extends GetView<SearchBarController> {
                       ),
                       Container(
                         width: 50.w,
-                        height: 50.h,
+                        height: 50.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           border: Border.all(

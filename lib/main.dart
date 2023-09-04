@@ -23,14 +23,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatefulWidget {
-
-
   const MyApp({super.key});
-
-
-
-
-
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -39,14 +32,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   bool isDarkMode = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     _fetchThemeMode();
-
   }
+
   Future<void> _fetchThemeMode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -56,9 +50,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     // print(Get.isDarkMode.toString());
     // print(Get.is)
     return ScreenUtilInit(
@@ -77,7 +68,4 @@ class _MyAppState extends State<MyApp> {
       },
     );
   }
-
-
 }
-

@@ -56,7 +56,7 @@ class LoginPage extends GetView<SignupLoginController> {
               width: double.infinity,
               height: 50,
               decoration: BoxDecoration(
-                color: AppColors.lightBgColor,
+                color: AppColors.lightButtonColor,
                 borderRadius: BorderRadius.circular(29),
               ),
               child: Center(
@@ -102,7 +102,7 @@ Widget _buildForm(
               obsecure: true,
               textInputAction: TextInputAction.done,
               keyboardType: TextInputType.emailAddress,
-              icon: Icons.lock_open,
+              icon: Icons.lock_open ,
               contr: pass,
               descrip: 'Enter your password',
               // focNode: controller.state.loginPasswordFocus,

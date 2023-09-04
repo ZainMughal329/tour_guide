@@ -29,8 +29,8 @@ class BuildDrawer {
                     accountName: Text(userModel.userName.capitalize.toString()),
                     accountEmail: Text(userModel.email),
                     currentAccountPicture: Container(
-                      height: 120,
-                      width: 120,
+                      height: 120.w,
+                      width: 120.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         border: Border.all(color: AppColors.bgColor),
@@ -42,7 +42,7 @@ class BuildDrawer {
                                 ? Icon(
                                     Icons.person,
                                     size: 50,
-                          color: AppColors.iconsColor,
+                          color: Colors.white,
                                   )
                                 : Image(
                                     image: NetworkImage(userModel.photoUrl),
