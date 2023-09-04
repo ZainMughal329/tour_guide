@@ -12,6 +12,7 @@ class catogeryScreenController extends GetxController {
   final state = catogeryScreenState();
   final auth = FirebaseAuth.instance;
 
+  final userRef = FirebaseFirestore.instance.collection('users');
   void setTourRef(String catogery){
 
      state.fireStoreTourRef=  FirebaseFirestore.instance
@@ -34,5 +35,10 @@ class catogeryScreenController extends GetxController {
     super.onInit();
     // setTourRef(catogery);
 
+  }
+
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getCurrentUserData() {
+    return userRef.doc(auth.currentUser!.uid.toString()).snapshots();
   }
 }

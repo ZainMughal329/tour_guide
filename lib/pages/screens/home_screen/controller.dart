@@ -18,48 +18,12 @@ import '../../../ReUsable/models/userModel.dart';
 class HomeController extends GetxController {
   final state = HomeState();
   final auth = FirebaseAuth.instance;
-  final userRef=FirebaseFirestore.instance.collection("users");
+  final userRef = FirebaseFirestore.instance.collection("users");
 
-  final fireStoreTourRef = FirebaseFirestore.instance
-      .collection('allTours')
-      .where('id', isNotEqualTo: '')
-      .snapshots();
+  final firestore =
+      FirebaseFirestore.instance.collection('allTours').snapshots();
 
   late final List<String> category;
-
-  Stream<DocumentSnapshot<Map<String, dynamic>>> getNodeData() {
-    return FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid.toString())
-        .snapshots();
-  }
-
-  final _db = FirebaseFirestore.instance;
-  Future<UserModel> getUserData(String id) async {
-    final snapshot =
-        await _db.collection('users').where('id', isEqualTo: id).get();
-    final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
-    return userData;
-  }
-
-  Future<List<TourModel>> getAllTourData() async {
-    final snapshot = await _db.collection('allTours').get();
-    final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
-    return tourData;
-  }
-
-  Future<List<TourModel>> getAndShowALlToursData() async {
-    return await getAllTourData();
-  }
-
-  getUsersData() async {
-    final id = auth.currentUser!.uid.toString();
-    if (id != '') {
-      return await getUserData(id);
-    } else {
-      Get.snackbar('Error', 'Something went wrong');
-    }
-  }
 
   @override
   void onInit() {
@@ -76,6 +40,20 @@ class HomeController extends GetxController {
     ];
   }
 
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getCurrentUserData() {
+    return userRef.doc(auth.currentUser!.uid.toString()).snapshots();
+  }
+
+  Future<List<TourModel>> getAllTourData() async {
+    final snapshot = await FirebaseFirestore.instance.collection('allTours').get();
+    final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
+    return tourData;
+  }
+
+  Future<List<TourModel>> getAndShowALlToursData() async {
+    return await getAllTourData();
+  }
+
   openwhatsapp(BuildContext context, String phone) async {
     final Uri whatsapp = Uri.parse(phone);
     final Uri whatsappURl_android = Uri.parse(
@@ -88,23 +66,15 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> fetchUserData() async{
-  try{
-    final userNode= await userRef.doc(auth.currentUser!.uid.toString()).get();
+  Future<void> fetchUserData() async {
+    try {
+      final userNode =
+          await userRef.doc(auth.currentUser!.uid.toString()).get();
 
-    state.name=userNode['userName'];
-    state.phoneNumber=userNode['phone'];
-  }catch(e){
-Snackbar.showSnackBar("Error: ", e.toString());
+      state.name = userNode['userName'];
+      state.phoneNumber = userNode['phone'];
+    } catch (e) {
+      Snackbar.showSnackBar("Error: ", e.toString());
+    }
   }
-
-  }
-
-
-
-// openWhatsApp(BuildContext context , String phone) async{
-  //   final Uri phoneNumber = Uri.parse(phone);
-  //   final Uri whatsApp = Uri.parse('https://wa.me/1XXXXXXXXXX');
-  //
-  // }
 }

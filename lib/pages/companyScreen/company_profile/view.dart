@@ -18,6 +18,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
+      resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
@@ -43,14 +44,22 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               Get.to(() => UpdateCompanyData());
                             },
                             leading: Container(
-                              height: 50,
-                              width: 50,
+                              height: 50.w,
+                              width: 50.w,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+
+                                ),
+                                borderRadius: BorderRadius.circular(50),
+
+                              ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(50),
                                 child: snapshot.data!['logo'].toString() == ''
                                     ? Icon(
                                         Icons.person_outline,
-                                        size: 30,
+                                        size: 30.sp,
                                         color: Colors.white,
                                       )
                                     : Image(

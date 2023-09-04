@@ -56,7 +56,7 @@ class DetailScreen extends GetView<HomeController> {
                       Get.back();
                     },
                     child: Container(
-                      height: 50.h,
+                      height: 50.w,
                       width: 50.w,
                       decoration: BoxDecoration(
                         color: AppColors.bgColor,
@@ -75,7 +75,7 @@ class DetailScreen extends GetView<HomeController> {
                       // Get.back();
                     },
                     child: Container(
-                      height: 50.h,
+                      height: 50.w,
                       width: 50.w,
                       decoration: BoxDecoration(
                         color: AppColors.bgColor,

@@ -26,8 +26,8 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
         height: 330.h,
         width: 220.w,
         child: Container(
-          height: 297,
-          width: 201,
+          height: 297.h,
+          width: 201.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(color: AppColors.iconsColor),
@@ -36,8 +36,8 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
             color: Colors.transparent,
           ),
           child: Container(
-            height: 297,
-            width: 201,
+            height: 297.h,
+            width: 201.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(colors: [
@@ -79,157 +79,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
           ),
         ),
       ),
-      // child: Container(
-      //   height: 300,
-      //   width: 200,
-      //   decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.circular(40),
-      //     color: Colors.white,
-      //   ),
-      //   child: Stack(
-      //     children: [
-      //       Container(
-      //         width: 300,
-      //         decoration: BoxDecoration(
-      //             borderRadius: BorderRadius.circular(15),
-      //             boxShadow: [
-      //               BoxShadow(
-      //                 color: Colors.grey,
-      //                 spreadRadius: 1,
-      //               ),
-      //             ],
-      //             border: Border.all(width: 0.9, color: Colors.black)),
-      //         child: ClipRRect(
-      //           borderRadius: BorderRadius.circular(15),
-      //           child: Image.network(
-      //             imageUrl,
-      //             fit: BoxFit.fill,
-      //             height: 300.h,
-      //             width: double.infinity,
-      //           ),
-      //         ),
-      //       ),
-      //       Positioned(
-      //         top: 10,
-      //         left: 10,
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             // color: AppColors.warningColor,
-      //             color: Color(0xFF4D4D8E),
-      //             // color: Colors.black.withOpacity(0.1),
-      //             borderRadius: BorderRadius.circular(10),
-      //           ),
-      //           padding: EdgeInsets.all(8),
-      //           child: Center(
-      //             child: Row(
-      //               mainAxisAlignment: MainAxisAlignment.center,
-      //               crossAxisAlignment: CrossAxisAlignment.center,
-      //               children: [
-      //                 Text(
-      //                   '\$${price}',
-      //                   style: TextStyle(
-      //                       fontSize: 20,
-      //                       color: Colors.white,
-      //                       fontWeight: FontWeight.w500),
-      //                 ),
-      //                 Text(
-      //                   '/Person',
-      //                   style: TextStyle(
-      //                     fontSize: 18,
-      //                     color: Colors.white.withOpacity(0.8),
-      //                   ),
-      //                 )
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       Positioned(
-      //         top: 10,
-      //         right: 10,
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             color: Colors.black.withOpacity(0.1),
-      //             borderRadius: BorderRadius.circular(10),
-      //           ),
-      //           padding: EdgeInsets.all(2.w),
-      //           child: Icon(
-      //             Icons.favorite,
-      //             color: Colors.red,
-      //           ),
-      //         ),
-      //       ),
-      //       Positioned(
-      //         bottom: 45,
-      //         left: 10,
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             color: Colors.black.withOpacity(0.1),
-      //             borderRadius: BorderRadius.circular(10),
-      //           ),
-      //           // width: 150.w,
-      //           alignment: Alignment.topLeft,
-      //           child: Padding(
-      //             padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-      //             child: Text(
-      //               title,
-      //               style: TextStyle(
-      //                 fontSize: 22,
-      //                 color: Colors.white,
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //       Positioned(
-      //         bottom: 10,
-      //         left: 10,
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             color: Colors.black.withOpacity(0.1),
-      //             borderRadius: BorderRadius.circular(10),
-      //           ),
-      //           padding: EdgeInsets.symmetric(horizontal: 8.w),
-      //           child: Row(
-      //             children: [
-      //               FaIcon(
-      //                 Icons.location_on_outlined,
-      //                 color: Colors.white,
-      //                 size: 17.sp,
-      //               ),
-      //               Text(
-      //                 " " + loc,
-      //                 style: TextStyle(color: Colors.white, fontSize: 16.sp
-      //                     // fontWeight: FontWeight.w600,
-      //                     ),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ),
-      //       Positioned(
-      //         bottom: 10,
-      //         right: 10,
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             // color: Colors.black.withOpacity(0.1),
-      //             borderRadius: BorderRadius.circular(10),
-      //           ),
-      //           padding: EdgeInsets.all(8),
-      //           child: IconButton(
-      //             icon: FaIcon(
-      //               FontAwesomeIcons.arrowUpRightFromSquare,
-      //             ),
-      //             color: Colors.grey,
-      //             onPressed: () {
-      //               // Perform arrow button action here
-      //             },
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+
     );
   }
   @override
@@ -269,20 +119,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: () {
-                          // Get.to(
-                          //       () => TourDetailScreen(
-                          //     img: snapshot.data!.docs[i]
-                          //     ['tourImage'],
-                          //     loc: snapshot.data!.docs[i]['location'],
-                          //     price: snapshot.data!.docs[i]['price'],
-                          //     people: snapshot.data!.docs[i]
-                          //     ['people'],
-                          //     category: snapshot.data!.docs[i]
-                          //     ['tourCategory'],
-                          //     des: snapshot.data!.docs[i]
-                          //     ['tourDescription'],
-                          //   ),
-                          // );
+
                           showDialog(
                             context: context,
                             builder: (context) {
@@ -346,20 +183,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: () {
-                          // Get.to(
-                          //       () => TourDetailScreen(
-                          //     img: snapshot.data!.docs[i + 1]
-                          //     ['tourImage'],
-                          //     loc: snapshot.data!.docs[i + 1]['location'],
-                          //     price: snapshot.data!.docs[i + 1]['price'],
-                          //     people: snapshot.data!.docs[i + 1]
-                          //     ['people'],
-                          //     category: snapshot.data!.docs[i + 1]
-                          //     ['tourCategory'],
-                          //     des: snapshot.data!.docs[i + 1]
-                          //     ['tourDescription'],
-                          //   ),
-                          // );
+
                           showDialog(
                             context: context,
                             builder: (context) {
@@ -429,20 +253,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                       padding: const EdgeInsets.all(8.0),
                       child: InkWell(
                         onTap: () {
-                          // Get.to(
-                          //       () => TourDetailScreen(
-                          //     img: snapshot.data!.docs[i]
-                          //     ['tourImage'],
-                          //     loc: snapshot.data!.docs[i]['location'],
-                          //     price: snapshot.data!.docs[i]['price'],
-                          //     people: snapshot.data!.docs[i]
-                          //     ['people'],
-                          //     category: snapshot.data!.docs[i]
-                          //     ['tourCategory'],
-                          //     des: snapshot.data!.docs[i]
-                          //     ['tourDescription'],
-                          //   ),
-                          // );
+
                           showDialog(
                               context: context,
                               builder: (context) {
@@ -511,148 +322,13 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
               ? ListView(
             children: cardRows,
           )
-          // ListView.builder(
-          //         physics: NeverScrollableScrollPhysics(),
-          //         shrinkWrap: true,
-          //         itemCount: snapshot.data!.docs.length,
-          //         itemBuilder: (BuildContext context, int index) {
-          //           return Padding(
-          //             padding: EdgeInsets.all(15),
-          //             child: Column(
-          //               children: [
-          //                 InkWell(
-          //                   onTap: () {
-          //                     Get.to(
-          //                       () => TourDetailScreen(
-          //                         img: snapshot.data!.docs[index]
-          //                             ['tourImage'],
-          //                         loc: snapshot.data!.docs[index]['location'],
-          //                         price: snapshot.data!.docs[index]['price'],
-          //                         people: snapshot.data!.docs[index]
-          //                             ['people'],
-          //                         category: snapshot.data!.docs[index]
-          //                             ['tourCategory'],
-          //                         des: snapshot.data!.docs[index]
-          //                             ['tourDescription'],
-          //                       ),
-          //                     );
-          //                   },
-          //                   child: Container(
-          //                     height: 200,
-          //                     decoration: BoxDecoration(
-          //                       color: Colors.black,
-          //                       borderRadius: BorderRadius.circular(15),
-          //                       image: DecorationImage(
-          //                           image: NetworkImage(
-          //                             snapshot.data!.docs[index]['tourImage']
-          //                                 .toString(),
-          //                           ),
-          //                           fit: BoxFit.cover,
-          //                           opacity: 0.7),
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 Padding(
-          //                   padding: EdgeInsets.only(top: 10),
-          //                   child: Row(
-          //                     mainAxisAlignment:
-          //                         MainAxisAlignment.spaceBetween,
-          //                     children: [
-          //                       Column(
-          //                         mainAxisAlignment: MainAxisAlignment.start,
-          //                         crossAxisAlignment:
-          //                             CrossAxisAlignment.start,
-          //                         children: [
-          //                           Text(
-          //                             snapshot.data!.docs[index]['location']
-          //                                 .toString(),
-          //                             style: TextStyle(
-          //                               fontSize: 20,
-          //                               fontWeight: FontWeight.w600,
-          //                             ),
-          //                           ),
-          //                           SizedBox(
-          //                             height: 5,
-          //                           ),
-          //                           Text(
-          //                             snapshot.data!.docs[index]['price']
-          //                                 .toString(),
-          //                             style: TextStyle(
-          //                               fontSize: 12,
-          //                               fontWeight: FontWeight.normal,
-          //                             ),
-          //                           ),
-          //                         ],
-          //                       ),
-          //                       InkWell(
-          //                         onTap: () {
-          //                           showDialog(
-          //                             context: context,
-          //                             builder: (context) {
-          //                               return AlertDialog(
-          //                                 content: Container(
-          //                                   height: 110.h,
-          //                                   child: Column(
-          //                                     children: [
-          //                                       ListTile(
-          //                                         onTap: () {
-          //                                           // pickedImageFromGallery(context);
-          //                                           controller.deleteTour(
-          //                                             snapshot.data!
-          //                                                 .docs[index].id
-          //                                                 .toString(),
-          //                                           );
-          //                                           Navigator.pop(context);
-          //                                         },
-          //                                         leading: Icon(Icons.delete),
-          //                                         title: Text('Delete'),
-          //                                       ),
-          //                                       ListTile(
-          //                                         onTap: () {
-          //                                           // pickedImageFromCamera(context);
-          //                                           Navigator.pop(context);
-          //                                           Get.to( () =>
-          //                                              UpdateTourData(
-          //                                               id: snapshot.data!
-          //                                                   .docs[index].id
-          //                                                   .toString(),
-          //                                             ),
-          //                                           );
-          //                                           print('heloo');
-          //                                         },
-          //                                         leading: Icon(Icons.edit),
-          //                                         title: Text('Edit'),
-          //                                       ),
-          //
-          //                                     ],
-          //                                   ),
-          //                                 ),
-          //                               );
-          //                             },
-          //                           );
-          //                         },
-          //                         child: Icon(
-          //                           Icons.more_vert,
-          //                           size: 30,
-          //                         ),
-          //                       )
-          //                     ],
-          //                   ),
-          //                 ),
-          //                 SizedBox(
-          //                   height: 5,
-          //                 ),
-          //               ],
-          //             ),
-          //           );
-          //         },
-          //       )
+
               : Container(
                   margin: EdgeInsets.only(top: 50.h),
                   child: Center(
                     child: Text(
                       'No tours added.',
-                      style: TextStyle(fontSize: 20.sp),
+                      style: TextStyle(fontSize: 20.sp , color: Colors.white),
                     ),
                   ),
                 );

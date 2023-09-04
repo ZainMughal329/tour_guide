@@ -53,26 +53,26 @@ class _CompanyHomeState extends State<CompanyHome>
                               child: Row(
                                 children: [
                                   Icon(Icons.menu,
-                                      size: 30, color: AppColors.iconsColor),
+                                      size: 30.sp, color: AppColors.iconsColor),
                                   Expanded(
                                     child: Container(),
                                   ),
                                   Container(
-                                    width: 40,
-                                    height: 40,
+                                    width: 40.w,
+                                    height: 40.w,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: AppColors.iconsColor,
+                                      borderRadius: BorderRadius.circular(50),
+                                      // color: AppColors.iconsColor,
                                       border: Border.all(
-                                          color: Colors.black, width: 2.0),
+                                          color: Colors.blue, width: 2.0 ,),
                                     ),
                                     child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(25),
+                                      borderRadius: BorderRadius.circular(50),
                                       child: company.logo.toString() == ''
                                           ? Icon(
                                         Icons.person_outline,
-                                        size: 20,
-                                        color: AppColors.bgColor,
+                                        size: 30.sp,
+                                        color: Colors.blue,
                                       )
                                           : Image(
                                         image: NetworkImage(

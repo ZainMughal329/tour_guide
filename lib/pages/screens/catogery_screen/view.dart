@@ -23,19 +23,19 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
   catogeryScreenController controller = Get.put(catogeryScreenController());
 
   Widget _buildCard(BuildContext context, String title, String loc,
-      String price, String des, String imageUrl, String id,String phone) {
+      String price, String des, String imageUrl, String id, String phone) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
         onTap: () {
           Get.to(
             () => DetailScreen(
-                title: title,
-                price: price,
-                location: loc,
-                des: des,
-                img: imageUrl,
-            id: id,
+              title: title,
+              price: price,
+              location: loc,
+              des: des,
+              img: imageUrl,
+              id: id,
               phone: phone,
             ),
           );
@@ -43,8 +43,8 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
         child: Padding(
           padding: const EdgeInsets.only(right: 18.0),
           child: Container(
-            height: 297,
-            width: 201,
+            height: 297.h,
+            width: 241.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
@@ -259,14 +259,13 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
         ? controller.setRatingTourRef(catogery)
         : controller.setTourRef(catogery);
     return Scaffold(
-
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
             icon: const Icon(
-              Icons.arrow_back,
+              Icons.arrow_back_ios_new,
               color: AppColors.iconsColor,
             ),
           ),
@@ -277,12 +276,12 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
             style: TextStyle(fontSize: 20.sp),
           ),
           centerTitle: true,
-
         ),
         backgroundColor: AppColors.bgColor,
         drawer: BuildDrawer.buildDrawer(context),
         body: SafeArea(
-            child: Container(
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.w , right: 10.w , top: 20.h , bottom: 10.h),
           child: StreamBuilder<QuerySnapshot>(
             stream: controller.state.fireStoreTourRef,
             builder:
@@ -309,17 +308,17 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                           child: InkWell(
                             onTap: () {},
                             child: Container(
-                              height: 330.h,
+                              height: 270.h,
+                              width: 250.w,
                               child: _buildCard(
-                                  context,
-                                  snapshot.data!.docs[i]['title'],
-                                  snapshot.data!.docs[i]['location'],
-                                  snapshot.data!.docs[i]['price'],
-                                  snapshot.data!.docs[i]['tourDescription'],
-                                  snapshot.data!.docs[i]['tourImage'],
+                                context,
+                                snapshot.data!.docs[i]['title'],
+                                snapshot.data!.docs[i]['location'],
+                                snapshot.data!.docs[i]['price'],
+                                snapshot.data!.docs[i]['tourDescription'],
+                                snapshot.data!.docs[i]['tourImage'],
                                 snapshot.data!.docs[i]['id'],
-                                  snapshot.data!.docs[i]['companyPhone'],
-
+                                snapshot.data!.docs[i]['companyPhone'],
                               ),
                             ),
                           ),
@@ -328,19 +327,17 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                           child: InkWell(
                             onTap: () {},
                             child: Container(
-                              height: 330.h,
+                              height: 270.h,
+                              width: 250.w,
                               child: _buildCard(
                                   context,
                                   snapshot.data!.docs[i + 1]['title'],
                                   snapshot.data!.docs[i + 1]['location'],
                                   snapshot.data!.docs[i + 1]['price'],
-                                  snapshot.data!.docs[i + 1]
-                                      ['tourDescription'],
+                                  snapshot.data!.docs[i + 1]['tourDescription'],
                                   snapshot.data!.docs[i + 1]['tourImage'],
-                                snapshot.data!.docs[i + 1]['id'],
-                                  snapshot.data!.docs[i+1]['companyPhone']
-
-                              ),
+                                  snapshot.data!.docs[i + 1]['id'],
+                                  snapshot.data!.docs[i + 1]['companyPhone']),
                             ),
                           ),
                         ),
@@ -353,7 +350,8 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                           child: InkWell(
                             onTap: () {},
                             child: Container(
-                              height: 330.h,
+                              height: 270.h,
+                              width: 250.w,
                               child: _buildCard(
                                   context,
                                   snapshot.data!.docs[i]['title'],
@@ -361,10 +359,8 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                   snapshot.data!.docs[i]['price'],
                                   snapshot.data!.docs[i]['tourDescription'],
                                   snapshot.data!.docs[i]['tourImage'],
-                                snapshot.data!.docs[i]['id'],
-                                  snapshot.data!.docs[i]['companyPhone']
-
-                              ),
+                                  snapshot.data!.docs[i]['id'],
+                                  snapshot.data!.docs[i]['companyPhone']),
                             ),
                           ),
                         ),
@@ -379,21 +375,23 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                     ? ListView(
                         children: cardRows,
                       )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: Center(
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Center(
                               child: Text(
-
                                 'Currently,We have no tours in\nthis Category',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 20 , color: Colors.white,letterSpacing: 2),
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    letterSpacing: 2),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                 ;
               } catch (e) {

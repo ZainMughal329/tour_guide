@@ -163,261 +163,261 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgColor,
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.all(10.w),
-        child: SafeArea(
-            child: SingleChildScrollView(
-          // reverse: true,
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: NeverScrollableScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.all(10.w),
+          child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 1.h,
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          _showCustomDialog(context, controller);
+                        },
+                        child: Container(
+                            height: 200.h,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: controller.image == null
+                                  ? AppColors.cardBgColor
+                                  : AppColors.bgColor,
+                              border: Border.all(
+                                color: controller.image == null
+                                    ? AppColors.iconsColor
+                                    : AppColors.bgColor,
+                                // width: 3.0,
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GetBuilder<CompanyAddTourController>(
+                                    builder: (controller) {
+                                  return Column(
+                                    children: [
+                                      ClipRRect(
+                                        // borderRadius: BorderRadius.circular(100.r),
 
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 1.h,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      _showCustomDialog(context, controller);
-                    },
-                    child: Container(
-                        height: 200.h,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: controller.image == null
-                              ? AppColors.cardBgColor
-                              : AppColors.bgColor,
-                          border: Border.all(
-                            color: controller.image == null
-                                ? AppColors.iconsColor
-                                : AppColors.bgColor,
-                            // width: 3.0,
+                                        child: controller.image == null
+                                            ? Icon(
+                                                Icons.image,
+                                                size: 50,
+                                                color: AppColors.iconsColor,
+                                              )
+                                            : Container(
+                                                height: 185.h,
+                                                width: double.infinity,
+                                                child: Image.file(
+                                                  File(controller.image!.path)
+                                                      .absolute,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              ),
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      controller.image == null
+                                          ? Text(
+                                              "Tap to Upload Image",
+                                              style: TextStyle(color: Colors.white),
+                                            )
+                                          : Container(),
+                                    ],
+                                  );
+                                }),
+                              ],
+                            )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Column(
+                      children: [
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              _textField(
+                                controller.state.titleController,
+                                controller.state.titleNode,
+                                "Title",
+                                "Enter name for your tour",
+                                TextInputAction.next,
+                              ),
+                              _textField(
+                                controller.state.locationController,
+                                controller.state.locationNode,
+                                "Location",
+                                "Enter Location of your tour",
+                                TextInputAction.next,
+                              ),
+                              _textField(
+                                controller.state.priceController,
+                                controller.state.priceNode,
+                                "Price",
+                                "Enter Price for your tour in Rs",
+                                TextInputAction.next,
+                              ),
+                            ],
                           ),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GetBuilder<CompanyAddTourController>(
-                                builder: (controller) {
-                              return Column(
-                                children: [
-                                  ClipRRect(
-                                    // borderRadius: BorderRadius.circular(100.r),
-
-                                    child: controller.image == null
-                                        ? Icon(
-                                            Icons.image,
-                                            size: 50,
-                                            color: AppColors.iconsColor,
-                                          )
-                                        : Container(
-                                            height: 185.h,
-                                            width: double.infinity,
-                                            child: Image.file(
-                                              File(controller.image!.path)
-                                                  .absolute,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: TextField(
+                            controller: controller.state.descrepController,
+                            focusNode: controller.state.descrepNode,
+                            style: TextStyle(color: Colors.white),
+                            onEditingComplete: () {},
+                            onSubmitted: (value) {},
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: AppColors.cardBgColor,
+                                labelText: "Tour Description",
+                                labelStyle: TextStyle(color: Colors.white),
+                                hintText: "Enter long description about you tour",
+                                hintStyle: TextStyle(color: Colors.white),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppColors.iconsColor,
                                   ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                  controller.image == null
-                                      ? Text(
-                                          "Tap to Upload Image",
-                                          style: TextStyle(color: Colors.white),
-                                        )
-                                      : Container(),
-                                ],
-                              );
-                            }),
-                          ],
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Column(
-                  children: [
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          _textField(
-                            controller.state.titleController,
-                            controller.state.titleNode,
-                            "Title",
-                            "Enter name for your tour",
-                            TextInputAction.next,
+                                  borderRadius: BorderRadius.circular(20.r),
+                                )),
+                            maxLines: 5,
                           ),
-                          _textField(
-                            controller.state.locationController,
-                            controller.state.locationNode,
-                            "Location",
-                            "Enter Location of your tour",
-                            TextInputAction.next,
-                          ),
-                          _textField(
-                            controller.state.priceController,
-                            controller.state.priceNode,
-                            "Price",
-                            "Enter Price for your tour in Rs",
-                            TextInputAction.next,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      child: TextField(
-                        controller: controller.state.descrepController,
-                        focusNode: controller.state.descrepNode,
-                        style: TextStyle(color: Colors.white),
-                        onEditingComplete: () {},
-                        onSubmitted: (value) {},
-                        decoration: InputDecoration(
-                            filled: true,
-                            fillColor: AppColors.cardBgColor,
-                            labelText: "Tour Description",
-                            labelStyle: TextStyle(color: Colors.white),
-                            hintText: "Enter long description about you tour",
-                            hintStyle: TextStyle(color: Colors.white),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColors.iconsColor,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Center(
+                                child: Text("Choose Category",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20.sp),),
                               ),
-                              borderRadius: BorderRadius.circular(20.r),
-                            )),
-                        maxLines: 5,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Center(
-                            child: Text("Choose Category",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20.sp),),
+                              SizedBox(
+                                width: 40.w,
+                              ),
+                              _buildCatList(),
+                            ],
                           ),
-                          SizedBox(
-                            width: 40.w,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Center(
+                                child: Text(
+                                  "No of People",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20.sp),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 40.w,
+                              ),
+                              _buildPeopleList(),
+                            ],
                           ),
-                          _buildCatList(),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Center(
-                            child: Text(
-                              "No of People",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 20.sp),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 40.w,
-                          ),
-                          _buildPeopleList(),
-                        ],
-                      ),
-                    ),
-                    Obx(() {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 25.h),
-                        child: controller.state.loading.value == true
-                            ? CircularProgressIndicator(
-                                color: AppColors.activeTabElementColor,
-                              )
-                            : RoundButton(
-                                color: Colors.blue,
-                                title: "Add Tour",
-                                onPress: () {
-                                  if (controller
+                        ),
+                        Obx(() {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: 25.h),
+                            child: controller.state.loading.value == true
+                                ? CircularProgressIndicator(
+                                    color: AppColors.activeTabElementColor,
+                                  )
+                                : RoundButton(
+                                    color: Colors.blue,
+                                    title: "Add Tour",
+                                    onPress: () {
+                                      if (controller
+                                                  .state.titleController.value.text
+                                                  .trim()
+                                                  .toString() !=
+                                              null &&
+                                          controller.state.catValue.value
+                                                  .toString() !=
+                                              "" &&
+                                          controller.state.descrepController.value.text
+                                                  .trim()
+                                                  .toString() !=
+                                              null &&
+                                          controller.image!.path.toString() != "" &&
+                                          controller.state.locationController.value
+                                                  .text
+                                                  .trim()
+                                                  .toString() !=
+                                              null &&
+                                          controller.state.tourPeople.value
+                                                  .toString() !=
+                                              "" &&
+                                          controller
+                                                  .state.priceController.value.text
+                                                  .trim()
+                                                  .toString() !=
+                                              null) {
+                                        print("validated");
+
+                                        controller.addTour(
+                                          // id: ,
+                                          controller
                                               .state.titleController.value.text
                                               .trim()
-                                              .toString() !=
-                                          null &&
-                                      controller.state.catValue.value
-                                              .toString() !=
-                                          "" &&
-                                      controller.state.descrepController.value.text
+                                              .toString(),
+                                          controller
+                                              .state.locationController.value.text
                                               .trim()
-                                              .toString() !=
-                                          null &&
-                                      controller.image!.path.toString() != "" &&
-                                      controller.state.locationController.value
-                                              .text
+                                              .toString(),
+
+                                          controller
+                                              .state.descrepController.value.text
                                               .trim()
-                                              .toString() !=
-                                          null &&
-                                      controller.state.tourPeople.value
-                                              .toString() !=
-                                          "" &&
-                                      controller
+                                              .toString(),
+
+                                          controller.state.catValue.value
+                                              .toString(),
+
+                                          controller.state.tourPeople.value
+                                              .toString(),
+                                          controller
                                               .state.priceController.value.text
                                               .trim()
-                                              .toString() !=
-                                          null) {
-                                    print("validated");
-
-                                    controller.addTour(
-                                      // id: ,
-                                      controller
-                                          .state.titleController.value.text
-                                          .trim()
-                                          .toString(),
-                                      controller
-                                          .state.locationController.value.text
-                                          .trim()
-                                          .toString(),
-
-                                      controller
-                                          .state.descrepController.value.text
-                                          .trim()
-                                          .toString(),
-
-                                      controller.state.catValue.value
-                                          .toString(),
-
-                                      controller.state.tourPeople.value
-                                          .toString(),
-                                      controller
-                                          .state.priceController.value.text
-                                          .trim()
-                                          .toString(),
-                                      controller.image!.path.toString(),
-                                    );
-                                    // print(tour.toJson().toString());
-                                    // c
-                                  } else {
-                                    print("Not validated");
-                                    toastInfo(msg: "Please Enter all Fields");
-                                  }
-                                },
-                              ),
-                      );
-                    })
+                                              .toString(),
+                                          controller.image!.path.toString(),
+                                        );
+                                        // print(tour.toJson().toString());
+                                        // c
+                                      } else {
+                                        print("Not validated");
+                                        toastInfo(msg: "Please Enter all Fields");
+                                      }
+                                    },
+                                  ),
+                          );
+                        })
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-          ),
-        )),
+                ),
+              )),
+        ),
       ),
     );
   }
