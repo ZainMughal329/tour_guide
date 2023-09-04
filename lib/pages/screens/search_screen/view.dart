@@ -36,9 +36,10 @@ class SearchView extends GetView<SearchBarController> {
               keyboardType: TextInputType.text,
               // focusNode: focNode,
               decoration: InputDecoration(
+
                 prefixIcon: Icon(
                   Icons.search,
-                  color: AppColors.lightTextFormFieldColor,
+                  color: AppColors.lightTextColor,
                 ),
                 border: InputBorder.none,
                 hintText: 'Search tours here...',
@@ -57,7 +58,7 @@ class SearchView extends GetView<SearchBarController> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: BuildDrawer.buildDrawer(context),
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.lightBgColor,
       body: Column(
         children: [
           Padding(
@@ -94,7 +95,7 @@ class SearchView extends GetView<SearchBarController> {
                               },
                               child: Icon(
                                 Icons.menu,
-                                color: Colors.blue,
+                                color: AppColors.lightTextColor,
                                 size: 35.sp,
                               ),
                             ),
@@ -110,7 +111,7 @@ class SearchView extends GetView<SearchBarController> {
                                   'Search tours',
                                   style: TextStyle(
                                       fontSize: 24.sp,
-                                      color: Colors.white,
+                                      color: AppColors.lightTextColor,
                                       fontWeight: FontWeight.w600),
                                 ),
                               ],
@@ -125,7 +126,7 @@ class SearchView extends GetView<SearchBarController> {
                           borderRadius: BorderRadius.circular(50),
                           border: Border.all(
                             color: userModel.photoUrl.toString() == ''
-                                ? Colors.blue
+                                ? AppColors.lightTextColor
                                 : Colors.white,
                             width: 1.0.w,
                           ),
@@ -135,8 +136,8 @@ class SearchView extends GetView<SearchBarController> {
                           child: userModel.photoUrl.toString() == ''
                               ? Icon(
                                   Icons.person_outline,
-                                  size: 30,
-                                  color: Colors.blue,
+                                  size: 30.sp,
+                                  color: AppColors.lightTextColor,
                                 )
                               : Image(
                                   image: NetworkImage(
@@ -206,7 +207,7 @@ class SearchView extends GetView<SearchBarController> {
                                                           ''
                                                       ? Icon(
                                                           Icons.person,
-                                                          color: Colors.white,
+                                                          color: AppColors.lightTextColor,
                                                         )
                                                       : Image.network(
                                                           item['tourImage']
@@ -229,7 +230,7 @@ class SearchView extends GetView<SearchBarController> {
                                                             .capitalizeFirst
                                                             .toString(),
                                                         style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: AppColors.lightTextColor,
                                                             fontSize: 15.sp,
                                                             fontWeight:
                                                                 FontWeight
@@ -244,7 +245,7 @@ class SearchView extends GetView<SearchBarController> {
                                                             .capitalizeFirst
                                                             .toString(),
                                                         style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: AppColors.lightTextColor,
                                                             fontSize: 15.sp,
                                                             fontWeight:
                                                                 FontWeight
@@ -266,8 +267,8 @@ class SearchView extends GetView<SearchBarController> {
                                                   children: [
                                                     Icon(
                                                       Icons.people,
-                                                      color: Colors.white,
-                                                      size: 20,
+                                                      color: AppColors.lightTextColor,
+                                                      size: 20.sp,
                                                     ),
                                                     SizedBox(
                                                       width: 2.w,
@@ -277,22 +278,22 @@ class SearchView extends GetView<SearchBarController> {
                                                               .toString() +
                                                           " person\'s",
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: AppColors.lightTextColor,
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
                                                   ],
                                                 ),
                                                 SizedBox(
-                                                  height: 8,
+                                                  height: 8.h,
                                                 ),
                                                 Row(
                                                   children: [
                                                     Icon(
                                                       Icons
                                                           .location_on_outlined,
-                                                      color: Colors.white,
-                                                      size: 20,
+                                                      color: AppColors.lightTextColor,
+                                                      size: 20.sp,
                                                     ),
                                                     SizedBox(
                                                       width: 2.w,
@@ -301,7 +302,7 @@ class SearchView extends GetView<SearchBarController> {
                                                       item['location']
                                                           .toString(),
                                                       style: TextStyle(
-                                                          color: Colors.white,
+                                                          color: AppColors.lightTextColor,
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
@@ -312,7 +313,7 @@ class SearchView extends GetView<SearchBarController> {
                                           ],
                                         ),
                                         Divider(
-                                          color: Colors.white,
+                                          color: AppColors.lightTextColor,
                                           thickness: 1,
                                         ),
                                         SizedBox(
@@ -329,7 +330,7 @@ class SearchView extends GetView<SearchBarController> {
                       : Center(
                           child: Text(
                             'No searches yet',
-                            style: TextStyle(color: Colors.white, fontSize: 25),
+                            style: TextStyle(color: AppColors.lightTextColor, fontSize: 25),
                           ),
                         ),
             ),
@@ -356,6 +357,9 @@ class TextFieldContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.primaryBackground,
         borderRadius: BorderRadius.circular(29),
+        border: Border.all(
+          color: AppColors.lightTextColor
+        )
       ),
       child: child,
     );

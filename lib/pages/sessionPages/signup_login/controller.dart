@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:password_strength/password_strength.dart';
 import 'package:tours_guide/ReUsable/Components/sign_up_msg.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
@@ -16,7 +18,8 @@ import 'package:tours_guide/ReUsable/routes/names.dart';
 import '../../../ReUsable/models/userModel.dart';
 import 'index.dart';
 
-class SignupLoginController extends GetxController with GetTickerProviderStateMixin {
+class SignupLoginController extends GetxController
+    with GetTickerProviderStateMixin {
   final state = SignupLoginState();
 
   SignupLoginController();
@@ -28,8 +31,8 @@ class SignupLoginController extends GetxController with GetTickerProviderStateMi
     // TODO: implement onInit
     super.onInit();
     tabController = TabController(length: 3, vsync: this);
-
   }
+
   // {
 
   // functions for company signUp
@@ -283,7 +286,6 @@ class SignupLoginController extends GetxController with GetTickerProviderStateMi
         .whenComplete(() {
       toastInfo(msg: 'Successfully created account');
 
-
       state.loading.value = false;
       StorePrefrences sp = StorePrefrences();
       sp.setIsFirstOpen(true);
@@ -294,13 +296,48 @@ class SignupLoginController extends GetxController with GetTickerProviderStateMi
     });
   }
 
-  void storeUser(UserModel user, BuildContext context,String email , String pass) async {
+  void storeUser(
+      UserModel user, BuildContext context, String email, String pass) async {
     registerUserWithEmailAndPassword(user, email, pass);
   }
 
   updateUserData(UserModel user) async {
     await _dbUser.doc(user.id).update(user.toJson());
   }
+
+  // double getPasswordStrength() {
+  //   // Get the password from your TextEditingController
+  //   String password = state.signUpPasswordController.text.trim();
+  //
+  //   // Use the password_strength package to estimate password strength
+  //   state.strength.value = estimatePasswordStrength(password);
+  //
+  //   update();
+  //
+  //   return state.strength.value;
+  // }
+
+  void validatePasswordStrength(String value) {
+    state.strength.value = estimatePasswordStrength(value);
+  }
+
+  String passwordStrengthLabel() {
+    if (state.strength.value < 0.3) {
+      return "Weak";
+    } else if (state.strength.value < 0.7) {
+      return "Fair";
+    } else {
+      return "Strong";
+    }
+  }
+
+  bool formIsValid() {
+    return (state.signUpEmailController.text.trim().isNotEmpty &&
+        state.signUpUserController.text.trim().isNotEmpty &&
+        state.signUpPasswordController.text.trim().isNotEmpty &&
+        state.strength.value >= 0.3); // Add other validation rules as needed
+  }
+
 
   @override
   void dispose() {

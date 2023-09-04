@@ -8,6 +8,8 @@ class SignupLoginState {
 
   var companyLogo = '';
 
+  RxDouble strength = 0.0.obs;
+
   final countryPicker = FlCountryCodePicker();
 
   Rx<CountryCode> code =

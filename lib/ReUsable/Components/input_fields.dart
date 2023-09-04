@@ -90,6 +90,7 @@ class InputTextField extends StatelessWidget {
   TextEditingController contr;
   FocusNode? focNode;
    String descrip;
+  final void Function(String)? onChange;
 
   InputTextField(
       {super.key,
@@ -100,6 +101,8 @@ class InputTextField extends StatelessWidget {
         required this.keyboardType,
         required this.obsecure,
         required this.icon,
+        this.onChange,
+
         //
       });
 
@@ -112,6 +115,9 @@ class InputTextField extends StatelessWidget {
         textInputAction: textInputAction,
         obscureText: obsecure,
         keyboardType: keyboardType,
+        onChanged:
+          onChange,
+
         // focusNode: focNode,
         decoration: InputDecoration(
           prefixIcon: Icon(icon , color: AppColors.lightButtonColor,),

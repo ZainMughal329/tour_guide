@@ -111,7 +111,7 @@ class HomePage extends GetView<HomeController> {
           width: 40.w,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.blue,
+              color: AppColors.lightTextColor,
             ),
             borderRadius: BorderRadius.circular(50),
           ),
@@ -129,7 +129,7 @@ class HomePage extends GetView<HomeController> {
         Text(
           title,
           style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
+              color: AppColors.lightTextColor, fontSize: 14.sp, fontWeight: FontWeight.w400),
         ),
       ],
     );
@@ -158,7 +158,7 @@ class HomePage extends GetView<HomeController> {
         Text(
           title,
           style: TextStyle(
-            color: Colors.white,
+            color: AppColors.lightTextColor,
             fontWeight: FontWeight.w400,
             fontSize: 16.sp,
           ),
@@ -170,7 +170,8 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff081921),
+      // backgroundColor: Color(0xff081921),
+      backgroundColor: AppColors.lightBgColor,
       key: _scaffoldKey,
 
       drawer: BuildDrawer.buildDrawer(context),
@@ -202,7 +203,7 @@ class HomePage extends GetView<HomeController> {
                                       },
                                       child: Icon(
                                         Icons.menu,
-                                        color: Colors.blue,
+                                        color: AppColors.lightTextColor,
                                         size: 35.sp,
                                       ),
                                     ),
@@ -219,7 +220,7 @@ class HomePage extends GetView<HomeController> {
                                           'Welcome back 🖐🏻',
                                           style: TextStyle(
                                               fontSize: 13.sp,
-                                              color: Colors.white,
+                                              color: AppColors.lightTextColor,
                                               fontWeight: FontWeight.w600),
                                         ),
                                         SizedBox(
@@ -232,7 +233,7 @@ class HomePage extends GetView<HomeController> {
                                               .toString(),
                                           style: TextStyle(
                                             fontSize: 20.sp,
-                                            color: Colors.white,
+                                            color: AppColors.lightTextColor,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -250,7 +251,7 @@ class HomePage extends GetView<HomeController> {
                                     color:
                                         snapshot.data!['photoUrl'].toString() ==
                                                 ''
-                                            ? Colors.blue
+                                            ? AppColors.lightTextColor
                                             : Colors.white,
                                     width: 1.0.w,
                                   ),
@@ -262,8 +263,8 @@ class HomePage extends GetView<HomeController> {
                                               ''
                                           ? Icon(
                                               Icons.person_outline,
-                                              size: 30,
-                                              color: Colors.blue,
+                                              size: 30.sp,
+                                              color: AppColors.lightTextColor,
                                             )
                                           : Image(
                                               image: NetworkImage(
@@ -297,7 +298,7 @@ class HomePage extends GetView<HomeController> {
                   style: TextStyle(
                       fontSize: 30.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      color: AppColors.lightTextColor),
                 ),
                 SizedBox(
                   height: 5.h,
@@ -306,7 +307,7 @@ class HomePage extends GetView<HomeController> {
                   'Explore the best places in the world!',
                   style: TextStyle(
                       fontSize: 16.sp,
-                      color: Colors.white,
+                      color: AppColors.lightTextColor,
                       fontWeight: FontWeight.normal),
                 ),
                 SizedBox(
@@ -322,14 +323,15 @@ class HomePage extends GetView<HomeController> {
                             margin: EdgeInsets.symmetric(horizontal: 10.w),
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: Color(0xff0c3e4f),
+                              // color: Color(0xff0c3e4f),
+                              color: AppColors.lightCardColor,
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 4,
-                                ),
-                              ],
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     color: Colors.black26,
+                              //     blurRadius: 4,
+                              //   ),
+                              // ],
                             ),
                             child: _buildCardView(
                               controller.category[i],
@@ -413,7 +415,7 @@ class HomePage extends GetView<HomeController> {
                                     Center(
                                       child: Text(
                                         'No new companies to approved',
-                                        style: TextStyle(fontSize: 30),
+                                        style: TextStyle(fontSize: 30 , color: AppColors.lightTextColor),
                                       ),
                                     ),
                                   ],
@@ -438,7 +440,7 @@ class HomePage extends GetView<HomeController> {
                   'Popular Categories',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: AppColors.lightTextColor,
                       fontSize: 18.sp),
                 ),
                 SizedBox(height: 10.h),

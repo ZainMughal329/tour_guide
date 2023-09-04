@@ -34,44 +34,44 @@ class ApplicationController extends GetxController {
       const BottomNavigationBarItem(
           icon: Icon(
             Icons.home_filled,
-            color: AppColors.unActiveIconColor,
+            color: AppColors.lightInActiveIconColor,
           ),
           activeIcon: Icon(
             Icons.home_filled,
-            color: AppColors.activeIconColor,
+            color: AppColors.lightActiveIconColor,
           ),
           label: 'Home',
           backgroundColor: AppColors.primaryBackground),
       const BottomNavigationBarItem(
           icon: Icon(
             Icons.search,
-            color: AppColors.unActiveIconColor,
+            color: AppColors.lightInActiveIconColor,
           ),
           activeIcon: Icon(
             Icons.search,
-            color: AppColors.activeIconColor,
+            color: AppColors.lightActiveIconColor,
           ),
           label: 'Search',
           backgroundColor: AppColors.primaryBackground),
       const BottomNavigationBarItem(
           icon: Icon(
             Icons.map_outlined,
-            color: AppColors.unActiveIconColor,
+            color: AppColors.lightInActiveIconColor,
           ),
           activeIcon: Icon(
             Icons.map_outlined,
-            color: AppColors.activeIconColor,
+            color: AppColors.lightActiveIconColor,
           ),
           label: 'Map',
           backgroundColor: AppColors.primaryBackground),
       const BottomNavigationBarItem(
           icon: Icon(
             Icons.person,
-            color: AppColors.unActiveIconColor,
+            color: AppColors.lightInActiveIconColor,
           ),
           activeIcon: Icon(
             Icons.person,
-            color: AppColors.activeIconColor,
+            color: AppColors.lightActiveIconColor,
           ),
           label: 'Person',
           backgroundColor: AppColors.primaryBackground),

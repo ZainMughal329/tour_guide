@@ -29,9 +29,21 @@ class AppColors {
 
   static Color lightTextFormFieldColor = Colors.cyanAccent.withOpacity(0.3);
 
+  static Color lightCardColor = Colors.cyanAccent;
+
+
   static const Color lightBgColor = Colors.white;
 
   static const Color lightTextColor = Colors.black;
+
+  static const Color lightInActiveIconColor = Colors.grey;
+
+  static const Color lightActiveIconColor = Colors.black;
+
+
+  static const Color darkBgColor = Color(0xff081921);
+
+
 
 
 }

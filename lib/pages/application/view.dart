@@ -29,16 +29,17 @@ class ApplicationPage extends GetView<ApplicationController> {
     return Obx(
       () => BottomNavigationBar(
         // backgroundColor: AppColors.unActiveIconColor.withOpacity(0.4),
-        backgroundColor: Color(0xff06141B),
+        // backgroundColor: Color(0xff06141B),
+        backgroundColor: Colors.white,
         items: controller.bottomTabs,
-        elevation: 0,
+        // elevation: 0,
         currentIndex: controller.state.page,
         onTap: controller.handleNavBarChange,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        selectedItemColor: Colors.white ,
-        unselectedItemColor: Colors.white,
+        selectedItemColor: AppColors.lightTextColor ,
+        unselectedItemColor: AppColors.lightTextColor,
       ),
     );
   }

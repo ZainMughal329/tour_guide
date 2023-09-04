@@ -20,7 +20,7 @@ class PersonView extends GetView<PersonController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.lightBgColor,
       key: _scaffoldKey,
       drawer: BuildDrawer.buildDrawer(context),
       body: SingleChildScrollView(
@@ -42,7 +42,7 @@ class PersonView extends GetView<PersonController> {
                             },
                             child: Icon(
                               Icons.menu,
-                              color: Colors.blue,
+                              color: AppColors.lightActiveIconColor,
                               size: 35.sp,
                             ),
                           ),
@@ -58,7 +58,7 @@ class PersonView extends GetView<PersonController> {
                                 'Profile',
                                 style: TextStyle(
                                     fontSize: 24.sp,
-                                    color: Colors.white,
+                                    color: AppColors.lightTextColor,
                                     fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -71,7 +71,7 @@ class PersonView extends GetView<PersonController> {
                         onPressed: () {},
                         icon: Icon(
                           Icons.dark_mode_outlined,
-                          color: Colors.blue,
+                          color: AppColors.lightActiveIconColor,
                           size: 35.sp,
                         ),
                       ),
@@ -96,7 +96,7 @@ class PersonView extends GetView<PersonController> {
                           // {
                           //   return
                           Container(
-                            height: 70,
+                            height: 60.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
@@ -104,19 +104,20 @@ class PersonView extends GetView<PersonController> {
                               // color: controller.state.isDarkMode.value
                               //     ? Colors.black
                               //     : Colors.white,
-                              color: Color(0xff0c3e4f),
+                              // color: Color(0xff0c3e4f),
+                              color: AppColors.lightCardColor
                             ),
                             child: ListTile(
                               onTap: () {
                                 Get.to(() => UpdateScreen());
                               },
                               leading: Container(
-                                height: 50,
-                                width: 50,
+                                height: 50.w,
+                                width: 50.w,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   border: Border.all(
-                                    color: Colors.blue,
+                                    color: AppColors.lightActiveIconColor,
                                     width: 2.0.w,
                                   ),
                                 ),
@@ -128,8 +129,8 @@ class PersonView extends GetView<PersonController> {
                                           ? Center(
                                               child: Icon(
                                                 Icons.person,
-                                                size: 30,
-                                                color: Colors.white,
+                                                size: 30.sp,
+                                                color: AppColors.lightActiveIconColor,
                                               ),
                                             )
                                           : Image(
@@ -146,65 +147,66 @@ class PersonView extends GetView<PersonController> {
                               ),
                               title: Text(
                                 snapshot.data!['email'].toString(),
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: AppColors.lightTextColor),
                               ),
                               subtitle: Text(snapshot.data!['phone'],
-                                  style: TextStyle(color: Colors.white)),
+                                  style: TextStyle(color: AppColors.lightTextColor),),
                               trailing: Icon(
                                 Icons.arrow_forward_ios,
-                                color: Colors.blue,
+                                color: AppColors.lightActiveIconColor,
                               ),
                             ),
                           ),
                           // }
                           // ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
                           Container(
                             height: 120,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Color(0xff0c3e4f),
+                              // color: Color(0xff0c3e4f),
+                              color: AppColors.lightCardColor,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
                               children: [
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     onTap: () {},
                                     leading: Icon(
                                       Icons.notifications,
-                                      color: Colors.blue,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                     title: Text(
                                       'Notifications',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: InkWell(
                                       onTap: () {},
                                       child: Icon(
                                         Icons.radio_button_on,
-                                        color: Colors.white,
+                                        color: AppColors.lightActiveIconColor,
                                       ),
                                     ),
                                   ),
                                 ),
                                 Divider(
                                   color: Colors.grey,
-                                  height: 5,
+                                  height: 5.h,
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     leading: Icon(
                                       Icons.dark_mode_outlined,
-                                      color: Colors.blue,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                     title: Text(
                                       'Dark Mode',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: Obx(() {
                                       return Switch(
@@ -228,89 +230,90 @@ class PersonView extends GetView<PersonController> {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
                           Container(
-                            height: 270,
+                            height: 225.h,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Color(0xff0c3e4f),
+                              // color: Color(0xff0c3e4f),
+                              color: AppColors.lightCardColor,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
                               children: [
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     onTap: () {},
                                     title: Text(
                                       'What\'s new',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: AppColors.iconsColor,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                   ),
                                 ),
-                                Divider(color: Colors.white, height: 5),
+                                Divider(color: Colors.grey, height: 5),
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     onTap: () {},
                                     title: Text(
                                       'FAQ\'s / Contact us',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: AppColors.iconsColor,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                   ),
                                 ),
                                 Divider(color: Colors.grey, height: 5),
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     onTap: () {},
                                     title: Text(
                                       'Community Guidelines',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: AppColors.iconsColor,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                   ),
                                 ),
                                 Divider(color: Colors.grey, height: 5),
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     onTap: () {},
                                     title: Text(
                                       'Term of use',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: AppColors.iconsColor,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                   ),
                                 ),
                                 Divider(color: Colors.grey, height: 5),
                                 Container(
-                                  height: 50,
+                                  height: 40.h,
                                   child: ListTile(
                                     onTap: () {},
                                     title: Text(
                                       'Privacy Policy',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: Icon(
                                       Icons.arrow_right_alt,
-                                      color: AppColors.iconsColor,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                   ),
                                 ),
@@ -350,11 +353,11 @@ class PersonView extends GetView<PersonController> {
                                 padding: EdgeInsets.symmetric(vertical: 30.h),
                                 child: InkWell(
                                   child: Container(
-                                      height: 50,
-                                      width: 300,
+                                      height: 50.h,
+                                      width: 300.w,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color: AppColors.activeIconColor,
+                                        color: AppColors.lightButtonColor,
                                       ),
                                       child: Obx(() {
                                         return controller.state.loading.value

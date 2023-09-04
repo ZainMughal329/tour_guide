@@ -52,9 +52,25 @@ class SignUpPage extends GetView<SignupLoginController> {
                 icon: Icons.lock_open,
                 contr: controller.state.signUpPasswordController,
                 descrip: 'Enter your password',
+                onChange: (val) {
+                  controller.validatePasswordStrength(val);
+                },
                 // focNode: controller.passwordFocus,
               ),
             ),
+          ),
+          SizedBox(height: 10),
+          Obx(
+            () {
+              return Text(
+                'Password Strength: ${controller.passwordStrengthLabel()}',
+                style: TextStyle(
+                  color: controller.state.strength.value < 0.3
+                      ? Colors.red
+                      : Colors.green,
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -72,30 +88,28 @@ class SignUpPage extends GetView<SignupLoginController> {
             tag: "signUp_btn",
             child: GestureDetector(
               onTap: () {
-                var user = UserModel(
-                  email: controller.state.signUpEmailController.text
-                      .trim()
-                      .toString(),
-                  password: controller.state.signUpPasswordController.text
-                      .trim()
-                      .toString(),
-                  phone: '+92**********',
-                  userName: controller.state.signUpUserController.text
-                      .trim()
-                      .toString(),
-                  photoUrl: '',
-                  location: '',
-                  fcmToken: '',
-                  addTime: Timestamp.now(),
-                );
-                controller.storeUser(
-                  user,
-                  context,
-                  controller.state.signUpEmailController.text.trim().toString(),
-                  controller.state.signUpPasswordController.text
-                      .trim()
-                      .toString(),
-                );
+                if (controller.formIsValid()) {
+                  // Form is valid, proceed with registration
+                  var user = UserModel(
+                    email: controller.state.signUpEmailController.text.trim(),
+                    password:
+                        controller.state.signUpPasswordController.text.trim(),
+                    phone: '+92**********',
+                    userName: controller.state.signUpUserController.text.trim(),
+                    photoUrl: '',
+                    location: '',
+                    fcmToken: '',
+                    addTime: Timestamp.now(),
+                  );
+                  controller.storeUser(
+                    user,
+                    context,
+                    controller.state.signUpEmailController.text.trim(),
+                    controller.state.signUpPasswordController.text.trim(),
+                  );
+                } else {
+                  Get.snackbar('Error', 'All fields must be filled');
+                }
               },
               child: Container(
                 width: double.infinity,
@@ -106,7 +120,7 @@ class SignUpPage extends GetView<SignupLoginController> {
                 ),
                 child: Center(
                   child: Text(
-                    "SignUp".toUpperCase(),
+                    "Sign Up".toUpperCase(),
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
