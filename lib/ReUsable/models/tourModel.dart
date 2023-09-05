@@ -13,6 +13,8 @@ class TourModel {
 
   final String price;
 
+
+
   // final String tourRating;
 
   final String tourImage;

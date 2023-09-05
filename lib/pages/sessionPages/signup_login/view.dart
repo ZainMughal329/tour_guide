@@ -90,11 +90,19 @@ class SignupLoginView extends GetView<SignupLoginController> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        // resizeToAvoidBottomInset: true,
+        backgroundColor: Colors.white,
+        // appBar: PreferredSize(
+        //   preferredSize: Size.fromHeight(300.0), // You can adjust this value
+        //   child: TopImage(),
+        // ),
         body: SingleChildScrollView(
+          // controller: ScrollController(),
+          // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TopImage(),
+              // TopImage(),
               Row(
                 children: [
                   Spacer(),
@@ -102,12 +110,13 @@ class SignupLoginView extends GetView<SignupLoginController> {
                     flex: 8,
                     child: Column(
                       children: [
+                        TopImage(),
                         Container(
                           child: Align(
-                            alignment: Alignment.topLeft,
+                            alignment: Alignment.center,
                             child: TabBar(
                               isScrollable: true,
-                              labelPadding: EdgeInsets.only(right: 20, left: 20),
+                              labelPadding: EdgeInsets.symmetric(horizontal: 20),
                               indicator:
                               CircleTabIndicator(color: Colors.cyan, radius: 4),
                               controller: controller.tabController,

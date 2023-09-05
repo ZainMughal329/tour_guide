@@ -15,7 +15,7 @@ class TopImage extends StatelessWidget {
           children: [
             const Spacer(),
             Expanded(
-              flex: 10,
+              flex: 4,
               child: Image.asset("assets/icons/travel.jpg" , fit: BoxFit.fill,),
             ),
             const Spacer(),

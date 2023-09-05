@@ -350,9 +350,10 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 20.h,
                 ),
                 Container(
+                  height: 300.h,
                   child: FutureBuilder<List<TourModel>>(
                     future: controller.getAndShowALlToursData(),
                     builder: (BuildContext context, snapshot) {
