@@ -19,6 +19,7 @@ class CompanyShowTourController extends GetxController {
   var auth = FirebaseAuth.instance;
 
   final state = CompanyShowTourState();
+  final dbCompany = FirebaseFirestore.instance.collection("company");
 
   final firestore = FirebaseFirestore.instance
       .collection('company')
@@ -34,6 +35,21 @@ class CompanyShowTourController extends GetxController {
   final _dbTours = FirebaseFirestore.instance.collection('allTours');
 
   // if(k.de)
+
+  Future<void> fetchCompanyId()async{
+    state.companyId = await auth.currentUser!.uid.toString();
+  }
+  Future<void> fetchCompanyName() async{
+    final companyDoc = await dbCompany.doc(state.companyId).get();
+    if(companyDoc !=null){
+      state.companyName = companyDoc["CompanyName"];
+    }
+  }
+
+
+
+
+
 
   deleteTour(String id) async {
     print('id is : ' + id.toString());

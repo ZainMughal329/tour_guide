@@ -166,7 +166,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: NeverScrollableScrollPhysics(),
+        // physics: NeverScrollableScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.all(10.w),
           child: SafeArea(
@@ -346,33 +346,23 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 : RoundButton(
                                     color: Colors.blue,
                                     title: "Add Tour",
-                                    onPress: () {
-                                      if (controller
-                                                  .state.titleController.value.text
-                                                  .trim()
-                                                  .toString() !=
-                                              null &&
-                                          controller.state.catValue.value
+                                    onPress: () async{
+                                      // final companyId = await controller.auth.currentUser!.uid.toString();
+                                      // final companydoc = await controller.dbCompany.doc(companyId).get();
+                                      // if(companydoc != null){
+                                      //   controller.state.companyName = companydoc["CompanyName"];
+                                      // }
+                                      controller.fetchCompanyId().then((value){
+                                        controller.fetchCompanyName();
+                                      });
+
+                                      if (controller.state.catValue.value
                                                   .toString() !=
                                               "" &&
-                                          controller.state.descrepController.value.text
-                                                  .trim()
-                                                  .toString() !=
-                                              null &&
                                           controller.image!.path.toString() != "" &&
-                                          controller.state.locationController.value
-                                                  .text
-                                                  .trim()
-                                                  .toString() !=
-                                              null &&
                                           controller.state.tourPeople.value
                                                   .toString() !=
-                                              "" &&
-                                          controller
-                                                  .state.priceController.value.text
-                                                  .trim()
-                                                  .toString() !=
-                                              null) {
+                                              "") {
                                         print("validated");
 
                                         controller.addTour(
@@ -401,6 +391,11 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                               .trim()
                                               .toString(),
                                           controller.image!.path.toString(),
+                                          controller.state.companyId.toString(),
+                                          controller.state.companyName.toString(),
+
+
+
                                         );
                                         // print(tour.toJson().toString());
                                         // c

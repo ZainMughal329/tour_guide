@@ -20,6 +20,9 @@ class CompanyShowTourState {
 
   final loading = false.obs;
 
+  String? companyId;
+  String? companyName;
+
   final location = TextEditingController();
 
   final title = TextEditingController();

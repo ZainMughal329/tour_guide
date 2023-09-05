@@ -426,16 +426,21 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                   color: Colors.blue,
                                   title: "Save",
                                   onPress: () async {
+                                    controller.fetchCompanyId().then((value){
+                                      controller.fetchCompanyName();
+                                    });
                                     var tourData = TourModel(
                                       id: id,
                                       title: title.text.toString(),
-                                      tourCategory:
-                                      controller.state.catValue.value,
+                                      tourCategory: controller.state.catValue.value,
                                       tourDescription: des.text.toString(),
                                       tourImage: tourModel.tourImage.toString(),
                                       location: location.text.toString(),
                                       people: controller.state.tourPeople.value,
                                       price: price.text.toString(),
+                                      companyId: controller.state.companyId,
+                                      companyName: controller.state.companyId,
+
                                     );
 
                                     await controller.updateTour(tourData, id);

@@ -18,7 +18,7 @@ class CompanyAddTourController extends GetxController {
 
   final state = CompanyAddTourState();
   final auth = FirebaseAuth.instance;
-  final _dbCompany = FirebaseFirestore.instance.collection("company");
+  final dbCompany = FirebaseFirestore.instance.collection("company");
   final allTours = FirebaseFirestore.instance.collection("allTours");
 
   firebase_storage.FirebaseStorage storage =
@@ -40,6 +40,17 @@ class CompanyAddTourController extends GetxController {
     state.catValue.value = "";
     state.tourPeople.value = "";
   }
+
+  Future<void> fetchCompanyId()async{
+    state.companyId = await auth.currentUser!.uid.toString();
+  }
+  Future<void> fetchCompanyName() async{
+    final companyDoc = await dbCompany.doc(state.companyId).get();
+    if(companyDoc !=null){
+      state.companyName = companyDoc["CompanyName"];
+    }
+  }
+
 
   final picker = ImagePicker();
 
@@ -82,14 +93,17 @@ class CompanyAddTourController extends GetxController {
       String tourCategory,
       String people,
       String price,
-      String tourImage) async {
+      String tourImage,
+      String companyId,
+      String comapnyName,
+      ) async {
     state.loading.value = true;
     String timeStamp = DateTime.now().microsecondsSinceEpoch.toString();
-    final companyDoc = await _dbCompany.doc(auth.currentUser!.uid).get();
+    final companyDoc = await dbCompany.doc(auth.currentUser!.uid).get();
     final companyPhone = companyDoc.data()!['companyPhone'];
     print('Data is: ' + companyPhone.toString());
     try {
-      await _dbCompany
+      await dbCompany
           .doc(auth.currentUser!.uid.toString())
           .collection('tour')
           .doc(timeStamp)
@@ -104,6 +118,9 @@ class CompanyAddTourController extends GetxController {
               people: people,
               price: price,
               companyPhone: companyPhone,
+              companyId: companyId,
+              companyName: comapnyName
+
             ).toJson(),
           )
           .then((value) async {
@@ -119,6 +136,8 @@ class CompanyAddTourController extends GetxController {
               people: people,
               price: price,
               companyPhone: companyPhone,
+          companyId: companyId,
+          companyName: comapnyName
             ).toJson())
             .then((value) {
           toastInfo(msg: "Successfully Added Tour");
@@ -159,7 +178,7 @@ class CompanyAddTourController extends GetxController {
 
     final newUrl = await storageRef.getDownloadURL();
 
-    _dbCompany
+    dbCompany
         .doc(auth.currentUser!.uid.toString())
         .collection('tour')
         .doc(timeStamp)

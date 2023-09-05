@@ -18,5 +18,8 @@ class CompanyAddTourState {
 
   final tourPeople = "".obs;
 
+  String? companyId;
+  String? companyName;
+
   final loading = false.obs;
 }
