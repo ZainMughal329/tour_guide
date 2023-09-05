@@ -10,6 +10,9 @@ class SignupLoginState {
 
   RxDouble strength = 0.0.obs;
 
+  RxDouble companyPassStrength = 0.0.obs;
+
+
   final countryPicker = FlCountryCodePicker();
 
   Rx<CountryCode> code =

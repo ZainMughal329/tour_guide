@@ -46,8 +46,8 @@ class HomePage extends GetView<HomeController> {
         child: Padding(
           padding: EdgeInsets.only(right: 18.w),
           child: Container(
-            height: 297,
-            width: 201,
+            height: 277.h,
+            width: 201.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
@@ -55,7 +55,7 @@ class HomePage extends GetView<HomeController> {
               color: Colors.transparent,
             ),
             child: Container(
-              height: 297.h,
+              height: 277.h,
               width: 201.w,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -363,7 +363,7 @@ class HomePage extends GetView<HomeController> {
                           print(snapshot.data!.length.toString());
                           return snapshot.data!.length != 0
                               ? Container(
-                                  height: 270.h,
+                                  height: 250.h,
                                   child: ListView.builder(
                                       // shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,

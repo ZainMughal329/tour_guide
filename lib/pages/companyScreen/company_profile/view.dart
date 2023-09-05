@@ -17,7 +17,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.lightBgColor,
       resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         child: Padding(
@@ -37,7 +37,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: AppColors.cardBgColor,
+                            color: AppColors.lightCardColor,
                           ),
                           child: ListTile(
                             onTap: () {
@@ -48,7 +48,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               width: 50.w,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.white,
+                                  color: AppColors.lightActiveIconColor,
 
                                 ),
                                 borderRadius: BorderRadius.circular(50),
@@ -60,7 +60,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                     ? Icon(
                                         Icons.person_outline,
                                         size: 30.sp,
-                                        color: Colors.white,
+                                        color: AppColors.lightActiveIconColor,
                                       )
                                     : Image(
                                         image: NetworkImage(
@@ -72,14 +72,14 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                             ),
                             title: Text(
                               snapshot.data!['CompanyEmail'].toString(),
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: AppColors.lightTextColor),
                             ),
                             subtitle: Text(
                                 snapshot.data!['companyPhone'].toString(),
-                                style: TextStyle(color: Colors.white)),
+                                style: TextStyle(color: AppColors.lightTextColor)),
                             trailing: Icon(
                               Icons.arrow_forward_ios,
-                              color: AppColors.iconsColor,
+                              color: AppColors.lightActiveIconColor,
                             ),
                           ),
                         ),
@@ -90,139 +90,139 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           height: 120,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.cardBgColor,
+                            color: AppColors.lightCardColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
                             children: [
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   onTap: () {},
                                   leading: Icon(
                                     Icons.notifications,
-                                    color: Colors.blue,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                   title: Text(
                                     'Notifications',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: InkWell(
                                     onTap: () {},
                                     child: Icon(
                                       Icons.radio_button_on,
-                                      color: AppColors.iconsColor,
+                                      color: AppColors.lightActiveIconColor,
                                     ),
                                   ),
                                 ),
                               ),
                               Divider(
                                 color: Colors.grey,
-                                height: 5,
+                                height: 5.h,
                               ),
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   leading: Icon(
                                     Icons.dark_mode_outlined,
-                                    color: Colors.blue,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                   title: Text(
                                     'Dark Mode',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.radio_button_on_outlined,
-                                    color: Colors.white,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Container(
-                          height: 270,
+                          height: 270.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.cardBgColor,
+                            color: AppColors.lightCardColor,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
                             children: [
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
                                     'What\'s new',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: AppColors.iconsColor,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                 ),
                               ),
-                              Divider(color: Colors.white, height: 5),
+                              Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
                                     'FAQ\'s / Contact us',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: AppColors.iconsColor,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                 ),
                               ),
-                              Divider(color: Colors.grey, height: 5),
+                              Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
                                     'Community Guidelines',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: AppColors.iconsColor,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                 ),
                               ),
-                              Divider(color: Colors.grey, height: 5),
+                              Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
                                     'Term of use',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: AppColors.iconsColor,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                 ),
                               ),
-                              Divider(color: Colors.grey, height: 5),
+                              Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50,
+                                height: 50.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
                                     'Privacy Policy',
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
-                                    color: AppColors.iconsColor,
+                                    color: AppColors.lightActiveIconColor,
                                   ),
                                 ),
                               ),
@@ -268,7 +268,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                     width: 300,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color: Colors.blue),
+                                        color: AppColors.lightButtonColor),
                                     child: Center(
                                       child: Text(
                                         'Logout',

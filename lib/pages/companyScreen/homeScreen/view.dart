@@ -39,7 +39,7 @@ class _CompanyHomeState extends State<CompanyHome>
                   return Scaffold(
 
                     resizeToAvoidBottomInset: false,
-                    backgroundColor: AppColors.bgColor,
+                    backgroundColor: AppColors.lightBgColor,
                     body: SafeArea(
                       child: SingleChildScrollView(
                         child: Column(
@@ -53,7 +53,7 @@ class _CompanyHomeState extends State<CompanyHome>
                               child: Row(
                                 children: [
                                   Icon(Icons.menu,
-                                      size: 30.sp, color: AppColors.iconsColor),
+                                      size: 30.sp, color: AppColors.lightActiveIconColor),
                                   Expanded(
                                     child: Container(),
                                   ),
@@ -64,7 +64,7 @@ class _CompanyHomeState extends State<CompanyHome>
                                       borderRadius: BorderRadius.circular(50),
                                       // color: AppColors.iconsColor,
                                       border: Border.all(
-                                          color: Colors.blue, width: 2.0 ,),
+                                          color: AppColors.lightActiveIconColor, width: 2.0 ,),
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(50),
@@ -72,7 +72,7 @@ class _CompanyHomeState extends State<CompanyHome>
                                           ? Icon(
                                         Icons.person_outline,
                                         size: 30.sp,
-                                        color: Colors.blue,
+                                        color: AppColors.lightActiveIconColor,
                                       )
                                           : Image(
                                         image: NetworkImage(
@@ -110,9 +110,9 @@ class _CompanyHomeState extends State<CompanyHome>
                                   labelPadding:
                                   EdgeInsets.only(right: 20.w, left: 20.w),
                                   indicator: CircleTabIndicator(
-                                      color: AppColors.iconsColor, radius: 4),
+                                      color: AppColors.lightButtonColor, radius: 4),
                                   controller: _tabController,
-                                  labelColor: Colors.white,
+                                  labelColor: AppColors.lightTextColor,
                                   unselectedLabelColor: Colors.grey,
                                   tabs: [
                                     Tab(

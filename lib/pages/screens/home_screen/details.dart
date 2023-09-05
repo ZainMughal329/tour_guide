@@ -59,13 +59,15 @@ class DetailScreen extends GetView<HomeController> {
                       height: 50.w,
                       width: 50.w,
                       decoration: BoxDecoration(
-                        color: AppColors.bgColor,
+                        // color: AppColors.bgColor,
+                        color: AppColors.lightBgColor,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
                         child: Icon(
                           Icons.arrow_back_ios_new,
-                          color: Colors.blue,
+                          // color: Colors.blue,
+                          color: AppColors.lightActiveIconColor,
                         ),
                       ),
                     ),
@@ -78,13 +80,15 @@ class DetailScreen extends GetView<HomeController> {
                       height: 50.w,
                       width: 50.w,
                       decoration: BoxDecoration(
-                        color: AppColors.bgColor,
+                        // color: AppColors.bgColor,
+                        color: AppColors.lightBgColor,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
                         child: Icon(
                           Icons.favorite_outline,
-                          color: AppColors.iconsColor,
+                          // color: AppColors.iconsColor,
+                          color: AppColors.lightActiveIconColor,
                         ),
                       ),
                     ),
@@ -129,7 +133,8 @@ class PostBottomBar extends GetView<HomeController> {
       padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
       height: MediaQuery.of(context).size.height * 0.5,
       decoration: BoxDecoration(
-        color: AppColors.cardBgColor,
+        // color: AppColors.cardBgColor,
+        color: AppColors.lightBgColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),
@@ -151,10 +156,10 @@ class PostBottomBar extends GetView<HomeController> {
                         Text(
                           title,
                           style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 23,
-                            color: Colors.white,
-                          ),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 23,
+                              // color: Colors.white,
+                              color: AppColors.lightTextColor),
                         ),
                         SizedBox(
                           height: 10.h,
@@ -168,10 +173,11 @@ class PostBottomBar extends GetView<HomeController> {
                             ),
                             Text(
                               location,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14.sp
-                                      // fontWeight: FontWeight.w600,
-                                      ),
+                              style: TextStyle(
+                                  color: AppColors.lightTextColor,
+                                  fontSize: 14.sp
+                                  // fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ],
                         ),
@@ -194,7 +200,7 @@ class PostBottomBar extends GetView<HomeController> {
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: AppColors.lightTextColor,
                                 // fontWeight: FontWeight.w600
                               ),
                             ),
@@ -217,9 +223,9 @@ class PostBottomBar extends GetView<HomeController> {
                 Text(
                   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                   style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
+                      fontSize: 15,
+                      // color: Colors.white,
+                      color: AppColors.lightTextColor),
                   textAlign: TextAlign.justify,
                 ),
                 SizedBox(height: 50.h),
@@ -228,24 +234,9 @@ class PostBottomBar extends GetView<HomeController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Container(
-                      //   padding: EdgeInsets.all(10),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(10),
-                      //     color: AppColors.bgColor,
-                      //     boxShadow: [
-                      //       BoxShadow(color: Colors.black54, blurRadius: 4),
-                      //     ],
-                      //   ),
-                      //   child: Icon(
-                      //     Icons.bookmark_border_outlined,
-                      //     size: 30,
-                      //     color: AppColors.iconsColor,
-                      //   ),
-                      // ),
                       InkWell(
                         onTap: () {
-                          controller.openwhatsapp(context, phone);
+                          controller.openWhatsapp(context, phone);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -261,7 +252,7 @@ class PostBottomBar extends GetView<HomeController> {
                             ],
                           ),
                           child: Text(
-                            phone,
+                            "Chat Now",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -271,15 +262,16 @@ class PostBottomBar extends GetView<HomeController> {
                       ),
                       InkWell(
                         onTap: () {
-
-                          controller.fetchUserData().then((value){
-                            Get.to(() => BookingView(tourId: id,name: controller.state.name ?? "" ,
-                            phoneNumber: controller.state.phoneNumber ?? "",
-                            ));
-                          }).onError((error, stackTrace){
+                          controller.fetchUserData().then((value) {
+                            Get.to(() => BookingView(
+                                  tourId: id,
+                                  name: controller.state.name ?? "",
+                                  phoneNumber:
+                                      controller.state.phoneNumber ?? "",
+                                ));
+                          }).onError((error, stackTrace) {
                             Snackbar.showSnackBar("Error", error.toString());
                           });
-
 
                           // Get.toNamed(AppRoutes.Booking_Screen);
                           // print(id.toString());

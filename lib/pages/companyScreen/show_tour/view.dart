@@ -30,7 +30,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
           width: 201.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.iconsColor),
+            border: Border.all(color: AppColors.lightActiveIconColor),
             image: DecorationImage(
                 image: NetworkImage(imageUrl), fit: BoxFit.cover),
             color: Colors.transparent,
@@ -85,7 +85,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.lightBgColor,
       resizeToAvoidBottomInset: true,
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -328,7 +328,7 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                   child: Center(
                     child: Text(
                       'No tours added.',
-                      style: TextStyle(fontSize: 20.sp , color: Colors.white),
+                      style: TextStyle(fontSize: 20.sp , color: AppColors.lightTextColor),
                     ),
                   ),
                 );

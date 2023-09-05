@@ -45,7 +45,8 @@ class HomeController extends GetxController {
   }
 
   Future<List<TourModel>> getAllTourData() async {
-    final snapshot = await FirebaseFirestore.instance.collection('allTours').get();
+    final snapshot =
+        await FirebaseFirestore.instance.collection('allTours').get();
     final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
     return tourData;
   }
@@ -54,15 +55,52 @@ class HomeController extends GetxController {
     return await getAllTourData();
   }
 
-  openwhatsapp(BuildContext context, String phone) async {
-    final Uri whatsapp = Uri.parse(phone);
-    final Uri whatsappURl_android = Uri.parse(
-        "whatsapp://send?phone=" + whatsapp.toString() + "&text=hello");
-    // var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+  openWhatsapp(BuildContext context, String phone) async {
+    // final Uri whatsapp = Uri.parse(phone);
+    // final Uri whatsappURl_android = Uri.parse(
+    //     "whatsapp://send?phone=" + whatsapp.toString() + "&text=hello");
+    // // var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    //
+    // // android , web
+    // if (await canLaunchUrl(whatsappURl_android)) {
+    //   await launchUrl(whatsappURl_android);
+    // }
 
-    // android , web
-    if (await canLaunchUrl(whatsappURl_android)) {
-      await launchUrl(whatsappURl_android);
+    // final phoneNumber = phone; // Replace with the recipient's phone number
+    // final message = 'Hello, this is a test message!'; // Optional: Replace with your message
+    //
+    // final whatsappUrl = Uri.parse("https://wa.me/$phoneNumber/?text=${Uri.encodeFull(message)}");
+    //
+    // if (await canLaunch(whatsappUrl.toString())) {
+    //   await launch(whatsappUrl.toString());
+    // } else {
+    //   Get.snackbar(
+    //     'Error',
+    //     'Could not launch WhatsApp. Make sure WhatsApp is installed on your device.',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //   );
+    // }
+
+    var whatsapp = phone;
+    var whatsappURl_android =
+        "whatsapp://send?phone=" + whatsapp + "&text=hello";
+    var whatappURL_ios = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunch(whatappURL_ios)) {
+        await launch(whatappURL_ios, forceSafariVC: false);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      }
+    } else {
+      // android , web
+      if (await canLaunch(whatsappURl_android)) {
+        await launch(whatsappURl_android);
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      }
     }
   }
 

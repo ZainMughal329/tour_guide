@@ -141,9 +141,9 @@ class UpdateInputTextField extends StatelessWidget {
   final bool obsecure;
   // final bool enable, autoFocus;
   IconData icon;
-  Color filledColor;
+  Color? filledColor;
   TextEditingController contr; FocusNode focNode;
-  String labelText; String descrip;
+  String? labelText; String descrip;
   Color color;
   Color textColor;
 
@@ -152,9 +152,9 @@ class UpdateInputTextField extends StatelessWidget {
         required this.contr,
         required this.descrip,
         required this.focNode,
-        required this.labelText,
+        this.labelText,
         required this.textInputAction,
-        required this.filledColor,
+        this.filledColor,
         required this.color,
         required this.textColor,
         // required this.controller,
@@ -173,34 +173,21 @@ class UpdateInputTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context)  {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.w , vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 5.w , vertical: 5.h),
       child: TextFormField(
         controller: contr,
         textInputAction: textInputAction,
         obscureText: obsecure,
         keyboardType: keyboardType,
         focusNode: focNode,
-        style: TextStyle(color: Colors.white),
-        validator: (value) {},
-        onFieldSubmitted: (value) {},
+        style: TextStyle(color: textColor),
         decoration: InputDecoration(
 
           fillColor: filledColor,
-          filled: true,
+          // filled: true,
           // hintText: "Email",
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.iconsColor,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.iconsColor,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          prefixIcon: Icon(icon , color: AppColors.iconsColor,),
+          border: InputBorder.none,
+          prefixIcon: Icon(icon , color: AppColors.lightButtonColor,),
           hintText: descrip,
           hintStyle: TextStyle(color: textColor),
           labelText: labelText,

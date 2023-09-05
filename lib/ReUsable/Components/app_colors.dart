@@ -29,7 +29,10 @@ class AppColors {
 
   static Color lightTextFormFieldColor = Colors.cyanAccent.withOpacity(0.3);
 
-  static Color lightCardColor = Colors.cyanAccent;
+  static Color lightDetailCardColor = Colors.cyanAccent;
+
+
+  static Color lightCardColor = Colors.cyanAccent.withOpacity(0.6);
 
 
   static const Color lightBgColor = Colors.white;

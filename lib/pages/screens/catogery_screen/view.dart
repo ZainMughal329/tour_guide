@@ -266,18 +266,18 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
-              color: AppColors.iconsColor,
+              color: AppColors.lightActiveIconColor,
             ),
           ),
           elevation: 0,
-          backgroundColor: AppColors.bgColor,
+          backgroundColor: AppColors.lightBgColor,
           title: Text(
             catogery,
-            style: TextStyle(fontSize: 20.sp),
+            style: TextStyle(fontSize: 20.sp , color: AppColors.lightTextColor),
           ),
           centerTitle: true,
         ),
-        backgroundColor: AppColors.bgColor,
+        backgroundColor: AppColors.lightBgColor,
         drawer: BuildDrawer.buildDrawer(context),
         body: SafeArea(
             child: Padding(
@@ -386,7 +386,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white,
+                                    color: AppColors.lightTextColor,
                                     letterSpacing: 2),
                               ),
                             ),

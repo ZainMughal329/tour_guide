@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 
 class BigAppText extends StatelessWidget {
   final String text;
@@ -13,7 +14,7 @@ class BigAppText extends StatelessWidget {
       style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: size.toDouble(),
-          color: Colors.white),
+          color: AppColors.lightTextColor),
     );
   }
 }

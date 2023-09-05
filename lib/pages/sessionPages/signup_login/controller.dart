@@ -116,6 +116,32 @@ class SignupLoginController extends GetxController
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
+
+  void validateCompanyPasswordStrength(String value) {
+    state.companyPassStrength.value = estimatePasswordStrength(value);
+  }
+
+  String passwordCompanyStrengthLabel() {
+    if (state.companyPassStrength.value < 0.3) {
+      return "Weak";
+    } else if (state.companyPassStrength.value < 0.7) {
+      return "Fair";
+    } else {
+      return "Strong";
+    }
+  }
+
+  bool companyFormIsValid() {
+    return (state.companyEmailController.text.trim().isNotEmpty &&
+        state.companyNameController.text.trim().isNotEmpty &&
+        state.companyDescController.text.trim().isNotEmpty &&
+        state.companyPhoneNumberController.text.trim().isNotEmpty &&
+        state.companyPassController.text.trim().isNotEmpty &&
+        state.companyPassStrength.value >= 0.3); // Add other validation rules as needed
+  }
+
+
+
   // picking up image from gallery
 
   Future pickedImageFromGallery(BuildContext context) async {
@@ -305,17 +331,7 @@ class SignupLoginController extends GetxController
     await _dbUser.doc(user.id).update(user.toJson());
   }
 
-  // double getPasswordStrength() {
-  //   // Get the password from your TextEditingController
-  //   String password = state.signUpPasswordController.text.trim();
-  //
-  //   // Use the password_strength package to estimate password strength
-  //   state.strength.value = estimatePasswordStrength(password);
-  //
-  //   update();
-  //
-  //   return state.strength.value;
-  // }
+
 
   void validatePasswordStrength(String value) {
     state.strength.value = estimatePasswordStrength(value);
@@ -339,12 +355,4 @@ class SignupLoginController extends GetxController
   }
 
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    state.loginPasswordController.dispose();
-    state.loginEmailController.dispose();
-    tabController.dispose();
-  }
 }

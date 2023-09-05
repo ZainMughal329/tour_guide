@@ -138,7 +138,7 @@ class SignupLoginView extends GetView<SignupLoginController> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 30),
-                          height: 390.h,
+                          height: 450.h,
                           width: double.infinity,
                           child: TabBarView(
                             controller: controller.tabController,

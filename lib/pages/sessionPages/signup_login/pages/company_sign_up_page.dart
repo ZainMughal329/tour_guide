@@ -50,16 +50,16 @@ class CompanySignUp extends GetView<SignupLoginController> {
             ),
           ),
           Obx(
-                () => LoginWidget(
+            () => LoginWidget(
               controller.state.code.value,
-                  () async {
+              () async {
                 final code = await controller.state.countryPicker
                     .showPicker(context: context);
                 // Null check
                 if (code != null) {
                   controller.state.code.value = code;
-                };
-
+                }
+                ;
               },
               controller.state.companyPhoneNumberController,
             ),
@@ -102,9 +102,26 @@ class CompanySignUp extends GetView<SignupLoginController> {
                 icon: Icons.lock_open,
                 contr: controller.state.companyPassController,
                 descrip: 'Enter password',
+
+                onChange: (val) {
+                  controller.validateCompanyPasswordStrength(val);
+                },
                 // focNode: controller.state.loginPasswordFocus,
               ),
             ),
+          ),
+          SizedBox(height: 10),
+          Obx(
+            () {
+              return Text(
+                'Password Strength: ${controller.passwordCompanyStrengthLabel()}',
+                style: TextStyle(
+                  color: controller.state.companyPassStrength.value < 0.3
+                      ? Colors.red
+                      : Colors.green,
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -123,7 +140,6 @@ class CompanySignUp extends GetView<SignupLoginController> {
               tag: "company_signUp_btn",
               child: GestureDetector(
                 onTap: () {
-                  // if (formKey.currentState!.validate()) {
                   final CompanyUser = CompanyModel(
                     companyEmail: controller.state.companyEmailController.text
                         .trim()
@@ -132,10 +148,10 @@ class CompanySignUp extends GetView<SignupLoginController> {
                         .trim()
                         .toString(),
                     status: 'false',
-                    companyPhone: controller.state.code.value.dialCode + controller
-                        .state.companyPhoneNumberController.text
-                        .trim()
-                        .toString(),
+                    companyPhone: controller.state.code.value.dialCode +
+                        controller.state.companyPhoneNumberController.text
+                            .trim()
+                            .toString(),
                     companyDescription: controller
                         .state.companyDescController.text
                         .trim()
@@ -149,7 +165,6 @@ class CompanySignUp extends GetView<SignupLoginController> {
                     addTime: Timestamp.now(),
                   );
                   controller.storeCompany(CompanyUser, context);
-                  // }
                 },
                 child: Container(
                   width: double.infinity,
