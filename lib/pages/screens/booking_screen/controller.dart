@@ -32,8 +32,8 @@ class BookingController extends GetxController {
     try {
       await dbref
           .doc(auth.currentUser!.uid.toString())
-          .collection(DateTime.timestamp().microsecondsSinceEpoch.toString())
-          .add(booking.toJson())
+          .collection('AllBookings').doc(DateTime.timestamp().microsecondsSinceEpoch.toString())
+          .set(booking.toJson())
           .then((value) {
         Get.toNamed(AppPages.APPlication);
       }).onError((error, stackTrace) {});

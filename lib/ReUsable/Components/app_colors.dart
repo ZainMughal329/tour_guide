@@ -32,7 +32,7 @@ class AppColors {
   static Color lightDetailCardColor = Colors.cyanAccent;
 
 
-  static Color lightCardColor = Colors.cyanAccent.withOpacity(0.6);
+  static Color lightCardColor = Colors.cyanAccent.shade400;
 
 
   static const Color lightBgColor = Colors.white;

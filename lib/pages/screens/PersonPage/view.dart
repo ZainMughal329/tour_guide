@@ -105,7 +105,7 @@ class PersonView extends GetView<PersonController> {
                               //     ? Colors.black
                               //     : Colors.white,
                               // color: Color(0xff0c3e4f),
-                              color: AppColors.lightCardColor
+                              color: AppColors.lightCardColor.withOpacity(0.2)
                             ),
                             child: ListTile(
                               onTap: () {
@@ -167,7 +167,7 @@ class PersonView extends GetView<PersonController> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               // color: Color(0xff0c3e4f),
-                              color: AppColors.lightCardColor,
+                              color: AppColors.lightCardColor.withOpacity(0.1),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
@@ -238,7 +238,7 @@ class PersonView extends GetView<PersonController> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                               // color: Color(0xff0c3e4f),
-                              color: AppColors.lightCardColor,
+                              color: AppColors.lightCardColor.withOpacity(0.07),
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(

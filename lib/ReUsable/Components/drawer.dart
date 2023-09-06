@@ -15,7 +15,7 @@ class BuildDrawer {
     var controller = Get.put(PersonController());
     return Drawer(
       width: 300.w,
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.lightBgColor,
       child: FutureBuilder(
         future: controller.getUsersData(),
         builder: (context, snapshot) {
@@ -25,7 +25,7 @@ class BuildDrawer {
               return ListView(
                 children: [
                   UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(color: AppColors.activeIconColor),
+                    decoration: BoxDecoration(color: AppColors.lightCardColor.withOpacity(0.1)),
                     accountName: Text(userModel.userName.capitalize.toString()),
                     accountEmail: Text(userModel.email),
                     currentAccountPicture: Container(
@@ -33,7 +33,7 @@ class BuildDrawer {
                       width: 120.w,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
-                        border: Border.all(color: AppColors.bgColor),
+                        border: Border.all(color: AppColors.lightTextColor),
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
@@ -41,7 +41,7 @@ class BuildDrawer {
                             ? userModel.photoUrl == ''
                                 ? Icon(
                                     Icons.person,
-                                    size: 50,
+                                    size: 50.sp,
                           color: Colors.white,
                                   )
                                 : Image(
@@ -59,7 +59,7 @@ class BuildDrawer {
                     // style: ListTileStyle.list,
                     // tileColor: AppColors.bgColor,
                     leading: Icon(Icons.home , color: AppColors.iconsColor,),
-                    title: Text('Home',style: TextStyle(color: Colors.white),),
+                    title: Text('Home',style: TextStyle(color: Colors.black),),
                     onTap: () {
                       Navigator.pop(context);
                       Get.offAndToNamed(AppRoutes.Application);
@@ -67,7 +67,7 @@ class BuildDrawer {
                   ),
                   ListTile(
                     leading: Icon(Icons.person , color: AppColors.iconsColor,),
-                    title: Text('My Profile',style: TextStyle(color: Colors.white),),
+                    title: Text('My Profile',style: TextStyle(color: AppColors.lightTextColor),),
                     onTap: () {
                       // Handle profile tap
                       Navigator.pop(context);
@@ -75,7 +75,7 @@ class BuildDrawer {
                   ),
                   ListTile(
                     leading: Icon(Icons.work,color: AppColors.iconsColor,),
-                    title: Text('My Network',style: TextStyle(color: Colors.white),),
+                    title: Text('My Network',style: TextStyle(color: AppColors.lightTextColor),),
                     onTap: () {
                       // Handle network tap
                       Navigator.pop(context);
@@ -83,7 +83,7 @@ class BuildDrawer {
                   ),
                   ListTile(
                     leading: Icon(Icons.message,color: AppColors.iconsColor,),
-                    title: Text('Messaging',style: TextStyle(color: Colors.white),),
+                    title: Text('Messaging',style: TextStyle(color: AppColors.lightTextColor),),
                     onTap: () {
                       // Handle messaging tap
                       Navigator.pop(context);
@@ -92,7 +92,7 @@ class BuildDrawer {
                   Divider(),
                   ListTile(
                     leading: Icon(Icons.settings,color: AppColors.iconsColor,),
-                    title: Text('Settings & Privacy',style: TextStyle(color: Colors.white),),
+                    title: Text('Settings & Privacy',style: TextStyle(color: AppColors.lightTextColor),),
                     onTap: () {
                       // Handle settings tap
                       Navigator.pop(context);
@@ -100,7 +100,7 @@ class BuildDrawer {
                   ),
                   ListTile(
                     leading: Icon(Icons.help,color: AppColors.iconsColor,),
-                    title: Text('Help & Support',style: TextStyle(color: Colors.white),),
+                    title: Text('Help & Support',style: TextStyle(color: AppColors.lightTextColor),),
                     onTap: () {
                       // Handle help tap
                       Navigator.pop(context);
