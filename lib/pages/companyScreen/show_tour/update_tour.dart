@@ -30,19 +30,19 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
         controller: contr,
         focusNode: focNode,
         textInputAction: action,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: AppColors.lightTextColor),
         validator: (value) {},
         onFieldSubmitted: (value) {},
         decoration: InputDecoration(
           hintText: descrip,
-          hintStyle: TextStyle(color: Colors.white),
+          hintStyle: TextStyle(color: AppColors.lightTextColor),
           filled: true,
-          fillColor: AppColors.cardBgColor,
+          fillColor: AppColors.lightBgColor,
           labelText: labelText,
-          labelStyle: TextStyle(color: Colors.white),
+          labelStyle: TextStyle(color: AppColors.lightTextColor),
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              color: AppColors.iconsColor,
+              color: AppColors.lightActiveIconColor,
             ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20.r),
@@ -59,13 +59,21 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
       () => Expanded(
         flex: 0,
         child: DropdownButton(
-          iconEnabledColor: AppColors.iconsColor,
-          dropdownColor: AppColors.cardBgColor,
-          style: TextStyle(color: Colors.white),
+          iconEnabledColor: AppColors.lightActiveIconColor,
+          dropdownColor: AppColors.lightBgColor,
+          style: TextStyle(color: AppColors.lightTextColor),
           iconSize: 40.0.h,
           hint: controller.state.catValue.value == ""
-              ? Text(cat , style: TextStyle(color: Colors.white),)
-              : Text(controller.state.catValue.value, style: TextStyle(color: Colors.white),),
+              ? Text(
+                  cat,
+                  style: TextStyle(
+                      color: AppColors.lightTextColor, fontSize: 17.sp),
+                )
+              : Text(
+                  controller.state.catValue.value,
+                  style: TextStyle(
+                      color: AppColors.lightTextColor, fontSize: 17.sp),
+                ),
           items: [
             DropdownMenuItem(
               child: Text("Adventure"),
@@ -97,13 +105,21 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
       () => Expanded(
         flex: 0,
         child: DropdownButton(
-          iconEnabledColor: AppColors.iconsColor,
-          dropdownColor: AppColors.cardBgColor,
-          style: TextStyle(color: Colors.white),
+          iconEnabledColor: AppColors.lightActiveIconColor,
+          dropdownColor: AppColors.lightBgColor,
+          style: TextStyle(color: AppColors.lightTextColor),
           iconSize: 40.0.h,
           hint: controller.state.tourPeople.value == ""
-              ? Text(people, style: TextStyle(color: Colors.white),)
-              : Text(controller.state.tourPeople.value, style: TextStyle(color: Colors.white),),
+              ? Text(
+                  people,
+                  style: TextStyle(
+                      color: AppColors.lightTextColor, fontSize: 17.sp),
+                )
+              : Text(
+                  controller.state.tourPeople.value,
+                  style: TextStyle(
+                      color: AppColors.lightTextColor, fontSize: 17.sp),
+                ),
           items: [
             DropdownMenuItem(
               child: Text("1"),
@@ -164,15 +180,18 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
           },
           icon: const Icon(
             Icons.arrow_back,
-            color: AppColors.iconsColor,
+            color: AppColors.lightActiveIconColor,
           ),
         ),
         centerTitle: true,
-        title: Text('Company Info'),
-        backgroundColor: AppColors.bgColor,
+        title: Text(
+          'Company Info',
+          style: TextStyle(color: AppColors.lightTextColor),
+        ),
+        backgroundColor: AppColors.lightBgColor,
         elevation: 0,
       ),
-      backgroundColor: AppColors.bgColor,
+      backgroundColor: AppColors.lightBgColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -248,7 +267,8 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                   controller.image == null
                                       ? Text(
                                           "Tap to Update Image",
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(
+                                              color: AppColors.lightTextColor),
                                         )
                                       : Container(),
                                 ],
@@ -312,7 +332,7 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                               // );
                             }),
                             SizedBox(
-                              height: 20,
+                              height: 20.h,
                             ),
                             Column(
                               children: [
@@ -327,7 +347,9 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                         "Enter name for your tour",
                                         TextInputAction.next,
                                       ),
-                                      SizedBox(height: 5.0,),
+                                      SizedBox(
+                                        height: 5.0.h,
+                                      ),
                                       _textField(
                                         location,
                                         controller.state.locationNode,
@@ -335,7 +357,9 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                         "Enter Location of your tour",
                                         TextInputAction.next,
                                       ),
-                                      SizedBox(height: 5.0,),
+                                      SizedBox(
+                                        height: 5.0.h,
+                                      ),
                                       _textField(
                                         price,
                                         controller.state.priceNode,
@@ -346,24 +370,28 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 5.0,),
+                                SizedBox(
+                                  height: 5.0.h,
+                                ),
                                 Padding(
                                   padding: EdgeInsets.symmetric(vertical: 10.h),
                                   child: TextField(
-                                    style:  TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
                                     controller: des,
                                     focusNode: controller.state.descrepNode,
                                     onEditingComplete: () {},
                                     onSubmitted: (value) {},
                                     decoration: InputDecoration(
                                       filled: true,
-                                      fillColor: AppColors.cardBgColor,
+                                      fillColor: AppColors.lightBgColor,
                                       labelText: "Tour Description",
-                                      labelStyle: TextStyle(color: Colors.white),
-
+                                      labelStyle: TextStyle(
+                                          color: AppColors.lightTextColor),
                                       hintText:
                                           "Enter long description about you tour",
-                                      hintStyle:  TextStyle(color: Colors.white),
+                                      hintStyle: TextStyle(
+                                          color: AppColors.lightTextColor),
                                       border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.r),
@@ -379,11 +407,13 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Center(
-                                        child: Text("Choose Category",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 20.sp),),
+                                        child: Text(
+                                          "Choose Category",
+                                          style: TextStyle(
+                                              color: AppColors.lightTextColor,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20.sp),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 40.w,
@@ -399,11 +429,13 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Center(
-                                        child: Text("No of People",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 20.sp),),
+                                        child: Text(
+                                          "No of People",
+                                          style: TextStyle(
+                                              color: AppColors.lightTextColor,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 20.sp),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: 40.w,
@@ -420,32 +452,40 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                 padding: EdgeInsets.symmetric(vertical: 25.h),
                                 child: controller.state.loading.value == true
                                     ? CircularProgressIndicator(
-                                  color: AppColors.activeTabElementColor,
-                                )
+                                        color: AppColors.activeTabElementColor,
+                                      )
                                     : RoundButton(
-                                  color: Colors.blue,
-                                  title: "Save",
-                                  onPress: () async {
-                                    controller.fetchCompanyId().then((value){
-                                      controller.fetchCompanyName();
-                                    });
-                                    var tourData = TourModel(
-                                      id: id,
-                                      title: title.text.toString(),
-                                      tourCategory: controller.state.catValue.value,
-                                      tourDescription: des.text.toString(),
-                                      tourImage: tourModel.tourImage.toString(),
-                                      location: location.text.toString(),
-                                      people: controller.state.tourPeople.value,
-                                      price: price.text.toString(),
-                                      companyId: controller.state.companyId,
-                                      companyName: controller.state.companyId,
+                                        color: AppColors.lightButtonColor,
+                                        title: "Save",
+                                        onPress: () async {
+                                          controller
+                                              .fetchCompanyId()
+                                              .then((value) {
+                                            controller.fetchCompanyName();
+                                          });
+                                          var tourData = TourModel(
+                                            id: id,
+                                            title: title.text.toString(),
+                                            tourCategory:
+                                                controller.state.catValue.value,
+                                            tourDescription:
+                                                des.text.toString(),
+                                            tourImage:
+                                                tourModel.tourImage.toString(),
+                                            location: location.text.toString(),
+                                            people: controller
+                                                .state.tourPeople.value,
+                                            price: price.text.toString(),
+                                            companyId:
+                                                controller.state.companyId,
+                                            companyName:
+                                                controller.state.companyId,
+                                          );
 
-                                    );
-
-                                    await controller.updateTour(tourData, id);
-                                  },
-                                ),
+                                          await controller.updateTour(
+                                              tourData, id);
+                                        },
+                                      ),
                               );
                             }),
                             // SizedBox(

@@ -16,8 +16,8 @@ class ShowAllTours extends GetView<AdminController> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: Container(
-        height: 330.h,
-        width: 220.w,
+        height: 300.h,
+        width: 180.w,
         child: Container(
           height: 297,
           width: 201,
@@ -107,21 +107,18 @@ class ShowAllTours extends GetView<AdminController> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text(
-                                        'Are you sure to delete?'),
+                                    title: Text('Are you sure to delete?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(
                                               context); // Close the dialog
                                           controller
-                                              .showFeedbackDialog(
-                                              context);
+                                              .showFeedbackDialog(context);
                                         },
                                         child: Text(
                                           'Yes',
-                                          style: TextStyle(
-                                              color: Colors.red),
+                                          style: TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       TextButton(
@@ -133,8 +130,7 @@ class ShowAllTours extends GetView<AdminController> {
                                         },
                                         child: Text(
                                           'No',
-                                          style: TextStyle(
-                                              color: Colors.black),
+                                          style: TextStyle(color: Colors.black),
                                         ),
                                       ),
                                     ],
@@ -142,7 +138,8 @@ class ShowAllTours extends GetView<AdminController> {
                                 });
                           },
                           child: Container(
-                            height: 330.h,
+                            height: 280.h,
+                            width: 180.w,
                             child: _buildCard(
                                 context,
                                 snapshot.data![i].title,
@@ -163,21 +160,18 @@ class ShowAllTours extends GetView<AdminController> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text(
-                                        'Are you sure to delete?'),
+                                    title: Text('Are you sure to delete?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(
                                               context); // Close the dialog
                                           controller
-                                              .showFeedbackDialog(
-                                              context);
+                                              .showFeedbackDialog(context);
                                         },
                                         child: Text(
                                           'Yes',
-                                          style: TextStyle(
-                                              color: Colors.red),
+                                          style: TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       TextButton(
@@ -189,8 +183,7 @@ class ShowAllTours extends GetView<AdminController> {
                                         },
                                         child: Text(
                                           'No',
-                                          style: TextStyle(
-                                              color: Colors.black),
+                                          style: TextStyle(color: Colors.black),
                                         ),
                                       ),
                                     ],
@@ -198,7 +191,8 @@ class ShowAllTours extends GetView<AdminController> {
                                 });
                           },
                           child: Container(
-                            height: 330.h,
+                            height: 280.h,
+                            width: 180.w,
                             child: _buildCard(
                                 context,
                                 snapshot.data![i + 1].title,
@@ -210,7 +204,6 @@ class ShowAllTours extends GetView<AdminController> {
                         ),
                       ),
                     ),
-
                   ],
                 ));
               } else {
@@ -225,21 +218,18 @@ class ShowAllTours extends GetView<AdminController> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text(
-                                        'Are you sure to delete?'),
+                                    title: Text('Are you sure to delete?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(
                                               context); // Close the dialog
                                           controller
-                                              .showFeedbackDialog(
-                                              context);
+                                              .showFeedbackDialog(context);
                                         },
                                         child: Text(
                                           'Yes',
-                                          style: TextStyle(
-                                              color: Colors.red),
+                                          style: TextStyle(color: Colors.red),
                                         ),
                                       ),
                                       TextButton(
@@ -251,8 +241,7 @@ class ShowAllTours extends GetView<AdminController> {
                                         },
                                         child: Text(
                                           'No',
-                                          style: TextStyle(
-                                              color: Colors.black),
+                                          style: TextStyle(color: Colors.black),
                                         ),
                                       ),
                                     ],
@@ -260,7 +249,8 @@ class ShowAllTours extends GetView<AdminController> {
                                 });
                           },
                           child: Container(
-                            height: 330.h,
+                            height: 280.h,
+                            width: 180.w,
                             child: _buildCard(
                                 context,
                                 snapshot.data![i].title,
@@ -272,21 +262,20 @@ class ShowAllTours extends GetView<AdminController> {
                         ),
                       ),
                     ),
-                    Expanded(child: Container(),),
+                    Expanded(
+                      child: Container(),
+                    ),
                   ],
                 ));
               }
-
             }
             return snapshot.data!.length != 0
                 ? ListView(
-              children: cardRows,
-            )
+                    children: cardRows,
+                  )
                 : Center(
                     child: Text('No tours added now.'),
                   );
-
-
           } catch (e) {
             print('Exception is : ' + e.toString());
             return Text('data : ' + e.toString());

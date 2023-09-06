@@ -23,8 +23,8 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: Container(
-        height: 330.h,
-        width: 220.w,
+        height: 300.h,
+        width: 210.w,
         child: Container(
           height: 297.h,
           width: 201.w,
@@ -166,7 +166,8 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                           );
                         },
                         child: Container(
-                          height: 330.h,
+                          height: 280.h,
+                          width: 180.w,
                           child: _buildCard(
                               context,
                               snapshot.data!.docs[i]['title'],
@@ -230,7 +231,8 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                           );
                         },
                         child: Container(
-                          height: 330.h,
+                          height: 280.h,
+                          width: 180.w,
                           child: _buildCard(
                               context,
                               snapshot.data!.docs[i+1]['title'],
@@ -300,7 +302,8 @@ class CompanyShowTourScreen extends GetView<CompanyShowTourController> {
                           );
                         },
                         child: Container(
-                          height: 330.h,
+                          height: 280.h,
+                          width: 180.w,
                           child: _buildCard(
                               context,
                               snapshot.data!.docs[i]['title'],

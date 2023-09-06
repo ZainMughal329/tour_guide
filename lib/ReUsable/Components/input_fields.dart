@@ -187,9 +187,9 @@ class UpdateInputTextField extends StatelessWidget {
           // filled: true,
           // hintText: "Email",
           border: InputBorder.none,
-          prefixIcon: Icon(icon , color: AppColors.lightButtonColor,),
           hintText: descrip,
           hintStyle: TextStyle(color: textColor),
+          prefixIcon: Icon(icon , color: Colors.blue,),
           labelText: labelText,
           labelStyle: TextStyle(color: color),
           // border: OutlineInputBorder(

@@ -33,11 +33,6 @@ class PersonController extends GetxController {
   final phoneFocus = FocusNode();
 
   final state = PersonState();
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'openid',
-    ],
-  );
 
   String userProfileImage = '';
   final auth = FirebaseAuth.instance;
@@ -50,6 +45,10 @@ class PersonController extends GetxController {
 
   var doc_id = null;
 
+
+  // --------------------------------------------------------------------
+  // for store and upload image
+  // {
   final picker = ImagePicker();
 
   firebase_storage.FirebaseStorage storage =
@@ -142,6 +141,11 @@ class PersonController extends GetxController {
     });
   }
 
+  // }
+
+  // --------------------------------------------------------------------
+  // signOut method
+
   void signOut() async {
     setLoading(true);
     try {
@@ -163,6 +167,9 @@ class PersonController extends GetxController {
   }
 
 
+  // --------------------------------------------------------------------
+
+  // for fetching particular user data
   Stream<DocumentSnapshot<Map<String, dynamic>>> getNodeData() {
     return FirebaseFirestore.instance
         .collection('users')
@@ -170,6 +177,10 @@ class PersonController extends GetxController {
         .snapshots();
   }
 
+
+  // --------------------------------------------------------------------
+
+  // for update and drawer screen
   Future<UserModel> getUserData(String id) async {
     final snapshot =
         await _db.collection('users').where('id', isEqualTo: id).get();
@@ -186,6 +197,9 @@ class PersonController extends GetxController {
     }
   }
 
+  // --------------------------------------------------------------------
+
+  // for updating user
   updateUserData(UserModel user) async {
     await _db.collection('users').doc(user.id).update(
           user.toJson(),
@@ -198,6 +212,7 @@ class PersonController extends GetxController {
     await updateUserData(user);
   }
 
+  // --------------------------------------------------------------------
 
   void _saveThemeMode() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

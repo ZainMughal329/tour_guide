@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,18 +17,18 @@ class BuildDrawer {
     return Drawer(
       width: 300.w,
       backgroundColor: AppColors.lightBgColor,
-      child: FutureBuilder(
-        future: controller.getUsersData(),
+      child:
+      StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        stream: controller.getNodeData(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasData) {
-              UserModel userModel = snapshot.data as UserModel;
+              // UserModel userModel = snapshot.data as UserModel;
               return ListView(
                 children: [
                   UserAccountsDrawerHeader(
                     decoration: BoxDecoration(color: AppColors.lightCardColor.withOpacity(0.1)),
-                    accountName: Text(userModel.userName.capitalize.toString()),
-                    accountEmail: Text(userModel.email),
+                    accountName: Text(snapshot.data!['userName'].toString().capitalize.toString(),style:TextStyle(color: AppColors.lightTextColor),),
+                    accountEmail: Text(snapshot.data!['email'],style:TextStyle(color: AppColors.lightTextColor),),
                     currentAccountPicture: Container(
                       height: 120.w,
                       width: 120.w,
@@ -38,14 +39,14 @@ class BuildDrawer {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: controller.image == null
-                            ? userModel.photoUrl == ''
+                            ? snapshot.data!['photoUrl'] == ''
                                 ? Icon(
                                     Icons.person,
                                     size: 50.sp,
-                          color: Colors.white,
+                          color: Colors.blue,
                                   )
                                 : Image(
-                                    image: NetworkImage(userModel.photoUrl),
+                                    image: NetworkImage(snapshot.data!['photoUrl']),
                                     fit: BoxFit.cover,
                                   )
                             : Image.file(
@@ -116,9 +117,7 @@ class BuildDrawer {
             } else {
               return Text('Something went wrong');
             }
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
+
         },
       ),
     );

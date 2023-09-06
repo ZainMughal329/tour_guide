@@ -18,6 +18,8 @@ class CompanyProfileController extends GetxController {
 
   final _db = FirebaseFirestore.instance;
 
+  // for fetching particular company data
+
   Stream<DocumentSnapshot<Map<String, dynamic>>> getNodeData() {
     return FirebaseFirestore.instance
         .collection('company')
@@ -25,6 +27,10 @@ class CompanyProfileController extends GetxController {
         .snapshots();
   }
 
+
+  // --------------------------------------------------------------------
+  // for storing image
+  //     {
   final picker = ImagePicker();
 
   firebase_storage.FirebaseStorage storage =
@@ -45,7 +51,6 @@ class CompanyProfileController extends GetxController {
     }
   }
 
-  //
   Future pickedImageFromCamera(BuildContext context) async {
     final pickedImage =
         await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
@@ -115,23 +120,33 @@ class CompanyProfileController extends GetxController {
     });
   }
 
-  Future<CompanyModel> getUserData(String id) async {
+  // }
+
+  // --------------------------------------------------------------------
+  // for showing company data in update and drawer screen
+  // {
+  Future<CompanyModel> getCompanyData(String id) async {
     final snapshot =
         await _db.collection('company').where('id', isEqualTo: id).get();
     final userData = snapshot.docs.map((e) => CompanyModel.fromJson(e)).single;
     return userData;
   }
-
-  getUsersData() async {
+  showCompanyData() async {
     final id = auth.currentUser!.uid.toString();
     if (id != '') {
-      return await getUserData(id);
+      return await getCompanyData(id);
     } else {
       Get.snackbar('Error', 'Something went wrong');
     }
   }
+  // }
 
-  updateUserData(CompanyModel companyModel) async {
+  // --------------------------------------------------------------------
+  // for updating company data
+
+  // {
+
+  updateCompanyData(CompanyModel companyModel) async {
     await _db
         .collection('company')
         .doc(auth.currentUser!.uid.toString())
@@ -143,8 +158,8 @@ class CompanyProfileController extends GetxController {
     });
   }
 
-  updateUser(CompanyModel companyModel) async {
-    await updateUserData(companyModel);
-
+  updateCompany(CompanyModel companyModel) async {
+    await updateCompanyData(companyModel);
   }
+// }
 }

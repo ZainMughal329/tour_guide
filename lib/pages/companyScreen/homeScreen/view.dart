@@ -7,6 +7,7 @@ import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 
+import '../../../ReUsable/Components/company_drawer.dart';
 import '../../../ReUsable/Components/tab_bar_settings.dart';
 import '../../../ReUsable/models/companyModel.dart';
 import '../show_tour/view.dart';
@@ -22,183 +23,211 @@ class CompanyHome extends StatefulWidget {
 class _CompanyHomeState extends State<CompanyHome>
     with TickerProviderStateMixin {
   final controller = Get.put(CompanyHomeController());
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final _tabController = TabController(length: 3, vsync: this);
 
-    return Container(
-      child:
-      FutureBuilder(
-        future: controller.getUsersData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData) {
-                CompanyModel company = snapshot.data as CompanyModel;
-                if (company.status == 'true') {
-                  return Scaffold(
+    return Scaffold(
+      body: Container(
+        child: FutureBuilder(
+            future: controller.getUsersData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  CompanyModel company = snapshot.data as CompanyModel;
+                  if (company.status == 'true') {
+                    return Scaffold(
+                      key: _scaffoldKey,
+                      drawer: BuildCompanyDrawer.buildDrawer(context),
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor: AppColors.lightBgColor,
+                      body: SafeArea(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(
+                                  left: 20,
+                                  top: 20,
+                                ),
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        _scaffoldKey.currentState!.openDrawer();
 
-                    resizeToAvoidBottomInset: false,
-                    backgroundColor: AppColors.lightBgColor,
-                    body: SafeArea(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.only(
-                                left: 20,
-                                top: 20,
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.menu,
-                                      size: 30.sp, color: AppColors.lightActiveIconColor),
-                                  Expanded(
-                                    child: Container(),
-                                  ),
-                                  Container(
-                                    width: 40.w,
-                                    height: 40.w,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      // color: AppColors.iconsColor,
-                                      border: Border.all(
-                                          color: AppColors.lightActiveIconColor, width: 2.0 ,),
+                                      },
+                                      child: Icon(Icons.menu,
+                                          size: 30.sp,
+                                          color:
+                                              AppColors.lightActiveIconColor),
                                     ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(50),
-                                      child: company.logo.toString() == ''
-                                          ? Icon(
-                                        Icons.person_outline,
-                                        size: 30.sp,
-                                        color: AppColors.lightActiveIconColor,
-                                      )
-                                          : Image(
-                                        image: NetworkImage(
-                                          company.logo.toString(),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    Container(
+                                      width: 40.w,
+                                      height: 40.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        // color: AppColors.iconsColor,
+                                        border: Border.all(
+                                          color: AppColors.lightActiveIconColor,
+                                          width: 2.0,
                                         ),
-                                        fit: BoxFit.cover,
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(50),
+                                        child: company.logo.toString() == ''
+                                            ? Icon(
+                                                Icons.person_outline,
+                                                size: 30.sp,
+                                                color: AppColors
+                                                    .lightActiveIconColor,
+                                              )
+                                            : Image(
+                                                image: NetworkImage(
+                                                  company.logo.toString(),
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(left: 5.w, right: 5.w),
-                              child: Center(
-                                child: BigAppText(
-                                    text: company.companyName.toString().capitalizeFirst.toString(),
-                                    size: 30),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Container(
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: TabBar(
-                                  isScrollable: true,
-                                  labelPadding:
-                                  EdgeInsets.only(right: 20.w, left: 20.w),
-                                  indicator: CircleTabIndicator(
-                                      color: AppColors.lightButtonColor, radius: 4),
-                                  controller: _tabController,
-                                  labelColor: AppColors.lightTextColor,
-                                  unselectedLabelColor: Colors.grey,
-                                  tabs: [
-                                    Tab(
-                                      text: 'Profile',
-
-                                    ),
-                                    Tab(
-                                      text: 'All tour',
-                                    ),
-                                    Tab(
-                                      text: 'Add tour',
-                                    ),
-
+                                    SizedBox(
+                                      width: 20,
+                                    )
                                   ],
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: 450.h,
-                              width: double.infinity,
-                              child: TabBarView(
-                                controller: _tabController,
-                                children: [
-                                  // Get.offAndToNamed(page)
-                                  Container(
-                                    child: CompanyProfileView(),
-                                  ),
-                                  CompanyShowTourScreen(),
-                                  Center(
-                                    child: CompanyAddTourScreen(),
-                                  ),
-
-                                ],
+                              const SizedBox(
+                                height: 30,
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                } else {
-                  return Scaffold(
-                    body: SafeArea(
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  width: double.infinity,
-                                  height: 200.h,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFEDE2E6),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'We have recieved your information.\n'
-                                          'You will get confirmation shortly.\nThank You.',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 20,
+                              Container(
+                                padding: EdgeInsets.only(left: 5.w, right: 5.w),
+                                child: Center(
+                                  child: BigAppText(
+                                      text: company.companyName
+                                          .toString()
+                                          .capitalizeFirst
+                                          .toString(),
+                                      size: 30),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Container(
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    labelPadding: EdgeInsets.only(
+                                        right: 20.w, left: 20.w),
+                                    indicator: CircleTabIndicator(
+                                        color: AppColors.lightButtonColor,
+                                        radius: 4),
+                                    controller: _tabController,
+                                    labelColor: AppColors.lightTextColor,
+                                    unselectedLabelColor: Colors.grey,
+                                    tabs: [
+                                      Tab(
+                                        text: 'Profile',
                                       ),
-                                      textAlign: TextAlign.justify,
-                                    ),
+                                      Tab(
+                                        text: 'All tour',
+                                      ),
+                                      Tab(
+                                        text: 'Add tour',
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              TextButton(
-                                onPressed: () async {
-                                  await controller.auth.signOut();
-                                  StorePrefrences sp = StorePrefrences();
-                                  sp.setIsFirstOpen(false);
-                                  Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
-                                },
-                                child: Text('Back to login page'),
+                              Container(
+                                height: 450.h,
+                                width: double.infinity,
+                                child: TabBarView(
+                                  controller: _tabController,
+                                  children: [
+                                    // Get.offAndToNamed(page)
+                                    Container(
+                                      child: CompanyProfileView(),
+                                    ),
+                                    CompanyShowTourScreen(),
+                                    Center(
+                                      child: CompanyAddTourScreen(),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
-                        )),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return Scaffold(
+                      body: SafeArea(
+                          child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                width: double.infinity,
+                                height: 200.h,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFEDE2E6),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'We have recieved your information.\n'
+                                    'You will get confirmation shortly.\nThank You.',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await controller.auth.signOut();
+                                StorePrefrences sp = StorePrefrences();
+                                sp.setIsFirstOpen(false);
+                                Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
+                              },
+                              child: Text('Back to login page'),
+                            ),
+                          ],
+                        ),
+                      )),
+                    );
+                  }
+                } else {
+                  return Scaffold(
+                    body: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ],
+                    ),
                   );
                 }
               } else {
+                print("here is code");
                 return Scaffold(
                   body: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -211,21 +240,7 @@ class _CompanyHomeState extends State<CompanyHome>
                   ),
                 );
               }
-            } else {
-              print("here is code");
-              return Scaffold(
-                body: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ],
-                ),
-              );
-            }
-          }
+            }),
       ),
     );
   }

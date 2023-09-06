@@ -37,7 +37,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: AppColors.lightCardColor,
+                            color: AppColors.lightCardColor.withOpacity(0.2),
                           ),
                           child: ListTile(
                             onTap: () {
@@ -83,20 +83,20 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.h,
                         ),
                         Container(
                           height: 120,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.lightCardColor,
+                            color: AppColors.lightCardColor.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
                             children: [
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   onTap: () {},
                                   leading: Icon(
@@ -121,7 +121,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 height: 5.h,
                               ),
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   leading: Icon(
                                     Icons.dark_mode_outlined,
@@ -144,16 +144,16 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           height: 10.h,
                         ),
                         Container(
-                          height: 270.h,
+                          height: 225.h,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: AppColors.lightCardColor,
+                            color: AppColors.lightCardColor.withOpacity(0.07),
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Column(
                             children: [
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
@@ -168,7 +168,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               ),
                               Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
@@ -183,7 +183,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               ),
                               Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
@@ -198,7 +198,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               ),
                               Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(
@@ -213,7 +213,7 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               ),
                               Divider(color: Colors.grey, height: 5.h),
                               Container(
-                                height: 50.h,
+                                height: 40.h,
                                 child: ListTile(
                                   onTap: () {},
                                   title: Text(

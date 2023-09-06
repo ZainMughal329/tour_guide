@@ -326,6 +326,9 @@ class HomePage extends GetView<HomeController> {
                               // color: Color(0xff0c3e4f),
                               color: AppColors.lightCardColor.withOpacity(0.07),
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: AppColors.lightActiveIconColor.withOpacity(0.1),
+                              )
                               // boxShadow: [
                               //   BoxShadow(
                               //     color: Colors.black26,
