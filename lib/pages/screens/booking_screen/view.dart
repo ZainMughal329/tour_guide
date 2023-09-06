@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/models/bookingMode.dart';
+import 'package:tours_guide/pages/screens/booking_screen/card_view.dart';
 import 'package:tours_guide/pages/screens/booking_screen/controller.dart';
 
 class BookingView extends GetView<BookingController> {
@@ -98,7 +100,7 @@ class BookingView extends GetView<BookingController> {
                      }).toList(),
                    );
                  }),
-                 SizedBox(height: 32),
+                 SizedBox(height: 32.h),
                  ElevatedButton(
                    onPressed: () async{
                      await controller.fetchDetails(tourId);
@@ -117,6 +119,18 @@ class BookingView extends GetView<BookingController> {
                      // Handle booking logic here
                    },
                    child: Text('Book Now'),
+                 ),
+
+                 SizedBox(height: 10.h),
+                 ElevatedButton(
+                   style: ButtonStyle(
+                     backgroundColor: MaterialStateProperty.all(Colors.green),
+                   ),
+                   onPressed: () {
+                    Get.to(() => PaymentView(),);
+                     // Handle booking logic here
+                   },
+                   child: Text('Your Cards'),
                  ),
                ],
              ),

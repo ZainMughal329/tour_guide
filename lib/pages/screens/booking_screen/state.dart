@@ -14,4 +14,15 @@ class BookingState {
   String? pricePerPerson;
   String? tourImgae;
 
+
+
+  RxString cardNumber = ''.obs;
+  RxString expiryDate = ''.obs;
+  RxString cardHolderName = ''.obs;
+  RxString cvvCode = ''.obs;
+  RxBool isCvvFocused = false.obs;
+  bool useGlassMorphism = false;
+  bool useBackgroundImage = false;
+  OutlineInputBorder? border;
+
 }
