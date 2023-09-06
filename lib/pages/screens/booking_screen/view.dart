@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/bookingMode.dart';
 import 'package:tours_guide/pages/screens/booking_screen/card_view.dart';
 import 'package:tours_guide/pages/screens/booking_screen/controller.dart';
@@ -9,10 +10,14 @@ class BookingView extends GetView<BookingController> {
   String tourId;
   String name;
   String phoneNumber;
+  String companyName;
+  String companyId;
 
    BookingView({required this.tourId,
      required this.name,
      required this.phoneNumber,
+     required this.companyName,
+     required this.companyId,
      Key? key}) : super(key: key);
    final controller = Get.put<BookingController>(BookingController());
   String? _selectedMonth;
@@ -103,19 +108,23 @@ class BookingView extends GetView<BookingController> {
                  SizedBox(height: 32.h),
                  ElevatedButton(
                    onPressed: () async{
-                     await controller.fetchDetails(tourId);
-                     final booking = BookingModel(
+                     await controller.fetchDetails(tourId).then((value){
+                       final booking = BookingModel(
                          uid: controller.state.uid,
                          name: name,
-                         phoneNumber: phoneNumber,
+                         phoneNumber: phoneController.text.trim().toString(),
                          CompanyName: controller.state.companyName,
                          CompanyId: controller.state.companyId,
                          tourTitle: controller.state.tourTitle,
                          tourId: tourId,
                          pricePerPerson: controller.state.pricePerPerson,
                          tourImage: controller.state.tourImgae,
-                     );
-                     controller.addBookings(booking);
+                       );
+                       controller.addBookings(booking);
+                     }).onError((error, stackTrace){
+                       Snackbar.showSnackBar("Error", error.toString());
+                     });
+
                      // Handle booking logic here
                    },
                    child: Text('Book Now'),

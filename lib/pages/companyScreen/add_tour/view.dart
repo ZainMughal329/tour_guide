@@ -352,57 +352,63 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                       // if(companydoc != null){
                                       //   controller.state.companyName = companydoc["CompanyName"];
                                       // }
-                                      controller.fetchCompanyId().then((value){
-                                        controller.fetchCompanyName();
+                                      await controller.fetchCompanyId().then((value)async{
+                                        await controller.fetchCompanyName().then((value){
+                                          if (controller.state.catValue.value
+                                              .toString() !=
+                                              "" &&
+                                              controller.image!.path.toString() != "" &&
+                                              controller.state.tourPeople.value
+                                                  .toString() !=
+                                                  "") {
+                                            print("validated");
+
+                                            controller.addTour(
+                                              // id: ,
+                                              controller
+                                                  .state.titleController.value.text
+                                                  .trim()
+                                                  .toString(),
+                                              controller
+                                                  .state.locationController.value.text
+                                                  .trim()
+                                                  .toString(),
+
+                                              controller
+                                                  .state.descrepController.value.text
+                                                  .trim()
+                                                  .toString(),
+
+                                              controller.state.catValue.value
+                                                  .toString(),
+
+                                              controller.state.tourPeople.value
+                                                  .toString(),
+                                              controller
+                                                  .state.priceController.value.text
+                                                  .trim()
+                                                  .toString(),
+                                              controller.image!.path.toString(),
+                                              controller.state.companyId.toString(),
+                                              controller.state.companyName.toString(),
+
+
+
+                                            );
+                                            // print(tour.toJson().toString());
+                                            // c
+                                          } else {
+                                            print("Not validated");
+                                            toastInfo(msg: "Please Enter all Fields");
+                                          }
+                                        });
+
+
+
+
                                       });
 
-                                      if (controller.state.catValue.value
-                                                  .toString() !=
-                                              "" &&
-                                          controller.image!.path.toString() != "" &&
-                                          controller.state.tourPeople.value
-                                                  .toString() !=
-                                              "") {
-                                        print("validated");
 
-                                        controller.addTour(
-                                          // id: ,
-                                          controller
-                                              .state.titleController.value.text
-                                              .trim()
-                                              .toString(),
-                                          controller
-                                              .state.locationController.value.text
-                                              .trim()
-                                              .toString(),
-
-                                          controller
-                                              .state.descrepController.value.text
-                                              .trim()
-                                              .toString(),
-
-                                          controller.state.catValue.value
-                                              .toString(),
-
-                                          controller.state.tourPeople.value
-                                              .toString(),
-                                          controller
-                                              .state.priceController.value.text
-                                              .trim()
-                                              .toString(),
-                                          controller.image!.path.toString(),
-                                          controller.state.companyId.toString(),
-                                          controller.state.companyName.toString(),
-
-
-
-                                        );
-                                        // print(tour.toJson().toString());
-                                        // c
-                                      } else {
-                                        print("Not validated");
-                                        toastInfo(msg: "Please Enter all Fields");
-                                      }
                                     },
                                   ),
                           );

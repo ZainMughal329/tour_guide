@@ -18,6 +18,7 @@ class AppRoutes {
   static const Tourist_Login = '/tourist_login';
   static const Tourist_Home = '/tourist_home';
   static const Add_Tour = '/add_tour';
+  static const all_Tours = '/all_tours';
 
 
   static const Application = '/application';

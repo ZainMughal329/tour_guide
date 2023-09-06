@@ -189,7 +189,11 @@ class SearchView extends GetView<SearchBarController> {
                                           img: item['tourImage'].toString(),
                                           id: item['id'].toString(),
                                           phone:
-                                              item['companyPhone'].toString()));
+                                              item['companyPhone'].toString(),
+                                        comapnyName: item['companyName'].toString(),
+                                        companyId: item['companyId'].toString(),
+
+                                      ));
                                     },
                                     child: Column(
                                       children: [

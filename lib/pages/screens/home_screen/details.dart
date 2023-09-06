@@ -19,6 +19,8 @@ class DetailScreen extends GetView<HomeController> {
   final String des;
   final String id;
   final String phone;
+  final String comapnyName;
+  final String companyId;
 
   DetailScreen({
     Key? key,
@@ -29,6 +31,8 @@ class DetailScreen extends GetView<HomeController> {
     required this.img,
     required this.id,
     required this.phone,
+    required this.comapnyName,
+    required this.companyId,
   }) : super(key: key);
 
   @override
@@ -104,6 +108,8 @@ class DetailScreen extends GetView<HomeController> {
             des: des,
             id: id,
             phone: phone,
+            companyName: comapnyName,
+            companyId: companyId,
           )),
     );
   }
@@ -116,6 +122,8 @@ class PostBottomBar extends GetView<HomeController> {
   final String des;
   final String id;
   final String phone;
+  final String companyName;
+  final String companyId;
 
   const PostBottomBar({
     Key? key,
@@ -125,6 +133,8 @@ class PostBottomBar extends GetView<HomeController> {
     required this.des,
     required this.id,
     required this.phone,
+    required this.companyName,
+    required this.companyId,
   }) : super(key: key);
 
   @override
@@ -261,13 +271,15 @@ class PostBottomBar extends GetView<HomeController> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          controller.fetchUserData().then((value) {
+                        onTap: () async{
+                          await controller.fetchUserData().then((value) {
                             Get.to(() => BookingView(
                                   tourId: id,
                                   name: controller.state.name ?? "",
                                   phoneNumber:
                                       controller.state.phoneNumber ?? "",
+                              companyName: companyName,
+                              companyId: companyId,
                                 ));
                           }).onError((error, stackTrace) {
                             Snackbar.showSnackBar("Error", error.toString());

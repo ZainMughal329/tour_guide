@@ -6,6 +6,7 @@ import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/bookingMode.dart';
+import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/ReUsable/routes/pages.dart';
 import 'package:tours_guide/pages/screens/booking_screen/state.dart';
 
@@ -30,28 +31,35 @@ class BookingController extends GetxController {
   }
 
   Future<void> fetchDetails(String tourId) async {
-    final tourDoc = await FirebaseFirestore.instance
-        .collection("allTours")
-        .doc(tourId)
-        .get();
-    if (tourDoc != null) {
-      state.companyId = tourDoc["companyId"];
-      state.pricePerPerson = tourDoc["price"];
-      state.tourImgae = tourDoc["tourImage"];
-      state.tourTitle = tourDoc["title"];
-      state.companyName = tourDoc["companyName"];
+    try{
+      state.uid = await auth.currentUser!.uid.toString();
+      final tourDoc = await FirebaseFirestore.instance
+          .collection("allTours")
+          .doc(tourId)
+          .get();
+      if (tourDoc != null) {
+        state.companyId = tourDoc["companyId"];
+        state.pricePerPerson = tourDoc["price"];
+        state.tourImgae = tourDoc["tourImage"];
+        state.tourTitle = tourDoc["title"];
+        state.companyName = tourDoc["companyName"];
+      }
+    }catch(e){
+      Snackbar.showSnackBar("Error while fetching User Details", e.toString());
     }
   }
 
   Future<void> addBookings(BookingModel booking) async {
     try {
       await dbref
-          .doc(auth.currentUser!.uid.toString())
+          .doc(state.uid.toString())
           .collection('AllBookings')
           .doc(DateTime.timestamp().microsecondsSinceEpoch.toString())
           .set(booking.toJson())
           .then((value) {
-        Get.toNamed(AppPages.APPlication);
+        Get.offAllNamed(AppRoutes.Application);
+            Snackbar.showSnackBar("Congrats", "Tour Booked Successfully");
+
       }).onError((error, stackTrace) {});
     } catch (e) {
       Snackbar.showSnackBar("Error", e.toString());

@@ -177,17 +177,20 @@ class PersonView extends GetView<PersonController> {
                                   child: ListTile(
                                     onTap: () {},
                                     leading: Icon(
-                                      Icons.notifications,
+                                      Icons.shopping_cart_rounded,
                                       color: AppColors.lightActiveIconColor,
                                     ),
                                     title: Text(
-                                      'Notifications',
+                                      'All Bookings',
                                       style: TextStyle(color: AppColors.lightTextColor),
                                     ),
                                     trailing: InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.all_Tours);
+
+                                      },
                                       child: Icon(
-                                        Icons.radio_button_on,
+                                        Icons.arrow_forward_ios_outlined,
                                         color: AppColors.lightActiveIconColor,
                                       ),
                                     ),
@@ -391,7 +394,16 @@ class PersonView extends GetView<PersonController> {
                       ),
                     );
                   } else {
-                    return Text('Something went wrong');
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                          color: AppColors.lightTextColor,
+                        ),
+                      ],
+                    );
+                    // return Text('Something went wrong');
                   }
 
               },

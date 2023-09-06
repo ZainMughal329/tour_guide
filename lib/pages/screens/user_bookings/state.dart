@@ -1,0 +1,4 @@
+class UserBookingState{
+
+  String? uid="";
+}

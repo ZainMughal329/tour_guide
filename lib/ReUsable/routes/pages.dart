@@ -11,6 +11,8 @@ import 'package:tours_guide/pages/companyScreen/show_tour/index.dart';
 import 'package:tours_guide/pages/screens/booking_screen/bindings.dart';
 import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
+import 'package:tours_guide/pages/screens/user_bookings/bindings.dart';
+import 'package:tours_guide/pages/screens/user_bookings/view.dart';
 
 // import 'package:tours_guide/pages/sessionPages/companySignUp/bindings.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/index.dart';
@@ -99,8 +101,16 @@ class AppPages {
       page: () => BookingView(tourId: '',
       name: '',
         phoneNumber: '',
+        companyName: '',
+        companyId: '',
       ),
       binding: BookingBindings(),
+    ),
+
+    GetPage(
+      name: AppRoutes.all_Tours,
+      page: () => UserBookingView(),
+      binding: UserBookingBindings(),
     ),
 
    ];
