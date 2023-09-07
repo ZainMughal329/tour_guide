@@ -13,6 +13,7 @@ class catogeryScreenController extends GetxController {
   final auth = FirebaseAuth.instance;
 
   final userRef = FirebaseFirestore.instance.collection('users');
+
   void setTourRef(String catogery){
 
      state.fireStoreTourRef=  FirebaseFirestore.instance

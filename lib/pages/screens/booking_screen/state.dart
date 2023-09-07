@@ -6,6 +6,7 @@ class BookingState {
   final phoneController = TextEditingController();
   RxString personString = "Select number of persons".obs;
   RxString monthString = "Select month".obs;
+  RxBool loading = false.obs;
 
   String? uid;
   String? companyName;

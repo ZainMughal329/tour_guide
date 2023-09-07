@@ -9,7 +9,8 @@ import '../screens/search_screen/view.dart';
 import 'controller.dart';
 
 class ApplicationPage extends GetView<ApplicationController> {
-  const ApplicationPage({Key? key}) : super(key: key);
+   ApplicationPage({Key? key}) : super(key: key);
+  final controller = Get.put<ApplicationController>( ApplicationController());
 
   Widget _buildPage() {
     return PageView(

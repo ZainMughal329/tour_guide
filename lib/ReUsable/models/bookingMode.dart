@@ -11,6 +11,8 @@ class BookingModel {
   String? tourId;
   String? pricePerPerson;
   String? tourImage;
+  String? month;
+  String? persons;
 
   BookingModel({
     required this.uid,
@@ -22,6 +24,8 @@ class BookingModel {
     required this.tourId,
     required this.pricePerPerson,
     required this.tourImage,
+    required this.month,
+    required this.persons,
   });
 
   Map<String , dynamic> toJson(){
@@ -35,6 +39,8 @@ class BookingModel {
       "tourTitle" : tourTitle,
       "pricePerPerson" : pricePerPerson,
       "tourImage" : tourImage,
+      "month" : month,
+      "persons" : persons,
     };
   }
 
@@ -52,6 +58,9 @@ class BookingModel {
         tourId: data['tourId'],
         pricePerPerson: data['pricePerPerson'],
         tourImage: data['tourImage'],
+      month: data['month'],
+      persons: data['persons'],
+
     );
   }
 

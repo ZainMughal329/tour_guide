@@ -16,6 +16,7 @@ class BookingController extends GetxController {
   // BookingController();
   final auth = FirebaseAuth.instance;
   final dbref = FirebaseFirestore.instance.collection("usersBookings");
+  final allbookingRef = FirebaseFirestore.instance.collection("allUserBookings");
 
   // final companyRef = FirebaseFirestore.instance.collection("usersBookings");
 
@@ -31,6 +32,7 @@ class BookingController extends GetxController {
   }
 
   Future<void> fetchDetails(String tourId) async {
+    setLoading(true);
     try{
       state.uid = await auth.currentUser!.uid.toString();
       final tourDoc = await FirebaseFirestore.instance
@@ -45,25 +47,42 @@ class BookingController extends GetxController {
         state.companyName = tourDoc["companyName"];
       }
     }catch(e){
+      setLoading(false);
       Snackbar.showSnackBar("Error while fetching User Details", e.toString());
     }
   }
+  void setLoading(bool value){
+    state.loading.value = value;
+  }
 
   Future<void> addBookings(BookingModel booking) async {
+    setLoading(true);
     try {
       await dbref
           .doc(state.uid.toString())
           .collection('AllBookings')
           .doc(DateTime.timestamp().microsecondsSinceEpoch.toString())
           .set(booking.toJson())
-          .then((value) {
-        Get.offAllNamed(AppRoutes.Application);
-            Snackbar.showSnackBar("Congrats", "Tour Booked Successfully");
-
-      }).onError((error, stackTrace) {});
+          .then((value) async{
+await addinAllBookings(booking);
+      }).onError((error, stackTrace) {
+        setLoading(false);
+        Snackbar.showSnackBar("Error", error.toString());
+      });
     } catch (e) {
+      setLoading(false);
       Snackbar.showSnackBar("Error", e.toString());
     }
+  }
+  Future<void> addinAllBookings(BookingModel bookingData) async{
+    await allbookingRef.doc(DateTime.timestamp().microsecondsSinceEpoch.toString()).set(bookingData.toJson()).then((value){
+      setLoading(false);
+      Get.offAllNamed(AppRoutes.Application);
+      Snackbar.showSnackBar("Congrats", "Tour Booked Successfully");
+    }).onError((error, stackTrace){
+      setLoading(false);
+      Snackbar.showSnackBar("Error while adding to bookings", error.toString());
+    });
   }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {

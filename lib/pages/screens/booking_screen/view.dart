@@ -106,32 +106,38 @@ class BookingView extends GetView<BookingController> {
                    );
                  }),
                  SizedBox(height: 32.h),
-                 ElevatedButton(
-                   onPressed: () async{
-                     await controller.fetchDetails(tourId).then((value){
-                       final booking = BookingModel(
-                         uid: controller.state.uid,
-                         name: name,
-                         phoneNumber: phoneController.text.trim().toString(),
-                         CompanyName: controller.state.companyName,
-                         CompanyId: controller.state.companyId,
-                         tourTitle: controller.state.tourTitle,
-                         tourId: tourId,
-                         pricePerPerson: controller.state.pricePerPerson,
-                         tourImage: controller.state.tourImgae,
-                       );
-                       controller.addBookings(booking);
-                     }).onError((error, stackTrace){
-                       Snackbar.showSnackBar("Error", error.toString());
-                     });
+                 Obx((){
+                   return ElevatedButton(
+                     onPressed: () async{
+                       await controller.fetchDetails(tourId).then((value){
+                         final booking = BookingModel(
+                           uid: controller.state.uid,
+                           name: name,
+                           phoneNumber: phoneController.text.trim().toString(),
+                           CompanyName: controller.state.companyName,
+                           CompanyId: controller.state.companyId,
+                           tourTitle: controller.state.tourTitle,
+                           tourId: tourId,
+                           pricePerPerson: controller.state.pricePerPerson,
+                           tourImage: controller.state.tourImgae,
+                           month: controller.state.monthString.value.toString(),
+                           persons: controller.state.personString.value.toString(),
 
-                     // Handle booking logic here
-                   },
-                   child: Text('Book Now'),
-                 ),
+                         );
+                         controller.addBookings(booking);
+                       }).onError((error, stackTrace){
+                         Snackbar.showSnackBar("Error", error.toString());
+                       });
+
+                       // Handle booking logic here
+                     },
+                     child: controller.state.loading.value==true ? Center(child: CircularProgressIndicator(color: Colors.white,)) : Text('Book Now'),
+                   );
+                 }),
 
                  SizedBox(height: 10.h),
                  ElevatedButton(
+
                    style: ButtonStyle(
                      backgroundColor: MaterialStateProperty.all(Colors.green),
                    ),

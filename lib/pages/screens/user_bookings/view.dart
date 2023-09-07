@@ -96,7 +96,7 @@ class UserBookingView extends GetView<UserBookingController> {
                           ),
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(10),
                           child: userModel.photoUrl.toString() == ''
                               ? Icon(
                                   Icons.person_outline,
@@ -278,6 +278,37 @@ class UserBookingView extends GetView<UserBookingController> {
                                                               ),
                                                             ],
                                                           ),
+                                                          SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              Icon(
+                                                                Icons
+                                                                    .calendar_month_outlined,
+                                                                color:
+                                                                Colors.blue,
+                                                                size: 20.sp,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 2.w,
+                                                              ),
+                                                              Text(
+                                                                (item['month']
+                                                                    .toString())
+                                                                    .capitalize
+                                                                    .toString(),
+                                                                style: TextStyle(
+                                                                    color: AppColors
+                                                                        .lightTextColor,
+                                                                    fontSize:
+                                                                    15.sp,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w600),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -321,7 +352,7 @@ class UserBookingView extends GetView<UserBookingController> {
                                                       children: [
                                                         Icon(
                                                           Icons
-                                                              .price_check_outlined,
+                                                              .supervised_user_circle_sharp,
                                                           color: Colors.blue,
                                                           size: 20.sp,
                                                         ),
@@ -329,8 +360,38 @@ class UserBookingView extends GetView<UserBookingController> {
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          item['pricePerPerson']
-                                                              .toString(),
+                                                          item['persons'],
+
+                                                          style: TextStyle(
+                                                              color: AppColors
+                                                                  .lightTextColor,
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .w500),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8.h,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .attach_money_outlined,
+                                                          color: Colors.blue,
+                                                          size: 20.sp,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 2.w,
+                                                        ),
+                                                        Text(
+                                                          // item['pricePerPerson'].toString(),
+
+                                                            (int.parse(item['pricePerPerson'].toString()
+                                                                )*(int.parse(item['persons'].toString()
+                                                            ))).toString(),
+
                                                           style: TextStyle(
                                                               color: AppColors
                                                                   .lightTextColor,
@@ -340,6 +401,7 @@ class UserBookingView extends GetView<UserBookingController> {
                                                         ),
                                                       ],
                                                     ),
+
                                                   ],
                                                 ),
                                               ],
@@ -351,6 +413,7 @@ class UserBookingView extends GetView<UserBookingController> {
                                             SizedBox(
                                               height: 10.h,
                                             ),
+
                                           ],
                                         ),
                                       ),
