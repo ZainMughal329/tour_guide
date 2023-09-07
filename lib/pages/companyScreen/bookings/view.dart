@@ -23,10 +23,10 @@ print("uid in widget is" +uid.toString());
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
               try{
                 if(snapshot.connectionState == ConnectionState.waiting){
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 }
                 if(snapshot.hasError){
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 }
                 print(snapshot.data!.docs.length.toString());
 
@@ -295,8 +295,10 @@ print("uid in widget is" +uid.toString());
 
 
               }catch(e){
-                return Text(
-                  'data : ' + e.toString(),
+                return Center(
+                  child: Text(
+                    'data : ' + e.toString(),
+                  ),
                 );
               }
             },
