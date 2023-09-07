@@ -5,10 +5,11 @@ import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
-import 'package:tours_guide/pages/screens/booking_screen/add_card.dart';
+import 'package:tours_guide/pages/screens/PersonPage/add_card.dart';
+import 'package:tours_guide/pages/screens/PersonPage/controller.dart';
 import 'package:tours_guide/pages/screens/booking_screen/controller.dart';
 
-class PaymentView extends GetView<BookingController> {
+class PaymentView extends GetView<PersonController> {
   const PaymentView({super.key});
 
   @override
@@ -20,9 +21,9 @@ class PaymentView extends GetView<BookingController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(Icons.arrow_back , color: AppColors.lightActiveIconColor,),
+          icon: Icon(Icons.arrow_back , color: AppColors.lightBgColor,),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blueAccent,
         elevation: 0,
       ),
 
@@ -34,7 +35,7 @@ class PaymentView extends GetView<BookingController> {
             Container(
               height: 220,
               width: double.infinity,
-              color: Colors.green,
+              color: Colors.blueAccent,
               child: Center(
                 child: Text(
                   'Your Card',
@@ -61,7 +62,7 @@ class PaymentView extends GetView<BookingController> {
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
                                 return CreditCardWidget(
-                                  cardBgColor: Colors.black,
+                                  cardBgColor: Colors.blueGrey,
                                   cardNumber: snapshot.data!.docs[index]
                                       ['cardNumber'],
                                   expiryDate: snapshot.data!.docs[index]
@@ -109,13 +110,13 @@ class PaymentView extends GetView<BookingController> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green),
+                          color: Colors.blue),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     FloatingActionButton(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.blue,
                       onPressed: () {
                         Get.to(
                           () => AddPaymentCard(),

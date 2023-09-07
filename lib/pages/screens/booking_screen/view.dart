@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/bookingMode.dart';
-import 'package:tours_guide/pages/screens/booking_screen/card_view.dart';
+import 'package:tours_guide/pages/screens/PersonPage/card_view.dart';
 import 'package:tours_guide/pages/screens/booking_screen/controller.dart';
 
 class BookingView extends GetView<BookingController> {
@@ -133,20 +133,8 @@ class BookingView extends GetView<BookingController> {
                      },
                      child: controller.state.loading.value==true ? Center(child: CircularProgressIndicator(color: Colors.white,)) : Text('Book Now'),
                    );
-                 }),
+                 },),
 
-                 SizedBox(height: 10.h),
-                 ElevatedButton(
-
-                   style: ButtonStyle(
-                     backgroundColor: MaterialStateProperty.all(Colors.green),
-                   ),
-                   onPressed: () {
-                    Get.to(() => PaymentView(),);
-                     // Handle booking logic here
-                   },
-                   child: Text('Your Cards'),
-                 ),
                ],
              ),
            ),

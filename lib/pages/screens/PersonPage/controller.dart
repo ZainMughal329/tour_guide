@@ -4,11 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
+import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../ReUsable/models/userModel.dart';
 import '../../../ReUsable/routes/names.dart';
@@ -21,10 +23,17 @@ class PersonController extends GetxController {
   @override
   void onInit() {
     // TODO: implement onInit
+    state.border = OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey.withOpacity(0.7),
+        width: 2.0,
+      ),
+    );
     _loadThemeMode();
     super.onInit();
 
   }
+
 
   final emailFocus = FocusNode();
   final passwordFocus = FocusNode();
@@ -228,6 +237,67 @@ class PersonController extends GetxController {
     Get.changeThemeMode(state.isDarkMode.value? ThemeMode.dark : ThemeMode.light);
 
     _saveThemeMode(); // Save the theme mode when it changes
+  }
+
+
+  void onCreditCardModelChange(CreditCardModel? creditCardModel) {
+    state.cardNumber.value = creditCardModel!.cardNumber;
+    state.expiryDate.value = creditCardModel.expiryDate;
+    state.cardHolderName.value = creditCardModel.cardHolderName;
+    state.cvvCode.value = creditCardModel.cvvCode;
+    state.isCvvFocused.value = creditCardModel.isCvvFocused;
+  }
+
+  storeCardInfo(String cardNumber, expiryDate, cardHolderName, cvvCode) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('card')
+        .doc(DateTime.timestamp().microsecondsSinceEpoch.toString())
+        .set({
+      'name': cardHolderName,
+      'cardNumber': cardNumber,
+      'cvv': cvvCode,
+      'expiryDate': expiryDate,
+    }).then((value) {
+      state.cvvCode.value = '';
+      state.cardHolderName.value = '';
+      state.cardNumber.value = '';
+      state.expiryDate.value = '';
+      Get.snackbar('Success', 'Your Card is added successfully');
+
+
+    }).onError((error, stackTrace) {
+      Get.snackbar('Error', 'Error is:' + error.toString());
+      print('Error is:' + error.toString());
+    });
+    return true;
+  }
+
+  final getUserCards = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection('card')
+      .snapshots();
+
+
+  final String emailAddress = "thedevtech2022@gmail.com"; // Replace with your email address
+
+  launchEmail() async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: emailAddress,
+    );
+    final String gmailUrl = "googlegmail:///co?to=$emailAddress"; // Gmail app URI
+
+    if (await canLaunch(gmailUrl)) {
+      await launch(gmailUrl);
+    } else if (await canLaunch(emailLaunchUri.toString())) {
+      await launch(emailLaunchUri.toString());
+    } else {
+      throw 'Could not launch Gmail or email';
+
+  }
   }
 
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PersonState {
@@ -9,4 +10,13 @@ class PersonState {
   RxString name = 'John Doe'.obs;
   RxString email = 'email@gmail.com'.obs;
   RxBool isDarkMode = false.obs;
+
+  RxString cardNumber = ''.obs;
+  RxString expiryDate = ''.obs;
+  RxString cardHolderName = ''.obs;
+  RxString cvvCode = ''.obs;
+  RxBool isCvvFocused = false.obs;
+  bool useGlassMorphism = false;
+  bool useBackgroundImage = false;
+  OutlineInputBorder? border;
 }

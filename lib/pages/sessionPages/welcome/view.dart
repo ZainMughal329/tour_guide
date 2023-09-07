@@ -243,7 +243,7 @@ class WelcomePage extends GetView<WelcomeController> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                   ),
                   Center(
                     child: InkWell(
@@ -251,7 +251,7 @@ class WelcomePage extends GetView<WelcomeController> {
                         controller.handleSignIn();
                       },
                       child: Container(
-                        height: 123.h,
+                        height: 127.h,
                         width: 66.w,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/pages/screens/booking_screen/controller.dart';
 
-class AddPaymentCard extends GetView<BookingController> {
+import 'controller.dart';
+
+class AddPaymentCard extends GetView<PersonController> {
   AddPaymentCard({super.key});
 
   //
@@ -27,9 +30,9 @@ class AddPaymentCard extends GetView<BookingController> {
           onPressed: () {
             Get.back();
           },
-          icon: Icon(Icons.arrow_back , color: AppColors.lightActiveIconColor,),
+          icon: Icon(Icons.arrow_back , color: Colors.white,),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue.withOpacity(0.5),
         elevation: 0,
       ),
       resizeToAvoidBottomInset: true,
@@ -42,7 +45,7 @@ class AddPaymentCard extends GetView<BookingController> {
               height: 220,
               // padding: EdgeInsets.only(top: 5),
               width: double.infinity,
-              color: Colors.green,
+              color: Colors.blue.withOpacity(0.5),
               child: Center(
                   child: Text(
                 'Add Card',
@@ -77,7 +80,7 @@ class AddPaymentCard extends GetView<BookingController> {
                     obscureCardNumber: true,
                     obscureCardCvv: true,
                     isHolderNameVisible: true,
-                    cardBgColor: Colors.black,
+                    cardBgColor: Colors.blueGrey,
                     backgroundImage: controller.state.useBackgroundImage
                         ? 'assets/images/card_bg.png'
                         : null,
@@ -180,19 +183,19 @@ class AddPaymentCard extends GetView<BookingController> {
                                   //   begin: Alignment(-1, -4),
                                   //   end: Alignment(1, 4),
                                   // ),
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(8),
+                                  color: Colors.blue.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(29),
                                 ),
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 15),
                                 width: double.infinity,
                                 alignment: Alignment.center,
-                                child: const Text(
-                                  'Validate',
+                                child: Text(
+                                  'Save',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     // fontFamily: 'halter',
-                                    fontSize: 14,
+                                    fontSize: 14.sp,
                                     package: 'flutter_credit_card',
                                   ),
                                 ),

@@ -6,6 +6,11 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/update.dart';
+import 'package:tours_guide/pages/screens/PersonPage/community_guidlines.dart';
+import 'package:tours_guide/pages/screens/PersonPage/contact_us.dart';
+import 'package:tours_guide/pages/screens/PersonPage/faqs.dart';
+import 'package:tours_guide/pages/screens/PersonPage/privacy_policy.dart';
+import 'package:tours_guide/pages/screens/PersonPage/term_of_use.dart';
 
 import 'controller.dart';
 
@@ -155,9 +160,11 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               Container(
                                 height: 40.h,
                                 child: ListTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(() => ContactUsWidget());
+                                  },
                                   title: Text(
-                                    'What\'s new',
+                                    'Contact us',
                                     style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
@@ -170,9 +177,12 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               Container(
                                 height: 40.h,
                                 child: ListTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(() => FAQsWidget());
+
+                                  },
                                   title: Text(
-                                    'FAQ\'s / Contact us',
+                                    'FAQ\'s',
                                     style: TextStyle(color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
@@ -185,7 +195,10 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               Container(
                                 height: 40.h,
                                 child: ListTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(() => CommunityGuidelinesScreen());
+
+                                  },
                                   title: Text(
                                     'Community Guidelines',
                                     style: TextStyle(color: AppColors.lightTextColor),
@@ -200,7 +213,10 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               Container(
                                 height: 40.h,
                                 child: ListTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(() => TermsOfUseScreen());
+
+                                  },
                                   title: Text(
                                     'Term of use',
                                     style: TextStyle(color: AppColors.lightTextColor),
@@ -215,7 +231,10 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               Container(
                                 height: 40.h,
                                 child: ListTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.to(() => PrivacyPolicyScreen());
+
+                                  },
                                   title: Text(
                                     'Privacy Policy',
                                     style: TextStyle(color: AppColors.lightTextColor),
