@@ -19,25 +19,22 @@ class BuildCompanyDrawer {
     return Drawer(
       width: 300.w,
       backgroundColor: AppColors.lightBgColor,
-      child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: controller.getNodeData(),
+      child: FutureBuilder(
+        future: controller.showCompanyData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            // CompanyModel companyModel = snapshot.data as CompanyModel;
+            CompanyModel companyModel = snapshot.data as CompanyModel;
             return ListView(
               children: [
                 UserAccountsDrawerHeader(
                   decoration: BoxDecoration(
                       color: AppColors.lightCardColor.withOpacity(0.1)),
                   accountName: Text(
-                    snapshot.data!['companyName']
-                        .toString()
-                        .capitalize
-                        .toString(),
+                    companyModel.companyName.capitalize.toString(),
                     style: TextStyle(color: AppColors.lightTextColor),
                   ),
                   accountEmail: Text(
-                    snapshot.data!['companyEmail'],
+                    companyModel.companyEmail,
                     style: TextStyle(color: AppColors.lightTextColor),
                   ),
                   currentAccountPicture: Container(
@@ -50,14 +47,14 @@ class BuildCompanyDrawer {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: controller.image == null
-                          ? snapshot.data!['logo'] == ''
+                          ? companyModel.logo == ''
                               ? Icon(
                                   Icons.person,
                                   size: 50.sp,
                                   color: Colors.blue,
                                 )
                               : Image(
-                                  image: NetworkImage(snapshot.data!['logo']),
+                                  image: NetworkImage(companyModel.logo),
                                   fit: BoxFit.cover,
                                 )
                           : Image.file(

@@ -15,13 +15,24 @@ class PaymentView extends GetView<BookingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Icons.arrow_back , color: AppColors.lightActiveIconColor,),
+        ),
+        backgroundColor: Colors.green,
+        elevation: 0,
+      ),
+
       body: Container(
         width: Get.width,
         height: Get.height,
         child: Stack(
           children: [
             Container(
-              height: 250,
+              height: 220,
               width: double.infinity,
               color: Colors.green,
               child: Center(
@@ -35,7 +46,7 @@ class PaymentView extends GetView<BookingController> {
               ),
             ),
             Positioned(
-              top: 170,
+              top: 120,
               right: 0,
               left: 0,
               bottom: 80,

@@ -175,7 +175,9 @@ class PersonView extends GetView<PersonController> {
                                 Container(
                                   height: 40.h,
                                   child: ListTile(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Get.toNamed(AppRoutes.all_Tours);
+                                    },
                                     leading: Icon(
                                       Icons.shopping_cart_rounded,
                                       color: AppColors.lightActiveIconColor,

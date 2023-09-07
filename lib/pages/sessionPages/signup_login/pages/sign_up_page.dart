@@ -5,12 +5,13 @@ import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/controller.dart';
 
 import '../../../../ReUsable/Components/input_fields.dart';
+import '../../../../ReUsable/Components/login_widget.dart';
 import '../../../../ReUsable/models/userModel.dart';
 
 class SignUpPage extends GetView<SignupLoginController> {
   const SignUpPage({Key? key}) : super(key: key);
 
-  Widget _buildForm() {
+  Widget _buildForm(BuildContext context) {
     return Form(
       child: Column(
         children: [
@@ -40,6 +41,21 @@ class SignUpPage extends GetView<SignupLoginController> {
                 descrip: 'Enter your email',
                 // focNode: controller.emailFocus,
               ),
+            ),
+          ),
+          Obx(
+            () => LoginWidget(
+              controller.state.code.value,
+              () async {
+                final code = await controller.state.countryPicker
+                    .showPicker(context: context);
+                // Null check
+                if (code != null) {
+                  controller.state.code.value = code;
+                }
+                ;
+              },
+              controller.state.signUpPhoneController,
             ),
           ),
           Padding(
@@ -82,7 +98,7 @@ class SignUpPage extends GetView<SignupLoginController> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          _buildForm(),
+          _buildForm(context),
           const SizedBox(height: 10),
           Hero(
             tag: "signUp_btn",
@@ -94,7 +110,10 @@ class SignUpPage extends GetView<SignupLoginController> {
                     email: controller.state.signUpEmailController.text.trim(),
                     password:
                         controller.state.signUpPasswordController.text.trim(),
-                    phone: '+92**********',
+                    phone: controller.state.code.value.dialCode +
+                        controller.state.signUpPhoneController.text
+                            .trim()
+                            .toString(),
                     userName: controller.state.signUpUserController.text.trim(),
                     photoUrl: '',
                     location: '',

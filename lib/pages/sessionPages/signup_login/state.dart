@@ -25,6 +25,8 @@ class SignupLoginState {
   // controllers for signUp
   final signUpEmailController = TextEditingController();
   final signUpPasswordController = TextEditingController();
+  final signUpPhoneController = TextEditingController();
+
   final signUpUserController = TextEditingController();
 
   // controllers for company signUp

@@ -69,16 +69,16 @@ class SearchView extends GetView<SearchBarController> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     // print('waiting for connection state');
-                    toastInfo(
-                        msg: "waiting for connection ...",
-                        length: Toast.LENGTH_SHORT);
+                    // toastInfo(
+                    //     msg: "waiting for connection ...",
+                    //     length: Toast.LENGTH_SHORT);
                     return Center(
                       child: SizedBox(),
                     );
                   }
                   if (snapshot.hasError) {
-                    toastInfo(msg: "Something went wrong");
-                    print('Inside snapshot error');
+                    // toastInfo(msg: "Something went wrong");
+                    // print('Inside snapshot error');
                     return SizedBox();
                   }
                   UserModel userModel = snapshot.data as UserModel;
@@ -206,6 +206,11 @@ class SearchView extends GetView<SearchBarController> {
                                                 Container(
                                                   height: 50.h,
                                                   width: 50.w,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: AppColors.lightActiveIconColor.withOpacity(0.1),
+                                                    ),
+                                                  ),
                                                   child: item['tourImage']
                                                               .toString() ==
                                                           ''
