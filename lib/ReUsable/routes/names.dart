@@ -14,6 +14,8 @@ class AppRoutes {
   static const Company_profile = '/company_profile';
   static const Company_AddTour = '/company_add_tour';
   static const Company_ShowTour = '/company_show_tour';
+  static const Company_Bookings = '/company_all_bookings';
+
 
   static const Tourist_Login = '/tourist_login';
   static const Tourist_Home = '/tourist_home';

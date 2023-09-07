@@ -5,6 +5,7 @@ import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
+import 'package:tours_guide/pages/companyScreen/bookings/view.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 
 import '../../../ReUsable/Components/company_drawer.dart';
@@ -27,7 +28,7 @@ class _CompanyHomeState extends State<CompanyHome>
 
   @override
   Widget build(BuildContext context) {
-    final _tabController = TabController(length: 3, vsync: this);
+    final _tabController = TabController(length: 4, vsync: this);
 
     return Scaffold(
       body: Container(
@@ -142,6 +143,9 @@ class _CompanyHomeState extends State<CompanyHome>
                                       Tab(
                                         text: 'Add tour',
                                       ),
+                                      Tab(
+                                        text: 'All Bookings',
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -160,6 +164,7 @@ class _CompanyHomeState extends State<CompanyHome>
                                     Center(
                                       child: CompanyAddTourScreen(),
                                     ),
+                                    CompanyBookingsView(uid: controller.state.id.toString(),),
                                   ],
                                 ),
                               ),

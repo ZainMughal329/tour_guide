@@ -5,6 +5,8 @@ import 'package:tours_guide/pages/admin/index.dart';
 
 // import 'package:tours_guide/pages/companyScreen/add_tour/bindings.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
+import 'package:tours_guide/pages/companyScreen/bookings/bindings.dart';
+import 'package:tours_guide/pages/companyScreen/bookings/view.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/index.dart';
@@ -111,6 +113,11 @@ class AppPages {
       name: AppRoutes.all_Tours,
       page: () => UserBookingView(),
       binding: UserBookingBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.Company_Bookings,
+      page: () => CompanyBookingsView(uid: '',),
+      binding: CompanyBookingBindings(),
     ),
 
    ];

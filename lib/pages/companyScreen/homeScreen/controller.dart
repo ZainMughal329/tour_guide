@@ -25,10 +25,10 @@ class CompanyHomeController extends GetxController {
   }
   getUsersData() async {
     print('INSIDE FUNC');
-    final id = auth.currentUser!.uid.toString();
-    if (id != '') {
+    state.id = auth.currentUser!.uid.toString();
+    if (state.id != '') {
       print('object');
-      final data = await getUserData(id);
+      final data = await getUserData(state.id.toString());
       return data;
     } else {
       Get.snackbar('Error', 'Something went wrong');
