@@ -36,7 +36,6 @@ class SearchView extends GetView<SearchBarController> {
               keyboardType: TextInputType.text,
               // focusNode: focNode,
               decoration: InputDecoration(
-
                 prefixIcon: Icon(
                   Icons.search,
                   color: AppColors.lightTextColor,
@@ -164,7 +163,7 @@ class SearchView extends GetView<SearchBarController> {
             child: Obx(
               () =>
                   // var tours = controller.filteredTourList;
-                  controller.filteredTourList.length !=0
+                  controller.filteredTourList.length != 0
                       ? ListView.builder(
                           itemCount: controller.filteredTourList.length,
                           itemBuilder: (context, index) {
@@ -181,19 +180,21 @@ class SearchView extends GetView<SearchBarController> {
                                   GestureDetector(
                                     onTap: () {
                                       Get.to(() => DetailScreen(
-                                          title: item['title'].toString(),
-                                          price: item['price'].toString(),
-                                          location: item['location'].toString(),
-                                          des: item['tourDescription']
-                                              .toString(),
-                                          img: item['tourImage'].toString(),
-                                          id: item['id'].toString(),
-                                          phone:
-                                              item['companyPhone'].toString(),
-                                        comapnyName: item['companyName'].toString(),
-                                        companyId: item['companyId'].toString(),
-
-                                      ));
+                                            title: item['title'].toString(),
+                                            price: item['price'].toString(),
+                                            location:
+                                                item['location'].toString(),
+                                            des: item['tourDescription']
+                                                .toString(),
+                                            img: item['tourImage'].toString(),
+                                            id: item['id'].toString(),
+                                            phone:
+                                                item['companyPhone'].toString(),
+                                            comapnyName:
+                                                item['companyName'].toString(),
+                                            companyId:
+                                                item['companyId'].toString(),
+                                          ));
                                     },
                                     child: Column(
                                       children: [
@@ -208,7 +209,9 @@ class SearchView extends GetView<SearchBarController> {
                                                   width: 50.w,
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
-                                                      color: AppColors.lightActiveIconColor.withOpacity(0.1),
+                                                      color: AppColors
+                                                          .lightActiveIconColor
+                                                          .withOpacity(0.1),
                                                     ),
                                                   ),
                                                   child: item['tourImage']
@@ -216,7 +219,8 @@ class SearchView extends GetView<SearchBarController> {
                                                           ''
                                                       ? Icon(
                                                           Icons.person,
-                                                          color: AppColors.lightTextColor,
+                                                          color: AppColors
+                                                              .lightTextColor,
                                                         )
                                                       : Image.network(
                                                           item['tourImage']
@@ -234,13 +238,30 @@ class SearchView extends GetView<SearchBarController> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        (item['title']
-                                                                .toString())
+                                                        ((item['title']
+                                                            .toString())
                                                             .capitalizeFirst
-                                                            .toString(),
+                                                            .toString())
+                                                            .split('')
+                                                            .take(5)
+                                                            .join('').length >=5 ? ((item['title']
+                                                                    .toString())
+                                                                .capitalizeFirst
+                                                                .toString())
+                                                            .split('')
+                                                            .take(5)
+                                                            .join('') + '...' : ((item['title']
+                                                            .toString())
+                                                            .capitalizeFirst
+                                                            .toString()),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                         style: TextStyle(
-                                                            color: AppColors.lightTextColor,
+                                                            color: AppColors
+                                                                .lightTextColor,
                                                             fontSize: 15.sp,
+                                                            // overflow: TextOverflow.ellipsis,
+
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w600),
@@ -254,7 +275,8 @@ class SearchView extends GetView<SearchBarController> {
                                                             .capitalizeFirst
                                                             .toString(),
                                                         style: TextStyle(
-                                                            color: AppColors.lightTextColor,
+                                                            color: AppColors
+                                                                .lightTextColor,
                                                             fontSize: 15.sp,
                                                             fontWeight:
                                                                 FontWeight
@@ -276,7 +298,8 @@ class SearchView extends GetView<SearchBarController> {
                                                   children: [
                                                     Icon(
                                                       Icons.people,
-                                                      color: AppColors.lightTextColor,
+                                                      color: AppColors
+                                                          .lightTextColor,
                                                       size: 20.sp,
                                                     ),
                                                     SizedBox(
@@ -287,7 +310,8 @@ class SearchView extends GetView<SearchBarController> {
                                                               .toString() +
                                                           " person\'s",
                                                       style: TextStyle(
-                                                          color: AppColors.lightTextColor,
+                                                          color: AppColors
+                                                              .lightTextColor,
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
@@ -301,17 +325,33 @@ class SearchView extends GetView<SearchBarController> {
                                                     Icon(
                                                       Icons
                                                           .location_on_outlined,
-                                                      color: AppColors.lightTextColor,
+                                                      color: AppColors
+                                                          .lightTextColor,
                                                       size: 20.sp,
                                                     ),
                                                     SizedBox(
                                                       width: 2.w,
                                                     ),
                                                     Text(
-                                                      item['location']
-                                                          .toString(),
+                                                      (item['location']
+                                                          .toString())
+                                                          .split('')
+                                                          .take(5)
+                                                          .join('').length >=5 ? ((item['location']
+                                                          .toString())
+                                                          .capitalizeFirst
+                                                          .toString())
+                                                          .split('')
+                                                          .take(5)
+                                                          .join('') + '...' : ((item['location']
+                                                          .toString())
+                                                          .capitalizeFirst
+                                                          .toString()),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
                                                       style: TextStyle(
-                                                          color: AppColors.lightTextColor,
+                                                          color: AppColors
+                                                              .lightTextColor,
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
@@ -339,7 +379,8 @@ class SearchView extends GetView<SearchBarController> {
                       : Center(
                           child: Text(
                             'No searches yet',
-                            style: TextStyle(color: AppColors.lightTextColor, fontSize: 25),
+                            style: TextStyle(
+                                color: AppColors.lightTextColor, fontSize: 25),
                           ),
                         ),
             ),
@@ -364,12 +405,9 @@ class TextFieldContainer extends StatelessWidget {
       width: size.width,
       height: 50.h,
       decoration: BoxDecoration(
-        color: AppColors.primaryBackground,
-        borderRadius: BorderRadius.circular(29),
-        border: Border.all(
-          color: AppColors.lightTextColor
-        )
-      ),
+          color: AppColors.primaryBackground,
+          borderRadius: BorderRadius.circular(29),
+          border: Border.all(color: AppColors.lightTextColor)),
       child: child,
     );
   }

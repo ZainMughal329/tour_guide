@@ -87,6 +87,7 @@ class FAQsWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ExpansionTile(
                     title: Text(faqs[index].question),
+                    leading: Icon(Icons.question_answer_outlined),
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16.0),

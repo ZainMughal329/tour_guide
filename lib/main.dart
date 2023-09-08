@@ -10,6 +10,7 @@ import 'package:tours_guide/fucntions_call.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/controller.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/controller.dart';
 import 'package:tours_guide/pages/screens/PersonPage/controller.dart';
+import 'package:tours_guide/pages/sessionPages/welcome/controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   Get.put(CompanyProfileController());
   Get.lazyPut<CompanyShowTourController>(() => CompanyShowTourController());
+  Get.put(WelcomeController());
   runApp(const MyApp());
 }
 

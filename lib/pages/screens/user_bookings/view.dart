@@ -232,10 +232,24 @@ class UserBookingView extends GetView<UserBookingController> {
                                                                 width: 2.w,
                                                               ),
                                                               Text(
-                                                                (item['tourTitle']
+                                                                ((item['tourTitle']
                                                                         .toString())
                                                                     .capitalizeFirst
-                                                                    .toString(),
+                                                                    .toString())
+                                                                    .split('')
+                                                                    .take(5)
+                                                                    .join('').length >=5 ? ((item['tourTitle']
+                                                                    .toString())
+                                                                    .capitalizeFirst
+                                                                    .toString())
+                                                                    .split('')
+                                                                    .take(5)
+                                                                    .join('') + '...' : ((item['tourTitle']
+                                                                    .toString())
+                                                                    .capitalizeFirst
+                                                                    .toString()),
+                                                                overflow: TextOverflow
+                                                                    .ellipsis,
                                                                 style: TextStyle(
                                                                     color: AppColors
                                                                         .lightTextColor,
@@ -263,10 +277,23 @@ class UserBookingView extends GetView<UserBookingController> {
                                                                 width: 2.w,
                                                               ),
                                                               Text(
-                                                                (item['CompanyName']
+                                                                ((item['CompanyName']
                                                                         .toString())
                                                                     .capitalize
-                                                                    .toString(),
+                                                                    .toString()).split('')
+                                                                    .take(5)
+                                                                    .join('').length >=5 ? ((item['CompanyName']
+                                                                    .toString())
+                                                                    .capitalizeFirst
+                                                                    .toString())
+                                                                    .split('')
+                                                                    .take(5)
+                                                                    .join('') + '...' : ((item['CompanyName']
+                                                                    .toString())
+                                                                    .capitalizeFirst
+                                                                    .toString()),
+                                                                overflow: TextOverflow
+                                                                    .ellipsis,
                                                                 style: TextStyle(
                                                                     color: AppColors
                                                                         .lightTextColor,
@@ -294,10 +321,10 @@ class UserBookingView extends GetView<UserBookingController> {
                                                                 width: 2.w,
                                                               ),
                                                               Text(
-                                                                (item['month']
+                                                                ((item['month']
                                                                     .toString())
                                                                     .capitalize
-                                                                    .toString(),
+                                                                    .toString()),
                                                                 style: TextStyle(
                                                                     color: AppColors
                                                                         .lightTextColor,
@@ -332,8 +359,21 @@ class UserBookingView extends GetView<UserBookingController> {
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          item['name']
-                                                              .toString(),
+                                                          (item['name']
+                                                              .toString()).split('')
+                                                              .take(5)
+                                                              .join('').length >=5 ? ((item['name']
+                                                              .toString())
+                                                              .capitalizeFirst
+                                                              .toString())
+                                                              .split('')
+                                                              .take(5)
+                                                              .join('') + '...' : ((item['name']
+                                                              .toString())
+                                                              .capitalizeFirst
+                                                              .toString()),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           // +
                                                           // " person\'s",
                                                           style: TextStyle(
@@ -360,7 +400,20 @@ class UserBookingView extends GetView<UserBookingController> {
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          item['persons'],
+                                                          (item['persons']).split('')
+                                                              .take(5)
+                                                              .join('').length >=5 ? ((item['persons']
+                                                              .toString())
+                                                              .capitalizeFirst
+                                                              .toString())
+                                                              .split('')
+                                                              .take(5)
+                                                              .join('') + '...' : ((item['persons']
+                                                              .toString())
+                                                              .capitalizeFirst
+                                                              .toString()),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
 
                                                           style: TextStyle(
                                                               color: AppColors
@@ -388,9 +441,9 @@ class UserBookingView extends GetView<UserBookingController> {
                                                         Text(
                                                           // item['pricePerPerson'].toString(),
 
-                                                            (int.parse(item['pricePerPerson'].toString()
+                                                            ((int.parse(item['pricePerPerson'].toString()
                                                                 )*(int.parse(item['persons'].toString()
-                                                            ))).toString(),
+                                                            ))).toString()),
 
                                                           style: TextStyle(
                                                               color: AppColors
