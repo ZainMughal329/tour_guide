@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 class SignupLoginState {
   final loading = false.obs;
+  final userSignUpLoading = false.obs;
+  final companySignUpLoading = false.obs;
   final keyboardStatus = false.obs;
 
   var companyLogo = '';

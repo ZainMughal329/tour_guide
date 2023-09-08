@@ -33,6 +33,18 @@ class SignupLoginController extends GetxController
     tabController = TabController(length: 3, vsync: this);
   }
 
+  // function to setLoading for buttons
+  void setLoading(bool value){
+    state.loading.value = value;
+  }
+  void setSignUpLoading(bool value){
+    state.userSignUpLoading.value = value;
+  }
+
+  void setCompanyLoading(bool value){
+    state.companySignUpLoading.value = value;
+  }
+
   // {
 
   // functions for company signUp
@@ -54,16 +66,17 @@ class SignupLoginController extends GetxController
   // after registeration , store the user in database
   void registerCompanyWithEmailAndPassword(
       CompanyModel Compuser, String email, String password) async {
-    state.loading.value = true;
+    setCompanyLoading(true);
     try {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         toastInfo(msg: "Information Received");
         toastInfo(msg: "You'll receive confirmation \nmail shortly");
-        Get.to(() => SignUpMsg());
 
-        state.loading.value = false;
+        // Get.to(() => SignUpMsg());
+
+        setCompanyLoading(false);
         StorePrefrences sp = StorePrefrences();
         sp.setIsFirstOpen(true);
         Compuser.id = auth.currentUser!.uid.toString();
@@ -89,21 +102,23 @@ class SignupLoginController extends GetxController
 
 // this function is to store user in Firebase FireStore
   createCompany(CompanyModel user) async {
-    state.loading.value = true;
+    // state.loading.value = true;
     try {
       await _dbCompany
           .doc(auth.currentUser!.uid.toString())
           .set(user.toJson())
           .then((value) {
-        auth.signOut();
-        Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
-        state.loading.value = false;
+        Get.to(() => SignUpMsg());
+        // auth.signOut();
+        // Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
+        setCompanyLoading(false);
       }).onError((error, stackTrace) {
-        state.loading.value = false;
+        setCompanyLoading(false);
         toastInfo(msg: error.toString());
       });
     } catch (e) {
       toastInfo(msg: e.toString());
+      setCompanyLoading(false);
     }
   }
 
@@ -112,7 +127,6 @@ class SignupLoginController extends GetxController
     registerCompanyWithEmailAndPassword(
         compUser, compUser.companyEmail, compUser.pass);
   }
-
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -225,7 +239,7 @@ class SignupLoginController extends GetxController
 
   void registerUserWithEmailAndPassword(
       UserModel userinfo, String email, password) async {
-    state.loading.value = true;
+    setSignUpLoading(true);
     try {
       var user = await auth
           .createUserWithEmailAndPassword(email: email, password: password)
@@ -235,20 +249,20 @@ class SignupLoginController extends GetxController
         sp.setIsFirstOpen(true);
         createUser(userinfo);
       }).onError((error, stackTrace) {
-        state.loading.value = false;
+        setSignUpLoading(false);
         toastInfo(msg: error.toString());
       });
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
-      state.loading.value = false;
+      setSignUpLoading(false);
     } catch (_) {
-      state.loading.value = false;
+      setSignUpLoading(false);
     }
   }
 
   void loginUserWithEmailAndPassword(String email, password) async {
-    // state.loading.value = true;
+    setLoading(true);
     try {
       var user = await auth
           .signInWithEmailAndPassword(email: email, password: password)
@@ -260,28 +274,30 @@ class SignupLoginController extends GetxController
         if (companyData.docs.isNotEmpty) {
           print('inside company if');
           StorePrefrences().setIsFirstOpen(true);
-
+          setLoading(false);
           Get.offAndToNamed(AppRoutes.Company_Home);
         } else {
           StorePrefrences().setIsFirstOpen(true);
+          setLoading(false);
           Get.offAndToNamed(AppRoutes.Application);
         }
+        setLoading(false);
 
-        state.loading.value = false;
+        // state.loading.value = false;
         state.loginEmailController.clear();
         state.loginPasswordController.clear();
         // userController.clear();
       }).onError((error, stackTrace) {
         final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
         toastInfo(msg: ex.toString());
-        state.loading.value = false;
+        setLoading(false);
       });
     } on FirebaseAuthException catch (e) {
       final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
       toastInfo(msg: ex.toString());
-      state.loading.value = false;
+      setLoading(false);
     } catch (_) {
-      state.loading.value = false;
+      setLoading(false);
     }
   }
 
@@ -305,20 +321,20 @@ class SignupLoginController extends GetxController
   }
 
   createUser(UserModel user) async {
-    state.loading.value = true;
+    setSignUpLoading(true);
     await _dbUser
         .doc(auth.currentUser!.uid)
         .set(user.toJson())
         .whenComplete(() {
       toastInfo(msg: 'Successfully created account');
 
-      state.loading.value = false;
+      setSignUpLoading(false);
       StorePrefrences sp = StorePrefrences();
       sp.setIsFirstOpen(true);
       Get.offAllNamed(AppRoutes.Application);
     }).catchError((error, stackTrace) {
       toastInfo(msg: "Error occurred");
-      state.loading.value = false;
+      setSignUpLoading(false);
     });
   }
 

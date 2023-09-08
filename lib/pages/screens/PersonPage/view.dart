@@ -384,7 +384,7 @@ class PersonView extends GetView<PersonController> {
                                     ),
                                     child: Obx(() {
                                       return controller.state.loading.value
-                                          ? CircularProgressIndicator()
+                                          ? Center(child: CircularProgressIndicator(color: Colors.white,))
                                           : Center(
                                               child: Text(
                                                 'Logout',

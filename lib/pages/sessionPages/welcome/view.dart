@@ -248,7 +248,7 @@ class WelcomePage extends GetView<WelcomeController> {
                   Center(
                     child: InkWell(
                       onTap: () {
-                        controller.handleSignIn();
+                        // controller.handleSignIn();
                       },
                       child: Container(
                         height: 127.h,
@@ -267,35 +267,61 @@ class WelcomePage extends GetView<WelcomeController> {
                               // ]
                             ),
                             borderRadius: BorderRadius.circular(40)),
-                        child: Column(
+                        child: Stack(
                           children: [
-                            Icon(
-                              Icons.keyboard_arrow_up_rounded,
-                              size: 40,
-                              color: Colors.white.withOpacity(0.3),
+
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.keyboard_arrow_up_rounded,
+                                  size: 40,
+                                  color: Colors.white.withOpacity(0.3),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_up_rounded,
+                                  size: 40,
+                                  color: Colors.white,
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    height: 50.h,
+                                    width: 50.w,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xff000000).withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(50)),
+                                    child: Center(
+                                        child: Text(
+                                          'Go',
+                                          style: TextStyle(
+                                              fontSize: 24,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Icon(
-                              Icons.keyboard_arrow_up_rounded,
-                              size: 40,
-                              color: Colors.white,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: 50.h,
-                                width: 50.w,
-                                decoration: BoxDecoration(
-                                    color: Color(0xff000000).withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(50)),
-                                child: Center(
-                                    child: Text(
-                                  'Go',
-                                  style: TextStyle(
-                                      fontSize: 24,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                              ),
+                            RotatedBox(
+                              quarterTurns: 3,
+                              child: Obx((){
+                                return Slider(
+                                  value: controller.state.value.value,
+                                  onChanged: (val){
+                                    controller.state.value.value= val;
+                                  },
+                                  thumbColor: Colors.black.withOpacity(0.0),
+                                  activeColor: Colors.black.withOpacity(0.0),
+                                  inactiveColor: Colors.black.withOpacity(0.0),
+                                  secondaryActiveColor: Colors.black.withOpacity(0.0),
+                                  onChangeEnd: (newvalue){
+                                    print("End edge value" + newvalue.toString());
+                                    if(newvalue==1.0){
+                                      controller.handleSignIn();
+                                    }
+                                  },
+                                );
+                              }),
                             ),
                           ],
                         ),

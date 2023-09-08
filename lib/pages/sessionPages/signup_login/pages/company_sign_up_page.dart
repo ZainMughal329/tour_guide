@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
@@ -131,59 +132,65 @@ class CompanySignUp extends GetView<SignupLoginController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            _buildForm(context),
-            const SizedBox(height: AppColors.defaultPadding),
-            Hero(
-              tag: "company_signUp_btn",
-              child: GestureDetector(
-                onTap: () {
-                  final CompanyUser = CompanyModel(
-                    companyEmail: controller.state.companyEmailController.text
-                        .trim()
-                        .toString(),
-                    companyName: controller.state.companyNameController.text
-                        .trim()
-                        .toString(),
-                    status: 'false',
-                    companyPhone: controller.state.code.value.dialCode +
-                        controller.state.companyPhoneNumberController.text
-                            .trim()
-                            .toString(),
-                    companyDescription: controller
-                        .state.companyDescController.text
-                        .trim()
-                        .toString(),
-                    pass: controller.state.companyPassController.text
-                        .trim()
-                        .toString(),
-                    logo: '',
-                    location: '',
-                    fcmToken: '',
-                    addTime: Timestamp.now(),
-                  );
-                  controller.storeCompany(CompanyUser, context);
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: AppColors.lightButtonColor,
-                    borderRadius: BorderRadius.circular(29),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "SignUp".toUpperCase(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: AppColors.defaultPadding),
-          ],
+      child: Padding(
+        padding:  EdgeInsets.only(bottom: 200.h),
+        child: Container(
+          child: Column(
+            children: [
+              _buildForm(context),
+              const SizedBox(height: AppColors.defaultPadding),
+             Obx((){
+               return  Hero(
+                 tag: "company_signUp_btn",
+                 child: GestureDetector(
+                   onTap: () {
+                     final CompanyUser = CompanyModel(
+                       companyEmail: controller.state.companyEmailController.text
+                           .trim()
+                           .toString(),
+                       companyName: controller.state.companyNameController.text
+                           .trim()
+                           .toString(),
+                       status: 'false',
+                       companyPhone: controller.state.code.value.dialCode +
+                           controller.state.companyPhoneNumberController.text
+                               .trim()
+                               .toString(),
+                       companyDescription: controller
+                           .state.companyDescController.text
+                           .trim()
+                           .toString(),
+                       pass: controller.state.companyPassController.text
+                           .trim()
+                           .toString(),
+                       logo: '',
+                       location: '',
+                       fcmToken: '',
+                       addTime: Timestamp.now(),
+                     );
+                     controller.storeCompany(CompanyUser, context);
+                   },
+                   child: Container(
+                     width: double.infinity,
+                     height: 50,
+                     decoration: BoxDecoration(
+                       color: AppColors.lightButtonColor,
+                       borderRadius: BorderRadius.circular(29),
+                     ),
+                     child: Center(
+                       child: controller.state.companySignUpLoading == true ? Center(child: CircularProgressIndicator(color: Colors.white),) :
+                       Text(
+                         "Sign Up".toUpperCase(),
+                         style: TextStyle(color: Colors.white),
+                       ),
+                     ),
+                   ),
+                 ),
+               );
+             }),
+              const SizedBox(height: AppColors.defaultPadding),
+            ],
+          ),
         ),
       ),
     );

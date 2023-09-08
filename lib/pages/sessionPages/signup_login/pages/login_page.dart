@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
@@ -18,58 +19,67 @@ class LoginPage extends GetView<SignupLoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // TopImage(),
+    return Padding(
+      padding:  EdgeInsets.only(bottom: 200.h),
+      child: Column(
+        children: [
+          // TopImage(),
 
-        _buildForm(controller.state.loginEmailController , controller.state.loginPasswordController),
-        const SizedBox(height: AppColors.defaultPadding),
-        Hero(
-          tag: "login_btn",
-          child: GestureDetector(
-            onTap: () {
-              // if (formKey.currentState!.validate()) {
-                if (controller.state.loginEmailController.text ==
-                    'admin@admin.com' &&
-                    controller.state.loginPasswordController
-                        .text ==
-                        'admin@123') {
-                  Get.offAndToNamed(AppRoutes.Admin)!
-                      .then((value) {
-                    controller.state.loginEmailController
-                        .clear();
-                    controller.state.loginPasswordController
-                        .clear();
-                  });
-                } else {
-                  controller
-                      .loginUserWithEmailAndPassword(
-                    controller.state.loginEmailController.text
-                        .trim(),
-                    controller.state.loginPasswordController.text
-                        .trim(),
-                  );
-                }
-              // }
-            },
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                color: AppColors.lightButtonColor,
-                borderRadius: BorderRadius.circular(29),
-              ),
-              child: Center(
-                child: Text(
-                  "Login".toUpperCase(),
-                  style: TextStyle(color: Colors.white),
+          _buildForm(controller.state.loginEmailController , controller.state.loginPasswordController),
+          const SizedBox(height: AppColors.defaultPadding),
+          Obx((){
+            return Hero(
+              tag: "login_btn",
+              child: GestureDetector(
+                onTap: () {
+
+                  // if (formKey.currentState!.validate()) {
+                  if (controller.state.loginEmailController.text ==
+                      'admin@admin.com' &&
+                      controller.state.loginPasswordController
+                          .text ==
+                          'admin@123') {
+                    controller.setLoading(true);
+                    Get.offAndToNamed(AppRoutes.Admin)!
+                        .then((value) {
+                      controller.setLoading(false);
+                      controller.state.loginEmailController
+                          .clear();
+                      controller.state.loginPasswordController
+                          .clear();
+                    });
+                  } else {
+                    controller
+                        .loginUserWithEmailAndPassword(
+                      controller.state.loginEmailController.text
+                          .trim(),
+                      controller.state.loginPasswordController.text
+                          .trim(),
+                    );
+                  }
+                  // }
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: AppColors.lightButtonColor,
+                    borderRadius: BorderRadius.circular(29),
+                  ),
+                  child: Center(
+                    child: controller.state.loading.value==true ? Center(child: CircularProgressIndicator(color: Colors.white,)) :
+                    Text(
+                      "Login".toUpperCase(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ),
-        const SizedBox(height: AppColors.defaultPadding),
-      ],
+            );
+          }),
+          const SizedBox(height: AppColors.defaultPadding),
+        ],
+      ),
     );
   }
 }
