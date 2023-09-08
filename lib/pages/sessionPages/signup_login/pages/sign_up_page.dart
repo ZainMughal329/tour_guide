@@ -99,6 +99,7 @@ class SignUpPage extends GetView<SignupLoginController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+
       child: Padding(
         padding:  EdgeInsets.only(bottom: 200.h),
         child: Column(

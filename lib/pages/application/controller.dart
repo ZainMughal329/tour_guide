@@ -79,10 +79,5 @@ class ApplicationController extends GetxController {
     pageController = PageController(initialPage: state.page);
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    pageController.dispose();
-  }
+
 }

@@ -168,76 +168,72 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
         scrollDirection: Axis.vertical,
         // physics: NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.all(10.w),
+          padding: EdgeInsets.symmetric(horizontal : 10.w),
           child: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 1.h,
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          _showCustomDialog(context, controller);
-                        },
-                        child: Container(
-                            height: 200.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: controller.image == null
-                                  ? AppColors.lightBgColor
-                                  : AppColors.lightBgColor,
-                              border: Border.all(
+                    GetBuilder<CompanyAddTourController>(
+                        builder: (controller) {
+                        return InkWell(
+                          onTap: () {
+                            _showCustomDialog(context, controller);
+                          },
+                          child: Container(
+                              height: 200.h,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
                                 color: controller.image == null
-                                    ? AppColors.lightActiveIconColor
+                                    ? AppColors.lightBgColor
                                     : AppColors.lightBgColor,
-                                // width: 3.0,
+                                border: Border.all(
+                                  color: controller.image == null
+                                      ? AppColors.lightActiveIconColor
+                                      : Colors.transparent,
+                                  // width: 3.0,
+                                ),
                               ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GetBuilder<CompanyAddTourController>(
-                                    builder: (controller) {
-                                  return Column(
-                                    children: [
-                                      ClipRRect(
-                                        // borderRadius: BorderRadius.circular(100.r),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                      children: [
+                                        ClipRRect(
+                                          // borderRadius: BorderRadius.circular(100.r),
 
-                                        child: controller.image == null
-                                            ? Icon(
-                                                Icons.image,
-                                                size: 50.sp,
-                                                color: AppColors.lightActiveIconColor,
-                                              )
-                                            : Container(
-                                                height: 185.h,
-                                                width: double.infinity,
-                                                child: Image.file(
-                                                  File(controller.image!.path)
-                                                      .absolute,
-                                                  fit: BoxFit.fill,
+                                          child: controller.image == null
+                                              ? Icon(
+                                                  Icons.image,
+                                                  size: 50.sp,
+                                                  color: AppColors.lightActiveIconColor,
+                                                )
+                                              : Container(
+                                                  height: 185.h,
+                                                  width: double.infinity,
+                                                  child: Image.file(
+                                                    File(controller.image!.path)
+                                                        .absolute,
+                                                    fit: BoxFit.fill,
+                                                  ),
                                                 ),
-                                              ),
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      controller.image == null
-                                          ? Text(
-                                              "Tap to Upload Image",
-                                              style: TextStyle(color: AppColors.lightTextColor),
-                                            )
-                                          : Container(),
-                                    ],
-                                  );
-                                }),
-                              ],
-                            )),
-                      ),
+                                        ),
+                                        controller.image == null ?SizedBox(
+                                          height: 10.h,
+                                        ) : SizedBox(),
+                                        controller.image == null
+                                            ? Text(
+                                                "Tap to Upload Image",
+                                                style: TextStyle(color: AppColors.lightTextColor),
+                                              )
+                                            : Container(),
+                                      ],
+                                    ),
+                                ],
+                              )),
+                        );
+                      }
                     ),
                     SizedBox(
                       height: 20.h,

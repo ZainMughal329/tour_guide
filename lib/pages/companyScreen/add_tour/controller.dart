@@ -68,7 +68,6 @@ class CompanyAddTourController extends GetxController {
       _image = XFile(pickedImage.path);
 
       update();
-      Navigator.pop(context);
     }
   }
 
@@ -80,10 +79,9 @@ class CompanyAddTourController extends GetxController {
         await picker.pickImage(source: ImageSource.camera, imageQuality: 100);
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-
       update();
-      Navigator.pop(context);
     }
+
   }
 
   void addTour(

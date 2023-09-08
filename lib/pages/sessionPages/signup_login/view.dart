@@ -90,12 +90,9 @@ class SignupLoginView extends GetView<SignupLoginController> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        // resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        // appBar: PreferredSize(
-        //   preferredSize: Size.fromHeight(300.0), // You can adjust this value
-        //   child: TopImage(),
-        // ),
+
         body: SingleChildScrollView(
           // controller: ScrollController(),
           // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -138,7 +135,7 @@ class SignupLoginView extends GetView<SignupLoginController> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 30),
-                          height: 450.h,
+                          height: MediaQuery.of(context).size.height,
                           width: double.infinity,
                           child: TabBarView(
                             controller: controller.tabController,

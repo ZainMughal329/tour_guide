@@ -26,7 +26,7 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  // final con = Get.lazyPut<HomeController>(() => HomeController());
   Widget _buildCard(
       BuildContext context,
       String title,

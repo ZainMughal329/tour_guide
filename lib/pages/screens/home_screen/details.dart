@@ -141,7 +141,7 @@ class PostBottomBar extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w),
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.45,
       decoration: BoxDecoration(
         // color: AppColors.cardBgColor,
         color: AppColors.lightBgColor,
@@ -152,169 +152,166 @@ class PostBottomBar extends GetView<HomeController> {
       ),
       child: ListView(
         children: [
-          Padding(
-            padding: EdgeInsets.only(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 23,
-                              // color: Colors.white,
-                              color: AppColors.lightTextColor),
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Row(
-                          children: [
-                            FaIcon(
-                              Icons.location_on_outlined,
-                              color: AppColors.iconsColor,
-                              size: 17.sp,
-                            ),
-                            Text(
-                              location,
-                              style: TextStyle(
-                                  color: AppColors.lightTextColor,
-                                  fontSize: 14.sp
-                                  // fontWeight: FontWeight.w600,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              '\$',
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              price,
-                              style: TextStyle(
-                                fontSize: 18.sp,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.lightTextColor,
-                                // fontWeight: FontWeight.w600
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Text(
-                          '/per person',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(
-                  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                  style: TextStyle(
-                      fontSize: 15,
-                      // color: Colors.white,
-                      color: AppColors.lightTextColor),
-                  textAlign: TextAlign.justify,
-                ),
-                SizedBox(height: 50.h),
-                Container(
-                  height: 80.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          controller.openWhatsapp(context, phone);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15.h, horizontal: 25.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: AppColors.bgColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black54,
-                                blurRadius: 4,
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            "Chat Now",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 23.sp,
+                            // color: Colors.white,
+                            color: AppColors.lightTextColor),
                       ),
-                      InkWell(
-                        onTap: () async{
-                          await controller.fetchUserData().then((value) {
-                            Get.to(() => BookingView(
-                                  tourId: id,
-                                  name: controller.state.name ?? "",
-                                  phoneNumber:
-                                      controller.state.phoneNumber ?? "",
-                              companyName: companyName,
-                              companyId: companyId,
-                                ));
-                          }).onError((error, stackTrace) {
-                            Snackbar.showSnackBar("Error", error.toString());
-                          });
-
-                          // Get.toNamed(AppRoutes.Booking_Screen);
-                          // print(id.toString());
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15.h, horizontal: 25.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.blue,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black54,
-                                blurRadius: 4,
-                              ),
-                            ],
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Row(
+                        children: [
+                          FaIcon(
+                            Icons.location_on_outlined,
+                            color: AppColors.iconsColor,
+                            size: 17.sp,
                           ),
-                          child: Text(
-                            'Book Now',
+                          Text(
+                            location,
                             style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500),
+                                color: AppColors.lightTextColor,
+                                fontSize: 14.sp
+                                // fontWeight: FontWeight.w600,
+                                ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            '\$',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            price,
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.lightTextColor,
+                              // fontWeight: FontWeight.w600
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        '/per person',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                style: TextStyle(
+                    fontSize: 15.sp,
+                    // color: Colors.white,
+                    color: AppColors.lightTextColor),
+                textAlign: TextAlign.justify,
+              ),
+              SizedBox(height: 30.h),
+              Container(
+                height: 80.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        controller.openWhatsapp(context, phone);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.h, horizontal: 25.w),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.bgColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 4,
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          "Chat Now",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async{
+                        await controller.fetchUserData().then((value) {
+                          Get.to(() => BookingView(
+                                tourId: id,
+                                name: controller.state.name ?? "",
+                                phoneNumber:
+                                    controller.state.phoneNumber ?? "",
+                            companyName: companyName,
+                            companyId: companyId,
+                              ));
+                        }).onError((error, stackTrace) {
+                          Snackbar.showSnackBar("Error", error.toString());
+                        });
+
+                        // Get.toNamed(AppRoutes.Booking_Screen);
+                        // print(id.toString());
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 15.h, horizontal: 25.w),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 4,
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          'Book Now',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

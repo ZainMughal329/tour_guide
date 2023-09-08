@@ -151,7 +151,7 @@ class _CompanyHomeState extends State<CompanyHome>
                                 ),
                               ),
                               Container(
-                                height: 450.h,
+                                height: MediaQuery.of(context).size.height,
                                 width: double.infinity,
                                 child: TabBarView(
                                   controller: _tabController,

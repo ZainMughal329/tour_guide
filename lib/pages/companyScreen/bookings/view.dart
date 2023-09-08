@@ -6,49 +6,46 @@ import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/pages/companyScreen/bookings/controller.dart';
 
 class CompanyBookingsView extends GetView<CompanyBookingController> {
-String uid;
-    CompanyBookingsView({required this.uid,Key? key}) : super(key: key);
+  String uid;
 
+  CompanyBookingsView({required this.uid, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-print("uid in widget is" +uid.toString());
+    print("uid in widget is" + uid.toString());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
           child: StreamBuilder<QuerySnapshot>(
             stream: controller.getNodeData(uid),
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-              try{
-                if(snapshot.connectionState == ConnectionState.waiting){
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              try {
+                if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 }
-                if(snapshot.hasError){
+                if (snapshot.hasError) {
                   return Center(child: CircularProgressIndicator());
                 }
                 print(snapshot.data!.docs.length.toString());
 
-                return snapshot.data!.docs.length !=0 ?
-                    ListView.builder(
+                return snapshot.data!.docs.length != 0
+                    ? ListView.builder(
                         itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index){
-                          return  Padding(
+                        itemBuilder: (context, index) {
+                          return Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 2),
                             child: Column(
                               children: [
                                 GestureDetector(
-                                  onTap: () {
-
-                                  },
+                                  onTap: () {},
                                   child: Column(
                                     children: [
                                       Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             children: [
@@ -62,17 +59,25 @@ print("uid in widget is" +uid.toString());
                                                         .withOpacity(0.1),
                                                   ),
                                                 ),
-                                                child: snapshot.data!.docs[index]['tourImage'].toString() ==
-                                                    ''
+                                                child: snapshot
+                                                            .data!
+                                                            .docs[index]
+                                                                ['tourImage']
+                                                            .toString() ==
+                                                        ''
                                                     ? Icon(
-                                                  Icons.person,
-                                                  color: AppColors
-                                                      .lightTextColor,
-                                                )
+                                                        Icons.person,
+                                                        color: AppColors
+                                                            .lightTextColor,
+                                                      )
                                                     : Image.network(
-                                                  snapshot.data!.docs[index]['tourImage'].toString(),
-                                                  fit: BoxFit.fill,
-                                                ),
+                                                        snapshot
+                                                            .data!
+                                                            .docs[index]
+                                                                ['tourImage']
+                                                            .toString(),
+                                                        fit: BoxFit.fill,
+                                                      ),
                                               ),
                                               SizedBox(
                                                 width: 15.w,
@@ -80,31 +85,61 @@ print("uid in widget is" +uid.toString());
                                               Container(
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
                                                         Icon(
                                                           Icons.title,
-                                                          color:
-                                                          Colors.blue,
+                                                          color: Colors.blue,
                                                           size: 20.sp,
                                                         ),
                                                         SizedBox(
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          (
-                                                          snapshot.data!.docs[index]['tourTitle'].toString()),
+                                                          ((snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                              index]
+                                                                              [
+                                                                              'tourTitle']
+                                                                          .toString()))
+                                                                      .split('')
+                                                                      .take(5)
+                                                                      .join('')
+                                                                      .length >=
+                                                                  5
+                                                              ? (snapshot
+                                                                          .data!
+                                                                          .docs[
+                                                                              index]
+                                                                              [
+                                                                              'tourTitle']
+                                                                          .toString())
+                                                                      .split('')
+                                                                      .take(5)
+                                                                      .join(
+                                                                          '') +
+                                                                  '...'
+                                                              : ((snapshot
+                                                                      .data!
+                                                                      .docs[
+                                                                          index]
+                                                                          [
+                                                                          'tourTitle']
+                                                                      .toString())
+                                                                  .capitalizeFirst
+                                                                  .toString()),
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           style: TextStyle(
                                                               color: AppColors
                                                                   .lightTextColor,
-                                                              fontSize:
-                                                              15.sp,
+                                                              fontSize: 15.sp,
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w600),
+                                                                  FontWeight
+                                                                      .w600),
                                                         ),
                                                       ],
                                                     ),
@@ -114,25 +149,26 @@ print("uid in widget is" +uid.toString());
                                                     Row(
                                                       children: [
                                                         Icon(
-                                                          Icons
-                                                              .phone_android,
-                                                          color:
-                                                          Colors.blue,
+                                                          Icons.phone_android,
+                                                          color: Colors.blue,
                                                           size: 20.sp,
                                                         ),
                                                         SizedBox(
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          (snapshot.data!.docs[index]['phoneNumber'].toString()),
+                                                          (snapshot
+                                                              .data!
+                                                              .docs[index][
+                                                                  'phoneNumber']
+                                                              .toString()),
                                                           style: TextStyle(
                                                               color: AppColors
                                                                   .lightTextColor,
-                                                              fontSize:
-                                                              15.sp,
+                                                              fontSize: 15.sp,
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w600),
+                                                                  FontWeight
+                                                                      .w600),
                                                         ),
                                                       ],
                                                     ),
@@ -144,27 +180,27 @@ print("uid in widget is" +uid.toString());
                                                         Icon(
                                                           Icons
                                                               .calendar_month_outlined,
-                                                          color:
-                                                          Colors.blue,
+                                                          color: Colors.blue,
                                                           size: 20.sp,
                                                         ),
                                                         SizedBox(
                                                           width: 2.w,
                                                         ),
                                                         Text(
-                                                          (
-                                                              snapshot.data!.docs[index]['month'].toString()
-                                                          )
+                                                          (snapshot
+                                                                  .data!
+                                                                  .docs[index]
+                                                                      ['month']
+                                                                  .toString())
                                                               .capitalize
                                                               .toString(),
                                                           style: TextStyle(
                                                               color: AppColors
                                                                   .lightTextColor,
-                                                              fontSize:
-                                                              15.sp,
+                                                              fontSize: 15.sp,
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w600),
+                                                                  FontWeight
+                                                                      .w600),
                                                         ),
                                                       ],
                                                     ),
@@ -175,10 +211,9 @@ print("uid in widget is" +uid.toString());
                                           ),
                                           Column(
                                             mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Row(
                                                 children: [
@@ -191,15 +226,16 @@ print("uid in widget is" +uid.toString());
                                                     width: 2.w,
                                                   ),
                                                   Text(
-                                                    snapshot.data!.docs[index]['name'].toString(),
+                                                    snapshot.data!
+                                                        .docs[index]['name']
+                                                        .toString(),
                                                     // +
                                                     // " person\'s",
                                                     style: TextStyle(
                                                         color: AppColors
                                                             .lightTextColor,
                                                         fontWeight:
-                                                        FontWeight
-                                                            .w500),
+                                                            FontWeight.w500),
                                                   ),
                                                 ],
                                               ),
@@ -218,14 +254,14 @@ print("uid in widget is" +uid.toString());
                                                     width: 2.w,
                                                   ),
                                                   Text(
-                                                    snapshot.data!.docs[index]['persons'].toString(),
-
+                                                    snapshot.data!
+                                                        .docs[index]['persons']
+                                                        .toString(),
                                                     style: TextStyle(
                                                         color: AppColors
                                                             .lightTextColor,
                                                         fontWeight:
-                                                        FontWeight
-                                                            .w500),
+                                                            FontWeight.w500),
                                                   ),
                                                 ],
                                               ),
@@ -235,8 +271,7 @@ print("uid in widget is" +uid.toString());
                                               Row(
                                                 children: [
                                                   Icon(
-                                                    Icons
-                                                        .approval,
+                                                    Icons.approval,
                                                     color: Colors.blue,
                                                     size: 20.sp,
                                                   ),
@@ -245,19 +280,16 @@ print("uid in widget is" +uid.toString());
                                                   ),
                                                   Text(
                                                     // item['pricePerPerson'].toString(),
-"Status"
-                                                    ,
+                                                    "Status",
 
                                                     style: TextStyle(
                                                         color: AppColors
                                                             .lightTextColor,
                                                         fontWeight:
-                                                        FontWeight
-                                                            .w500),
+                                                            FontWeight.w500),
                                                   ),
                                                 ],
                                               ),
-
                                             ],
                                           ),
                                         ],
@@ -269,32 +301,29 @@ print("uid in widget is" +uid.toString());
                                       SizedBox(
                                         height: 10.h,
                                       ),
-
                                     ],
                                   ),
                                 ),
                               ],
                             ),
                           );
-                        }
-                    )
+                        })
                     : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              Center(
-              child: Text(
-              'No Bookings Yet!',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 26.sp , color: AppColors.lightTextColor),
-              ),
-              ),
-              ],
-              );
-
-
-
-              }catch(e){
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: Text(
+                              'No Bookings Yet!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 26.sp,
+                                  color: AppColors.lightTextColor),
+                            ),
+                          ),
+                        ],
+                      );
+              } catch (e) {
                 return Center(
                   child: Text(
                     'data : ' + e.toString(),
@@ -303,7 +332,6 @@ print("uid in widget is" +uid.toString());
               }
             },
           ),
-
         ),
       ),
     );
