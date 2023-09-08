@@ -246,85 +246,87 @@ class WelcomePage extends GetView<WelcomeController> {
                     height: 40,
                   ),
                   Center(
-                    child: InkWell(
-                      onTap: () {
-                        // controller.handleSignIn();
-                      },
-                      child: Container(
-                        height: 127.h,
-                        width: 66.w,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xff1EA49C).withOpacity(0),
-                                Color(0xff1EA49C).withOpacity(1),
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              // stops: [
-                              //   10.0,
-                              //   100.0,
-                              // ]
-                            ),
-                            borderRadius: BorderRadius.circular(40)),
-                        child: Stack(
-                          children: [
+                    child: Container(
+                      height: 127.h,
+                      width: 66.w,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xff1EA49C).withOpacity(0),
+                              Color(0xff1EA49C).withOpacity(1),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            // stops: [
+                            //   10.0,
+                            //   100.0,
+                            // ]
+                          ),
+                          borderRadius: BorderRadius.circular(40)),
+                      child: Stack(
+                        children: [
 
-                            Column(
-                              children: [
-                                Icon(
-                                  Icons.keyboard_arrow_up_rounded,
-                                  size: 40,
-                                  color: Colors.white.withOpacity(0.3),
+                          Column(
+                            children: [
+                              Icon(
+                                Icons.keyboard_arrow_up_rounded,
+                                size: 40,
+                                color: Colors.white.withOpacity(0.3),
+                              ),
+                              Icon(
+                                Icons.keyboard_arrow_up_rounded,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  height: 50.h,
+                                  width: 50.w,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xff000000).withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(50)),
+                                  child: Center(
+                                      child: Text(
+                                        'Go',
+                                        style: TextStyle(
+                                            fontSize: 24,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      )),
                                 ),
-                                Icon(
-                                  Icons.keyboard_arrow_up_rounded,
-                                  size: 40,
-                                  color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          RotatedBox(
+                            quarterTurns: 3,
+                            child: Obx((){
+                              return Padding(
+                                padding:  EdgeInsets.only(left: 10.h),
+                                child: SliderTheme(
+                                    data: SliderTheme.of(context).copyWith(
+                                  thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20), // Adjust the value as needed
                                 ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Container(
-                                    height: 50.h,
-                                    width: 50.w,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xff000000).withOpacity(0.5),
-                                        borderRadius: BorderRadius.circular(50)),
-                                    child: Center(
-                                        child: Text(
-                                          'Go',
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            RotatedBox(
-                              quarterTurns: 3,
-                              child: Obx((){
-                                return Slider(
+                                child: Slider(
                                   value: controller.state.value.value,
                                   onChanged: (val){
                                     controller.state.value.value= val;
                                   },
                                   thumbColor: Colors.black.withOpacity(0.0),
-                                  activeColor: Colors.black.withOpacity(0.0),
-                                  inactiveColor: Colors.black.withOpacity(0.0),
-                                  secondaryActiveColor: Colors.black.withOpacity(0.0),
-                                  onChangeEnd: (newvalue){
-                                    print("End edge value" + newvalue.toString());
-                                    if(newvalue==1.0){
+                                  activeColor: Colors.white.withOpacity(0.0),
+                                  inactiveColor: Colors.white.withOpacity(0.0),
+                                  secondaryActiveColor: Colors.white.withOpacity(1),
+                                  onChangeEnd: (newValue){
+                                    print("End edge value" + newValue.toString());
+                                    if(newValue==1.0){
                                       controller.handleSignIn();
                                     }
                                   },
-                                );
-                              }),
-                            ),
-                          ],
-                        ),
+                                )),
+                              );
+                            }),
+                          ),
+                        ],
                       ),
                     ),
                   ),

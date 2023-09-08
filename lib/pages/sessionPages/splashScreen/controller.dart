@@ -45,7 +45,12 @@ class SplashScreenController extends GetxController {
                 } else if (val == false && auth.currentUser == null ||
                     val == null) {
                   Get.offAllNamed(AppRoutes.Welcome);
-                } else if (val == false && auth.currentUser != null) {}
+                } else if (val == false && auth.currentUser != null) {
+
+
+
+
+                }
               });
             });
           });
