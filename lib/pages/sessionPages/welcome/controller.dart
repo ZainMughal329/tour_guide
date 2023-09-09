@@ -25,4 +25,5 @@ class WelcomeController extends GetxController {
       Snackbar.showSnackBar('Error', e.toString());
     }
   }
+
 }

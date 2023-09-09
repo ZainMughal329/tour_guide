@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tours_guide/pages/screens/GMap/controller.dart';
 import 'package:tours_guide/pages/screens/PersonPage/controller.dart';
 
 import '../screens/GoogleMap/controller.dart';
@@ -24,5 +25,6 @@ class ApplicationBinding implements Bindings {
     Get.lazyPut<PersonController>(
       () => PersonController(),
     );
+    Get.lazyPut<GMapController>(() => GMapController());
   }
 }

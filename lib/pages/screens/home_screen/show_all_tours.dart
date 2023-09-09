@@ -234,7 +234,7 @@ class ShowAllToursToUser extends GetView<HomeController> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
+                                    padding:  EdgeInsets.only(right: 8.0),
                                     child: InkWell(
                                       onTap: () {
                                         showDialog(

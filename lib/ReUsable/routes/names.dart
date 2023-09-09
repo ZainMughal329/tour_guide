@@ -2,6 +2,7 @@ class AppRoutes {
   static const Welcome = '/';
   static const SplashScreen = '/splashScreen';
   static const LOGIN_SIGN_UP = '/login_signup';
+  static const GMapView = '/g_map_view';
 
   static const Forgot_Password = '/forgot_pass';
   static const NotFound = '/not_found';

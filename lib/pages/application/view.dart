@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/pages/screens/GMap/view.dart';
 import 'package:tours_guide/pages/screens/GoogleMap/index.dart';
 
 import '../../ReUsable/Components/app_colors.dart';
@@ -20,7 +21,8 @@ class ApplicationPage extends GetView<ApplicationController> {
       children:  [
         HomePage(),
         SearchView(),
-        MapPage(),
+        // MapPage(),
+        GMapView(),
         PersonView(),
       ],
     );

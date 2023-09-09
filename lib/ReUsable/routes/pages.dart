@@ -10,6 +10,8 @@ import 'package:tours_guide/pages/companyScreen/bookings/view.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
 import 'package:tours_guide/pages/companyScreen/homeScreen/index.dart';
 import 'package:tours_guide/pages/companyScreen/show_tour/index.dart';
+import 'package:tours_guide/pages/screens/GMap/bindings.dart';
+import 'package:tours_guide/pages/screens/GMap/view.dart';
 import 'package:tours_guide/pages/screens/booking_screen/bindings.dart';
 import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
@@ -94,6 +96,12 @@ class AppPages {
       name: AppRoutes.Company_ShowTour,
       page: () => CompanyShowTourScreen(),
       binding: CompanyShowTourBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.GMapView,
+      page: () => GMapView(),
+      binding: GMapBindings(),
     ),
 
 
