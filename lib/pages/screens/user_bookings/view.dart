@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_bar.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/models/bookingMode.dart';
+import 'package:tours_guide/pages/screens/home_screen/details.dart';
 import 'package:tours_guide/pages/screens/user_bookings/controller.dart';
 
 import '../../../ReUsable/Components/toast_info.dart';
@@ -163,20 +164,46 @@ class UserBookingView extends GetView<UserBookingController> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
-                                          // Get.to(() => DetailScreen(
-                                          //   title: item['title'].toString(),
-                                          //   price: item['price'].toString(),
-                                          //   location: item['location'].toString(),
-                                          //   des: item['tourDescription']
-                                          //       .toString(),
-                                          //   img: item['tourImage'].toString(),
-                                          //   id: item['id'].toString(),
-                                          //   phone:
-                                          //   item['companyPhone'].toString(),
-                                          //   comapnyName: item['companyName'].toString(),
-                                          //   companyId: item['companyId'].toString(),
-                                          //
-                                          // ));
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Are you sure to delete?'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(
+                                                            context);
+                                                         // Close the dialog
+                                                      },
+                                                      child: Text(
+                                                        'Yes',
+                                                        style: TextStyle(
+                                                            color: Colors.red),
+                                                      ),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        // Action when "No" is clicked
+                                                        Navigator.pop(
+                                                            context); // Close the dialog
+                                                        // TODO: Perform some other action
+                                                      },
+                                                      child: Text(
+                                                        'No',
+                                                        style: TextStyle(
+                                                            color: Colors.black),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        },
+                                        onDoubleTap: (){
+                                          // Get.toNamed(AppRoutes)
+
+
                                         },
                                         child: Column(
                                           children: [
