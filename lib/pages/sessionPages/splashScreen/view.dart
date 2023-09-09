@@ -19,7 +19,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
     Future.delayed(Duration(seconds: 7), () async {
       bool? val = (await sp.getIsFirstOpen());
       if (val == true && auth.currentUser == null) {
-        Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
+        Get.toNamed(AppRoutes.LOGIN_SIGN_UP);
       } else if (val == true && auth.currentUser != null) {
         final companyData = await _dbCompnay
             .where('id', isEqualTo: auth.currentUser!.uid.toString())

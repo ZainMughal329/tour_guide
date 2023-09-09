@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,13 @@ import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/home_screen/index.dart';
 
+import '../../pages/companyScreen/company_profile/contact_us.dart';
 import '../../pages/companyScreen/company_profile/controller.dart';
+import '../../pages/companyScreen/company_profile/faqs.dart';
+import '../../pages/companyScreen/company_profile/privacy_policy.dart';
+import '../../pages/companyScreen/company_profile/term_of_use.dart';
 import '../../pages/screens/PersonPage/controller.dart';
+import '../Prefrences/storage_pref.dart';
 import '../models/userModel.dart';
 
 class BuildCompanyDrawer {
@@ -67,88 +73,76 @@ class BuildCompanyDrawer {
                 ListTile(
                   // style: ListTileStyle.list,
                   // tileColor: AppColors.bgColor,
-                  leading: Icon(
-                    Icons.home,
-                    color: AppColors.iconsColor,
-                  ),
-                  title: Text(
-                    'Home',
-                    style: TextStyle(color: Colors.black),
-                  ),
+                  leading: Icon(Icons.tour , color: AppColors.iconsColor,),
+                  title: Text('All tours',style: TextStyle(color: Colors.black),),
                   onTap: () {
                     Navigator.pop(context);
-                    Get.offAndToNamed(AppRoutes.Application);
+                    // Get.offAndToNamed(AppRoutes.Company_ShowTour);
+                    // Get.to( () => ShowAllToursToUser(),);
                   },
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.person,
-                    color: AppColors.iconsColor,
-                  ),
-                  title: Text(
-                    'My Profile',
-                    style: TextStyle(color: AppColors.lightTextColor),
-                  ),
-                  onTap: () {
-                    // Handle profile tap
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  leading: Icon(
-                    Icons.work,
-                    color: AppColors.iconsColor,
-                  ),
-                  title: Text(
-                    'My Network',
-                    style: TextStyle(color: AppColors.lightTextColor),
-                  ),
+                  leading: Icon(Icons.contact_page,color: AppColors.iconsColor,),
+                  title: Text('Contact Us',style: TextStyle(color: AppColors.lightTextColor),),
                   onTap: () {
                     // Handle network tap
                     Navigator.pop(context);
+                    Get.to( () => ContactUsWidget(),);
+
                   },
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.message,
-                    color: AppColors.iconsColor,
-                  ),
-                  title: Text(
-                    'Messaging',
-                    style: TextStyle(color: AppColors.lightTextColor),
-                  ),
+                  leading: Icon(Icons.question_answer_outlined,color: AppColors.iconsColor,),
+                  title: Text('FAQ\'s',style: TextStyle(color: AppColors.lightTextColor),),
                   onTap: () {
                     // Handle messaging tap
                     Navigator.pop(context);
+                    Get.to( () => FAQsWidget(),);
                   },
                 ),
                 Divider(),
                 ListTile(
-                  leading: Icon(
-                    Icons.settings,
-                    color: AppColors.iconsColor,
-                  ),
-                  title: Text(
-                    'Settings & Privacy',
-                    style: TextStyle(color: AppColors.lightTextColor),
-                  ),
+                  leading: Icon(Icons.settings,color: AppColors.iconsColor,),
+                  title: Text('Privacy Policy',style: TextStyle(color: AppColors.lightTextColor),),
                   onTap: () {
                     // Handle settings tap
                     Navigator.pop(context);
+                    Get.to( () => PrivacyPolicyScreen(),);
+
                   },
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.help,
-                    color: AppColors.iconsColor,
-                  ),
-                  title: Text(
-                    'Help & Support',
-                    style: TextStyle(color: AppColors.lightTextColor),
-                  ),
+                  leading: Icon(Icons.help,color: AppColors.iconsColor,),
+                  title: Text('Term of use',style: TextStyle(color: AppColors.lightTextColor),),
                   onTap: () {
                     // Handle help tap
                     Navigator.pop(context);
+                    Get.to( () => TermsOfUseScreen(),);
+
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.logout_outlined,color: AppColors.iconsColor,),
+                  title: Text('LogOut',style: TextStyle(color: AppColors.lightTextColor),),
+                  onTap: () async {
+                    // Handle help tap
+                    Navigator.pop(context);
+                    // Get.to( () => TermsOfUseScreen(),);
+                    final auth = FirebaseAuth.instance;
+                    try {
+                      await auth.signOut().then((value) async {
+                        StorePrefrences sp = StorePrefrences();
+                        await sp.setIsFirstOpen(false);
+
+                        Get.snackbar('Sign Out ', 'Successfully');
+                        Get.toNamed(AppRoutes.LOGIN_SIGN_UP);
+                      }).onError((error, stackTrace) {
+                        Get.snackbar('Error', error.toString());
+                      });
+                    } catch (e) {
+                      Get.snackbar("Error while logout", e.toString());
+                    }
+
                   },
                 ),
               ],

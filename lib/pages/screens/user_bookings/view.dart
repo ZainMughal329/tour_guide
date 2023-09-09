@@ -173,6 +173,8 @@ class UserBookingView extends GetView<UserBookingController> {
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () {
+                                                        controller.deleteBookedTour(item['tourId'].toString());
+                                                        controller.deleteFromAllUserBookings(item['tourId'].toString());
                                                         Navigator.pop(
                                                             context);
                                                          // Close the dialog
@@ -184,7 +186,9 @@ class UserBookingView extends GetView<UserBookingController> {
                                                       ),
                                                     ),
                                                     TextButton(
+
                                                       onPressed: () {
+
                                                         // Action when "No" is clicked
                                                         Navigator.pop(
                                                             context); // Close the dialog

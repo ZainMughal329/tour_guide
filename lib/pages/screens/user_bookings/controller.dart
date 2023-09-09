@@ -35,8 +35,6 @@ class UserBookingController extends GetxController {
     return await getAllTourData();
   }
 
-
-
   getUsersData() async {
     final id = auth.currentUser!.uid.toString();
     if (id != '') {
@@ -50,8 +48,30 @@ class UserBookingController extends GetxController {
 
   Future<UserModel> getUserData(String id) async {
     final snapshot =
-    await db.collection('users').where('id', isEqualTo: id).get();
+        await db.collection('users').where('id', isEqualTo: id).get();
     final userData = snapshot.docs.map((e) => UserModel.fromJson(e)).single;
     return userData;
+  }
+
+  deleteBookedTour(String id) async {
+    await db
+        .collection('usersBookings')
+        .doc(auth.currentUser!.uid)
+        .collection('AllBookings')
+        .doc(id)
+        .delete()
+        .then((value) {
+      Get.snackbar('Success', 'message');
+    }).onError((error, stackTrace) {
+      Get.snackbar('Error', 'message');
+    });
+  }
+
+  deleteFromAllUserBookings(String id) async {
+    await db.collection('allUserBookings').doc(id).delete().then((value) {
+      print('Successfully delete from allUserBookings');
+    }).onError((error, stackTrace) {
+      print('Error while deleting : ' + error.toString());
+    });
   }
 }

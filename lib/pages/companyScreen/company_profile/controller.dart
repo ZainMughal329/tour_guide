@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/state.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CompanyProfileController extends GetxController {
   CompanyProfileController();
@@ -161,5 +162,23 @@ class CompanyProfileController extends GetxController {
   updateCompany(CompanyModel companyModel) async {
     await updateCompanyData(companyModel);
   }
-// }
+
+  final String emailAddress = "thedevtech2022@gmail.com"; // Replace with your email address
+
+  launchEmail() async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: emailAddress,
+    );
+    final String gmailUrl = "googlegmail:///co?to=$emailAddress"; // Gmail app URI
+
+    if (await canLaunch(gmailUrl)) {
+      await launch(gmailUrl);
+    } else if (await canLaunch(emailLaunchUri.toString())) {
+      await launch(emailLaunchUri.toString());
+    } else {
+      throw 'Could not launch Gmail or email';
+
+    }
+}
 }

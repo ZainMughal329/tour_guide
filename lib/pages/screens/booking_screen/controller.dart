@@ -46,13 +46,16 @@ class BookingController extends GetxController {
     state.loading.value = value;
   }
 
+  final timeStamp = DateTime.timestamp().microsecondsSinceEpoch.toString();
+
+
   Future<void> addBookings(BookingModel booking) async {
     setLoading(true);
     try {
       await dbref
           .doc(state.uid.toString())
           .collection('AllBookings')
-          .doc(DateTime.timestamp().microsecondsSinceEpoch.toString())
+          .doc(timeStamp)
           .set(booking.toJson())
           .then((value) async{
 await addinAllBookings(booking);
@@ -66,7 +69,7 @@ await addinAllBookings(booking);
     }
   }
   Future<void> addinAllBookings(BookingModel bookingData) async{
-    await allbookingRef.doc(DateTime.timestamp().microsecondsSinceEpoch.toString()).set(bookingData.toJson()).then((value){
+    await allbookingRef.doc(timeStamp).set(bookingData.toJson()).then((value){
       setLoading(false);
       Get.offAllNamed(AppRoutes.Application);
       Snackbar.showSnackBar("Congrats", "Tour Booked Successfully");

@@ -24,7 +24,8 @@ class ShowCompanies extends GetView<AdminController> {
               return Center(child: CircularProgressIndicator());
             }
             return snapshot.data!.docs.length != 0
-                ? ListView.builder(
+                ?
+            ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   return Padding(

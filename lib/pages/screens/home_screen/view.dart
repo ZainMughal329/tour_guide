@@ -13,6 +13,7 @@ import 'package:tours_guide/ReUsable/models/userModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/admin/showAllTours.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
+import 'package:tours_guide/pages/screens/home_screen/comming_soon.dart';
 import 'package:tours_guide/pages/screens/home_screen/show_all_tours.dart';
 
 import '../../../ReUsable/Components/app_bar.dart';
@@ -26,6 +27,7 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   // final con = Get.lazyPut<HomeController>(() => HomeController());
   Widget _buildCard(
       BuildContext context,
@@ -601,25 +603,65 @@ class HomePage extends GetView<HomeController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _buildPopularCategory(
-                      'Trips',
-                      Icons.airplanemode_active_outlined,
-                      Color(0xff1C939B),
+                    InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => CommingSoon(
+                            color: Color(0xff1C939B),
+                            title: 'Trips',
+                          ),
+                        );
+                      },
+                      child: _buildPopularCategory(
+                        'Trips',
+                        Icons.airplanemode_active_outlined,
+                        Color(0xff1C939B),
+                      ),
                     ),
-                    _buildPopularCategory(
-                      'Hotels',
-                      Icons.hotel,
-                      Color(0xffDB8D1E),
+                    InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => CommingSoon(
+                            color: Color(0xffDB8D1E),
+                            title: 'Hotels',
+                          ),
+                        );
+                      },
+                      child: _buildPopularCategory(
+                        'Hotels',
+                        Icons.hotel,
+                        Color(0xffDB8D1E),
+                      ),
                     ),
-                    _buildPopularCategory(
-                      'Events',
-                      Icons.event,
-                      Color(0xffE5291D),
+                    InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => CommingSoon(
+                            color: Color(0xffE5291D),
+                            title: 'Events',
+                          ),
+                        );
+                      },
+                      child: _buildPopularCategory(
+                        'Events',
+                        Icons.event,
+                        Color(0xffE5291D),
+                      ),
                     ),
-                    _buildPopularCategory(
-                      'Transport',
-                      Icons.car_rental_outlined,
-                      Color(0xff3E79EA),
+                    InkWell(
+                      onTap: () {
+                        Get.to(
+                          () => CommingSoon(
+                            color: Color(0xff3E79EA),
+                            title: 'Transport',
+                          ),
+                        );
+                      },
+                      child: _buildPopularCategory(
+                        'Transport',
+                        Icons.car_rental_outlined,
+                        Color(0xff3E79EA),
+                      ),
                     ),
                   ],
                 ),

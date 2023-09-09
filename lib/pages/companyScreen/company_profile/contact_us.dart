@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/pages/companyScreen/company_profile/controller.dart';
 import 'package:tours_guide/pages/screens/PersonPage/controller.dart';
 
-class ContactUsWidget extends GetView<PersonController> {
+class ContactUsWidget extends GetView<CompanyProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
