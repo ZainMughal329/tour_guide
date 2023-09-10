@@ -60,6 +60,7 @@ dependencies:
   password_strength:
   flutter_credit_card:
   video_player:
+  animated_text_kit: ^4.2.2
 
 
 dev_dependencies:

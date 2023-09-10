@@ -152,6 +152,7 @@ class PersonController extends GetxController {
 
   // }
 
+
   // --------------------------------------------------------------------
   // signOut method
 
