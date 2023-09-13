@@ -91,60 +91,60 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Container(
-                          height: 120,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: AppColors.lightCardColor.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Column(
-                            children: [
-                              Container(
-                                height: 40.h,
-                                child: ListTile(
-                                  onTap: () {},
-                                  leading: Icon(
-                                    Icons.notifications,
-                                    color: AppColors.lightActiveIconColor,
-                                  ),
-                                  title: Text(
-                                    'Notifications',
-                                    style: TextStyle(color: AppColors.lightTextColor),
-                                  ),
-                                  trailing: InkWell(
-                                    onTap: () {},
-                                    child: Icon(
-                                      Icons.radio_button_on,
-                                      color: AppColors.lightActiveIconColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Divider(
-                                color: Colors.grey,
-                                height: 5.h,
-                              ),
-                              Container(
-                                height: 40.h,
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.dark_mode_outlined,
-                                    color: AppColors.lightActiveIconColor,
-                                  ),
-                                  title: Text(
-                                    'Dark Mode',
-                                    style: TextStyle(color: AppColors.lightTextColor),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.radio_button_on_outlined,
-                                    color: AppColors.lightActiveIconColor,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   height: 120,
+                        //   width: double.infinity,
+                        //   decoration: BoxDecoration(
+                        //     color: AppColors.lightCardColor.withOpacity(0.1),
+                        //     borderRadius: BorderRadius.circular(15),
+                        //   ),
+                        //   child: Column(
+                        //     children: [
+                        //       // Container(
+                        //       //   height: 40.h,
+                        //       //   child: ListTile(
+                        //       //     onTap: () {},
+                        //       //     leading: Icon(
+                        //       //       Icons.notifications,
+                        //       //       color: AppColors.lightActiveIconColor,
+                        //       //     ),
+                        //       //     title: Text(
+                        //       //       'Notifications',
+                        //       //       style: TextStyle(color: AppColors.lightTextColor),
+                        //       //     ),
+                        //       //     trailing: InkWell(
+                        //       //       onTap: () {},
+                        //       //       child: Icon(
+                        //       //         Icons.radio_button_on,
+                        //       //         color: AppColors.lightActiveIconColor,
+                        //       //       ),
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //       // Divider(
+                        //       //   color: Colors.grey,
+                        //       //   height: 5.h,
+                        //       // ),
+                        //       // Container(
+                        //       //   height: 40.h,
+                        //       //   child: ListTile(
+                        //       //     leading: Icon(
+                        //       //       Icons.dark_mode_outlined,
+                        //       //       color: AppColors.lightActiveIconColor,
+                        //       //     ),
+                        //       //     title: Text(
+                        //       //       'Dark Mode',
+                        //       //       style: TextStyle(color: AppColors.lightTextColor),
+                        //       //     ),
+                        //       //     trailing: Icon(
+                        //       //       Icons.radio_button_on_outlined,
+                        //       //       color: AppColors.lightActiveIconColor,
+                        //       //     ),
+                        //       //   ),
+                        //       // ),
+                        //     ],
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 10.h,
                         ),

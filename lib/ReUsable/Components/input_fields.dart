@@ -146,6 +146,7 @@ class UpdateInputTextField extends StatelessWidget {
   String? labelText; String descrip;
   Color color;
   Color textColor;
+  bool readOnly;
 
   UpdateInputTextField(
       {super.key,
@@ -162,6 +163,7 @@ class UpdateInputTextField extends StatelessWidget {
         // required this.onFieldSubmitedVlaue,
         // required this.formfieldValidator,
         required this.keyboardType,
+        this.readOnly = false,
         // this.autoFocus = false,
         required this.obsecure,
         // this.enable = true,
@@ -180,6 +182,7 @@ class UpdateInputTextField extends StatelessWidget {
         obscureText: obsecure,
         keyboardType: keyboardType,
         focusNode: focNode,
+        readOnly: readOnly,
         style: TextStyle(color: textColor),
         decoration: InputDecoration(
 

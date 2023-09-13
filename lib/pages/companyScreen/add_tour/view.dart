@@ -14,14 +14,18 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
 
   final _formKey = GlobalKey<FormState>();
 
-  Widget _textField(TextEditingController contr, FocusNode focNode,
-      String labelText, String descrip, TextInputAction action) {
+  Widget _textField(
+      TextEditingController contr, FocusNode focNode,
+      String labelText, String descrip, TextInputAction action,TextInputType type) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h),
       child: TextFormField(
         controller: contr,
         focusNode: focNode,
+        // textInputType : TextInputType.number,
         textInputAction: action,
+        keyboardType: type,
+
         style: TextStyle(color: AppColors.lightTextColor),
         validator: (value) {},
         onFieldSubmitted: (value) {},
@@ -163,17 +167,17 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.lightBgColor,
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         // physics: NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal : 10.w),
+          padding: EdgeInsets.symmetric(horizontal : 10.w,vertical: 50.h),
           child: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.w),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     GetBuilder<CompanyAddTourController>(
                         builder: (controller) {
@@ -250,6 +254,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 "Title",
                                 "Enter name for your tour",
                                 TextInputAction.next,
+                                TextInputType.name
                               ),
                               _textField(
                                 controller.state.locationController,
@@ -257,6 +262,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 "Location",
                                 "Enter Location of your tour",
                                 TextInputAction.next,
+                                TextInputType.name
                               ),
                               _textField(
                                 controller.state.priceController,
@@ -264,6 +270,8 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 "Price",
                                 "Enter Price for your tour in Rs",
                                 TextInputAction.next,
+                                  TextInputType.number
+
                               ),
                             ],
                           ),
@@ -274,6 +282,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                             controller: controller.state.descrepController,
                             focusNode: controller.state.descrepNode,
                             style: TextStyle(color: AppColors.lightTextColor),
+                            keyboardType: TextInputType.text,
                             onEditingComplete: () {},
                             onSubmitted: (value) {},
                             decoration: InputDecoration(
@@ -334,7 +343,7 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                         ),
                         Obx(() {
                           return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 25.h),
+                            padding: EdgeInsets.only(top:  25.h , ),
                             child: controller.state.loading.value == true
                                 ? CircularProgressIndicator(
                                     color: AppColors.activeTabElementColor,

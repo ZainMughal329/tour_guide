@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -138,7 +139,8 @@ class CompanyAddTourController extends GetxController {
           companyName: comapnyName
             ).toJson())
             .then((value) {
-          toastInfo(msg: "Successfully Added Tour");
+          // toastInfo(msg: "Successfully Added Tour");
+          Snackbar.showSnackBar("Congratulations", "Tour Added Successfully");
           // toastInfo(msg: "Updating ...");
 
           uploadImage(timeStamp);
@@ -160,12 +162,14 @@ class CompanyAddTourController extends GetxController {
       //
       // });
     } catch (e) {
-      toastInfo(msg: e.toString());
+      // toastInfo(msg: e.toString());
+      Snackbar.showSnackBar("Error",e.toString());
     }
   }
 
   Future uploadImage(String timeStamp) async {
-    Get.snackbar('Wait', "Updating...");
+    // Get.snackbar('Wait', "Updating...");
+    Snackbar.showSnackBar("Wait", "Updating ...");
     state.loading.value = true;
     firebase_storage.Reference storageRef =
         firebase_storage.FirebaseStorage.instance.ref('/tourPic' + timeStamp);
@@ -187,18 +191,22 @@ class CompanyAddTourController extends GetxController {
         "tourImage": newUrl.toString(),
       }).then((value) {
         state.loading.value = false;
-        Get.snackbar('Congrats', 'Update Successfully');
+        // Get.snackbar('Congrats', 'Update Successfully');
+        Snackbar.showSnackBar("Congrats ", "Updated Successfully");
+
 
         dispose();
 
         _image = null;
       }).onError((error, stackTrace) {
         state.loading.value = false;
-        Get.snackbar('Error Occurred', error.toString());
+        // Get.snackbar('Error Occurred', error.toString());
+        Snackbar.showSnackBar("Error Occurred ", error.toString());
       });
     }).onError((error, stackTrace) {
       state.loading.value = false;
-      Get.snackbar('Error Occurred', error.toString());
+      // Get.snackbar('Error Occurred', error.toString());
+      Snackbar.showSnackBar("Error Occurred ", error.toString());
     });
   }
 }

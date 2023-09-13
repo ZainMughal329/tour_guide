@@ -19,7 +19,7 @@ class AdminHomePage extends GetView<AdminController> {
     return Scaffold(
       backgroundColor: AppColors.lightBgColor,
       appBar: AppBar(
-        leading: IconButton(onPressed: (){}, icon: Icon(Icons.menu , color: AppColors.lightActiveIconColor,),),
+        // leading: IconButton(onPressed: (){}, icon: Icon(Icons.admin_p , color: AppColors.lightActiveIconColor,),),
         backgroundColor: AppColors.lightBgColor,
         elevation: 0,
         title: Text('Admin Panel' , style: TextStyle(

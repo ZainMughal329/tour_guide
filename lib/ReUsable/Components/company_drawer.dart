@@ -37,7 +37,7 @@ class BuildCompanyDrawer {
                       color: AppColors.lightCardColor.withOpacity(0.1)),
                   accountName: Text(
                     companyModel.companyName.capitalize.toString(),
-                    style: TextStyle(color: AppColors.lightTextColor),
+                    style: TextStyle(color: AppColors.lightTextColor,fontWeight: FontWeight.bold,fontSize: 20.sp),
                   ),
                   accountEmail: Text(
                     companyModel.companyEmail,

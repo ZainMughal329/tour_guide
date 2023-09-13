@@ -147,6 +147,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                               child: UpdateInputTextField(
                                   obsecure: false,
                                   color: AppColors.lightTextColor,
+                                  readOnly: true,
                                   textColor: AppColors.lightTextColor,
                                   // filledColor: AppColors.cardBgColor,
                                   keyboardType: TextInputType.emailAddress,
@@ -171,6 +172,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                   keyboardType: TextInputType.visiblePassword,
                                   icon: Icons.lock_open,
                                   contr: pass,
+                                  readOnly: true,
                                   descrip: 'Enter your password',
                                   focNode: controller.passwordFocus,
                                   // labelText: 'Password'

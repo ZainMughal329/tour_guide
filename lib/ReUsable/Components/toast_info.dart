@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 
 Future<void> toastInfo({
   required String msg,
@@ -13,8 +14,8 @@ Future<void> toastInfo({
     toastLength: length,
     gravity: ToastGravity.TOP,
     timeInSecForIosWeb: 2,
-    backgroundColor: backgroundColor,
-    textColor: textColor,
+    backgroundColor: AppColors.lightCardColor.withOpacity(0.2),
+    textColor: backgroundColor,
     fontSize: 16.sp,
   );
 }

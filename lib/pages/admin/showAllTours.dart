@@ -103,39 +103,40 @@ class ShowAllTours extends GetView<AdminController> {
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Are you sure to delete?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context); // Close the dialog
-                                          controller
-                                              .showFeedbackDialog(context);
-                                        },
-                                        child: Text(
-                                          'Yes',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Action when "No" is clicked
-                                          Navigator.pop(
-                                              context); // Close the dialog
-                                          // TODO: Perform some other action
-                                        },
-                                        child: Text(
-                                          'No',
-                                          style: TextStyle(color: Colors.black),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                });
+
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (context) {
+                            //       return AlertDialog(
+                            //         title: Text('Are you sure to delete?'),
+                            //         actions: [
+                            //           TextButton(
+                            //             onPressed: () {
+                            //               Navigator.pop(
+                            //                   context); // Close the dialog
+                            //               controller
+                            //                   .showFeedbackDialog(context);
+                            //             },
+                            //             child: Text(
+                            //               'Yes',
+                            //               style: TextStyle(color: Colors.red),
+                            //             ),
+                            //           ),
+                            //           TextButton(
+                            //             onPressed: () {
+                            //               // Action when "No" is clicked
+                            //               Navigator.pop(
+                            //                   context); // Close the dialog
+                            //               // TODO: Perform some other action
+                            //             },
+                            //             child: Text(
+                            //               'No',
+                            //               style: TextStyle(color: Colors.black),
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       );
+                            //     });
                           },
                           child: Container(
                             height: 280.h,

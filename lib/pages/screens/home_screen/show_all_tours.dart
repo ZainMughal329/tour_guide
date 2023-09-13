@@ -113,7 +113,7 @@ class ShowAllToursToUser extends GetView<HomeController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -206,10 +206,11 @@ class ShowAllToursToUser extends GetView<HomeController> {
                   ),
                 ),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.w,
                 ),
                 Container(
                   height: MediaQuery.of(context).size.height,
+                  padding: EdgeInsets.only(bottom: 90.h),
                   child: FutureBuilder<List<TourModel>>(
                     future: controller.getAndShowALlToursData(),
                     builder: (BuildContext context, snapshot) {
@@ -234,7 +235,7 @@ class ShowAllToursToUser extends GetView<HomeController> {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding:  EdgeInsets.only(right: 8.0),
+                                    padding:  EdgeInsets.only(right: 10.w),
                                     child: InkWell(
                                       onTap: () {
                                         showDialog(

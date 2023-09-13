@@ -32,6 +32,7 @@ class _CompanyHomeState extends State<CompanyHome>
 
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         child: FutureBuilder(
             future: controller.getUsersData(),
             builder: (context, snapshot) {
@@ -161,8 +162,24 @@ class _CompanyHomeState extends State<CompanyHome>
                                       child: CompanyProfileView(),
                                     ),
                                     CompanyShowTourScreen(),
-                                    Center(
-                                      child: CompanyAddTourScreen(),
+                                    Scaffold(
+                                      body: SafeArea(
+                                        child: InkWell(
+                                          onTap: (){
+
+                                          },
+                                          child: Center(
+                                            child: TextButton(child: Text("Add Tour +",
+                                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 50.sp,color: Colors.blue),
+                                            ),
+                                              onPressed: (){
+                                                Get.toNamed(AppRoutes.Company_AddTour);
+                                              },
+
+                                               ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     CompanyBookingsView(uid: controller.state.id.toString(),),
                                   ],

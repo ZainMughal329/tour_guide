@@ -59,7 +59,7 @@ class HomePage extends GetView<HomeController> {
           );
         },
         child: Padding(
-          padding: EdgeInsets.only(right: 18.w),
+          padding: EdgeInsets.only(right: 5.w),
           child: Container(
             height: 277.h,
             width: 201.w,
@@ -271,7 +271,7 @@ class HomePage extends GetView<HomeController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 20.w),
+            padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 4.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -386,22 +386,28 @@ class HomePage extends GetView<HomeController> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Text(
-                  'Discover',
-                  style: TextStyle(
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.lightTextColor),
+                Padding(
+                  padding: EdgeInsets.only(left:8.0),
+                  child: Text(
+                    'Discover',
+                    style: TextStyle(
+                        fontSize: 30.sp,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.lightTextColor),
+                  ),
                 ),
                 SizedBox(
                   height: 5.h,
                 ),
-                Text(
-                  'Explore the best places in the world!',
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      color: AppColors.lightTextColor,
-                      fontWeight: FontWeight.normal),
+                Padding(
+                  padding: EdgeInsets.only(left:8.0),
+                  child: Text(
+                    'Explore the best places in the world!',
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        color: AppColors.lightTextColor,
+                        fontWeight: FontWeight.normal),
+                  ),
                 ),
                 SizedBox(
                   height: 30.h,

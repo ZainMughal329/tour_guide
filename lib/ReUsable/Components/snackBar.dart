@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 
 class Snackbar {
   static void showSnackBar(String title, String message) {
@@ -7,6 +8,6 @@ class Snackbar {
         colorText: Colors.black,
         snackPosition: SnackPosition.TOP,
         isDismissible: true,
-        backgroundColor: Colors.white);
+        backgroundColor: AppColors.lightCardColor.withOpacity(0.2));
   }
 }

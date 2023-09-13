@@ -35,7 +35,7 @@ class BuildDrawer {
                 children: [
                   UserAccountsDrawerHeader(
                     decoration: BoxDecoration(color: AppColors.lightCardColor.withOpacity(0.1)),
-                    accountName: Text(snapshot.data!['userName'].toString().capitalize.toString(),style:TextStyle(color: AppColors.lightTextColor),),
+                    accountName: Text(snapshot.data!['userName'].toString().capitalize.toString(),style:TextStyle(color: AppColors.lightTextColor,fontWeight: FontWeight.bold,fontSize: 20.sp),),
                     accountEmail: Text(snapshot.data!['email'],style:TextStyle(color: AppColors.lightTextColor),),
                     currentAccountPicture: Container(
                       height: 120.w,

@@ -57,7 +57,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
             const SizedBox(width: 20.0),
             const Text(
               'Journey\nAwaits',
-              style: TextStyle(fontSize: 30.0),
+              style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 20.0,),
             SizedBox(
@@ -70,6 +70,8 @@ class SplashScreenView extends GetView<SplashScreenController> {
                   // fontFamily: 'Horizon',
                 ),
                 child:AnimatedTextKit(
+                  repeatForever: false,
+                totalRepeatCount: 1,
                 animatedTexts: [
 
                   // TypewriterAnimatedText(
