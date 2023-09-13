@@ -37,4 +37,7 @@ class AppRoutes {
   static const Chat = '/chat';
 
   static const Photoimgview = '/photoimgview';
+
+
+  static const fvrtTours = "/fvrtTours";
 }

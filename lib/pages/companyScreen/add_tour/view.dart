@@ -15,8 +15,12 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
   final _formKey = GlobalKey<FormState>();
 
   Widget _textField(
-      TextEditingController contr, FocusNode focNode,
-      String labelText, String descrip, TextInputAction action,TextInputType type) {
+      TextEditingController contr,
+      FocusNode focNode,
+      String labelText,
+      String descrip,
+      TextInputAction action,
+      TextInputType type) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.h),
       child: TextFormField(
@@ -172,257 +176,259 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
         scrollDirection: Axis.vertical,
         // physics: NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal : 10.w,vertical: 50.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 50.h),
           child: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GetBuilder<CompanyAddTourController>(
-                        builder: (controller) {
-                        return InkWell(
-                          onTap: () {
-                            _showCustomDialog(context, controller);
-                          },
-                          child: Container(
-                              height: 200.h,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: controller.image == null
-                                    ? AppColors.lightBgColor
-                                    : AppColors.lightBgColor,
-                                border: Border.all(
-                                  color: controller.image == null
-                                      ? AppColors.lightActiveIconColor
-                                      : Colors.transparent,
-                                  // width: 3.0,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                      children: [
-                                        ClipRRect(
-                                          // borderRadius: BorderRadius.circular(100.r),
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GetBuilder<CompanyAddTourController>(builder: (controller) {
+                  return InkWell(
+                    onTap: () {
+                      _showCustomDialog(context, controller);
+                    },
+                    child: Container(
+                        height: 200.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: controller.image == null
+                              ? AppColors.lightBgColor
+                              : AppColors.lightBgColor,
+                          border: Border.all(
+                            color: controller.image == null
+                                ? AppColors.lightActiveIconColor
+                                : Colors.transparent,
+                            // width: 3.0,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                ClipRRect(
+                                  // borderRadius: BorderRadius.circular(100.r),
 
-                                          child: controller.image == null
-                                              ? Icon(
-                                                  Icons.image,
-                                                  size: 50.sp,
-                                                  color: AppColors.lightActiveIconColor,
-                                                )
-                                              : Container(
-                                                  height: 185.h,
-                                                  width: double.infinity,
-                                                  child: Image.file(
-                                                    File(controller.image!.path)
-                                                        .absolute,
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                                ),
+                                  child: controller.image == null
+                                      ? Icon(
+                                          Icons.image,
+                                          size: 50.sp,
+                                          color: AppColors.lightActiveIconColor,
+                                        )
+                                      : Container(
+                                          height: 185.h,
+                                          width: double.infinity,
+                                          child: Image.file(
+                                            File(controller.image!.path)
+                                                .absolute,
+                                            fit: BoxFit.fill,
+                                          ),
                                         ),
-                                        controller.image == null ?SizedBox(
-                                          height: 10.h,
-                                        ) : SizedBox(),
-                                        controller.image == null
-                                            ? Text(
-                                                "Tap to Upload Image",
-                                                style: TextStyle(color: AppColors.lightTextColor),
-                                              )
-                                            : Container(),
-                                      ],
-                                    ),
-                                ],
-                              )),
-                        );
-                      }
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Column(
-                      children: [
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              _textField(
-                                controller.state.titleController,
-                                controller.state.titleNode,
-                                "Title",
-                                "Enter name for your tour",
-                                TextInputAction.next,
-                                TextInputType.name
-                              ),
-                              _textField(
-                                controller.state.locationController,
-                                controller.state.locationNode,
-                                "Location",
-                                "Enter Location of your tour",
-                                TextInputAction.next,
-                                TextInputType.name
-                              ),
-                              _textField(
-                                controller.state.priceController,
-                                controller.state.priceNode,
-                                "Price",
-                                "Enter Price for your tour in Rs",
-                                TextInputAction.next,
-                                  TextInputType.number
-
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          child: TextField(
-                            controller: controller.state.descrepController,
-                            focusNode: controller.state.descrepNode,
-                            style: TextStyle(color: AppColors.lightTextColor),
-                            keyboardType: TextInputType.text,
-                            onEditingComplete: () {},
-                            onSubmitted: (value) {},
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: AppColors.lightBgColor,
-                                labelText: "Tour Description",
-                                labelStyle: TextStyle(color: AppColors.lightTextColor),
-                                hintText: "Enter long description about you tour",
-                                hintStyle: TextStyle(color: AppColors.lightTextColor),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: AppColors.lightActiveIconColor,
-                                  ),
-                                  borderRadius: BorderRadius.circular(20.r),
-                                )),
-                            maxLines: 5,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Center(
-                                child: Text("Choose Category",
-                                    style: TextStyle(
-                                        color: AppColors.lightTextColor,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20.sp),),
-                              ),
-                              SizedBox(
-                                width: 40.w,
-                              ),
-                              _buildCatList(),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Center(
-                                child: Text(
-                                  "No of People",
-                                  style: TextStyle(
-                                      color: AppColors.lightTextColor,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20.sp),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 40.w,
-                              ),
-                              _buildPeopleList(),
-                            ],
-                          ),
-                        ),
-                        Obx(() {
-                          return Padding(
-                            padding: EdgeInsets.only(top:  25.h , ),
-                            child: controller.state.loading.value == true
-                                ? CircularProgressIndicator(
-                                    color: AppColors.activeTabElementColor,
-                                  )
-                                : RoundButton(
-                                    color: Colors.blue,
-                                    title: "Add Tour",
-                                    onPress: () async{
-                                      // final companyId = await controller.auth.currentUser!.uid.toString();
-                                      // final companydoc = await controller.dbCompany.doc(companyId).get();
-                                      // if(companydoc != null){
-                                      //   controller.state.companyName = companydoc["CompanyName"];
-                                      // }
-                                      await controller.fetchCompanyId().then((value)async{
-                                        await controller.fetchCompanyName().then((value){
-                                          if (controller.state.catValue.value
-                                              .toString() !=
-                                              "" &&
-                                              controller.image!.path.toString() != "" &&
-                                              controller.state.tourPeople.value
-                                                  .toString() !=
-                                                  "") {
-                                            print("validated");
-
-                                            controller.addTour(
-                                              // id: ,
-                                              controller
-                                                  .state.titleController.value.text
-                                                  .trim()
-                                                  .toString(),
-                                              controller
-                                                  .state.locationController.value.text
-                                                  .trim()
-                                                  .toString(),
-
-                                              controller
-                                                  .state.descrepController.value.text
-                                                  .trim()
-                                                  .toString(),
-
-                                              controller.state.catValue.value
-                                                  .toString(),
-
-                                              controller.state.tourPeople.value
-                                                  .toString(),
-                                              controller
-                                                  .state.priceController.value.text
-                                                  .trim()
-                                                  .toString(),
-                                              controller.image!.path.toString(),
-                                              controller.state.companyId.toString(),
-                                              controller.state.companyName.toString(),
-
-
-
-                                            );
-                                            // print(tour.toJson().toString());
-                                            // c
-                                          } else {
-                                            print("Not validated");
-                                            toastInfo(msg: "Please Enter all Fields");
-                                          }
-                                        });
-
-
-
-
-                                      });
-
-
-                                    },
-                                  ),
-                          );
-                        })
-                      ],
-                    )
-                  ],
+                                controller.image == null
+                                    ? SizedBox(
+                                        height: 10.h,
+                                      )
+                                    : SizedBox(),
+                                controller.image == null
+                                    ? Text(
+                                        "Tap to Upload Image",
+                                        style: TextStyle(
+                                            color: AppColors.lightTextColor),
+                                      )
+                                    : Container(),
+                              ],
+                            ),
+                          ],
+                        )),
+                  );
+                }),
+                SizedBox(
+                  height: 20.h,
                 ),
-              )),
+                Column(
+                  children: [
+                    Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          _textField(
+                              controller.state.titleController,
+                              controller.state.titleNode,
+                              "Title",
+                              "Enter name for your tour",
+                              TextInputAction.next,
+                              TextInputType.name),
+                          _textField(
+                              controller.state.locationController,
+                              controller.state.locationNode,
+                              "Location",
+                              "Enter Location of your tour",
+                              TextInputAction.next,
+                              TextInputType.name),
+                          _textField(
+                              controller.state.priceController,
+                              controller.state.priceNode,
+                              "Price",
+                              "Enter Price for your tour in Rs",
+                              TextInputAction.next,
+                              TextInputType.number),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: TextField(
+                        controller: controller.state.descrepController,
+                        focusNode: controller.state.descrepNode,
+                        style: TextStyle(color: AppColors.lightTextColor),
+                        keyboardType: TextInputType.text,
+                        onEditingComplete: () {},
+                        onSubmitted: (value) {},
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: AppColors.lightBgColor,
+                            labelText: "Tour Description",
+                            labelStyle:
+                                TextStyle(color: AppColors.lightTextColor),
+                            hintText: "Enter long description about you tour",
+                            hintStyle:
+                                TextStyle(color: AppColors.lightTextColor),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.lightActiveIconColor,
+                              ),
+                              borderRadius: BorderRadius.circular(20.r),
+                            )),
+                        maxLines: 5,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Center(
+                            child: Text(
+                              "Choose Category",
+                              style: TextStyle(
+                                  color: AppColors.lightTextColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20.sp),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40.w,
+                          ),
+                          _buildCatList(),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Center(
+                            child: Text(
+                              "No of People",
+                              style: TextStyle(
+                                  color: AppColors.lightTextColor,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 20.sp),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 40.w,
+                          ),
+                          _buildPeopleList(),
+                        ],
+                      ),
+                    ),
+                    Obx(() {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          top: 25.h,
+                        ),
+                        child: controller.state.loading.value == true
+                            ? CircularProgressIndicator(
+                                color: AppColors.activeTabElementColor,
+                              )
+                            : RoundButton(
+                                color: Colors.blue,
+                                title: "Add Tour",
+                                onPress: () async {
+                                  // final companyId = await controller.auth.currentUser!.uid.toString();
+                                  // final companydoc = await controller.dbCompany.doc(companyId).get();
+                                  // if(companydoc != null){
+                                  //   controller.state.companyName = companydoc["CompanyName"];
+                                  // }
+                                  await controller
+                                      .fetchCompanyId()
+                                      .then((value) async {
+                                    await controller
+                                        .fetchCompanyName()
+                                        .then((value) {
+                                      if (controller.state.catValue.value
+                                                  .toString() !=
+                                              "" &&
+                                          controller.image!.path.toString() !=
+                                              "" &&
+                                          controller.state.tourPeople.value
+                                                  .toString() !=
+                                              "") {
+                                        print("validated");
+
+                                        controller.addTour(
+                                          // id: ,
+                                          controller
+                                              .state.titleController.value.text
+                                              .trim()
+                                              .toString(),
+                                          controller.state.locationController
+                                              .value.text
+                                              .trim()
+                                              .toString(),
+
+                                          controller.state.descrepController
+                                              .value.text
+                                              .trim()
+                                              .toString(),
+
+                                          controller.state.catValue.value
+                                              .toString(),
+
+                                          controller.state.tourPeople.value
+                                              .toString(),
+                                          controller
+                                              .state.priceController.value.text
+                                              .trim()
+                                              .toString(),
+                                          controller.image!.path.toString(),
+                                          controller.state.companyId.toString(),
+                                          controller.state.companyName
+                                              .toString(),
+                                          false,
+                                        );
+                                        // print(tour.toJson().toString());
+                                        // c
+                                      } else {
+                                        print("Not validated");
+                                        toastInfo(
+                                            msg: "Please Enter all Fields");
+                                      }
+                                    });
+                                  });
+                                },
+                              ),
+                      );
+                    })
+                  ],
+                )
+              ],
+            ),
+          )),
         ),
       ),
     );

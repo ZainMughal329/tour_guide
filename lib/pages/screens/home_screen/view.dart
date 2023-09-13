@@ -39,7 +39,8 @@ class HomePage extends GetView<HomeController> {
       String id,
       String phone,
       String companyName,
-      String companyId) {
+      String companyId,
+      bool isFvrt) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -55,6 +56,7 @@ class HomePage extends GetView<HomeController> {
               phone: phone,
               comapnyName: companyName,
               companyId: companyId,
+              isFavourite: isFvrt,
             ),
           );
         },
@@ -127,7 +129,8 @@ class HomePage extends GetView<HomeController> {
       String id,
       String phone,
       String companyName,
-      String companyId) {
+      String companyId
+      ,bool isFvrt) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -464,16 +467,16 @@ class HomePage extends GetView<HomeController> {
                       try {
                         // TourModel tourModel = snapshot.data as TourModel;
                         if (snapshot.hasData) {
-                          print(snapshot.data!.length.toString());
+                          print("Length is : "+snapshot.data!.length.toString());
                           return snapshot.data!.length != 0
                               ? Container(
                                   height: 250.h,
                                   child: ListView.builder(
                                       // shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: 5,
+                                      itemCount: snapshot.data!.length,
                                       itemBuilder: (context, index) {
-                                        if (index == 4) {
+                                        if (index >= 4) {
                                           return Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -515,6 +518,8 @@ class HomePage extends GetView<HomeController> {
                                                   snapshot
                                                       .data![index].companyId
                                                       .toString(),
+                                                    snapshot
+                                                        .data![index].isFavourite
                                                 ),
                                               ),
                                             ],
@@ -561,6 +566,8 @@ class HomePage extends GetView<HomeController> {
                                                   snapshot
                                                       .data![index].companyId
                                                       .toString(),
+                                                    snapshot
+                                                        .data![index].isFavourite,
                                                 ),
                                               ),
                                             ],
@@ -583,7 +590,7 @@ class HomePage extends GetView<HomeController> {
                                   ],
                                 );
                         } else if (snapshot.hasError) {
-                          print("inside 2nd circle  : ");
+                          print("inside 2nd circle  : " + snapshot.error.toString());
                           return Center(child: CircularProgressIndicator());
                         } else {
                           return SizedBox();

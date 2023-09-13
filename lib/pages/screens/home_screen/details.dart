@@ -21,6 +21,7 @@ class DetailScreen extends GetView<HomeController> {
   final String phone;
   final String comapnyName;
   final String companyId;
+  final bool isFavourite;
 
   DetailScreen({
     Key? key,
@@ -33,6 +34,7 @@ class DetailScreen extends GetView<HomeController> {
     required this.phone,
     required this.comapnyName,
     required this.companyId,
+    required this.isFavourite,
   }) : super(key: key);
 
   @override
@@ -79,6 +81,23 @@ class DetailScreen extends GetView<HomeController> {
                   InkWell(
                     onTap: () {
                       // Get.back();
+                      controller.state.isFavourite.value =
+                          !controller.state.isFavourite.value;
+                      controller.updateFvrValue(id);
+                      controller.getData(id);
+                      isFavourite == false
+                          ? controller.removeFromFavouriteList(
+                              img,
+                              title,
+                              price,
+                              location,
+                              des,
+                              id,
+                              phone,
+                              comapnyName,
+                              companyId)
+                          : controller.addToFavouriteList(img, title, price,
+                              location, des, id, phone, comapnyName, companyId);
                     },
                     child: Container(
                       height: 50.w,
@@ -89,12 +108,19 @@ class DetailScreen extends GetView<HomeController> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Center(
-                        child: Icon(
+                        child: isFavourite == false
+                            ? Icon(
                           Icons.favorite_outline,
                           // color: AppColors.iconsColor,
                           color: AppColors.lightActiveIconColor,
-                        ),
-                      ),
+                        )
+                            : Icon(
+                          Icons.favorite,
+
+                          // color: AppColors.iconsColor,
+                          color: Colors.red,
+
+                      ),),
                     ),
                   ),
                 ],
@@ -182,8 +208,7 @@ class PostBottomBar extends GetView<HomeController> {
                           Text(
                             location,
                             style: TextStyle(
-                                color: AppColors.lightTextColor,
-                                fontSize: 14.sp
+                                color: AppColors.lightTextColor, fontSize: 14.sp
                                 // fontWeight: FontWeight.w600,
                                 ),
                           ),
@@ -269,15 +294,14 @@ class PostBottomBar extends GetView<HomeController> {
                       ),
                     ),
                     InkWell(
-                      onTap: () async{
+                      onTap: () async {
                         await controller.fetchUserData().then((value) {
                           Get.to(() => BookingView(
                                 tourId: id,
                                 name: controller.state.name ?? "",
-                                phoneNumber:
-                                    controller.state.phoneNumber ?? "",
-                            companyName: companyName,
-                            companyId: companyId,
+                                phoneNumber: controller.state.phoneNumber ?? "",
+                                companyName: companyName,
+                                companyId: companyId,
                               ));
                         }).onError((error, stackTrace) {
                           Snackbar.showSnackBar("Error", error.toString());

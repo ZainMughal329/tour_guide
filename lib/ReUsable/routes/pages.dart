@@ -15,6 +15,8 @@ import 'package:tours_guide/pages/screens/GMap/view.dart';
 import 'package:tours_guide/pages/screens/booking_screen/bindings.dart';
 import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/catogery_screen/index.dart';
+import 'package:tours_guide/pages/screens/fvrts/bindings.dart';
+import 'package:tours_guide/pages/screens/fvrts/view.dart';
 import 'package:tours_guide/pages/screens/user_bookings/bindings.dart';
 import 'package:tours_guide/pages/screens/user_bookings/view.dart';
 
@@ -121,6 +123,12 @@ class AppPages {
       name: AppRoutes.all_Tours,
       page: () => UserBookingView(),
       binding: UserBookingBindings(),
+    ),
+
+    GetPage(
+      name: AppRoutes.fvrtTours,
+      page: () => FavouriteView(),
+      binding: FavouriteBindings(),
     ),
     GetPage(
       name: AppRoutes.Company_Bookings,

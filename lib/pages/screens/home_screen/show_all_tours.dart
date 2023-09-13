@@ -25,7 +25,8 @@ class ShowAllToursToUser extends GetView<HomeController> {
       String id,
       String phone,
       String companyName,
-      String companyId) {
+      String companyId,
+      bool isFavourite,) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: GestureDetector(
@@ -41,6 +42,7 @@ class ShowAllToursToUser extends GetView<HomeController> {
               phone: phone,
               comapnyName: companyName,
               companyId: companyId,
+              isFavourite: isFavourite,
             ),
           );
         },
@@ -290,6 +292,8 @@ class ShowAllToursToUser extends GetView<HomeController> {
                                               .toString(),
                                           snapshot.data![i].companyId
                                               .toString(),
+                                          snapshot.data![i].isFavourite
+                                              ,
                                         ),
                                       ),
                                     ),
@@ -351,6 +355,8 @@ class ShowAllToursToUser extends GetView<HomeController> {
                                         snapshot.data![i].companyName
                                             .toString(),
                                         snapshot.data![i].companyId.toString(),
+                                          snapshot.data![i].isFavourite
+
                                       ),
                                     ),
                                   ),
@@ -416,6 +422,8 @@ class ShowAllToursToUser extends GetView<HomeController> {
                                         snapshot.data![i].companyName
                                             .toString(),
                                         snapshot.data![i].companyId.toString(),
+                                          snapshot.data![i].isFavourite,
+
                                       ),
                                     ),
                                   ),

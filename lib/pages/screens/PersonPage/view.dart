@@ -171,7 +171,7 @@ class PersonView extends GetView<PersonController> {
                           height: 10.h,
                         ),
                         Container(
-                          height: 120,
+                          height: 165,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             // color: Color(0xff0c3e4f),
@@ -236,6 +236,37 @@ class PersonView extends GetView<PersonController> {
                                   ),
                                 ),
                               ),
+                              Divider(
+                                color: Colors.grey,
+                                height: 5.h,
+                              ),
+                              Container(
+                                height: 40.h,
+                                child: ListTile(
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.fvrtTours);
+                                  },
+                                  leading: Icon(
+                                    Icons.favorite_outline,
+                                    color: AppColors.lightActiveIconColor,
+                                  ),
+                                  title: Text(
+                                    'Favourite Tours',
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
+                                  ),
+                                  trailing: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(AppRoutes.fvrtTours);
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_forward_ios_outlined,
+                                      color: AppColors.lightActiveIconColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+
                             ],
                           ),
                         ),

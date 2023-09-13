@@ -21,9 +21,14 @@ class HomeController extends GetxController {
   final userRef = FirebaseFirestore.instance.collection("users");
 
   final firestore =
-      FirebaseFirestore.instance.collection('allTours').snapshots();
+  FirebaseFirestore.instance.collection('allTours').snapshots();
 
   late final List<String> category;
+
+  String dc_id = DateTime
+      .timestamp()
+      .microsecondsSinceEpoch
+      .toString();
 
   @override
   void onInit() {
@@ -46,7 +51,7 @@ class HomeController extends GetxController {
 
   Future<List<TourModel>> getAllTourData() async {
     final snapshot =
-        await FirebaseFirestore.instance.collection('allTours').get();
+    await FirebaseFirestore.instance.collection('allTours').get();
     final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
     return tourData;
   }
@@ -107,12 +112,98 @@ class HomeController extends GetxController {
   Future<void> fetchUserData() async {
     try {
       final userNode =
-          await userRef.doc(auth.currentUser!.uid.toString()).get();
+      await userRef.doc(auth.currentUser!.uid.toString()).get();
 
       state.name = userNode['userName'];
       state.phoneNumber = userNode['phone'];
     } catch (e) {
       Snackbar.showSnackBar("Error: ", e.toString());
+    }
+  }
+
+  addToFavouriteList(final String img,
+      final String title,
+      final String price,
+      final String location,
+      final String des,
+      final String id,
+      final String phone,
+      final String comapnyName,
+      final String companyId,) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('fvrt')
+        .doc(dc_id)
+        .set({
+      'fvrtId': dc_id,
+      'id': id,
+      'img': img,
+      'title': title,
+      'price': price,
+      'location': location,
+      'des': des,
+      'phone': phone,
+      'comapnyName': comapnyName,
+      'companyId': companyId,
+    }).then((value) {
+      Snackbar.showSnackBar('Success', 'Added to fvrt');
+    }).onError((error, stackTrace) {
+      print('Error is : ' + error.toString());
+    });
+  }
+
+  removeFromFavouriteList(final String img,
+      final String title,
+      final String price,
+      final String location,
+      final String des,
+      final String id,
+      final String phone,
+      final String comapnyName,
+      final String companyId,) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('fvrt')
+        .doc(dc_id)
+        .delete()
+        .then((value) {
+      Snackbar.showSnackBar('Success', 'Delete from fvrt');
+    }).onError((error, stackTrace) {
+      print('Error is : ' + error.toString());
+    });
+  }
+
+  updateFvrValue(String id) async {
+    await FirebaseFirestore.instance.collection('allTours').doc(id).update(
+      {
+        'isFavourite': state.isFavourite.value,
+      },
+    );
+  }
+
+  var fieldValue;
+
+  Future<void> getData(String id) async {
+    try {
+      // Get a reference to the document
+      DocumentReference docRef = FirebaseFirestore.instance.collection(
+          'allTours').doc(id);
+
+      // Retrieve the document
+      DocumentSnapshot doc = await docRef.get();
+
+      // Check if the document exists
+      if (doc.exists) {
+        // Access a specific field ('field_name' in this example)
+        state.isFavourite.value = doc['isFavourite'];
+        print('Value of field_name: $fieldValue');
+      } else {
+        print('Document does not exist');
+      }
+    } catch (e) {
+      print('Error getting data: $e');
     }
   }
 }

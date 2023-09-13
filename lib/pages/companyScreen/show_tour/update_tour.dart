@@ -480,6 +480,7 @@ class UpdateTourData extends GetView<CompanyShowTourController> {
                                                 controller.state.companyId,
                                             companyName:
                                                 controller.state.companyId,
+                                            isFavourite:false,
                                           );
 
                                           await controller.updateTour(

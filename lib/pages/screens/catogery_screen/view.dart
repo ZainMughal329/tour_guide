@@ -22,14 +22,24 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
   catogeryScreenPage({Key? key, required this.catogery}) : super(key: key);
   catogeryScreenController controller = Get.put(catogeryScreenController());
 
-  Widget _buildCard(BuildContext context, String title, String loc,
-      String price, String des, String imageUrl, String id, String phone,String companyName,String companyId) {
+  Widget _buildCard(
+      BuildContext context,
+      String title,
+      String loc,
+      String price,
+      String des,
+      String imageUrl,
+      String id,
+      String phone,
+      String companyName,
+      String companyId,
+      bool isFavourite) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
         onTap: () {
           Get.to(
-                () => DetailScreen(
+            () => DetailScreen(
               title: title,
               price: price,
               location: loc,
@@ -39,7 +49,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
               phone: phone,
               comapnyName: companyName,
               companyId: companyId,
-
+              isFavourite: isFavourite,
             ),
           );
         },
@@ -276,7 +286,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
           backgroundColor: AppColors.lightBgColor,
           title: Text(
             catogery,
-            style: TextStyle(fontSize: 20.sp , color: AppColors.lightTextColor),
+            style: TextStyle(fontSize: 20.sp, color: AppColors.lightTextColor),
           ),
           centerTitle: true,
         ),
@@ -284,136 +294,142 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
         drawer: BuildDrawer.buildDrawer(context),
         body: SafeArea(
             child: Padding(
-              padding: EdgeInsets.only(left: 10.w , right: 10.w , top: 20.h , bottom: 10.h),
-              child: StreamBuilder<QuerySnapshot>(
-                stream: controller.state.fireStoreTourRef,
-                builder:
-                    (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                  try {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      print("inside first circle");
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasError) {
-                      print("inside 2nd circle");
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    print(snapshot.data!.docs.length.toString());
-                    var len = snapshot.data!.docs.length;
+          padding:
+              EdgeInsets.only(left: 10.w, right: 10.w, top: 20.h, bottom: 10.h),
+          child: StreamBuilder<QuerySnapshot>(
+            stream: controller.state.fireStoreTourRef,
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              try {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  print("inside first circle");
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  print("inside 2nd circle");
+                  return Center(child: CircularProgressIndicator());
+                }
+                print(snapshot.data!.docs.length.toString());
+                var len = snapshot.data!.docs.length;
 
-                    print('Length is' + len.toString());
-                    List<Widget> cardRows = [];
-                    for (int i = 0; i < snapshot.data!.docs.length; i += 2) {
-                      if (i + 1 < snapshot.data!.docs.length) {
-                        cardRows.add(Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  height: 270.h,
-                                  width: 250.w,
-                                  child: _buildCard(
-                                    context,
-                                    snapshot.data!.docs[i]['title'],
-                                    snapshot.data!.docs[i]['location'],
-                                    snapshot.data!.docs[i]['price'],
-                                    snapshot.data!.docs[i]['tourDescription'],
-                                    snapshot.data!.docs[i]['tourImage'],
-                                    snapshot.data!.docs[i]['id'],
-                                    snapshot.data!.docs[i]['companyPhone'],
-                                    snapshot.data!.docs[i]['companyName'],
-                                    snapshot.data!.docs[i]['companyId'],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  height: 270.h,
-                                  width: 250.w,
-                                  child: _buildCard(
-                                    context,
-                                    snapshot.data!.docs[i + 1]['title'],
-                                    snapshot.data!.docs[i + 1]['location'],
-                                    snapshot.data!.docs[i + 1]['price'],
-                                    snapshot.data!.docs[i + 1]['tourDescription'],
-                                    snapshot.data!.docs[i + 1]['tourImage'],
-                                    snapshot.data!.docs[i + 1]['id'],
-                                    snapshot.data!.docs[i + 1]['companyPhone'],
-                                    snapshot.data!.docs[i + 1]['companyName'],
-                                    snapshot.data!.docs[i + 1]['companyId'],
+                print('Length is' + len.toString());
+                List<Widget> cardRows = [];
+                for (int i = 0; i < snapshot.data!.docs.length; i += 2) {
+                  if (i + 1 < snapshot.data!.docs.length) {
+                    cardRows.add(Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 270.h,
+                              width: 250.w,
+                              child: _buildCard(
+                                context,
+                                snapshot.data!.docs[i]['title'],
+                                snapshot.data!.docs[i]['location'],
+                                snapshot.data!.docs[i]['price'],
+                                snapshot.data!.docs[i]['tourDescription'],
+                                snapshot.data!.docs[i]['tourImage'],
+                                snapshot.data!.docs[i]['id'],
+                                snapshot.data!.docs[i]['companyPhone'],
+                                snapshot.data!.docs[i]['companyName'],
+                                snapshot.data!.docs[i]['companyId'],
+                                snapshot.data!.docs[i]['isFavourite'],
 
-                                  ),
-                                ),
                               ),
-                            ),
-                          ],
-                        ));
-                      } else {
-                        cardRows.add(Row(
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  height: 270.h,
-                                  width: 250.w,
-                                  child: _buildCard(
-                                    context,
-                                    snapshot.data!.docs[i]['title'],
-                                    snapshot.data!.docs[i]['location'],
-                                    snapshot.data!.docs[i]['price'],
-                                    snapshot.data!.docs[i]['tourDescription'],
-                                    snapshot.data!.docs[i]['tourImage'],
-                                    snapshot.data!.docs[i]['id'],
-                                    snapshot.data!.docs[i]['companyPhone'],
-                                    snapshot.data!.docs[i ]['companyName'],
-                                    snapshot.data!.docs[i ]['companyId'],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(),
-                            ),
-                          ],
-                        ));
-                      }
-                    }
-                    return snapshot.data!.docs.length != 0
-                        ? ListView(
-                      children: cardRows,
-                    )
-                        : Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: Text(
-                              'Currently,We have no tours in\nthis Category',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: AppColors.lightTextColor,
-                                  letterSpacing: 2),
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                    ;
-                  } catch (e) {
-                    return Text(
-                      'data : ' + e.toString(),
-                    );
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 270.h,
+                              width: 250.w,
+                              child: _buildCard(
+                                context,
+                                snapshot.data!.docs[i + 1]['title'],
+                                snapshot.data!.docs[i + 1]['location'],
+                                snapshot.data!.docs[i + 1]['price'],
+                                snapshot.data!.docs[i + 1]['tourDescription'],
+                                snapshot.data!.docs[i + 1]['tourImage'],
+                                snapshot.data!.docs[i + 1]['id'],
+                                snapshot.data!.docs[i + 1]['companyPhone'],
+                                snapshot.data!.docs[i + 1]['companyName'],
+                                snapshot.data!.docs[i + 1]['companyId'],
+                                snapshot.data!.docs[i+1]['isFavourite'],
+
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ));
+                  } else {
+                    cardRows.add(Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: 270.h,
+                              width: 250.w,
+                              child: _buildCard(
+                                context,
+                                snapshot.data!.docs[i]['title'],
+                                snapshot.data!.docs[i]['location'],
+                                snapshot.data!.docs[i]['price'],
+                                snapshot.data!.docs[i]['tourDescription'],
+                                snapshot.data!.docs[i]['tourImage'],
+                                snapshot.data!.docs[i]['id'],
+                                snapshot.data!.docs[i]['companyPhone'],
+                                snapshot.data!.docs[i]['companyName'],
+                                snapshot.data!.docs[i]['companyId'],
+                                snapshot.data!.docs[i]['isFavourite'],
+
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                      ],
+                    ));
                   }
-                },
-              ),
-            )));
+                }
+                return snapshot.data!.docs.length != 0
+                    ? ListView(
+                        children: cardRows,
+                      )
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Center(
+                              child: Text(
+                                'Currently,We have no tours in\nthis Category',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: AppColors.lightTextColor,
+                                    letterSpacing: 2),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                ;
+              } catch (e) {
+                return Text(
+                  'data : ' + e.toString(),
+                );
+              }
+            },
+          ),
+        )));
   }
 }
 // _buildCard("Naran Kaghan","Peshawar","200",'assets/images/pic1.jpg')

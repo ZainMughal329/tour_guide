@@ -95,6 +95,7 @@ class CompanyAddTourController extends GetxController {
       String tourImage,
       String companyId,
       String comapnyName,
+      bool isFvrt
       ) async {
     state.loading.value = true;
     String timeStamp = DateTime.now().microsecondsSinceEpoch.toString();
@@ -118,7 +119,8 @@ class CompanyAddTourController extends GetxController {
               price: price,
               companyPhone: companyPhone,
               companyId: companyId,
-              companyName: comapnyName
+              companyName: comapnyName,
+              isFavourite: isFvrt,
 
             ).toJson(),
           )
@@ -136,8 +138,10 @@ class CompanyAddTourController extends GetxController {
               price: price,
               companyPhone: companyPhone,
           companyId: companyId,
-          companyName: comapnyName
-            ).toJson())
+          companyName: comapnyName,
+          isFavourite: isFvrt,
+
+        ).toJson())
             .then((value) {
           // toastInfo(msg: "Successfully Added Tour");
           Snackbar.showSnackBar("Congratulations", "Tour Added Successfully");
