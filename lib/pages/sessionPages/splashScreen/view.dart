@@ -18,7 +18,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
     StorePrefrences sp = StorePrefrences();
     FirebaseAuth auth = FirebaseAuth.instance;
     final _dbCompnay = FirebaseFirestore.instance.collection('company');
-    Future.delayed(Duration(seconds: 7), () async {
+    Future.delayed(Duration(milliseconds: 4000), () async {
       bool? val = (await sp.getIsFirstOpen());
       if (val == true && auth.currentUser == null) {
         Get.toNamed(AppRoutes.LOGIN_SIGN_UP);
@@ -81,10 +81,10 @@ class SplashScreenView extends GetView<SplashScreenController> {
                   //   // colors: controller.state.colorizeColors,
                   // ),
                   RotateAnimatedText('Travel',
-                  duration: Duration(milliseconds: 1500),
+                  duration: Duration(milliseconds: 1000),
                   ),
-                  RotateAnimatedText('Explore',duration: Duration(milliseconds: 1500),),
-                  RotateAnimatedText('Repeat',duration: Duration(milliseconds: 1500),),
+                  RotateAnimatedText('Explore',duration: Duration(milliseconds: 1000),),
+                  RotateAnimatedText('Repeat',duration: Duration(milliseconds: 1000),),
 
                 ],
                 isRepeatingAnimation: true,

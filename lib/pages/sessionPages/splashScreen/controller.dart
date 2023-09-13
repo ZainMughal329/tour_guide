@@ -34,7 +34,7 @@ class SplashScreenController extends GetxController {
     FirebaseAuth auth = FirebaseAuth.instance;
     final _dbCompnay =
     FirebaseFirestore.instance.collection('company');
-    Future.delayed(Duration(seconds: 6), () async {
+    Future.delayed(Duration(milliseconds: 4000), () async {
       bool? val = (await sp.getIsFirstOpen());
       if (val == true && auth.currentUser == null) {
         Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);

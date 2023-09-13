@@ -38,28 +38,28 @@ class GMapView extends GetView<GMapController> {
           );
         }),
       ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(right: 50.h),
-        child: FloatingActionButton(
-          onPressed: () {
-
-            controller.getCurrentLocation().then((value) async {
-              final GoogleMapController cont = await _controller.future;
-              controller.state.currentLocation.value =
-                  LatLng(value.latitude, value.longitude);
-              // controller.state.markers.add(Marker(
-              //   markerId: MarkerId("1"),
-              //   position: LatLng(value.latitude, value.longitude),
-              //   infoWindow: InfoWindow(
-              //     title: "My Location",
-              //   ),
-              // ),);
-              cont.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: controller.state.currentLocation.value,zoom: 14 )));
-            }).onError((error, stackTrace) {});
-          },
-          child: Icon(Icons.location_on_outlined),
-        ),
-      ),
+      // floatingActionButton: Padding(
+      //   padding: EdgeInsets.only(right: 50.h),
+      //   child: FloatingActionButton(
+      //     onPressed: () {
+      //
+      //       controller.getCurrentLocation().then((value) async {
+      //         final GoogleMapController cont = await _controller.future;
+      //         controller.state.currentLocation.value =
+      //             LatLng(value.latitude, value.longitude);
+      //         // controller.state.markers.add(Marker(
+      //         //   markerId: MarkerId("1"),
+      //         //   position: LatLng(value.latitude, value.longitude),
+      //         //   infoWindow: InfoWindow(
+      //         //     title: "My Location",
+      //         //   ),
+      //         // ),);
+      //         cont.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: controller.state.currentLocation.value,zoom: 14 )));
+      //       }).onError((error, stackTrace) {});
+      //     },
+      //     child: Icon(Icons.location_on_outlined),
+      //   ),
+      // ),
     );
   }
 }
