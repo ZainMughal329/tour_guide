@@ -108,7 +108,7 @@ class SignupLoginController extends GetxController
           .doc(auth.currentUser!.uid.toString())
           .set(user.toJson())
           .then((value) {
-        Get.to(() => SignUpMsg());
+        Get.to(() => CompanyApprovalPage());
         // auth.signOut();
         // Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
         setCompanyLoading(false);

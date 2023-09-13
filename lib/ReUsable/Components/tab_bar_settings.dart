@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
-
 class BigAppText extends StatelessWidget {
   final String text;
   final int size;

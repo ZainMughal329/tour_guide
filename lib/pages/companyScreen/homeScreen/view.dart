@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/sign_up_msg.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/add_tour/index.dart';
@@ -191,49 +192,7 @@ class _CompanyHomeState extends State<CompanyHome>
                       ),
                     );
                   } else {
-                    return Scaffold(
-                      body: SafeArea(
-                          child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                width: double.infinity,
-                                height: 200.h,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFEDE2E6),
-                                  borderRadius: BorderRadius.circular(15),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'We have recieved your information.\n'
-                                    'You will get confirmation shortly.\nThank You.',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                await controller.auth.signOut();
-                                StorePrefrences sp = StorePrefrences();
-                                sp.setIsFirstOpen(false);
-                                Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
-                              },
-                              child: Text('Back to login page'),
-                            ),
-                          ],
-                        ),
-                      )),
-                    );
+                    return CompanyApprovalPage();
                   }
                 } else {
                   return Scaffold(
