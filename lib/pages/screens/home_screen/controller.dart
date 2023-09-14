@@ -21,14 +21,11 @@ class HomeController extends GetxController {
   final userRef = FirebaseFirestore.instance.collection("users");
 
   final firestore =
-  FirebaseFirestore.instance.collection('allTours').snapshots();
+      FirebaseFirestore.instance.collection('allTours').snapshots();
 
   late final List<String> category;
 
-  String dc_id = DateTime
-      .timestamp()
-      .microsecondsSinceEpoch
-      .toString();
+  String dc_id = DateTime.timestamp().microsecondsSinceEpoch.toString();
 
   @override
   void onInit() {
@@ -51,7 +48,7 @@ class HomeController extends GetxController {
 
   Future<List<TourModel>> getAllTourData() async {
     final snapshot =
-    await FirebaseFirestore.instance.collection('allTours').get();
+        await FirebaseFirestore.instance.collection('allTours').get();
     final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
     return tourData;
   }
@@ -112,7 +109,7 @@ class HomeController extends GetxController {
   Future<void> fetchUserData() async {
     try {
       final userNode =
-      await userRef.doc(auth.currentUser!.uid.toString()).get();
+          await userRef.doc(auth.currentUser!.uid.toString()).get();
 
       state.name = userNode['userName'];
       state.phoneNumber = userNode['phone'];
@@ -121,64 +118,63 @@ class HomeController extends GetxController {
     }
   }
 
-  addToFavouriteList(final String img,
-      final String title,
-      final String price,
-      final String location,
-      final String des,
-      final String id,
-      final String phone,
-      final String comapnyName,
-      final String companyId,) async {
-    await FirebaseFirestore.instance
+  addToFavouriteList(
+    final String img,
+    final String title,
+    final String price,
+    final String location,
+    final String des,
+    final String id,
+    final String phone,
+    final String comapnyName,
+    final String companyId,
+  ) async {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('fvrt')
+          .doc(dc_id)
+          .set({
+        'fvrtId': dc_id,
+        'id': id,
+        'img': img,
+        'title': title,
+        'price': price,
+        'location': location,
+        'des': des,
+        'phone': phone,
+        'comapnyName': comapnyName,
+        'companyId': companyId,
+      }).then((value) {
+        Snackbar.showSnackBar('Success', 'Added to fvrt');
+      }).onError((error, stackTrace) {
+        print('Error is : ' + error.toString());
+      });
+
+  }
+
+  removeFromFavouriteList(
+      String id,
+  ) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(auth.currentUser!.uid)
         .collection('fvrt')
-        .doc(dc_id)
-        .set({
-      'fvrtId': dc_id,
-      'id': id,
-      'img': img,
-      'title': title,
-      'price': price,
-      'location': location,
-      'des': des,
-      'phone': phone,
-      'comapnyName': comapnyName,
-      'companyId': companyId,
-    }).then((value) {
-      Snackbar.showSnackBar('Success', 'Added to fvrt');
-    }).onError((error, stackTrace) {
-      print('Error is : ' + error.toString());
+        .where('id', isEqualTo: id)
+        .get();
+    querySnapshot.docs.forEach((doc) async {
+      await doc.reference.delete().then((value) {
+        Snackbar.showSnackBar('Success', 'Delete from fvrt');
+      }).onError((error, stackTrace) {
+        print('Error is : ' + error.toString());
+      });
     });
   }
 
-  removeFromFavouriteList(final String img,
-      final String title,
-      final String price,
-      final String location,
-      final String des,
-      final String id,
-      final String phone,
-      final String comapnyName,
-      final String companyId,) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .collection('fvrt')
-        .doc(dc_id)
-        .delete()
-        .then((value) {
-      Snackbar.showSnackBar('Success', 'Delete from fvrt');
-    }).onError((error, stackTrace) {
-      print('Error is : ' + error.toString());
-    });
-  }
-
-  updateFvrValue(String id) async {
+  updateFvrValue(String id , bool isFvrt) async {
     await FirebaseFirestore.instance.collection('allTours').doc(id).update(
       {
-        'isFavourite': state.isFavourite.value,
+        'isFavourite': isFvrt,
       },
     );
   }
@@ -188,8 +184,8 @@ class HomeController extends GetxController {
   Future<void> getData(String id) async {
     try {
       // Get a reference to the document
-      DocumentReference docRef = FirebaseFirestore.instance.collection(
-          'allTours').doc(id);
+      DocumentReference docRef =
+          FirebaseFirestore.instance.collection('allTours').doc(id);
 
       // Retrieve the document
       DocumentSnapshot doc = await docRef.get();
@@ -204,6 +200,44 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       print('Error getting data: $e');
+    }
+  }
+
+  getParticularTourData(String id) async {
+    await FirebaseFirestore.instance.collection('allTours').doc(id).snapshots();
+  }
+
+  Future<bool> isFavorite(String tourId) async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .collection('fvrt')
+        .where('id', isEqualTo: tourId)
+        .get();
+    return querySnapshot.docs.isNotEmpty;
+  }
+  Future<void> toggleFavorite(
+      bool isFvrt,
+      final String img,
+      final String title,
+      final String price,
+      final String location,
+      final String des,
+      final String id,
+      final String phone,
+      final String comapnyName,
+      final String companyId,
+      ) async {
+    // Check if the tour ID already exists in favorites
+    updateFvrValue(id, isFvrt);
+    bool exists = await isFavorite(id);
+
+    if (exists) {
+      // If it exists, remove it from favorites
+      await removeFromFavouriteList(id);
+    } else {
+      // If it doesn't exist, add it to favorites
+      await addToFavouriteList(img, title, price, location, des, id, phone, comapnyName, companyId);
     }
   }
 }

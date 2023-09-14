@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -83,21 +84,10 @@ class DetailScreen extends GetView<HomeController> {
                       // Get.back();
                       controller.state.isFavourite.value =
                           !controller.state.isFavourite.value;
-                      controller.updateFvrValue(id);
+                      controller.updateFvrValue(id,controller.state.isFavourite.value);
                       controller.getData(id);
-                      isFavourite == false
-                          ? controller.removeFromFavouriteList(
-                              img,
-                              title,
-                              price,
-                              location,
-                              des,
-                              id,
-                              phone,
-                              comapnyName,
-                              companyId)
-                          : controller.addToFavouriteList(img, title, price,
-                              location, des, id, phone, comapnyName, companyId);
+                      controller.toggleFavorite(controller.state.isFavourite.value ,img, title, price, location,
+                          des, id, phone, comapnyName, companyId);
                     },
                     child: Container(
                       height: 50.w,
@@ -110,17 +100,17 @@ class DetailScreen extends GetView<HomeController> {
                       child: Center(
                         child: isFavourite == false
                             ? Icon(
-                          Icons.favorite_outline,
-                          // color: AppColors.iconsColor,
-                          color: AppColors.lightActiveIconColor,
-                        )
+                                Icons.favorite_outline,
+                                // color: AppColors.iconsColor,
+                                color: AppColors.lightActiveIconColor,
+                              )
                             : Icon(
-                          Icons.favorite,
+                                Icons.favorite,
 
-                          // color: AppColors.iconsColor,
-                          color: Colors.red,
-
-                      ),),
+                                // color: AppColors.iconsColor,
+                                color: Colors.red,
+                              ),
+                      ),
                     ),
                   ),
                 ],
