@@ -15,26 +15,31 @@ class SplashScreenView extends GetView<SplashScreenController> {
   const SplashScreenView({Key? key}) : super(key: key);
 
   onInit() {
-    StorePrefrences sp = StorePrefrences();
-    FirebaseAuth auth = FirebaseAuth.instance;
-    final _dbCompnay = FirebaseFirestore.instance.collection('company');
-    Future.delayed(Duration(milliseconds: 4000), () async {
-      bool? val = (await sp.getIsFirstOpen());
-      if (val == true && auth.currentUser == null) {
-        Get.toNamed(AppRoutes.LOGIN_SIGN_UP);
-      } else if (val == true && auth.currentUser != null) {
-        final companyData = await _dbCompnay
-            .where('id', isEqualTo: auth.currentUser!.uid.toString())
-            .get();
-        if (companyData.docs.isNotEmpty) {
-          Get.offAllNamed(AppRoutes.Company_Home);
-        } else {
-          Get.offAllNamed(AppRoutes.Application);
-        }
-      } else if (val == false && auth.currentUser == null || val == null) {
-        Get.offAllNamed(AppRoutes.Welcome);
-      } else if (val == false && auth.currentUser != null) {}
-    });
+    try{
+
+      StorePrefrences sp = StorePrefrences();
+      FirebaseAuth auth = FirebaseAuth.instance;
+      final _dbCompnay = FirebaseFirestore.instance.collection('company');
+      Future.delayed(Duration(milliseconds: 4000), () async {
+        bool? val = (await sp.getIsFirstOpen());
+        if (val == true && auth.currentUser == null) {
+          Get.toNamed(AppRoutes.LOGIN_SIGN_UP);
+        } else if (val == true && auth.currentUser != null) {
+          final companyData = await _dbCompnay
+              .where('id', isEqualTo: auth.currentUser!.uid.toString())
+              .get();
+          if (companyData.docs.isNotEmpty) {
+            Get.offAllNamed(AppRoutes.Company_Home);
+          } else {
+            Get.offAllNamed(AppRoutes.Application);
+          }
+        } else if (val == false && auth.currentUser == null || val == null) {
+          Get.offAllNamed(AppRoutes.Welcome);
+        } else if (val == false && auth.currentUser != null) {}
+      });
+    } catch(e) {
+
+    }
   }
 
   @override
