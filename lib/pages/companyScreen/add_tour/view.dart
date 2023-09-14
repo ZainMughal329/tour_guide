@@ -356,7 +356,6 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                 color: AppColors.activeTabElementColor,
                               )
                             : RoundButton(
-                                color: Colors.blue,
                                 title: "Add Tour",
                                 onPress: () async {
                                   // final companyId = await controller.auth.currentUser!.uid.toString();
@@ -409,7 +408,6 @@ class CompanyAddTourScreen extends GetView<CompanyAddTourController> {
                                           controller.state.companyId.toString(),
                                           controller.state.companyName
                                               .toString(),
-                                          false,
                                         );
                                         // print(tour.toJson().toString());
                                         // c

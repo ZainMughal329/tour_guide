@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
+import 'package:tours_guide/ReUsable/models/fvrt_tour_model.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/pages/screens/home_screen/state.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,7 +26,7 @@ class HomeController extends GetxController {
 
   late final List<String> category;
 
-  String dc_id = DateTime.timestamp().microsecondsSinceEpoch.toString();
+  // String dc_id = DateTime.timestamp().microsecondsSinceEpoch.toString();
 
   @override
   void onInit() {
@@ -117,127 +118,121 @@ class HomeController extends GetxController {
       Snackbar.showSnackBar("Error: ", e.toString());
     }
   }
-
-  addToFavouriteList(
-    final String img,
-    final String title,
-    final String price,
-    final String location,
-    final String des,
-    final String id,
-    final String phone,
-    final String comapnyName,
-    final String companyId,
-  ) async {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(auth.currentUser!.uid)
-          .collection('fvrt')
-          .doc(dc_id)
-          .set({
-        'fvrtId': dc_id,
-        'id': id,
-        'img': img,
-        'title': title,
-        'price': price,
-        'location': location,
-        'des': des,
-        'phone': phone,
-        'comapnyName': comapnyName,
-        'companyId': companyId,
-      }).then((value) {
-        Snackbar.showSnackBar('Success', 'Added to fvrt');
-      }).onError((error, stackTrace) {
-        print('Error is : ' + error.toString());
-      });
-
-  }
-
-  removeFromFavouriteList(
-      String id,
-  ) async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .collection('fvrt')
-        .where('id', isEqualTo: id)
-        .get();
-    querySnapshot.docs.forEach((doc) async {
-      await doc.reference.delete().then((value) {
-        Snackbar.showSnackBar('Success', 'Delete from fvrt');
-      }).onError((error, stackTrace) {
-        print('Error is : ' + error.toString());
-      });
-    });
-  }
-
-  updateFvrValue(String id , bool isFvrt) async {
-    await FirebaseFirestore.instance.collection('allTours').doc(id).update(
-      {
-        'isFavourite': isFvrt,
-      },
-    );
-  }
-
-  var fieldValue;
-
-  Future<void> getData(String id) async {
-    try {
-      // Get a reference to the document
-      DocumentReference docRef =
-          FirebaseFirestore.instance.collection('allTours').doc(id);
-
-      // Retrieve the document
-      DocumentSnapshot doc = await docRef.get();
-
-      // Check if the document exists
-      if (doc.exists) {
-        // Access a specific field ('field_name' in this example)
-        state.isFavourite.value = doc['isFavourite'];
-        print('Value of field_name: $fieldValue');
-      } else {
-        print('Document does not exist');
-      }
-    } catch (e) {
-      print('Error getting data: $e');
-    }
-  }
-
-  getParticularTourData(String id) async {
-    await FirebaseFirestore.instance.collection('allTours').doc(id).snapshots();
-  }
-
-  Future<bool> isFavorite(String tourId) async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .collection('fvrt')
-        .where('id', isEqualTo: tourId)
-        .get();
-    return querySnapshot.docs.isNotEmpty;
-  }
-  Future<void> toggleFavorite(
-      bool isFvrt,
-      final String img,
-      final String title,
-      final String price,
-      final String location,
-      final String des,
-      final String id,
-      final String phone,
-      final String comapnyName,
-      final String companyId,
-      ) async {
-    // Check if the tour ID already exists in favorites
-    updateFvrValue(id, isFvrt);
-    bool exists = await isFavorite(id);
-
-    if (exists) {
-      // If it exists, remove it from favorites
-      await removeFromFavouriteList(id);
-    } else {
-      // If it doesn't exist, add it to favorites
-      await addToFavouriteList(img, title, price, location, des, id, phone, comapnyName, companyId);
-    }
-  }
+  //
+  // addToFavouriteList(FvrtTourModel tourModel,String id) async {
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(auth.currentUser!.uid)
+  //       .collection('fvrt')
+  //       .doc(id)
+  //       .set(tourModel.toJson())
+  //       .then((value) {
+  //     Snackbar.showSnackBar('Success', 'Added to fvrt');
+  //   }).onError((error, stackTrace) {
+  //     // print('Error is : ' + error.toString());
+  //   });
+  // }
+  //
+  // removeFromFavouriteList(
+  //   String id,
+  // ) async {
+  //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(auth.currentUser!.uid)
+  //       .collection('fvrt')
+  //       .where('id', isEqualTo: id)
+  //       .get();
+  //   querySnapshot.docs.forEach((doc) async {
+  //     await doc.reference.delete().then((value) {
+  //       Snackbar.showSnackBar('Success', 'Delete from fvrt');
+  //     }).onError((error, stackTrace) {
+  //       // print('Error is : ' + error.toString());
+  //     });
+  //   });
+  // }
+  //
+  // updateFvrValue(String id) async {
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(auth.currentUser!.uid)
+  //       .collection('fvrt')
+  //       .doc(id)
+  //       .update(
+  //     {
+  //       'isFavourite': state.isFavourite.value,
+  //     },
+  //   );
+  // }
+  //
+  // RxBool fieldValue = false.obs;
+  //
+  // Future<void> getData(String id) async {
+  //   try {
+  //     // Get a reference to the document
+  //     DocumentReference docRef = FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(auth.currentUser!.uid)
+  //         .collection('fvrt')
+  //         .doc(id);
+  //
+  //     // Retrieve the document
+  //     DocumentSnapshot doc = await docRef.get();
+  //
+  //     // Check if the document exists
+  //     if (doc.exists) {
+  //       // Access a specific field ('field_name' in this example)
+  //       state.isFavourite.value = doc['isFavourite'];
+  //       print('Value of field_name: $fieldValue');
+  //     } else {
+  //       print('Document does not exist');
+  //     }
+  //   } catch (e) {
+  //     // print('Error getting data: $e');
+  //   }
+  // }
+  //
+  // getParticularTourData(String id) async {
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(auth.currentUser!.uid)
+  //       .collection('fvrt')
+  //       .doc(id)
+  //       .snapshots();
+  // }
+  //
+  // Future<bool> isFavorite(String tourId) async {
+  //   // Get a reference to the document
+  //   DocumentReference docRef = FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(auth.currentUser!.uid)
+  //       .collection('fvrt')
+  //       .doc(tourId);
+  //
+  //   // Retrieve the document
+  //   DocumentSnapshot doc = await docRef.get();
+  //
+  //   // Check if the document exists
+  //   if (doc.exists) {
+  //     // Access a specific field ('field_name' in this example)
+  //     print('Exist with id : ' + tourId);
+  //     return true;
+  //   } else {
+  //     print('Document does not exist');
+  //     return false;
+  //   }
+  // }
+  //
+  // Future<void> toggleFavorite(final String id, FvrtTourModel tourModel) async {
+  //   // Check if the tour ID already exists in favorites
+  //   updateFvrValue(id);
+  //   bool exists = await isFavorite(id);
+  //
+  //   if (exists) {
+  //     // If it exists, remove it from favorites
+  //     await removeFromFavouriteList(id);
+  //   } else {
+  //     // If it doesn't exist, add it to favorites
+  //     await addToFavouriteList(tourModel , id);
+  //   }
+  // }
 }

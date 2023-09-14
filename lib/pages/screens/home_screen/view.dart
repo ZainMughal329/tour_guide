@@ -40,7 +40,7 @@ class HomePage extends GetView<HomeController> {
       String phone,
       String companyName,
       String companyId,
-      bool isFvrt) {
+      ) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -56,7 +56,6 @@ class HomePage extends GetView<HomeController> {
               phone: phone,
               comapnyName: companyName,
               companyId: companyId,
-              isFavourite: isFvrt,
             ),
           );
         },
@@ -130,7 +129,7 @@ class HomePage extends GetView<HomeController> {
       String phone,
       String companyName,
       String companyId
-      ,bool isFvrt) {
+      ) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -518,8 +517,7 @@ class HomePage extends GetView<HomeController> {
                                                   snapshot
                                                       .data![index].companyId
                                                       .toString(),
-                                                    snapshot
-                                                        .data![index].isFavourite
+
                                                 ),
                                               ),
                                             ],
@@ -566,8 +564,7 @@ class HomePage extends GetView<HomeController> {
                                                   snapshot
                                                       .data![index].companyId
                                                       .toString(),
-                                                    snapshot
-                                                        .data![index].isFavourite,
+
                                                 ),
                                               ),
                                             ],

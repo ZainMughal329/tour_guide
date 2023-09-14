@@ -152,7 +152,6 @@ class FavouriteView extends GetView<FavouriteController> {
                                               phone: item['phone'],
                                               comapnyName: item['comapnyName'],
                                               companyId: item['companyId'],
-                                              isFavourite: item['isFavourite'],
                                             ),
                                           );
                                         },

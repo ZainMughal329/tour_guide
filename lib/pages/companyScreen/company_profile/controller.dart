@@ -123,6 +123,10 @@ class CompanyProfileController extends GetxController {
 
   // }
 
+  void setLoading(bool value) {
+    state.loading.value = value;
+  }
+
   // --------------------------------------------------------------------
   // for showing company data in update and drawer screen
   // {
@@ -148,13 +152,17 @@ class CompanyProfileController extends GetxController {
   // {
 
   updateCompanyData(CompanyModel companyModel) async {
+    setLoading(true);
     await _db
         .collection('company')
         .doc(auth.currentUser!.uid.toString())
         .update(companyModel.toJson())
         .then((value) {
+          setLoading(false);
       toastInfo(msg: 'Successfully update user data');
     }).onError((error, stackTrace) {
+      setLoading(false);
+
       toastInfo(msg: 'Something went wrong.');
     });
   }

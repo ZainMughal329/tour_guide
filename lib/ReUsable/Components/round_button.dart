@@ -8,6 +8,7 @@ class RoundButton extends StatelessWidget {
   final Color color, textcolor, borderColor;
   final VoidCallback onPress;
   final bool loading;
+
   const RoundButton(
       {super.key,
       required this.title,
@@ -19,39 +20,32 @@ class RoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPress,
-      child: Container(
-        height: 54.h,
-        width: 280.w,
-        padding: EdgeInsets.all(10.w),
-        margin: EdgeInsets.only(bottom: 15.h),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(15),
+    return Center(
+      child: InkWell(
+        onTap: onPress,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: InkWell(
+            child: Container(
+              height: 50.h,
+              width: 300.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: AppColors.lightButtonColor,
+              ),
+              child: loading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ))
+                  : Center(
+                      child: Text(
+                        title,
+                        style: TextStyle(color: Colors.white, fontSize: 17),
+                      ),
+                    ),
+            ),
           ),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.grey.withOpacity(0.3),
-          //     spreadRadius: 1,
-          //     blurRadius: 2,
-          //     offset: const Offset(0, 2),
-          //   ),
-          // ],
-        ),
-        child: Center(
-          child: loading
-              ? CircularProgressIndicator(
-                  color: Colors.white,
-                )
-              : Text(
-                  title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle2!
-                      .copyWith(fontSize: 16, color: textcolor),
-                ),
         ),
       ),
     );

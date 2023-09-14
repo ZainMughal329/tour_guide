@@ -194,7 +194,6 @@ class SearchView extends GetView<SearchBarController> {
                                                 item['companyName'].toString(),
                                             companyId:
                                                 item['companyId'].toString(),
-                                        isFavourite: item['isFavourite'],
                                           ));
                                     },
                                     child: Column(

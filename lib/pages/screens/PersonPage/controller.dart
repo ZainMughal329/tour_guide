@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -211,10 +212,12 @@ class PersonController extends GetxController {
 
   // for updating user
   updateUserData(UserModel user) async {
+    setLoading(true);
     await _db.collection('users').doc(user.id).update(
           user.toJson(),
         ).then((value) {
-          Get.snackbar('Update', 'Successfully Updated');
+          setLoading(false);
+          Snackbar.showSnackBar('Update', 'Successfully Updated');
     });
   }
 

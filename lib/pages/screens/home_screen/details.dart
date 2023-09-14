@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
+import 'package:tours_guide/ReUsable/models/fvrt_tour_model.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/booking_screen/view.dart';
 import 'package:tours_guide/pages/screens/home_screen/controller.dart';
@@ -22,7 +23,6 @@ class DetailScreen extends GetView<HomeController> {
   final String phone;
   final String comapnyName;
   final String companyId;
-  final bool isFavourite;
 
   DetailScreen({
     Key? key,
@@ -35,7 +35,6 @@ class DetailScreen extends GetView<HomeController> {
     required this.phone,
     required this.comapnyName,
     required this.companyId,
-    required this.isFavourite,
   }) : super(key: key);
 
   @override
@@ -79,40 +78,51 @@ class DetailScreen extends GetView<HomeController> {
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Get.back();
-                      controller.state.isFavourite.value =
-                          !controller.state.isFavourite.value;
-                      controller.updateFvrValue(id,controller.state.isFavourite.value);
-                      controller.getData(id);
-                      controller.toggleFavorite(controller.state.isFavourite.value ,img, title, price, location,
-                          des, id, phone, comapnyName, companyId);
-                    },
-                    child: Container(
-                      height: 50.w,
-                      width: 50.w,
-                      decoration: BoxDecoration(
-                        // color: AppColors.bgColor,
-                        color: AppColors.lightBgColor,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Center(
-                        child: isFavourite == false
-                            ? Icon(
-                                Icons.favorite_outline,
-                                // color: AppColors.iconsColor,
-                                color: AppColors.lightActiveIconColor,
-                              )
-                            : Icon(
-                                Icons.favorite,
-
-                                // color: AppColors.iconsColor,
-                                color: Colors.red,
-                              ),
-                      ),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     // Get.back();
+                  //     controller.state.isFavourite.value =
+                  //         !controller.state.isFavourite.value;
+                  //     controller.updateFvrValue(id);
+                  //     controller.getData(id);
+                  //     FvrtTourModel fvrtModel = FvrtTourModel(
+                  //         id: id,
+                  //         title: title,
+                  //         tourDescription: des,
+                  //         tourImage: img,
+                  //         location: location,
+                  //         price: price,
+                  //         companyId: companyId,
+                  //         companyName: comapnyName,
+                  //       isFavourite: true,
+                  //
+                  //     );
+                  //     controller.toggleFavorite(id, fvrtModel);
+                  //   },
+                  //   child: Container(
+                  //     height: 50.w,
+                  //     width: 50.w,
+                  //     decoration: BoxDecoration(
+                  //       // color: AppColors.bgColor,
+                  //       color: AppColors.lightBgColor,
+                  //       borderRadius: BorderRadius.circular(50),
+                  //     ),
+                  //     child: Center(
+                  //       child: controller.isFavorite(id) == false
+                  //           ? Icon(
+                  //         Icons.favorite_outline,
+                  //         // color: AppColors.iconsColor,
+                  //         color: AppColors.lightActiveIconColor,
+                  //       )
+                  //           : Icon(
+                  //         Icons.favorite,
+                  //
+                  //         // color: AppColors.iconsColor,
+                  //         color: Colors.red,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

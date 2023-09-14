@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
+import 'package:tours_guide/ReUsable/Components/round_button.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/index.dart';
@@ -211,51 +212,23 @@ class UpdateCompanyData extends GetView<CompanyProfileController> {
 
                               SizedBox(height: 10.0.h),
 
-                              Center(
-                                child: InkWell(
-                                  onTap: () async {
-                                    var userData = CompanyModel(
-                                      id: auth.currentUser!.uid.toString(),
-                                      status: companyModel.status,
-                                      companyEmail: email.text.trim(),
-                                      companyName: name.text.trim(),
-                                      companyPhone: phone.text.trim(),
-                                      companyDescription: des.text.trim(),
-                                      logo: companyModel.logo.toString(),
-                                      pass: pass.text.trim(),
-                                      location: '',
-                                      fcmToken: '',
-                                      addTime: Timestamp.now(),
-                                    );
-                                    await controller.updateCompany(userData);
-                                    Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
-                                  },
-                                  child: Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 10.h),
-                                    child: Container(
-                                        height: 50.h,
-                                        width: 300.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: AppColors.lightButtonColor,
-                                        ),
-                                        child: Obx(() {
-                                          return controller.state.loading.value
-                                              ? CircularProgressIndicator()
-                                              : Center(
-                                                  child: Text(
-                                                    'Save Profile',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 17),
-                                                  ),
-                                                );
-                                        })),
-                                  ),
-                                ),
-                              ),
+                              Obx(() => RoundButton(title: 'Save Profile', onPress:() async {
+                              var userData = CompanyModel(
+                              id: auth.currentUser!.uid.toString(),
+                              status: companyModel.status,
+                              companyEmail: email.text.trim(),
+                              companyName: name.text.trim(),
+                              companyPhone: phone.text.trim(),
+                              companyDescription: des.text.trim(),
+                              logo: companyModel.logo.toString(),
+                              pass: pass.text.trim(),
+                              location: '',
+                              fcmToken: '',
+                              addTime: Timestamp.now(),
+                              );
+                              await controller.updateCompany(userData);
+                              Get.offAllNamed(AppRoutes.LOGIN_SIGN_UP);
+                              },loading: controller.state.loading.value,),),
 
                               // SizedBox(
                               //   width: double.infinity,

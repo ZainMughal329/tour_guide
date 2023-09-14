@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Exceptions/app_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/sessionPages/splashScreen/controller.dart';
@@ -15,8 +16,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
   const SplashScreenView({Key? key}) : super(key: key);
 
   onInit() {
-    try{
-
+    try {
       StorePrefrences sp = StorePrefrences();
       FirebaseAuth auth = FirebaseAuth.instance;
       final _dbCompnay = FirebaseFirestore.instance.collection('company');
@@ -37,8 +37,15 @@ class SplashScreenView extends GetView<SplashScreenController> {
           Get.offAllNamed(AppRoutes.Welcome);
         } else if (val == false && auth.currentUser != null) {}
       });
-    } catch(e) {
-
+    } catch (e) {
+      Get.dialog(Container(
+        height: 50,
+        width: 100,
+        color: Colors.white,
+        child: Center(
+          child: Text('Error occurs'),
+        ),
+      ));
     }
   }
 
@@ -55,53 +62,58 @@ class SplashScreenView extends GetView<SplashScreenController> {
                 image: AssetImage('assets/images/nws.png'),
                 fit: BoxFit.fill,
               ),
-      Padding(
-        padding:  EdgeInsets.only(top: 100.h,right: 90.w),
-        child: Row(
-          children: [
-            const SizedBox(width: 20.0),
-            const Text(
-              'Journey\nAwaits',
-              style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(width: 20.0,),
-            SizedBox(
-              // width: 250.0,
-              height: 100.h,
-              child: DefaultTextStyle(
-                style:  TextStyle(
-                  fontSize: 40.sp,
-                  color: Colors.black
-                  // fontFamily: 'Horizon',
+              Padding(
+                padding: EdgeInsets.only(top: 100.h, right: 90.w),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 20.0),
+                    const Text(
+                      'Journey\nAwaits',
+                      style: TextStyle(
+                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      width: 20.0,
+                    ),
+                    SizedBox(
+                      // width: 250.0,
+                      height: 100.h,
+                      child: DefaultTextStyle(
+                          style: TextStyle(fontSize: 40.sp, color: Colors.black
+                              // fontFamily: 'Horizon',
+                              ),
+                          child: AnimatedTextKit(
+                            repeatForever: false,
+                            totalRepeatCount: 1,
+                            animatedTexts: [
+                              // TypewriterAnimatedText(
+                              //   'Travel...Travel alot!\nBut once in a while,\ntravel back to your roots ...',
+                              //   textStyle: controller.state.colorizeTextStyle,
+                              //   speed: Duration(milliseconds: 60),
+                              //   // colors: controller.state.colorizeColors,
+                              // ),
+                              RotateAnimatedText(
+                                'Travel',
+                                duration: Duration(milliseconds: 1000),
+                              ),
+                              RotateAnimatedText(
+                                'Explore',
+                                duration: Duration(milliseconds: 1000),
+                              ),
+                              RotateAnimatedText(
+                                'Repeat',
+                                duration: Duration(milliseconds: 1000),
+                              ),
+                            ],
+                            isRepeatingAnimation: true,
+                            onTap: () {
+                              // print("Tap Event");
+                            },
+                          )),
+                    ),
+                  ],
                 ),
-                child:AnimatedTextKit(
-                  repeatForever: false,
-                totalRepeatCount: 1,
-                animatedTexts: [
-
-                  // TypewriterAnimatedText(
-                  //   'Travel...Travel alot!\nBut once in a while,\ntravel back to your roots ...',
-                  //   textStyle: controller.state.colorizeTextStyle,
-                  //   speed: Duration(milliseconds: 60),
-                  //   // colors: controller.state.colorizeColors,
-                  // ),
-                  RotateAnimatedText('Travel',
-                  duration: Duration(milliseconds: 1000),
-                  ),
-                  RotateAnimatedText('Explore',duration: Duration(milliseconds: 1000),),
-                  RotateAnimatedText('Repeat',duration: Duration(milliseconds: 1000),),
-
-                ],
-                isRepeatingAnimation: true,
-                onTap: () {
-                  // print("Tap Event");
-                },
-              )),
-            ),
-          ],
-        ),
-      )
-
+              )
             ],
           ),
         )

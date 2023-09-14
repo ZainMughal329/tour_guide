@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/round_button.dart';
+import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/companyScreen/company_profile/update.dart';
 import 'package:tours_guide/pages/screens/PersonPage/community_guidlines.dart';
@@ -54,10 +56,8 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                               decoration: BoxDecoration(
                                 border: Border.all(
                                   color: AppColors.lightActiveIconColor,
-
                                 ),
                                 borderRadius: BorderRadius.circular(50),
-
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(50),
@@ -81,7 +81,8 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                             ),
                             subtitle: Text(
                                 snapshot.data!['companyPhone'].toString(),
-                                style: TextStyle(color: AppColors.lightTextColor)),
+                                style:
+                                    TextStyle(color: AppColors.lightTextColor)),
                             trailing: Icon(
                               Icons.arrow_forward_ios,
                               color: AppColors.lightActiveIconColor,
@@ -165,7 +166,8 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                   },
                                   title: Text(
                                     'Contact us',
-                                    style: TextStyle(color: AppColors.lightTextColor),
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
@@ -179,11 +181,11 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 child: ListTile(
                                   onTap: () {
                                     Get.to(() => FAQsWidget());
-
                                   },
                                   title: Text(
                                     'FAQ\'s',
-                                    style: TextStyle(color: AppColors.lightTextColor),
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
@@ -197,11 +199,11 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 child: ListTile(
                                   onTap: () {
                                     Get.to(() => CommunityGuidelinesScreen());
-
                                   },
                                   title: Text(
                                     'Community Guidelines',
-                                    style: TextStyle(color: AppColors.lightTextColor),
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
@@ -215,11 +217,11 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 child: ListTile(
                                   onTap: () {
                                     Get.to(() => TermsOfUseScreen());
-
                                   },
                                   title: Text(
                                     'Term of use',
-                                    style: TextStyle(color: AppColors.lightTextColor),
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
@@ -233,11 +235,11 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                                 child: ListTile(
                                   onTap: () {
                                     Get.to(() => PrivacyPolicyScreen());
-
                                   },
                                   title: Text(
                                     'Privacy Policy',
-                                    style: TextStyle(color: AppColors.lightTextColor),
+                                    style: TextStyle(
+                                        color: AppColors.lightTextColor),
                                   ),
                                   trailing: Icon(
                                     Icons.arrow_right_alt,
@@ -253,63 +255,32 @@ class CompanyProfileView extends GetView<CompanyProfileController> {
                           height: 25.h,
                         ),
                         Padding(
-                          padding:  EdgeInsets.only(bottom: 15.h),
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
+                          padding: EdgeInsets.only(bottom: 15.h),
+                          child: Obx(
+                            () => RoundButton(
+                              title: 'LogOut',
+                              onPress: () {
+                                controller.setLoading(true);
                                 final auth = FirebaseAuth.instance;
                                 auth.signOut().then((value) {
+                                  controller.setLoading(false);
+
                                   Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
-                                  Get.snackbar(
+                                  Snackbar.showSnackBar(
                                     'Congrats',
                                     'Successfully logOut ',
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    colorText: Colors.green,
-                                    backgroundColor:
-                                        Colors.green.withOpacity(0.1),
                                   );
                                 }).onError((error, stackTrace) {
-                                  Get.snackbar(
+                                  controller.setLoading(false);
+
+                                  Snackbar.showSnackBar(
                                     'Error',
-                                    'Something went wrong + ' + error.toString(),
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    colorText: Colors.green,
-                                    backgroundColor:
-                                        Colors.green.withOpacity(0.1),
+                                    'Something went wrong + ' +
+                                        error.toString(),
                                   );
                                 });
                               },
-                              child: Padding(
-                                padding:  EdgeInsets.only(bottom: 15.h),
-                                child: InkWell(
-                                  child: Container(
-                                    height: 50,
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: AppColors.lightButtonColor),
-                                    child: Center(
-                                      child: Text(
-                                        'Logout',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 17),
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-
-                                    final auth = FirebaseAuth.instance;
-                                    auth.signOut().then(
-                                      (value) {
-                                        Get.snackbar('Successful', 'Log Out');
-                                        Get.offAndToNamed(AppRoutes.LOGIN_SIGN_UP);
-                                      },
-                                    ).onError((error, stackTrace) {
-                                      Get.snackbar('Error', 'Something goes wrong');
-                                    });
-                                  },
-                                ),
-                              ),
+                              loading: controller.state.loading.value,
                             ),
                           ),
                         ),

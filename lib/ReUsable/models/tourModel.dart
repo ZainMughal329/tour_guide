@@ -20,7 +20,6 @@ class TourModel {
   final String? companyPhone;
   final String? companyId;
   final String? companyName;
-  bool isFavourite;
 
   TourModel({
     required this.id,
@@ -29,7 +28,6 @@ class TourModel {
     required this.tourDescription,
     required this.tourImage,
     required this.location,
-    this.isFavourite = false,
     required this.people,
     required this.price,
     this.companyPhone,
@@ -51,7 +49,6 @@ class TourModel {
       "companyPhone": companyPhone,
       "companyId" : companyId,
       "companyName" : companyName,
-      "isFavourite" : false,
     };
   }
 
@@ -63,7 +60,6 @@ class TourModel {
       tourDescription: data["tourDescription"],
       tourImage: data["tourImage"],
       title: data["title"],
-      isFavourite: data["isFavourite"],
       location: data["location"],
       people: data["people"],
       price: data["price"],

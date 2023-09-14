@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/round_button.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/controller.dart';
 
 import '../../../../ReUsable/Components/input_fields.dart';
@@ -10,7 +11,7 @@ import '../../../../ReUsable/Components/login_widget.dart';
 import '../../../../ReUsable/models/userModel.dart';
 
 class SignUpPage extends GetView<SignupLoginController> {
-   SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
 
   final controller = Get.put<SignupLoginController>(SignupLoginController());
 
@@ -99,29 +100,29 @@ class SignUpPage extends GetView<SignupLoginController> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-
       child: Padding(
-        padding:  EdgeInsets.only(bottom: 200.h),
+        padding: EdgeInsets.only(bottom: 200.h),
         child: Column(
           children: [
             _buildForm(context),
             const SizedBox(height: 10),
-            Obx((){
-              return Hero(
-                tag: "signUp_btn",
-                child: GestureDetector(
-                  onTap: () {
+            Obx(() {
+              return RoundButton(
+                  title: 'Sign Up',
+                  onPress: () {
                     if (controller.formIsValid()) {
                       // Form is valid, proceed with registration
                       var user = UserModel(
-                        email: controller.state.signUpEmailController.text.trim(),
-                        password:
-                        controller.state.signUpPasswordController.text.trim(),
+                        email:
+                            controller.state.signUpEmailController.text.trim(),
+                        password: controller.state.signUpPasswordController.text
+                            .trim(),
                         phone: controller.state.code.value.dialCode +
                             controller.state.signUpPhoneController.text
                                 .trim()
                                 .toString(),
-                        userName: controller.state.signUpUserController.text.trim(),
+                        userName:
+                            controller.state.signUpUserController.text.trim(),
                         photoUrl: '',
                         location: '',
                         fcmToken: '',
@@ -137,22 +138,7 @@ class SignUpPage extends GetView<SignupLoginController> {
                       Get.snackbar('Error', 'All fields must be filled');
                     }
                   },
-                  child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: AppColors.lightButtonColor,
-                      borderRadius: BorderRadius.circular(29),
-                    ),
-                    child: Center(
-                      child: controller.state.userSignUpLoading == true ? Center(child: CircularProgressIndicator(color: Colors.white),) :
-                      Text(
-                        "Sign Up".toUpperCase(),
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
+              loading: controller.state.loading.value,
               );
             }),
             const SizedBox(height: AppColors.defaultPadding),

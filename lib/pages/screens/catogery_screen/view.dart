@@ -33,7 +33,7 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
       String phone,
       String companyName,
       String companyId,
-      bool isFavourite) {
+      ) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: InkWell(
@@ -49,7 +49,6 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
               phone: phone,
               comapnyName: companyName,
               companyId: companyId,
-              isFavourite: isFavourite,
             ),
           );
         },
@@ -335,7 +334,6 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                 snapshot.data!.docs[i]['companyPhone'],
                                 snapshot.data!.docs[i]['companyName'],
                                 snapshot.data!.docs[i]['companyId'],
-                                snapshot.data!.docs[i]['isFavourite'],
 
                               ),
                             ),
@@ -358,7 +356,6 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                 snapshot.data!.docs[i + 1]['companyPhone'],
                                 snapshot.data!.docs[i + 1]['companyName'],
                                 snapshot.data!.docs[i + 1]['companyId'],
-                                snapshot.data!.docs[i+1]['isFavourite'],
 
                               ),
                             ),
@@ -386,7 +383,6 @@ class catogeryScreenPage extends GetView<catogeryScreenController> {
                                 snapshot.data!.docs[i]['companyPhone'],
                                 snapshot.data!.docs[i]['companyName'],
                                 snapshot.data!.docs[i]['companyId'],
-                                snapshot.data!.docs[i]['isFavourite'],
 
                               ),
                             ),

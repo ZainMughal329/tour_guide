@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/input_fields.dart';
+import 'package:tours_guide/ReUsable/Components/round_button.dart';
 import 'package:tours_guide/pages/screens/PersonPage/view.dart';
 
 import '../../../ReUsable/models/userModel.dart';
@@ -35,7 +36,10 @@ class _UpdateScreenState extends State<UpdateScreen> {
             color: AppColors.lightActiveIconColor,
           ),
         ),
-        title: const Text('Edit Profile' , style: TextStyle(color: AppColors.lightTextColor),),
+        title: const Text(
+          'Edit Profile',
+          style: TextStyle(color: AppColors.lightTextColor),
+        ),
         backgroundColor: AppColors.lightBgColor,
         elevation: 0,
         centerTitle: true,
@@ -66,8 +70,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                 width: 120,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
-                                  border:
-                                      Border.all(color: AppColors.lightActiveIconColor),
+                                  border: Border.all(
+                                      color: AppColors.lightActiveIconColor),
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
@@ -76,7 +80,8 @@ class _UpdateScreenState extends State<UpdateScreen> {
                                           ? Icon(
                                               Icons.person,
                                               size: 50.sp,
-                                    color: AppColors.lightActiveIconColor,
+                                              color: AppColors
+                                                  .lightActiveIconColor,
                                             )
                                           : Image(
                                               image: NetworkImage(
@@ -127,17 +132,17 @@ class _UpdateScreenState extends State<UpdateScreen> {
                           children: [
                             TextFieldContainer(
                               child: UpdateInputTextField(
-                                  obsecure: false,
-                                  textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.text,
-                                  icon: Icons.person,
-                                  contr: name,
-                                  textColor: AppColors.lightTextColor,
-                                  // filledColor: AppColors.cardBgColor,
-                                  descrip: 'Enter your username',
-                                  focNode: controller.userFocus,
-                                  color: AppColors.lightTextColor,
-                                  // labelText: 'Username'
+                                obsecure: false,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.text,
+                                icon: Icons.person,
+                                contr: name,
+                                textColor: AppColors.lightTextColor,
+                                // filledColor: AppColors.cardBgColor,
+                                descrip: 'Enter your username',
+                                focNode: controller.userFocus,
+                                color: AppColors.lightTextColor,
+                                // labelText: 'Username'
                               ),
                             ),
                             SizedBox(
@@ -145,18 +150,18 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             ),
                             TextFieldContainer(
                               child: UpdateInputTextField(
-                                  obsecure: false,
-                                  color: AppColors.lightTextColor,
-                                  readOnly: true,
-                                  textColor: AppColors.lightTextColor,
-                                  // filledColor: AppColors.cardBgColor,
-                                  keyboardType: TextInputType.emailAddress,
-                                  icon: Icons.email_outlined,
-                                  contr: email,
-                                  descrip: 'Enter your email',
-                                  focNode: controller.emailFocus,
-                                  textInputAction: TextInputAction.next,
-                                  // labelText: 'Email'
+                                obsecure: false,
+                                color: AppColors.lightTextColor,
+                                readOnly: true,
+                                textColor: AppColors.lightTextColor,
+                                // filledColor: AppColors.cardBgColor,
+                                keyboardType: TextInputType.emailAddress,
+                                icon: Icons.email_outlined,
+                                contr: email,
+                                descrip: 'Enter your email',
+                                focNode: controller.emailFocus,
+                                textInputAction: TextInputAction.next,
+                                // labelText: 'Email'
                               ),
                             ),
                             SizedBox(
@@ -164,18 +169,18 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             ),
                             TextFieldContainer(
                               child: UpdateInputTextField(
-                                  textInputAction: TextInputAction.next,
-                                  color: AppColors.lightTextColor,
-                                  textColor: AppColors.lightTextColor,
-                                  // filledColor: AppColors.cardBgColor,
-                                  obsecure: true,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  icon: Icons.lock_open,
-                                  contr: pass,
-                                  readOnly: true,
-                                  descrip: 'Enter your password',
-                                  focNode: controller.passwordFocus,
-                                  // labelText: 'Password'
+                                textInputAction: TextInputAction.next,
+                                color: AppColors.lightTextColor,
+                                textColor: AppColors.lightTextColor,
+                                // filledColor: AppColors.cardBgColor,
+                                obsecure: true,
+                                keyboardType: TextInputType.visiblePassword,
+                                icon: Icons.lock_open,
+                                contr: pass,
+                                readOnly: true,
+                                descrip: 'Enter your password',
+                                focNode: controller.passwordFocus,
+                                // labelText: 'Password'
                               ),
                             ),
                             SizedBox(
@@ -183,17 +188,17 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             ),
                             TextFieldContainer(
                               child: UpdateInputTextField(
-                                  obsecure: false,
-                                  keyboardType: TextInputType.phone,
-                                  color: AppColors.lightTextColor,
-                                  textColor: AppColors.lightTextColor,
-                                  // filledColor: AppColors.lightCardColor,
-                                  icon: Icons.phone,
-                                  textInputAction: TextInputAction.done,
-                                  contr: phone,
-                                  descrip: 'Enter your phone number',
-                                  focNode: controller.phoneFocus,
-                                  // labelText: 'Phone'
+                                obsecure: false,
+                                keyboardType: TextInputType.phone,
+                                color: AppColors.lightTextColor,
+                                textColor: AppColors.lightTextColor,
+                                // filledColor: AppColors.lightCardColor,
+                                icon: Icons.phone,
+                                textInputAction: TextInputAction.done,
+                                contr: phone,
+                                descrip: 'Enter your phone number',
+                                focNode: controller.phoneFocus,
+                                // labelText: 'Phone'
                               ),
                             ),
                           ],
@@ -202,9 +207,10 @@ class _UpdateScreenState extends State<UpdateScreen> {
                       SizedBox(
                         height: 10.h,
                       ),
-                      Center(
-                        child: InkWell(
-                          onTap: () async {
+                      Obx(() {
+                        return RoundButton(
+                          title: 'Save Profile',
+                          onPress: () async {
                             var userData = UserModel(
                               id: id.text,
                               email: email.text.trim(),
@@ -221,30 +227,9 @@ class _UpdateScreenState extends State<UpdateScreen> {
                             await controller.updateUser(userData);
                             // Get.to(() => PersonView());
                           },
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20.h),
-                            child: Container(
-                                height: 50.h,
-                                width: 250.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: AppColors.lightButtonColor,
-                                ),
-                                child: Obx(() {
-                                  return controller.state.loading.value
-                                      ? CircularProgressIndicator()
-                                      : Center(
-                                          child: Text(
-                                            'Save Profile',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 17.sp),
-                                          ),
-                                        );
-                                })),
-                          ),
-                        ),
-                      ),
+                          loading: controller.state.loading.value,
+                        );
+                      }),
                       // SizedBox(
                       //   width: double.infinity,
                       //   height: 50,
@@ -298,8 +283,6 @@ class _UpdateScreenState extends State<UpdateScreen> {
     );
   }
 }
-
-
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
