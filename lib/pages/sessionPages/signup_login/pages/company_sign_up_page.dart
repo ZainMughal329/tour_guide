@@ -127,36 +127,39 @@ class CompanySignUp extends GetView<SignupLoginController> {
               _buildForm(context),
               const SizedBox(height: AppColors.defaultPadding),
               Obx(() {
-                return RoundButton(
-                  title: 'Sign Up',
-                  onPress: () {
-                    final CompanyUser = CompanyModel(
-                      companyEmail: controller.state.companyEmailController.text
-                          .trim()
-                          .toString(),
-                      companyName: controller.state.companyNameController.text
-                          .trim()
-                          .toString(),
-                      status: 'false',
-                      companyPhone: controller.state.code.value.dialCode +
-                          controller.state.companyPhoneNumberController.text
-                              .trim()
-                              .toString(),
-                      companyDescription: controller
-                          .state.companyDescController.text
-                          .trim()
-                          .toString(),
-                      pass: controller.state.companyPassController.text
-                          .trim()
-                          .toString(),
-                      logo: '',
-                      location: '',
-                      fcmToken: '',
-                      addTime: Timestamp.now(),
-                    );
-                    controller.storeCompany(CompanyUser, context);
-                  },
-                  loading: controller.state.loading.value,
+                return Padding(
+                  padding:  EdgeInsets.only(bottom: 200.h),
+                  child: RoundButton(
+                    title: 'Sign Up',
+                    onPress: () {
+                      final CompanyUser = CompanyModel(
+                        companyEmail: controller.state.companyEmailController.text
+                            .trim()
+                            .toString(),
+                        companyName: controller.state.companyNameController.text
+                            .trim()
+                            .toString(),
+                        status: 'false',
+                        companyPhone: controller.state.code.value.dialCode +
+                            controller.state.companyPhoneNumberController.text
+                                .trim()
+                                .toString(),
+                        companyDescription: controller
+                            .state.companyDescController.text
+                            .trim()
+                            .toString(),
+                        pass: controller.state.companyPassController.text
+                            .trim()
+                            .toString(),
+                        logo: '',
+                        location: '',
+                        fcmToken: '',
+                        addTime: Timestamp.now(),
+                      );
+                      controller.storeCompany(CompanyUser, context);
+                    },
+                    loading: controller.state.loading.value,
+                  ),
                 );
               }),
               const SizedBox(height: AppColors.defaultPadding),

@@ -295,7 +295,7 @@ class PostBottomBar extends GetView<HomeController> {
                     ),
                     InkWell(
                       onTap: () async {
-                        await controller.fetchUserData().then((value) {
+                        await controller.fetchUserData(context).then((value) {
                           Get.to(() => BookingView(
                                 tourId: id,
                                 name: controller.state.name ?? "",

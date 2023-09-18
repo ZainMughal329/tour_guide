@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
+import 'package:tours_guide/ReUsable/Components/exception_alert.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/models/tourModel.dart';
 import 'package:tours_guide/ReUsable/models/userModel.dart';
@@ -285,102 +288,116 @@ class HomePage extends GetView<HomeController> {
                       stream: controller.getCurrentUserData(),
                       builder: (context, snapshot) {
                         // UserModel userModel = snapshot.data as UserModel;
-                        if (snapshot.hasData) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    child: InkWell(
-                                      onTap: () {
-                                        _scaffoldKey.currentState!.openDrawer();
-                                      },
-                                      child: Icon(
-                                        Icons.menu,
-                                        color: AppColors.lightTextColor,
-                                        size: 35.sp,
+
+                          if (snapshot.hasData) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: InkWell(
+                                        onTap: () {
+                                          _scaffoldKey.currentState!.openDrawer();
+                                        },
+                                        child: Icon(
+                                          Icons.menu,
+                                          color: AppColors.lightTextColor,
+                                          size: 35.sp,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 15.w,
-                                  ),
-                                  Center(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Welcome back 🖐🏻',
-                                          style: TextStyle(
-                                              fontSize: 13.sp,
-                                              color: AppColors.lightTextColor,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        SizedBox(
-                                          height: 3.h,
-                                        ),
-                                        Text(
-                                          snapshot.data!['userName']
-                                              .toString()
-                                              .capitalizeFirst
-                                              .toString(),
-                                          style: TextStyle(
-                                            fontSize: 20.sp,
-                                            color: AppColors.lightTextColor,
-                                            fontWeight: FontWeight.bold,
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    Center(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Welcome back 🖐🏻',
+                                            style: TextStyle(
+                                                fontSize: 13.sp,
+                                                color: AppColors.lightTextColor,
+                                                fontWeight: FontWeight.w600),
                                           ),
-                                        ),
-                                      ],
+                                          SizedBox(
+                                            height: 3.h,
+                                          ),
+                                          Text(
+                                            snapshot.data!['userName']
+                                                .toString()
+                                                .capitalizeFirst
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontSize: 20.sp,
+                                              color: AppColors.lightTextColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  width: 50.w,
+                                  height: 50.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color:
+                                      snapshot.data!['photoUrl'].toString() ==
+                                          ''
+                                          ? AppColors.lightTextColor
+                                          : Colors.white,
+                                      width: 1.0.w,
                                     ),
                                   ),
-                                ],
-                              ),
-                              Container(
-                                width: 50.w,
-                                height: 50.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                    color:
-                                        snapshot.data!['photoUrl'].toString() ==
-                                                ''
-                                            ? AppColors.lightTextColor
-                                            : Colors.white,
-                                    width: 1.0.w,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50),
+                                    child:
+                                    snapshot.data!['photoUrl'].toString() ==
+                                        ''
+                                        ? Icon(
+                                      Icons.person_outline,
+                                      size: 30.sp,
+                                      color: AppColors.lightTextColor,
+                                    )
+                                        : Image(
+                                      image: NetworkImage(
+                                        snapshot.data!['photoUrl']
+                                            .toString(),
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50),
-                                  child:
-                                      snapshot.data!['photoUrl'].toString() ==
-                                              ''
-                                          ? Icon(
-                                              Icons.person_outline,
-                                              size: 30.sp,
-                                              color: AppColors.lightTextColor,
-                                            )
-                                          : Image(
-                                              image: NetworkImage(
-                                                snapshot.data!['photoUrl']
-                                                    .toString(),
-                                              ),
-                                              fit: BoxFit.cover,
-                                            ),
-                                ),
-                              ),
-                            ],
-                          );
-                        } else if (snapshot.hasError) {
-                          toastInfo(msg: "Something went wrong");
-                          print('Inside snapshot error');
-                          return SizedBox();
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+                              ],
+                            );
+                          }
+                          else if(snapshot.connectionState != ConnectionState.active){
+
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          else if (snapshot.hasError) {
+                            // WidgetsBinding.instance.addPostFrameCallback((_) {
+                            //   ExceptionAlert.showExceptionAlert(context, 'Error While Fetching Data.');
+                            // });
+
+                            toastInfo(msg: "Something went wrong");
+                            print('Inside snapshot error');
+                            return SizedBox();
+                          } else {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+
+                        // return CircularProgressIndicator();
                       },
                     ),
                   ),
@@ -587,13 +604,17 @@ class HomePage extends GetView<HomeController> {
                                   ],
                                 );
                         } else if (snapshot.hasError) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ExceptionAlert.showExceptionAlert(context, 'Problem with the internet connection.');
+                          });
                           print("inside 2nd circle  : " + snapshot.error.toString());
                           return Center(child: CircularProgressIndicator());
                         } else {
                           return SizedBox();
                         }
                       } catch (e) {
-                        print('Error is : ' + e.toString());
+                        // ExceptionAlert.showExceptionAlert(context, e.toString(), AppRoutes.Application);
+                        // print('Error is : ' + e.toString());
                         return Text(
                           'data : ' + e.toString(),
                         );

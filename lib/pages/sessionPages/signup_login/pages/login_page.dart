@@ -43,7 +43,7 @@ class LoginPage extends GetView<SignupLoginController> {
                     controller.state.loginPasswordController.clear();
                   });
                 } else {
-                  controller.loginUserWithEmailAndPassword(
+                  controller.loginUserWithEmailAndPassword(context ,
                     controller.state.loginEmailController.text.trim(),
                     controller.state.loginPasswordController.text.trim(),
                   );

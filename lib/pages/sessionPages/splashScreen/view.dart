@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/exception_alert.dart';
 import 'package:tours_guide/ReUsable/Exceptions/app_exceptions.dart';
 import 'package:tours_guide/ReUsable/Prefrences/storage_pref.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
@@ -15,7 +16,7 @@ import 'package:video_player/video_player.dart';
 class SplashScreenView extends GetView<SplashScreenController> {
   const SplashScreenView({Key? key}) : super(key: key);
 
-  onInit() {
+  onInit(BuildContext context) {
     try {
       StorePrefrences sp = StorePrefrences();
       FirebaseAuth auth = FirebaseAuth.instance;
@@ -38,20 +39,28 @@ class SplashScreenView extends GetView<SplashScreenController> {
         } else if (val == false && auth.currentUser != null) {}
       });
     } catch (e) {
-      Get.dialog(Container(
-        height: 50,
-        width: 100,
-        color: Colors.white,
-        child: Center(
-          child: Text('Error occurs'),
-        ),
-      ));
+      print("Exception Blocked Called");
+
+      ExceptionAlert.showExceptionAlert(context, e.toString());
+      // Get.dialog(Container(
+      //   height: 50,
+      //   width: 100,
+      //   color: Colors.white,
+      //   child: Center(
+      //     child: Text('Error occurs'),
+      //   ),
+      // ));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    onInit();
+    try{
+      onInit(context);
+    }catch(e){
+      print("Inside e block ");
+      ExceptionAlert.showExceptionAlert(context, e.toString());
+    }
     return Scaffold(
         backgroundColor: Colors.white,
         body: Center(

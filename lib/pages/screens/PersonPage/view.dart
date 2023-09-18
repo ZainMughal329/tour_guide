@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/drawer.dart';
+import 'package:tours_guide/ReUsable/Components/exception_alert.dart';
 import 'package:tours_guide/ReUsable/routes/names.dart';
 import 'package:tours_guide/pages/screens/PersonPage/card_view.dart';
 import 'package:tours_guide/pages/screens/PersonPage/community_guidlines.dart';
@@ -435,7 +437,11 @@ class PersonView extends GetView<PersonController> {
                       ],
                     ),
                   );
-                } else if (snapshot.hasError) {
+                }
+
+                else if (snapshot.hasError) {
+
+
                   return Center(
                     child: Column(
                       children: [

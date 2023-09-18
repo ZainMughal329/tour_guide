@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tours_guide/ReUsable/Components/exception_alert.dart';
 import 'package:tours_guide/ReUsable/Components/snackBar.dart';
 import 'package:tours_guide/ReUsable/models/companyModel.dart';
 import 'package:tours_guide/ReUsable/models/fvrt_tour_model.dart';
@@ -48,13 +49,17 @@ class HomeController extends GetxController {
   }
 
   Future<List<TourModel>> getAllTourData() async {
-    final snapshot =
-        await FirebaseFirestore.instance.collection('allTours').get();
-    final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
-    return tourData;
+
+      final snapshot =
+      await FirebaseFirestore.instance.collection('allTours').get();
+      final tourData = snapshot.docs.map((e) => TourModel.fromJson(e)).toList();
+      return tourData;
+
+
   }
 
   Future<List<TourModel>> getAndShowALlToursData() async {
+
     return await getAllTourData();
   }
 
@@ -107,7 +112,7 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> fetchUserData() async {
+  Future<void> fetchUserData(BuildContext context) async {
     try {
       final userNode =
           await userRef.doc(auth.currentUser!.uid.toString()).get();
@@ -115,6 +120,7 @@ class HomeController extends GetxController {
       state.name = userNode['userName'];
       state.phoneNumber = userNode['phone'];
     } catch (e) {
+      ExceptionAlert.showExceptionAlert(context, e.toString());
       Snackbar.showSnackBar("Error: ", e.toString());
     }
   }

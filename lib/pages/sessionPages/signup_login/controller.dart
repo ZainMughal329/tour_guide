@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:password_strength/password_strength.dart';
+import 'package:tours_guide/ReUsable/Components/exception_alert.dart';
 import 'package:tours_guide/ReUsable/Components/sign_up_msg.dart';
 import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import 'package:tours_guide/ReUsable/Exceptions/signin_exceptions.dart';
@@ -64,7 +65,7 @@ class SignupLoginController extends GetxController
 
 //   this is to register with email and password
   // after registeration , store the user in database
-  void registerCompanyWithEmailAndPassword(
+  void registerCompanyWithEmailAndPassword(BuildContext context,
       CompanyModel Compuser, String email, String password) async {
     setCompanyLoading(true);
     try {
@@ -81,27 +82,34 @@ class SignupLoginController extends GetxController
         sp.setIsFirstOpen(true);
         Compuser.id = auth.currentUser!.uid.toString();
         // Write code to move to screen that show unApproved Status
-        createCompany(Compuser);
+        createCompany(context , Compuser);
         state.companyEmailController.clear();
         state.companyPassController.clear();
         state.companyNameController.clear();
         state.companyDescController.clear();
         state.companyPhoneNumberController.clear();
       }).onError((error, stackTrace) {
+        ExceptionAlert.showExceptionAlert(context, error.toString());
         state.loading.value = false;
-        toastInfo(msg: error.toString());
+        // toastInfo(msg: error.toString());
       });
     } on FirebaseAuthException catch (e) {
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      toastInfo(msg: ex.toString());
+      ExceptionAlert.showExceptionAlert(context, e.toString());
+      // final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      // toastInfo(msg: ex.toString());
       state.loading.value = false;
-    } catch (_) {
+    } catch (e) {
+      ExceptionAlert.showExceptionAlert(context, e.toString());
+      // ExceptionAlert.showExceptionAlert(context, e.toString());
+      // print("Exception while creating company is" + e.toString());
+
+      // ExceptionAlert.showExceptionAlert(context, e.toString(), AppRoutes.LOGIN_SIGN_UP);
       state.loading.value = false;
     }
   }
 
 // this function is to store user in Firebase FireStore
-  createCompany(CompanyModel user) async {
+  createCompany(BuildContext context ,CompanyModel user) async {
     // state.loading.value = true;
     try {
       await _dbCompany
@@ -114,17 +122,19 @@ class SignupLoginController extends GetxController
         setCompanyLoading(false);
       }).onError((error, stackTrace) {
         setCompanyLoading(false);
-        toastInfo(msg: error.toString());
+        // toastInfo(msg: error.toString());
+        ExceptionAlert.showExceptionAlert(context, error.toString());
       });
     } catch (e) {
+      ExceptionAlert.showExceptionAlert(context, e.toString());
       toastInfo(msg: e.toString());
       setCompanyLoading(false);
     }
   }
 
 //  for registering and storing Company USer
-  void storeCompany(CompanyModel compUser, BuildContext context) {
-    registerCompanyWithEmailAndPassword(
+  void storeCompany( CompanyModel compUser, BuildContext context) {
+    registerCompanyWithEmailAndPassword(context,
         compUser, compUser.companyEmail, compUser.pass);
   }
   firebase_storage.FirebaseStorage storage =
@@ -237,7 +247,7 @@ class SignupLoginController extends GetxController
 
   var verificationId = "".obs;
 
-  void registerUserWithEmailAndPassword(
+  void registerUserWithEmailAndPassword(BuildContext context ,
       UserModel userinfo, String email, password) async {
     setSignUpLoading(true);
     try {
@@ -247,21 +257,24 @@ class SignupLoginController extends GetxController
         userinfo.id = auth.currentUser!.uid.toString();
         StorePrefrences sp = StorePrefrences();
         sp.setIsFirstOpen(true);
-        createUser(userinfo);
+        createUser(context , userinfo);
       }).onError((error, stackTrace) {
+        ExceptionAlert.showExceptionAlert(context, error.toString());
         setSignUpLoading(false);
-        toastInfo(msg: error.toString());
+        // toastInfo(msg: error.toString());
       });
     } on FirebaseAuthException catch (e) {
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      toastInfo(msg: ex.toString());
+      ExceptionAlert.showExceptionAlert(context, e.toString());
+      // final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      // toastInfo(msg: ex.toString());
       setSignUpLoading(false);
-    } catch (_) {
+    } catch (e) {
+      ExceptionAlert.showExceptionAlert(context, e.toString());
       setSignUpLoading(false);
     }
   }
 
-  void loginUserWithEmailAndPassword(String email, password) async {
+  void loginUserWithEmailAndPassword(BuildContext context,String email, password) async {
     setLoading(true);
     try {
       var user = await auth
@@ -288,15 +301,21 @@ class SignupLoginController extends GetxController
         state.loginPasswordController.clear();
         // userController.clear();
       }).onError((error, stackTrace) {
-        final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
-        toastInfo(msg: ex.toString());
+        // final ex = SignUpWithEmailAndPasswordFailure.code(error.toString());
+        ExceptionAlert.showExceptionAlert(context, error.toString());
+        // toastInfo(msg: ex.toString());
         setLoading(false);
       });
     } on FirebaseAuthException catch (e) {
-      final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
-      toastInfo(msg: ex.toString());
+      // final ex = SignUpWithEmailAndPasswordFailure.code(e.code);
+      // toastInfo(msg: ex.toString());
+      ExceptionAlert.showExceptionAlert(context, e.toString());
       setLoading(false);
-    } catch (_) {
+    } catch (e) {
+
+      ExceptionAlert.showExceptionAlert(context, e.toString());
+      // print("Exception while login  is" + e.toString());
+
       setLoading(false);
     }
   }
@@ -320,27 +339,33 @@ class SignupLoginController extends GetxController
     return userData;
   }
 
-  createUser(UserModel user) async {
+  createUser(BuildContext context , UserModel user) async {
     setSignUpLoading(true);
-    await _dbUser
-        .doc(auth.currentUser!.uid)
-        .set(user.toJson())
-        .whenComplete(() {
-      toastInfo(msg: 'Successfully created account');
+   try{
+     await _dbUser
+         .doc(auth.currentUser!.uid)
+         .set(user.toJson())
+         .whenComplete(() {
+       toastInfo(msg: 'Successfully created account');
 
-      setSignUpLoading(false);
-      StorePrefrences sp = StorePrefrences();
-      sp.setIsFirstOpen(true);
-      Get.offAllNamed(AppRoutes.Application);
-    }).catchError((error, stackTrace) {
-      toastInfo(msg: "Error occurred");
-      setSignUpLoading(false);
-    });
+       setSignUpLoading(false);
+       StorePrefrences sp = StorePrefrences();
+       sp.setIsFirstOpen(true);
+       Get.offAllNamed(AppRoutes.Application);
+     }).catchError((error, stackTrace) {
+       toastInfo(msg: "Error occurred");
+       setSignUpLoading(false);
+     });
+   }catch(e){
+     ExceptionAlert.showExceptionAlert(context, e.toString());
+   }
+
+
   }
 
   void storeUser(
       UserModel user, BuildContext context, String email, String pass) async {
-    registerUserWithEmailAndPassword(user, email, pass);
+    registerUserWithEmailAndPassword(context, user, email, pass);
   }
 
   updateUserData(UserModel user) async {
