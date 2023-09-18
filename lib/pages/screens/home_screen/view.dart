@@ -30,6 +30,7 @@ class HomePage extends GetView<HomeController> {
   HomePage({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final controller = Get.put<HomeController>(HomeController());
 
   // final con = Get.lazyPut<HomeController>(() => HomeController());
   Widget _buildCard(
@@ -603,16 +604,19 @@ class HomePage extends GetView<HomeController> {
                                     ),
                                   ],
                                 );
-                        } else if (snapshot.hasError) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            ExceptionAlert.showExceptionAlert(context, 'Problem with the internet connection.');
-                          });
-                          print("inside 2nd circle  : " + snapshot.error.toString());
+                        }
+
+
+                        else if (snapshot.hasError) {
+
+                          // print("inside 2nd circle  : " + snapshot.error.toString());
                           return Center(child: CircularProgressIndicator());
                         } else {
                           return SizedBox();
                         }
                       } catch (e) {
+
+                        ExceptionAlert.showExceptionAlert(context, e.toString());
                         // ExceptionAlert.showExceptionAlert(context, e.toString(), AppRoutes.Application);
                         // print('Error is : ' + e.toString());
                         return Text(
