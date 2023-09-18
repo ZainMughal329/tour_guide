@@ -18,6 +18,10 @@ class FetchDataException extends AppException {
   FetchDataException([String? message]) : super(message , 'Error During communication');
 }
 
+class RequestTimeOut extends AppException{
+  RequestTimeOut([String? message]) : super(message , 'Error Request Timeout');
+}
+
 
 class BadRequestException extends AppException {
 
@@ -27,7 +31,7 @@ class BadRequestException extends AppException {
 
 class UnAuthorizedUserException extends AppException {
 
-  UnAuthorizedUserException([String? message]) : super(message , 'Unauthoried Request');
+  UnAuthorizedUserException([String? message]) : super(message , 'Unauthorized Request');
 }
 
 
