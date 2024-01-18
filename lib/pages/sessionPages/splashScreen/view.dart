@@ -75,7 +75,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
                 padding: EdgeInsets.only(top: 100.h, right: 90.w),
                 child: Row(
                   children: [
-                    const SizedBox(width: 20.0),
+                    const SizedBox(width: 8.0),
                     const Text(
                       'Journey\nAwaits',
                       style: TextStyle(

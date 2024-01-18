@@ -222,7 +222,7 @@ class PostBottomBar extends GetView<HomeController> {
                       Row(
                         children: [
                           Text(
-                            '\$',
+                            'Rs:',
                             style: TextStyle(
                                 color: Colors.blue,
                                 fontSize: 18.sp,

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'controller.dart';
-
 class WelcomePage extends GetView<WelcomeController> {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -24,7 +22,6 @@ class WelcomePage extends GetView<WelcomeController> {
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 65.h, horizontal: 15.w),
-
             child: Padding(
               padding: EdgeInsets.only(top: 280.h),
               child: Column(

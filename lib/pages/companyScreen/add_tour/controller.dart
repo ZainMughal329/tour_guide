@@ -42,16 +42,16 @@ class CompanyAddTourController extends GetxController {
     state.tourPeople.value = "";
   }
 
-  Future<void> fetchCompanyId()async{
+  Future<void> fetchCompanyId() async {
     state.companyId = await auth.currentUser!.uid.toString();
   }
-  Future<void> fetchCompanyName() async{
+
+  Future<void> fetchCompanyName() async {
     final companyDoc = await dbCompany.doc(state.companyId).get();
-    if(companyDoc !=null){
+    if (companyDoc != null) {
       state.companyName = companyDoc["CompanyName"];
     }
   }
-
 
   final picker = ImagePicker();
 
@@ -64,10 +64,8 @@ class CompanyAddTourController extends GetxController {
   ) async {
     final pickedImage =
         await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
-
     if (pickedImage != null) {
       _image = XFile(pickedImage.path);
-
       update();
     }
   }
@@ -82,20 +80,19 @@ class CompanyAddTourController extends GetxController {
       _image = XFile(pickedImage.path);
       update();
     }
-
   }
 
   void addTour(
-      String title,
-      String location,
-      String tourDescription,
-      String tourCategory,
-      String people,
-      String price,
-      String tourImage,
-      String companyId,
-      String comapnyName,
-      ) async {
+    String title,
+    String location,
+    String tourDescription,
+    String tourCategory,
+    String people,
+    String price,
+    String tourImage,
+    String companyId,
+    String comapnyName,
+  ) async {
     state.loading.value = true;
     String timeStamp = DateTime.now().microsecondsSinceEpoch.toString();
     final companyDoc = await dbCompany.doc(auth.currentUser!.uid).get();
@@ -119,7 +116,6 @@ class CompanyAddTourController extends GetxController {
               companyPhone: companyPhone,
               companyId: companyId,
               companyName: comapnyName,
-
             ).toJson(),
           )
           .then((value) async {
@@ -135,10 +131,9 @@ class CompanyAddTourController extends GetxController {
               people: people,
               price: price,
               companyPhone: companyPhone,
-          companyId: companyId,
-          companyName: comapnyName,
-
-        ).toJson())
+              companyId: companyId,
+              companyName: comapnyName,
+            ).toJson())
             .then((value) {
           // toastInfo(msg: "Successfully Added Tour");
           Snackbar.showSnackBar("Congratulations", "Tour Added Successfully");
@@ -164,7 +159,7 @@ class CompanyAddTourController extends GetxController {
       // });
     } catch (e) {
       // toastInfo(msg: e.toString());
-      Snackbar.showSnackBar("Error",e.toString());
+      Snackbar.showSnackBar("Error", e.toString());
     }
   }
 
@@ -194,7 +189,6 @@ class CompanyAddTourController extends GetxController {
         state.loading.value = false;
         // Get.snackbar('Congrats', 'Update Successfully');
         Snackbar.showSnackBar("Congrats ", "Updated Successfully");
-
 
         dispose();
 

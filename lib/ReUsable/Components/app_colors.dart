@@ -42,11 +42,6 @@ class AppColors {
   static const Color lightInActiveIconColor = Colors.grey;
 
   static const Color lightActiveIconColor = Colors.black;
-
-
   static const Color darkBgColor = Color(0xff081921);
-
-
-
 
 }

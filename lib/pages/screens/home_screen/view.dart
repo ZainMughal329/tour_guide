@@ -105,7 +105,7 @@ class HomePage extends GetView<HomeController> {
                   Padding(
                     padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                     child: Text(
-                      'Starting at \$' + price.toString(),
+                      'Starting at Rs:' + price.toString(),
                       style: TextStyle(
                         color: Colors.white,
                         // fontWeight: FontWeight.bold,
@@ -493,7 +493,7 @@ class HomePage extends GetView<HomeController> {
                                       scrollDirection: Axis.horizontal,
                                       itemCount: snapshot.data!.length,
                                       itemBuilder: (context, index) {
-                                        if (index >= 4) {
+                                        if (index >= 6) {
                                           return Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,

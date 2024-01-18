@@ -6,16 +6,12 @@ import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/ReUsable/Components/round_button.dart';
 import 'package:tours_guide/pages/sessionPages/signup_login/controller.dart';
-
 import '../../../../ReUsable/Components/input_fields.dart';
 import '../../../../ReUsable/Components/top_image.dart';
 import '../../../../ReUsable/routes/names.dart';
-
 class LoginPage extends GetView<SignupLoginController> {
   LoginPage({Key? key}) : super(key: key);
-
   final formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +19,6 @@ class LoginPage extends GetView<SignupLoginController> {
       child: Column(
         children: [
           // TopImage(),
-
           _buildForm(controller.state.loginEmailController,
               controller.state.loginPasswordController),
           const SizedBox(height: AppColors.defaultPadding/4),

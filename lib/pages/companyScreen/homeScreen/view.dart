@@ -30,7 +30,6 @@ class _CompanyHomeState extends State<CompanyHome>
   @override
   Widget build(BuildContext context) {
     final _tabController = TabController(length: 4, vsync: this);
-
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -61,7 +60,6 @@ class _CompanyHomeState extends State<CompanyHome>
                                     GestureDetector(
                                       onTap: () {
                                         _scaffoldKey.currentState!.openDrawer();
-
                                       },
                                       child: Icon(Icons.menu,
                                           size: 30.sp,

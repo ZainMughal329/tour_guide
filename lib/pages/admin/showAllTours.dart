@@ -58,7 +58,7 @@ class ShowAllTours extends GetView<AdminController> {
                 Padding(
                   padding: EdgeInsets.only(left: 10, right: 10, bottom: 20),
                   child: Text(
-                    'Starting at \$' + price.toString(),
+                    'Starting at Rs:' + price.toString(),
                     style: TextStyle(
                       color: Colors.white,
                       // fontWeight: FontWeight.bold,

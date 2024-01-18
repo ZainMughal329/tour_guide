@@ -6,7 +6,7 @@ import 'package:tours_guide/ReUsable/Components/toast_info.dart';
 import '../../ReUsable/models/tourModel.dart';
 
 class AdminController extends GetxController with GetTickerProviderStateMixin {
-  late TabController tabController;
+    late TabController tabController;
 
   @override
   void onInit() {
@@ -27,9 +27,7 @@ class AdminController extends GetxController with GetTickerProviderStateMixin {
       .collection('company')
       .where('status', isEqualTo: 'false')
       .snapshots();
-
   final _db = FirebaseFirestore.instance;
-
   updateCompanyData(String id) async {
     print('Inside update');
     print('update id : ' + id);

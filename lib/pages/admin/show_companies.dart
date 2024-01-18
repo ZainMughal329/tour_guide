@@ -5,10 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:tours_guide/ReUsable/Components/app_colors.dart';
 import 'package:tours_guide/pages/admin/controller.dart';
-
 class ShowCompanies extends GetView<AdminController> {
   const ShowCompanies({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -29,10 +27,10 @@ class ShowCompanies extends GetView<AdminController> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.all(18.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Container(
                       width: double.infinity,
-                      height: 130.h,
+                      height: 150.h,
                       decoration: BoxDecoration(
                         color: AppColors.lightCardColor.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(15),
